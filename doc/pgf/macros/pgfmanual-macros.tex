@@ -1,4 +1,4 @@
-% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/pgf/macros/Attic/pgfmanual-macros.tex,v 1.1 2005/06/29 12:14:04 tantau Exp $
+% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/pgf/macros/Attic/pgfmanual-macros.tex,v 1.2 2005/07/02 18:43:37 tantau Exp $
 
 % Copyright 2003, 2004 by Till Tantau <tantau@users.sourceforge.net>.
 %
@@ -121,13 +121,13 @@
   \index{Shapes!#1@\protect\texttt{#1}}}
 
 \def\package#1{\list{}{\leftmargin=2em\itemindent-\leftmargin\def\makelabel##1{\hss##1}}%
-\item{{\ttfamily\char`\\usepackage\char`\{\declare{#1}\char`\}\space\space \char`\%\space\space  LaTeX}}
+\item{{\ttfamily\char`\\usepackage\char`\{\declare{#1}\char`\}\space\space \char`\%\space\space  \LaTeX}}
   \index{#1@\protect\texttt{#1} package}%
   \index{Packages and Files!#1@\protect\texttt{#1}}%
   \par\topsep=0pt\itemsep=0pt
-\item{{\ttfamily\char`\\input \declare{#1}.tex\space\space\space \char`\%\space\space  plain TeX}}
+\item{{\ttfamily\char`\\input \declare{#1}.tex\space\space\space \char`\%\space\space  plain \TeX}}
   \par\topsep=0pt\itemsep=0pt
-\item{{\ttfamily\char`\\input \declare{#1}.tex\space\space\space \char`\%\space\space  ConTeX}}
+\item{{\ttfamily\char`\\input \declare{#1}.tex\space\space\space \char`\%\space\space  Con\TeX t}}
   \par\topsep=0pt
 }
 \def\endpackage{\endlist}
