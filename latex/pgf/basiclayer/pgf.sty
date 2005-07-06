@@ -5,13 +5,14 @@
 
 \RequirePackage{pgfrcs}
 
-\ProvidesPackageRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/latex/pgf/basiclayer/pgf.sty,v 1.1 2005/06/29 12:14:05 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/latex/pgf/basiclayer/pgf.sty,v 1.2 2005/07/06 15:58:58 tantau Exp $
 
 \def\pgf@draft{}
 \DeclareOption{draft}{\def\pgf@draft{\pgf@draftmodetrue}}
 
 \def\pgf@obsolete{\RequirePackage{pgfcompatibility-version-0-65}}
-\DeclareOption{strict}{\def\pgf@obsolete{}}
+\DeclareOption{version=0.65}{}
+\DeclareOption{version=0.96}{\def\pgf@obsolete{}}
 
 \ProcessOptions
 

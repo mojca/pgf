@@ -1,10 +1,13 @@
-% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/pgf/macros/Attic/pgfmanual-macros.tex,v 1.6 2005/07/05 21:39:05 tantau Exp $
+% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/pgf/macros/Attic/pgfmanual-macros.tex,v 1.7 2005/07/06 15:58:57 tantau Exp $
 
 % Copyright 2003, 2004 by Till Tantau <tantau@users.sourceforge.net>.
 %
 % This program can be redistributed and/or modified under the terms
 % of the GNU Public License, version 2.
 
+
+
+\colorlet{examplefill}{yellow!80!black}
 
 
 
@@ -244,13 +247,13 @@
   \index{#1@\protect\texttt{#1} plot mark}%
   \index{Plot marks!#1@\protect\texttt{#1}}
   \texttt{\char`\\pgfuseplotmark\char`\{\declare{#1}\char`\}} &
-  \tikz\draw[color=black!25] plot[mark=#1,fill=yellow,draw=black] coordinates{(0,0) (.5,0.2) (1,0) (1.5,0.2)};\\
+  \tikz\draw[color=black!25] plot[mark=#1,mark options={fill=examplefill,draw=black}] coordinates{(0,0) (.5,0.2) (1,0) (1.5,0.2)};\\
 }
 \newcommand\plotmarkentrytikz[1]{%
   \index{#1@\protect\texttt{#1} plot mark}%
   \index{Plot marks!#1@\protect\texttt{#1}}
   \texttt{mark=\declare{#1}} & \tikz\draw[color=black!25]
-  plot[mark=#1,fill=yellow,draw=black] 
+  plot[mark=#1,mark options={fill=examplefill,draw=black}] 
     coordinates {(0,0) (.5,0.2) (1,0) (1.5,0.2)};\\
 }
 
