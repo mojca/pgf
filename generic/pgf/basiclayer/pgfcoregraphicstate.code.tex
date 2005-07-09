@@ -1,4 +1,4 @@
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex,v 1.1 2005/06/29 12:14:04 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex,v 1.2 2005/07/09 19:27:02 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -21,7 +21,7 @@
 \def\pgfsetlinewidth#1{%
   \setlength\pgflinewidth{#1}%
   \global\pgflinewidth=\pgflinewidth%
-  \pgfsys@setlinewidth{\pgflinewidth}%
+  \pgfsys@setlinewidth{\the\pgflinewidth}%
   \ignorespaces}
 
 
@@ -54,7 +54,7 @@
   \def\pgf@next{\pgf@strip}%
   \pgf@strip#1{pgf@stop}%
   \setlength\pgf@x{#2}%
-  \pgfsys@setdash{\pgf@temp}{\pgf@x}%
+  \pgfsys@setdash{\pgf@temp}{\the\pgf@x}%
   \ignorespaces}
 
 \def\pgf@strip#1{%
