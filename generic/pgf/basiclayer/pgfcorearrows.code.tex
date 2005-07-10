@@ -1,4 +1,4 @@
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorearrows.code.tex,v 1.1 2005/06/29 12:14:04 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorearrows.code.tex,v 1.2 2005/07/10 20:11:23 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -95,7 +95,9 @@
         \pgftransformreset%
         \pgfsysprotocol@setcurrentprotocol\@empty%
         \pgfsysprotocol@bufferedtrue%
+        \pgfsys@beginscope%
         \csname pgf@arrow@code@#1\endcsname%
+        \pgfsys@endscope%
         \pgfsysprotocol@getcurrentprotocol\pgf@@arrow@temp%
         \global\let\pgf@@arrow@temp=\pgf@@arrow@temp%
       \endpgfinterruptpath%
