@@ -1,4 +1,4 @@
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.6 2005/07/06 15:58:57 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.7 2005/07/11 19:52:25 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -103,7 +103,8 @@
       \let\tikz@strokecolor\@empty%
       \let\tikz@fillcolor\@empty%
     \fi%
-    \color{#1}%
+    \colorlet{tikz@color}{#1}%
+    \color{tikz@color}%
     \pgfsys@color@reset@inordertrue%
   }%
   \def\tikz@textcolor{#1}}
@@ -1528,6 +1529,7 @@
 
 
 \def\tikz@@@plot{%
+    \def\pgfplotlastpoint{\pgfpointorigin}%
     \tikz@plot@handler%
     \tikz@plot@data%
     \global\let\tikz@@@temp=\pgfplotlastpoint%
