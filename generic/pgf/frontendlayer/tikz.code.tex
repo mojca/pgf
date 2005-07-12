@@ -1,4 +1,4 @@
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.7 2005/07/11 19:52:25 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.8 2005/07/12 07:28:54 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -1787,14 +1787,8 @@
               \minipage[t]{\tikz@text@width}%
                 \tikz@text@action%
           \fi%
-          \tikz@options%
           \bgroup%
             \setbox\tikz@figbox=\box\voidb@x%
-            \ifx\tikz@textcolor\@empty%
-              \color{.}%
-            \else%
-              \color{\tikz@textcolor}%
-            \fi%
             \tikz@uninstallcommands%
             \aftergroup\tikz@fig@collectresetcolor%
             \ignorespaces%
@@ -1834,6 +1828,12 @@
       \hbox{{%
           \pgfinterruptpath%
             \pgfscope%
+              \tikz@options%
+              \ifx\tikz@textcolor\@empty%
+                \color{.}%
+              \else%
+                \color{\tikz@textcolor}%
+              \fi%
               \setbox\tikz@figbox=\box\voidb@x%
               \pgfnode{\tikz@shape}{\tikz@anchor}{\box\pgfshapebox}{\tikz@fig@name}{\begingroup\tikz@finish}%
             \endpgfscope
