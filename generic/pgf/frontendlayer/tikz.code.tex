@@ -1,4 +1,4 @@
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.8 2005/07/12 07:28:54 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.9 2005/07/17 22:34:19 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -1788,6 +1788,11 @@
                 \tikz@text@action%
           \fi%
           \bgroup%
+            \ifx\tikz@textcolor\@empty%
+              \color{.}%
+            \else%
+              \color{\tikz@textcolor}%
+            \fi%
             \setbox\tikz@figbox=\box\voidb@x%
             \tikz@uninstallcommands%
             \aftergroup\tikz@fig@collectresetcolor%
@@ -1829,11 +1834,6 @@
           \pgfinterruptpath%
             \pgfscope%
               \tikz@options%
-              \ifx\tikz@textcolor\@empty%
-                \color{.}%
-              \else%
-                \color{\tikz@textcolor}%
-              \fi%
               \setbox\tikz@figbox=\box\voidb@x%
               \pgfnode{\tikz@shape}{\tikz@anchor}{\box\pgfshapebox}{\tikz@fig@name}{\begingroup\tikz@finish}%
             \endpgfscope
