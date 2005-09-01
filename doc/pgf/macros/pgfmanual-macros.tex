@@ -1,4 +1,4 @@
-% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/pgf/macros/Attic/pgfmanual-macros.tex,v 1.9 2005/08/13 18:59:55 tantau Exp $
+% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/pgf/macros/Attic/pgfmanual-macros.tex,v 1.10 2005/09/01 21:41:07 tantau Exp $
 
 % Copyright 2003, 2004 by Till Tantau <tantau@users.sourceforge.net>.
 %
@@ -88,6 +88,24 @@
 {
   \end{pgfmanualentry}
 }
+
+\newenvironment{pathoperation}[2]{
+  \begin{pgfmanualentry}
+    \pgfmanualentryheadline{\textcolor{gray}{{\ttfamily\char`\\path}\
+        \ \dots}
+      \declare{\texttt{#1}}#2\ \textcolor{gray}{\dots\texttt{;}}}%
+    \index{#1@\protect\texttt{#1} path operation}%
+    \index{Path operations!#1@\protect\texttt{#1}}
+    \pgfmanualbody
+}
+{
+  \end{pgfmanualentry}
+}
+
+\def\extractcommand#1#2\@@{%
+  \pgfmanualentryheadline{\declare{\texttt{\string#1}}#2}%
+  \removeats{#1}%
+  \index{\strippedat @\protect\myprintocmmand{\strippedat}}}
 
 
 \newenvironment{package}[1]{
