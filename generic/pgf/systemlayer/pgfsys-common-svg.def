@@ -1,4 +1,4 @@
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-common-svg.def,v 1.8 2005/07/17 22:34:19 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-common-svg.def,v 1.9 2005/09/05 21:46:56 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -108,7 +108,13 @@
 }
 
 % Graphics state
-\def\pgfsys@setdash#1#2{\pgf@sys@svg@gs{stroke-dasharray="#1" stroke-dashoffset="#2"}}
+\def\pgfsys@setdash#1#2{%
+  \edef\pgf@test@dashpattern{#1}%
+  \ifx\pgf@test@dashpattern\@empty%
+    \pgf@sys@svg@gs{stroke-dasharray="none" stroke-dashoffset="#2"}%
+  \else%
+    \pgf@sys@svg@gs{stroke-dasharray="#1" stroke-dashoffset="#2"}%
+  \fi}
 \def\pgfsys@setlinewidth#1{\pgf@sys@svg@gs{stroke-width="#1"}}
 \def\pgfsys@setmiterlimit#1{\pgf@sys@svg@gs{stroke-miterlimit="#1"}}
 \def\pgfsys@buttcap{\pgf@sys@svg@gs{stroke-linecap="butt"}}
