@@ -1,4 +1,4 @@
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/pgflibrarysnakes.code.tex,v 1.4 2005/09/07 08:27:17 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/pgflibrarysnakes.code.tex,v 1.5 2005/09/07 09:01:52 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -163,7 +163,16 @@
   \state{initial}[width=\pgfsnakesegmentlength,next state=wave]
   {}
 
-  \state{wave}[width=\pgfsnakesegmentlength]
+  \state{wave}[switch if less than=\pgfsnakesegmentlength to last,
+               width=\pgfsnakesegmentlength]
+  {
+    \pgfpathmoveto{
+      \pgfpointadd
+      {\pgfpoint{-\pgfsnakecompleteddistance}{0pt}}%
+      {\pgfpointpolar{\pgfsnakesegmentangle}{\pgfsnakecompleteddistance}}}%
+    \pgfpatharc{\pgfsnakesegmentangle}{-\pgfsnakesegmentangle}{\pgfsnakecompleteddistance}%
+  }
+  \state{last}[width=0pt,next state=final]
   {
     \pgfpathmoveto{
       \pgfpointadd
@@ -185,7 +194,17 @@
 
 \pgfdeclaresnake{waves}{wave}
 {
-  \state{wave}[width=\pgfsnakesegmentlength]
+  \state{wave}[switch if less than=\pgfsnakesegmentlength to last,
+               width=\pgfsnakesegmentlength]
+  {
+    \pgftransformxshift{\pgfsnakesegmentlength}
+    \pgfpathmoveto{
+      \pgfpointadd
+      {\pgfpoint{-\pgfsnakesegmentobjectlength}{0pt}}%
+      {\pgfpointpolar{\pgfsnakesegmentangle}{\pgfsnakesegmentobjectlength}}}%
+    \pgfpatharc{\pgfsnakesegmentangle}{-\pgfsnakesegmentangle}{\pgfsnakesegmentobjectlength}%
+  }
+  \state{last}[width=0pt,next state=final]
   {
     \pgftransformxshift{\pgfsnakesegmentlength}
     \pgfpathmoveto{
