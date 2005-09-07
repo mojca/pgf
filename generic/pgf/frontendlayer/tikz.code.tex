@@ -1,4 +1,4 @@
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.22 2005/09/06 08:12:48 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.23 2005/09/07 08:27:16 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -601,6 +601,20 @@
 \define@key{tikz}{segment aspect}{\def\pgfsnakesegmentaspect{#1}}
 
 \define@key{tikz}{segment object length}{\def\pgfsnakesegmentobjectlength{#1}}
+
+\define@key{tikz}{raise snake}{\def\pgf@snake@raise{\pgftransformyshift{#1}}}
+\define@key{tikz}{mirror snake}[true]{%
+  \csname if#1\endcsname
+    \def\pgf@snake@mirror{\pgftransformyscale{-1}}%
+  \else%
+    \let\pgf@snake@mirror=\@empty%
+  \fi
+}
+
+\let\pgf@snake@mirror=\@empty
+\let\pgf@snake@raise=\@empty
+
+\pgfsetsnakesegmenttransformation{\pgf@snake@mirror\pgf@snake@raise}
 
 \def\tikz@snake{zigzag}
 
