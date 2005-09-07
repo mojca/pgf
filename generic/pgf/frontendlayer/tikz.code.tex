@@ -1,4 +1,4 @@
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.23 2005/09/07 08:27:16 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.24 2005/09/07 22:11:17 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -710,9 +710,9 @@
 
 \tikzstyle{edge from parent}=       [draw]
 
-\tikzstyle{snake triangle 45}=      [snake=triangle,segment object length=2.41421356\pgfsnakesegmentamplitude]
-\tikzstyle{snake triangle 60}=      [snake=triangle,segment object length=1.73205081\pgfsnakesegmentamplitude]
-\tikzstyle{snake triangle 90}=      [snake=triangle,segment object length=\pgfsnakesegmentamplitude]
+\tikzstyle{snake triangles 45}=     [snake=triangles,segment object length=2.41421356\pgfsnakesegmentamplitude]
+\tikzstyle{snake triangles 60}=     [snake=triangles,segment object length=1.73205081\pgfsnakesegmentamplitude]
+\tikzstyle{snake triangles 90}=     [snake=triangles,segment object length=\pgfsnakesegmentamplitude]
 
 
 %
@@ -1001,6 +1001,7 @@
     \let\tikz@moveto@waiting=\relax%
     \let\tikz@timer=\relax%
     \let\tikz@collected@onpath=\@empty%
+    \tikz@snakedfalse%
     \tikz@node@is@a@labelfalse%
     \tikz@expandcount=1000\relax%
     \tikz@lastx=0pt%
