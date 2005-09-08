@@ -1,4 +1,4 @@
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-dvipdfm.def,v 1.4 2005/07/17 22:34:19 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-dvipdfm.def,v 1.5 2005/09/08 16:23:04 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -24,7 +24,7 @@
   \special{pdf: content Q q -1 0 0 -1 0 0 cm q}%
   \special{pdf: content -1 0 0 -1 0 0 cm q}% translate to original coordinate system
   \special{pdf: content 0 0 m W n q}% clip next stuff
-  {\hbox to 0pt{\selectfont.\hss}}% enforce font change
+  {\hbox to 0pt{\pgf@selectfontorig.\hss}}% enforce font change
   \special{pdf: content Q}% end of font change enforcement.
     \wd#1=0pt%
     \ht#1=0pt%
