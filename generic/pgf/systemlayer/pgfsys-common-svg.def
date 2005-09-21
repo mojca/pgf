@@ -1,4 +1,4 @@
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-common-svg.def,v 1.9 2005/09/05 21:46:56 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-common-svg.def,v 1.10 2005/09/21 00:05:34 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -83,6 +83,10 @@
 % Fill rules:
 \def\pgfsys@eoruletrue{\pgf@sys@svg@gs{fill-rule="evenodd"}}
 \def\pgfsys@eorulefalse{\pgf@sys@svg@gs{fill-rule="nonzero"}}
+
+% Transparency:
+\def\pgfsys@stroke@opacity#1{\pgf@sys@svg@gs{stroke-opacity="#1"}}
+\def\pgfsys@fill@opacity#1{\pgf@sys@svg@gs{fill-opacity="#1"}}
 
 % Transformation:
 \def\pgfsys@transformcm#1#2#3#4#5#6{%
