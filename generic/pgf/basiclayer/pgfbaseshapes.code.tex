@@ -1,4 +1,4 @@
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/Attic/pgfbaseshapes.code.tex,v 1.6 2005/08/26 08:11:40 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/Attic/pgfbaseshapes.code.tex,v 1.7 2005/09/30 07:14:03 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -65,13 +65,10 @@
       {\csname pgf@sh@bg@#1\endcsname#5}%
       \@ifundefined{pgf@sh@fbg@#1}{}
       {{\pgfscope\csname pgf@sh@fbg@#1\endcsname\endpgfscope}}%
-      \pgfsys@beginscope%
       {%
         \pgftransformshift{\pgf@sh@reanchor{#1}{text}}%
-        \pgflowlevelsynccm%
-        \pgfqbox{\pgfshapebox}%
+        \pgfqboxsynced{\pgfshapebox}%
       }%
-      \pgfsys@endscope%
       \@ifundefined{pgf@sh@bfg@#1}{}%
       {{\pgfscope\csname pgf@sh@bfg@#1\endcsname\endpgfscope}}%
       \@ifundefined{pgf@sh@fg@#1}{}%

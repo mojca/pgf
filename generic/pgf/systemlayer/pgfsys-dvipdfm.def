@@ -1,4 +1,4 @@
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-dvipdfm.def,v 1.6 2005/09/21 00:05:35 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-dvipdfm.def,v 1.7 2005/09/30 07:14:03 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -51,7 +51,9 @@
   \special{pdf: put @pgfopacities << #1 >>}%
   \special{pdf: put @resources << /ExtGState @pgfopacities >>}%
 }
-
+\def\pgf@sys@pdf@readdtopageresources#1{%
+  \special{pdf: put @resources << /ExtGState @pgfopacities >>}%
+}
 
 \def\pgfsys@imagesuffixlist{pdf:jpg:jpeg:png}
 \def\pgfsys@horishading#1#2#3{%
