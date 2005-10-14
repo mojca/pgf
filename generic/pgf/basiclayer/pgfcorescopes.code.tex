@@ -1,4 +1,4 @@
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorescopes.code.tex,v 1.8 2005/10/03 20:00:24 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorescopes.code.tex,v 1.9 2005/10/14 13:13:23 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -194,13 +194,14 @@
 
 \def\pgf@picture{%
   \setbox\pgfpic\hbox to0pt\bgroup%
+    \begingroup%
+    \color{.}%
     \pgfsys@beginpicture%
       \pgfsys@beginscope%
         \pgfsetlinewidth{0.4pt}%
         \pgftransformreset%
         \pgfsyssoftpath@setcurrentpath\@empty%
         \begingroup%
-          \color{.}%
           \let\pgf@setlengthorig=\setlength%
           \let\pgf@addtolengthorig=\addtolength%
           \let\pgf@selectfontorig=\selectfont%
@@ -220,6 +221,7 @@
         \endgroup%    
       \pgfsys@discardpath\pgfsys@endscope%
     \pgfsys@endpicture%
+    \endgroup%
     \hss
   \egroup%
   % ok, now let's position the box
