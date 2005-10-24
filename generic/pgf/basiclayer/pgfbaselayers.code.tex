@@ -1,4 +1,4 @@
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/Attic/pgfbaselayers.code.tex,v 1.1 2005/08/13 18:59:56 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/Attic/pgfbaselayers.code.tex,v 1.2 2005/10/24 15:14:48 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -17,10 +17,10 @@
 % \pgfdeclarelayer{background}
 
 \def\pgfdeclarelayer#1{%
-  \expandafter\newbox\csname pgf@layerbox@#1\endcsname%
-  \expandafter\newbox\csname pgf@layerboxsaved@#1\endcsname%
+  \expandafter\pgf@newbox\csname pgf@layerbox@#1\endcsname%
+  \expandafter\pgf@newbox\csname pgf@layerboxsaved@#1\endcsname%
 }
-
+\let\pgf@newbox=\newbox % avoid plain TeX outer problem
 
 % Sets the layers that compose the picture
 %
