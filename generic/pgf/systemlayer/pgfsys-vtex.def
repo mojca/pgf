@@ -1,4 +1,4 @@
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-vtex.def,v 1.3 2005/10/25 08:18:14 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-vtex.def,v 1.4 2005/10/25 08:39:23 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -13,8 +13,8 @@
 % Invoking things:
 \def\pgfsys@invoke#1{\special{pS: grestore #1 gsave}} % to protect against things happeing in between
 \def\pgfsys@outerinvoke#1{\special{pS: #1}}
-\def\pgf@sys@postscript@header#1{\sepcial{pS: #1}}
-\def\pgf@sys@postscript@object#1{\sepcial{pS: #1}}
+\def\pgf@sys@postscript@header#1{\special{pS: #1}}
+\def\pgf@sys@postscript@object#1{\special{pS: #1}}
 
 
 %
