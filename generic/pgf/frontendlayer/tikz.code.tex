@@ -1,4 +1,4 @@
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.32 2005/10/18 08:03:44 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.33 2005/10/31 09:50:41 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -1495,6 +1495,16 @@
   \fi%
 }
 
+% snake or lineto?
+\def\tikz@path@close#1{%
+  \iftikz@snaked%
+    \pgfpathsnakesto{\tikz@presnake,{\tikz@snake}{\tikz@mainsnakelength},\tikz@postsnake}{#1}%
+    \pgfpathclose%
+  \else%
+    \pgfpathclose%
+  \fi%
+}
+
 
 % Syntax for lineto horizontal/vertical: 
 % -| <point>
@@ -1570,7 +1580,7 @@
   {\tikz@@close c}}%
 \def\tikz@@close cycle{%
   \tikz@flush@moveto%
-  \pgfpathclose%
+  \tikz@path@close{\expandafter\pgfpoint\pgfsyssoftpath@lastmoveto}%
   \def\pgfstrokehook{}%
   \let\tikz@timer=\@undefined%
   \tikz@scan@next@command%
@@ -1710,8 +1720,7 @@
   \tikz@path@lineto{\pgfpoint{\pgf@xa}{\tikz@lasty}}%
   \tikz@path@lineto{\pgfpoint{\tikz@lastx}{\tikz@lasty}}%
   \tikz@path@lineto{\pgfpoint{\tikz@lastx}{\pgf@ya}}%
-  \tikz@path@lineto{\pgfpoint{\pgf@xa}{\pgf@ya}}%
-  \pgfpathclose%
+  \tikz@path@close{\pgfpoint{\pgf@xa}{\pgf@ya}}%
   \pgfpathmoveto{\pgfpoint{\tikz@lastx}{\tikz@lasty}}%
   \def\pgfstrokehook{}%
   \tikz@scan@next@command%
