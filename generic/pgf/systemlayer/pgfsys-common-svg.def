@@ -1,4 +1,4 @@
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-common-svg.def,v 1.12 2005/10/06 13:16:09 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-common-svg.def,v 1.13 2005/11/15 17:46:37 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -106,7 +106,7 @@
       \pgfsysprotocol@literal{</g>\Hnewline }%
       \advance\pgf@sys@svg@scopecount by-1\relax%
     \ifnum\pgf@sys@svg@scopecount>0\relax%
-    \repeat%  
+    \repeat%
   \endgroup%
   \global\pgf@sys@svg@scopecount=\pgf@sys@svg@thescopecount\relax%  
 }
