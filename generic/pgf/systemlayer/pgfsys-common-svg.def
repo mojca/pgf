@@ -1,4 +1,4 @@
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-common-svg.def,v 1.13 2005/11/15 17:46:37 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-common-svg.def,v 1.14 2005/11/21 17:38:19 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -191,30 +191,34 @@
   }%
 }
 
+\def\pgf@sys@svg@gs@color#1{%
+  \ifpgfpicture\pgf@sys@svg@gs{#1}\fi%
+}
+
 \def\pgfsys@color@rgb@stroke#1#2#3{%
   \pgf@sys@svg@color@rgb#1,#2,#3\relax%
-  \pgf@sys@svg@gs{stroke="\pgf@sys@svg@prepared"}}
+  \pgf@sys@svg@gs@color{stroke="\pgf@sys@svg@prepared"}}
 \def\pgfsys@color@rgb@fill#1#2#3{%
   \pgf@sys@svg@color@rgb#1,#2,#3\relax%
-  \pgf@sys@svg@gs{fill="\pgf@sys@svg@prepared"}}
+  \pgf@sys@svg@gs@color{fill="\pgf@sys@svg@prepared"}}
 \def\pgfsys@color@cmyk@stroke#1#2#3#4{%
   \pgf@sys@svg@color@cmyk#1,#2,#3,#4\relax%
-  \pgf@sys@svg@gs{stroke="\pgf@sys@svg@prepared"}}
+  \pgf@sys@svg@gs@color{stroke="\pgf@sys@svg@prepared"}}
 \def\pgfsys@color@cmyk@fill#1#2#3#4{%
   \pgf@sys@svg@color@cmyk#1,#2,#3,#4\relax%
-  \pgf@sys@svg@gs{fill="\pgf@sys@svg@prepared"}}
+  \pgf@sys@svg@gs@color{fill="\pgf@sys@svg@prepared"}}
 \def\pgfsys@color@cmy@stroke#1#2#3{%
   \pgf@sys@svg@color@cmy#1,#2,#3\relax%
-  \pgf@sys@svg@gs{stroke="\pgf@sys@svg@prepared"}}
+  \pgf@sys@svg@gs@color{stroke="\pgf@sys@svg@prepared"}}
 \def\pgfsys@color@cmy@fill#1#2#3{%
   \pgf@sys@svg@color@cmy#1,#2,#3\relax%
-  \pgf@sys@svg@gs{fill="\pgf@sys@svg@prepared"}}
+  \pgf@sys@svg@gs@color{fill="\pgf@sys@svg@prepared"}}
 \def\pgfsys@color@gray@stroke#1{%
   \pgf@sys@svg@color@gray#1\relax%
-  \pgf@sys@svg@gs{stroke="\pgf@sys@svg@prepared"}}
+  \pgf@sys@svg@gs@color{stroke="\pgf@sys@svg@prepared"}}
 \def\pgfsys@color@gray@fill#1{%
   \pgf@sys@svg@color@gray#1\relax%
-  \pgf@sys@svg@gs{fill="\pgf@sys@svg@prepared"}}
+  \pgf@sys@svg@gs@color{fill="\pgf@sys@svg@prepared"}}
 
 
 % Shadings:
