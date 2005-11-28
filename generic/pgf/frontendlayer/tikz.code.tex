@@ -1,4 +1,4 @@
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.36 2005/11/18 14:49:10 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.37 2005/11/28 16:55:22 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -2237,7 +2237,6 @@
     \let\tikz@options=\@empty%
     \let\tikz@transform=\@empty%
     \tikz@every@style{level \the\tikztreelevel}%
-    \tikz@options%
     \tikz@transform%            
     \let\tikzparentnode=\tikz@last@fig@name%
     % Transform to center of node
@@ -2287,7 +2286,6 @@
     \hbox\bgroup\bgroup%
         \pgfinterruptpath%
           \pgfscope%
-            \let\tikz@options=\@empty%
             \let\tikz@transform=\@empty%
             \tikz@every@style{every child}%
             \tikz@setkeys{#1}%
