@@ -1,4 +1,4 @@
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.37 2005/11/28 16:55:22 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.38 2005/12/12 17:50:54 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -2006,16 +2006,18 @@
 
 
 % Syntax for coordinates:
-% coordinate (coordinate name) at (point)
+% coordinate[options] (coordinate name) at (point)
 % where ``at (point)'' is optional
 \def\tikz@coordinate ordinate{%
-  \@ifnextchar({\tikz@@coordinate}
-  {\tikz@fig ode[shape=coordinate]{}}}%}
-\def\tikz@@coordinate(#1){%
-  \@ifnextchar a{\tikz@@coordinate@at(#1)}
-  {\tikz@fig ode[shape=coordinate](#1){}}}
-\def\tikz@@coordinate@at(#1)at#2(#3){%
-  \tikz@fig ode[shape=coordinate](#1)at(#3){}}
+  \@ifnextchar[{\tikz@@coordinate@opt}{\tikz@@coordinate@opt[]}}
+\def\tikz@@coordinate@opt[#1]{%
+  \@ifnextchar({\tikz@@coordinate[#1]}
+  {\tikz@fig ode[shape=coordinate,#1]{}}}%}
+\def\tikz@@coordinate[#1](#2){%
+  \@ifnextchar a{\tikz@@coordinate@at[#1](#2)}
+  {\tikz@fig ode[shape=coordinate,#1](#2){}}}
+\def\tikz@@coordinate@at[#1](#2)at#3(#4){%
+  \tikz@fig ode[shape=coordinate,#1](#2)at(#4){}}
   
 
 
