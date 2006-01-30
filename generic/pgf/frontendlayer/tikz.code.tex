@@ -1,4 +1,4 @@
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.38 2005/12/12 17:50:54 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.39 2006/01/30 09:58:53 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -1902,6 +1902,7 @@
   \tikz@scan@one@point\tikz@parabola@semifinal%
 }
 \def\tikz@parabola@semifinal#1{%
+  \tikz@flush@moveto%
   % Save original start:
   \pgf@xb=\tikz@lastx%
   \pgf@yb=\tikz@lasty%
