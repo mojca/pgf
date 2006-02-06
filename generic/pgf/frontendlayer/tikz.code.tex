@@ -1,4 +1,4 @@
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.39 2006/01/30 09:58:53 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.40 2006/02/06 14:58:52 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -1507,7 +1507,10 @@
 % snake or lineto?
 \def\tikz@path@close#1{%
   \iftikz@snaked%
-    \pgfpathsnakesto{\tikz@presnake,{\tikz@snake}{\tikz@mainsnakelength},\tikz@postsnake}{#1}%
+    {%
+      \pgftransformreset%
+      \pgfpathsnakesto{\tikz@presnake,{\tikz@snake}{\tikz@mainsnakelength},\tikz@postsnake}{#1}%
+    }%
     \pgfpathclose%
   \else%
     \pgfpathclose%
