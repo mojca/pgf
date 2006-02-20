@@ -1,4 +1,4 @@
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-pdftex.def,v 1.4 2005/10/06 13:16:09 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-pdftex.def,v 1.5 2006/02/20 15:37:51 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -120,6 +120,10 @@
     \pgf@process{\pgfpoint{\pgf@max}{\pgf@max}}%
     \advance\pgf@xa by \pgf@x%
     \advance\pgf@ya by \pgf@y%
+    \pgf@sys@bp@correct{\pgf@x}%
+    \pgf@sys@bp@correct{\pgf@y}%
+    \pgf@sys@bp@correct{\pgf@xa}%
+    \pgf@sys@bp@correct{\pgf@ya}%
     \pdfxform resources {%
       /Shading << /Sh << /ShadingType 3
       /ColorSpace /DeviceRGB

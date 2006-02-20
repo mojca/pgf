@@ -1,4 +1,4 @@
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-dvipdfm.def,v 1.7 2005/09/30 07:14:03 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-dvipdfm.def,v 1.8 2006/02/20 15:37:51 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -101,6 +101,10 @@
     \pgf@process{\pgfpoint{\pgf@max}{\pgf@max}}%
     \advance\pgf@xa by \pgf@x\relax%
     \advance\pgf@ya by \pgf@y\relax%
+    \pgf@sys@bp@correct{\pgf@x}%
+    \pgf@sys@bp@correct{\pgf@y}%
+    \pgf@sys@bp@correct{\pgf@xa}%
+    \pgf@sys@bp@correct{\pgf@ya}%
     \@tempdima=2\pgf@max\relax%
     \edef\@temp{\noexpand\pgf@sys@atbeginpage{\special{pdf: beginxobj @pgfshade#1 width \the\@tempdima\space height \the\@tempdima}}}\@temp%
     \edef\@temp{\noexpand\pgf@sys@atbeginpage{\special{pdf: put @resources <<
