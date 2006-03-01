@@ -1,4 +1,4 @@
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-dvipdfm.def,v 1.8 2006/02/20 15:37:51 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-dvipdfm.def,v 1.9 2006/03/01 23:57:34 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -43,7 +43,7 @@
 \def\pgfsys@beginpurepicture{\special{pdf: content q}}
 
 
-\def\pgf@sys@pdf@addtopageresources#1{%
+\def\pgf@sys@pdf@addtopageresources@extgs#1{%
   \ifx\pgf@sys@pdf@obj\@undefined%
     \global\let\pgf@sys@pdf@obj=\relax%
     \special{pdf: obj @pgfopacities << >>}%
@@ -51,7 +51,7 @@
   \special{pdf: put @pgfopacities << #1 >>}%
   \special{pdf: put @resources << /ExtGState @pgfopacities >>}%
 }
-\def\pgf@sys@pdf@readdtopageresources#1{%
+\def\pgf@sys@pdf@readdtopageresources@extgs#1{%
   \special{pdf: put @resources << /ExtGState @pgfopacities >>}%
 }
 
