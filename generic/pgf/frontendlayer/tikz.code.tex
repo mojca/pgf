@@ -1,4 +1,4 @@
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.42 2006/03/01 23:57:34 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.43 2006/03/07 21:50:46 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -133,11 +133,7 @@
 
 % Pattern options
 \define@key{tikz}{pattern color}{\def\tikz@pattern@color{#1}}
-\define@key{tikz}{pattern}{%
-  \pgfifpatterniscolored{#1}
-    {\tikz@addoption{\pgfsetfillpatterncolored{#1}}}
-    {\tikz@addoption{\pgfsetfillpatternuncolored{#1}{\tikz@pattern@color}}}%
-}
+\define@key{tikz}{pattern}{\tikz@addoption{\pgfsetfillpattern{#1}{\tikz@pattern@color}}}
 \def\tikz@pattern@color{black}
 
 
