@@ -1,4 +1,4 @@
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-pdftex.def,v 1.7 2006/03/07 21:50:46 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-pdftex.def,v 1.8 2006/03/14 23:25:13 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -201,6 +201,10 @@
   \pgfsysprotocol@literal{/Pattern cs /pgfpat#1\space scn}%
 }
 
+
+\def\pgfsys@papersize#1#2{%
+  \pdfpageheight#2%
+  \pdfpagewidth#1}
 
 
   % XForm version, crashes ghostview.
