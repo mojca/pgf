@@ -1,4 +1,4 @@
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-common-postscript.def,v 1.10 2006/03/07 21:50:46 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-common-postscript.def,v 1.11 2006/03/15 22:50:46 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -254,9 +254,11 @@
   \pgf@sys@bp@correct\pgf@yb%
   \pgf@sys@bp@correct\pgf@xc%
   \pgf@sys@bp@correct\pgf@yc%
-  % Now create the pattern object:
-  \AtBeginDvi{%
-    \pgfsys@invoke{
+  \pgfsys@outerinvoke{
+    save true setglobal globaldict begin /pgfpat#1
+    {
+    \ifnum#9=0 [/Pattern /DeviceRGB] \else /Pattern \fi\space
+    setcolorspace
     gsave
     initgraphics
     <<
@@ -272,21 +274,24 @@
     >>
     matrix
     makepattern
-    /pgfpat#1\space exch def
+    %/pgfpat#1\space exch def
     grestore
+    setcolor
+    } bind def end restore
   }%
-  }
 }
 
 \def\pgfsys@setpatternuncolored#1#2#3#4{%
-  \pgfsysprotocol@literal{/pgffc{[/Pattern /DeviceRGB] setcolorspace
-      #2 #3 #4 pgfpat#1\space setcolor}def}%
+  \pgfsysprotocol@literal{/pgffc{#2 #3 #4 pgfpat#1}def}%
+%      [/Pattern /DeviceRGB] setcolorspace
+%      #2 #3 #4 pgfpat#1\space setcolor
+%    }def}%
   \pgf@fillcolortrue%
 }
 
 \def\pgfsys@setpatterncolored#1{%
-  \pgfsysprotocol@literal{/pgffc{/Pattern setcolorspace
-      pgfpat#1\space setcolor}def}%
+  \pgfsysprotocol@literal{/pgffc{pgfpat#1}def}%/Pattern setcolorspace
+%      pgfpat#1\space setcolor}def}%
   \pgf@fillcolortrue%
 }
 
