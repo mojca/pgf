@@ -1,4 +1,4 @@
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-dvips.def,v 1.11 2006/03/14 23:25:13 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-dvips.def,v 1.12 2006/04/05 06:41:50 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -12,7 +12,7 @@
 
 \def\pgfsys@invoke#1{\special{ps:: #1}}
 \def\pgfsys@outerinvoke#1{\special{ps: #1}}
-\def\pgf@sys@postscript@header#1{\special{! #1}}
+\def\pgf@sys@postscript@header#1{\AtBeginDvi{\special{! #1}}}
 \def\pgf@sys@postscript@object#1{\special{! #1}}
 
 
@@ -54,7 +54,7 @@
   \expandafter\gdef\expandafter\pgfsys@atbegindocument\expandafter{\pgfsys@atbegindocument\special{papersize=#1,#2}}}
 
 \def\pgfsys@atbegindocument{%
-  \special{!
+  \pgf@sys@postscript@header{
     /pgfsc{}B% stroke color is empty by default
     /pgffc{}B% fill color is empty by default
     /pgfstr{stroke}B%
