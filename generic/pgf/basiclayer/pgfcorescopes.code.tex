@@ -1,4 +1,4 @@
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorescopes.code.tex,v 1.13 2005/11/18 14:49:10 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorescopes.code.tex,v 1.14 2006/04/07 09:38:10 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -215,7 +215,9 @@
   }
 \def\endpgfpicture{%
               % Shift baseline outside:
-              \global\let\pgf@shift@baseline=\pgf@baseline%
+              \pgf@relevantforpicturesizefalse%
+              \pgf@process{\pgf@baseline}%
+              \gdef\pgf@shift@baseline{\the\pgf@y}%
             \endgroup%
             \hss%
           \egroup%
@@ -245,6 +247,41 @@
 }
 
 
+
+
+% Sets the baseline at the y-coordinate of a given point
+%
+% #1 = point
+%
+% Sets the baseline of the picture to the y-coordinate of a given
+% point. However, the point will be evaluated *at the end of the
+% picture*. 
+%
+% Example:
+%
+% \pgfsetbaselinepointlater{\pgfpointanchor{mynode}{base}}
+
+\def\pgfsetbaselinepointlater#1{\def\pgf@baseline{#1}}
+
+
+% Sets the baseline at the y-coordinate of a given point, now
+%
+% #1 = point
+%
+% Sets the baseline of the picture to the y-coordinate of a given
+% point.
+%
+% Example:
+%
+% \pgfsetbaselinepointnow{\pgfpoint{1cm}{2pt}}
+
+\def\pgfsetbaselinepointnow#1{%
+  \pgf@process{#1}%
+  \edef\pgf@setter@baseline{\noexpand\pgfpoint{\the\pgf@x}{\the\pgf@y}}%
+  \pgfsetbaselinepointlater{\pgf@setter@baseline}%
+}
+
+
 % Sets the baseline
 %
 % #1 = baseline
@@ -256,9 +293,8 @@
 %
 % \pgfsetbaseline{1cm+2pt}
 
-\def\pgfsetbaseline#1{\def\pgf@baseline{#1}}
+\def\pgfsetbaseline#1{\pgfsetbaselinepointlater{\pgfpoint{0pt}{#1}}}
 \pgfsetbaseline{\pgf@picminy}
-
 
 
 
