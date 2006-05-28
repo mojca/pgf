@@ -1,4 +1,4 @@
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcoretransformations.code.tex,v 1.1 2005/06/29 12:14:04 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcoretransformations.code.tex,v 1.2 2006/05/28 20:58:50 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -233,6 +233,37 @@
 
 
 
+% Transformation into a given triangle. The three corners of the
+% triangle are called "origin", "x" and "y" are given. After this
+% transformation has been applied, the canvas origin is at "origin",
+% the vector (1pt,0pt) lies at "x" and the vector (0pt,1pt) lies at
+% "y". 
+%
+% #1 = origin
+% #2 = x
+% #3 = y
+%
+% Example:
+%
+% \pgftransformtriangle{\pgfpointorigin}{\pgfpoint{1cm}{1cm}}{\pgfpoint{-1cm}{1cm}}
+
+\def\pgftransformtriangle#1#2#3{%
+  \pgf@process{#2}%
+  \pgf@xa=\pgf@x%
+  \pgf@ya=\pgf@y%
+  \pgf@process{#3}%
+  \pgf@xb=\pgf@x%
+  \pgf@yb=\pgf@y%
+  \pgf@process{#1}%
+  \advance\pgf@xa by-\pgf@x%
+  \advance\pgf@ya by-\pgf@y%
+  \advance\pgf@xb by-\pgf@x%
+  \advance\pgf@yb by-\pgf@y%
+  \pgftransformcm%
+  {\pgf@sys@tonumber\pgf@xa}{\pgf@sys@tonumber\pgf@ya}%
+  {\pgf@sys@tonumber\pgf@xb}{\pgf@sys@tonumber\pgf@yb}%
+  {\pgfpoint{\pgf@x}{\pgf@y}}%
+}
 
 
 
