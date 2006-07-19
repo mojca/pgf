@@ -1,4 +1,4 @@
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.50 2006/05/28 20:58:50 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.51 2006/07/19 22:29:37 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -350,6 +350,8 @@
 \tikzoption{minimum width}{\def\pgfshapeminwidth{#1}}
 \tikzoption{minimum height}{\def\pgfshapeminheight{#1}}
 \tikzoption{minimum size}{\def\pgfshapeminwidth{#1}\def\pgfshapeminheight{#1}}
+
+\tikzoption{aspect}{\pgfsetshapeaspect{#1}}
 
 \tikzoption{anchor}{\def\tikz@anchor{#1}}
 
