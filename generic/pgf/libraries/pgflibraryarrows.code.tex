@@ -1,4 +1,4 @@
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/pgflibraryarrows.code.tex,v 1.2 2005/07/06 15:58:57 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/pgflibraryarrows.code.tex,v 1.3 2006/09/01 19:22:55 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -702,6 +702,38 @@
 
 \pgfarrowsdeclarereversed{hooks reversed}{hooks reversed}{hooks}{hooks}
 
+
+% An arrow that looks like a serif of the computer modern font
+
+\pgfarrowsdeclare{serif cm}{serif cm}
+{
+  \@tempdima=0.4pt%
+  \advance\@tempdima by.45\pgflinewidth%
+  \pgfarrowsleftextend{-.75\@tempdima}
+  \pgfarrowsrightextend{.04\pgflinewidth}
+}
+{
+  \@tempdima=0.4pt%
+  \advance\@tempdima by.45\pgflinewidth%
+  \pgftransformxshift{.04\pgflinewidth}
+  \pgfpathmoveto{\pgfpoint{-.75\@tempdima}{.5\pgflinewidth}}
+  \pgfpathcurveto
+    {\pgfpoint{-.375\@tempdima}{.5\pgflinewidth}}
+    {\pgfpoint{-.375\@tempdima}{.7\pgflinewidth}}
+    {\pgfpoint{-.375\@tempdima}{1.95\@tempdima}}
+  \pgfpathlineto{\pgfpoint{0pt}{1.95\@tempdima}}
+  \pgfpathcurveto
+    {\pgfpoint{-.04\pgflinewidth}{.5\@tempdima}}
+    {\pgfpoint{-.04\pgflinewidth}{-.5\@tempdima}}
+    {\pgfpoint{0pt}{-1.95\@tempdima}}  
+  \pgfpathlineto{\pgfpoint{-.375\@tempdima}{-1.95\@tempdima}}  
+  \pgfpathcurveto
+    {\pgfpoint{-.375\@tempdima}{-.7\pgflinewidth}}
+    {\pgfpoint{-.375\@tempdima}{-.5\pgflinewidth}}
+    {\pgfpoint{-.75\@tempdima}{-.5\pgflinewidth}}
+  \pgfpathclose
+  \pgfusepathqfill
+}
 
 
 
