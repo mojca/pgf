@@ -1,4 +1,4 @@
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibrarytikztopaths.code.tex,v 1.1 2006/09/01 19:22:55 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibrarytikztopaths.code.tex,v 1.2 2006/09/04 21:52:04 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -16,6 +16,8 @@
 
 \tikzstyle{every curve to}=          []
 \tikzstyle{curve to}=                [to path=\tikz@to@curve@path]
+
+\tikzoption{bend angle}{\def\tikz@to@bend{#1}}
 
 \tikzoption{bend left}[]{%
   \def\pgf@temp{#1}%
