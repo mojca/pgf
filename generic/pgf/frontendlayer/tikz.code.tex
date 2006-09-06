@@ -1,4 +1,4 @@
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.56 2006/09/06 20:21:32 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.57 2006/09/06 22:01:49 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -439,7 +439,7 @@
 \tikzoption{pos}{\edef\tikz@time{#1}}
 
 \tikzoption{auto}[]{\csname tikz@install@auto@anchor@#1\endcsname}
-\tikzoption{'}[]{%
+\tikzoption{swap}[]{%
   \def\tikz@temp{left}%
   \ifx\tikz@auto@anchor@direction\tikz@temp%
     \def\tikz@auto@anchor@direction{right}%
@@ -1436,7 +1436,7 @@
 
 \def\tikz@extra{\pgf@ifnextchar\bgroup\tikz@@extra\relax}
 \long\def\tikz@@extra#1{#1\tikz@scan@next@command}
-\def\endpgfextra{\tikz@scan@next@command}
+\let\endpgfextra=\tikz@scan@next@command
 
 \def\pgfextra{pgfextra}
 
