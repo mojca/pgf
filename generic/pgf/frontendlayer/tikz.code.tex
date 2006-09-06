@@ -1,4 +1,4 @@
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.55 2006/09/04 21:52:04 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.56 2006/09/06 20:21:32 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -1432,8 +1432,12 @@
 
 % Syntax for pgfextra: 
 % \pgfextra {normal tex text}
+% \pgfextra normal tex text \endpgfextra
 
-\long\def\tikz@extra#1{#1\tikz@scan@next@command}
+\def\tikz@extra{\pgf@ifnextchar\bgroup\tikz@@extra\relax}
+\long\def\tikz@@extra#1{#1\tikz@scan@next@command}
+\def\endpgfextra{\tikz@scan@next@command}
+
 \def\pgfextra{pgfextra}
 
 
