@@ -1,4 +1,4 @@
-% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.5 2006/09/06 22:01:49 tantau Exp $
+% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.6 2006/10/03 21:13:31 tantau Exp $
 
 % Copyright 2003, 2004 by Till Tantau <tantau@users.sourceforge.net>.
 %
@@ -101,6 +101,17 @@
     \pgfmanualentryheadline{Shape {\ttfamily\declare{#1}}}%
     \index{#1@\protect\texttt{#1} shape}%
     \index{Shapes!#1@\protect\texttt{#1}}
+    \pgfmanualbody
+}
+{
+  \end{pgfmanualentry}
+}
+
+\newenvironment{predefinednode}[1]{
+  \begin{pgfmanualentry}
+    \pgfmanualentryheadline{Predefined node {\ttfamily\declare{#1}}}%
+    \index{#1@\protect\texttt{#1} node}%
+    \index{Predefined node!#1@\protect\texttt{#1}}
     \pgfmanualbody
 }
 {

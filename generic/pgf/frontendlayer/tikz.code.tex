@@ -1,4 +1,4 @@
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.60 2006/09/27 17:07:24 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.61 2006/10/03 21:13:31 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -527,6 +527,12 @@
     \tikz@marshal%
   \fi%
 }
+
+
+% Inter-picture options
+\tikzoption{remember picture}[true]{\csname pgfrememberpicturepositiononpage#1\endcsname}
+\tikzoption{overlay}[]{\pgf@relevantforpicturesizefalse}
+
 
 
 % Line/curve label placement options
@@ -1096,8 +1102,10 @@
 \def\endtikzpicture{%
     \tikz@atend@picture%
     \global\let\pgf@shift@baseline=\pgf@baseline%
+    \global\let\pgf@remember@smuggle=\ifpgfrememberpicturepositiononpage%
     \endscope%
     \let\pgf@baseline=\pgf@shift@baseline%
+    \let\ifpgfrememberpicturepositiononpage=\pgf@remember@smuggle%
   \endpgfpicture}
 
   

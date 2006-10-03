@@ -1,4 +1,4 @@
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/Attic/pgfbaseshapes.code.tex,v 1.12 2006/10/01 14:46:00 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/Attic/pgfbaseshapes.code.tex,v 1.13 2006/10/03 21:13:31 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -702,6 +702,16 @@
 }
 \expandafter\def\csname pgf@sh@nt@current path bounding box\endcsname{{1}{0}{0}{1}{0pt}{0pt}}
 \expandafter\def\csname pgf@sh@pi@current path bounding box\endcsname{\pgfpictureid}
+
+
+% Special  current page bounding box rectangle:
+\expandafter\def\csname pgf@sh@ns@current page\endcsname{rectangle}
+\expandafter\def\csname pgf@sh@np@current page\endcsname{%
+  \def\southwest{\pgfpoint{0pt}{0pt}}%
+  \def\northeast{\pgfpoint{\paperwidth}{\paperheight}}%
+}
+\expandafter\def\csname pgf@sh@nt@current page\endcsname{{1}{0}{0}{1}{0pt}{0pt}}
+\expandafter\def\csname pgf@sh@pi@current page\endcsname{pgfpageorigin}
 
 
 
