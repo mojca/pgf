@@ -1,4 +1,4 @@
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-dvi.def,v 1.1 2006/02/26 12:47:55 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-dvi.def,v 1.2 2006/10/09 22:35:54 tantau Exp $
 
 % Copyright 2006 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -8,9 +8,11 @@
 
 
 
-% Driver commands for pure dvi
+% Driver commands for pure, ultra-portable dvi, in the tradition of
+% old-style LaTeX pictures.
 %
-% Very rudimentary
+% Do not expect magic from this file
+
 
 \newtoks\pgf@sys@dvi@path
 \def\pgf@sys@dvi@addtopath#1{\pgf@sys@dvi@path\expandafter{\the\pgf@sys@dvi@path#1}}
@@ -159,6 +161,13 @@
   }%
 }
 
+% Text:
+\def\pgfsys@hbox#1{%
+  \wd#1=0pt%
+  \ht#1=0pt%
+  \dp#1=0pt%
+  \pgf@sys@dvi@put{\pgf@sys@dvi@pt@x}{\pgf@sys@dvi@pt@y}{\box#1}%
+}
 
 
 
@@ -356,7 +365,7 @@
 }
 
 \def\pgf@sys@dvi@closepath@stroke{%
-  \pgf@sys@dvi@lineto@stroke{\pgf@xb}{\pgf@yb}%
+  \pgf@sys@dvi@lineto@stroke{\pgf@xc}{\pgf@yc}%
 }
 
 \def\pgf@sys@dvi@rect@stroke#1#2#3#4{%
