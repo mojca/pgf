@@ -1,4 +1,4 @@
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-common-postscript.def,v 1.12 2006/04/19 11:33:17 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-common-postscript.def,v 1.13 2006/10/10 07:25:41 tantau Exp $
 
 % Copyright 2005 by Till Tantau <tantau@cs.tu-berlin.de>.
 %
@@ -297,7 +297,7 @@
 
 
 
-\AtBeginDocument{
+\def\pgfsys@atbegindocument{%
   % Parameters to horizontal pre axishade: \pgf@domb x
   \pgf@sys@postscript@header{/pgfH{%
       /pgfheight exch def 0.75 setlinewidth [] 0 setdash
