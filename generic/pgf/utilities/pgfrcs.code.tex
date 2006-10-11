@@ -35,12 +35,17 @@
     \pgf@parsercsfile$#2$
   \fi}
 
-\def\ProvidesFileRCS $#1${
-  \pgf@parseid $#1$
-  \ProvidesFile{\pgf@rcsfile.\pgf@rcssuffix}[\pgf@rcsdate\space (rcs-revision \pgf@rcsrevision)]
+\def\ProvidesFileRCS{%
+  \def\pgfrcs@marshal{\ProvidesFile{\pgf@rcsfile.\pgf@rcssuffix}}%
+  \pgfrcs@parserest%
 }
 
 \def\ProvidesPackageRCS{%
+  \def\pgfrcs@marshal{\ProvidesPackage{\pgf@rcsfile}}%
+  \pgfrcs@parserest%
+}
+
+\def\pgfrcs@parserest{%
   \def\pgf@rcsadditional{}%
   \afterassignment\pgfrcs@checkforoptional\let\next=}
 
@@ -59,7 +64,7 @@
 
 \def\pgfrcs@package#1${
   \pgf@parseid $#1$
-  \ProvidesPackage{\pgf@rcsfile}[\pgf@rcsdate\space\pgf@rcsadditional\space(rcs-revision \pgf@rcsrevision)]
+  \pgfrcs@marshal[\pgf@rcsdate\space\pgf@rcsadditional\space(rcs-revision \pgf@rcsrevision)]
 }
 
 \def\ProvidesClassRCS $#1$ [#2]{%
@@ -77,7 +82,7 @@
   \def\ProvidesFile#1[#2]{\wlog{Loading file #1 version #2.}}
 \fi
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/utilities/pgfrcs.code.tex,v 1.10 2006/10/10 07:37:25 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/utilities/pgfrcs.code.tex,v 1.11 2006/10/11 10:03:05 tantau Exp $
 
 \catcode`\@=\pgfrcsatcode
 

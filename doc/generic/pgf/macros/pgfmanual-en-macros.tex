@@ -1,4 +1,4 @@
-% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.6 2006/10/03 21:13:31 tantau Exp $
+% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.7 2006/10/11 10:02:59 tantau Exp $
 
 % Copyright 2003, 2004 by Till Tantau <tantau@users.sourceforge.net>.
 %
@@ -172,6 +172,36 @@
     \index{Packages and files!#1@\protect\texttt{#1}}%
     \pgfmanualentryheadline{{\ttfamily\char`\\input \declare{#1}.tex\space\space\space \char`\%\space\space  plain \TeX}}
     \pgfmanualentryheadline{{\ttfamily\char`\\usemodule[\declare{#1}]\space\space \char`\%\space\space  Con\TeX t}}
+    \pgfmanualbody
+}
+{
+  \end{pgfmanualentry}
+}
+
+
+\newenvironment{pgflibrary}[1]{
+  \begin{pgfmanualentry}
+    \pgfmanualentryheadline{{\ttfamily\char`\\usepgflibrary\char`\{\declare{#1}\char`\}\space\space\space
+        \char`\%\space\space  \LaTeX\space and plain \TeX\space and pure pgf}}
+    \index{#1@\protect\texttt{#1} library}%
+    \index{Libraries!#1@\protect\texttt{#1}}%
+    \pgfmanualentryheadline{{\ttfamily\char`\\usepgflibrary[\declare{#1}]\space\space \char`\%\space\space  Con\TeX t\space and pure pgf}}
+    \pgfmanualentryheadline{{\ttfamily\char`\\usetikzlibrary\char`\{\declare{#1}\char`\}\space\space
+        \char`\%\space\space  \LaTeX\space and plain \TeX\space when using \tikzname}}
+    \pgfmanualentryheadline{{\ttfamily\char`\\usetikzlibrary[\declare{#1}]\space
+        \char`\%\space\space  Con\TeX t\space when using \tikzname}}
+    \pgfmanualbody
+}
+{
+  \end{pgfmanualentry}
+}
+
+\newenvironment{tikzlibrary}[1]{
+  \begin{pgfmanualentry}
+    \pgfmanualentryheadline{{\ttfamily\char`\\usetikzlibrary\char`\{\declare{#1}\char`\}\space\space \char`\%\space\space  \LaTeX\space and plain \TeX}}
+    \index{#1@\protect\texttt{#1} library}%
+    \index{Libraries!#1@\protect\texttt{#1}}%
+    \pgfmanualentryheadline{{\ttfamily\char`\\usetikzlibrary[\declare{#1}]\space \char`\%\space\space Con\TeX t}}
     \pgfmanualbody
 }
 {
