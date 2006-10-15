@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorepoints.code.tex,v 1.5 2006/10/11 15:22:25 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorepoints.code.tex,v 1.6 2006/10/15 15:54:25 tantau Exp $
 
 \newdimen\pgf@picminx
 \newdimen\pgf@picmaxx
@@ -39,9 +39,9 @@
     \global\pgf@tempdim\pgf@tempdim% make dimension global
   \endgroup%
   #1=\pgf@tempdim\relax}
-\newcounter{pgf@tempcount}
+\newcount\c@pgf@tempcount
 \def\pgf@setcounter#1#2{%
-  \setcounter{pgf@tempcount}{#2}% makes change global!
+  \pgflatex@setcounter{pgf@tempcount}{#2}% makes change global!
   \csname c@#1\endcsname=\c@pgf@tempcount\relax}
 \def\pgf@selectfont{\pgf@selectfontorig\nullfont}
 
