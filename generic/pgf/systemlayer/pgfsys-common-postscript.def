@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-common-postscript.def,v 1.14 2006/10/11 15:22:26 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-common-postscript.def,v 1.15 2006/10/16 22:32:59 tantau Exp $
 
 
 % Driver commands for postscript
@@ -103,7 +103,7 @@
 % Graphics state
 \def\pgfsys@setdash#1#2{%
   \pgfsysprotocol@literalbuffered{[}%
-  \@for\pgf@sys@temp:={#1}\do{\pgf@sys@bp{\pgf@sys@temp}}%
+  \pgfutil@for\pgf@sys@temp:={#1}\do{\pgf@sys@bp{\pgf@sys@temp}}%
   \pgfsysprotocol@literalbuffered{]}%
   \pgf@sys@bp{#2}\pgfsysprotocol@literal{setdash}}
 \def\pgfsys@setlinewidth#1{\pgf@sys@bp{#1}\pgfsysprotocol@literal{pgfw}}
@@ -157,7 +157,7 @@
   \expandafter\xdef\csname#1\endcsname{\the\pgf@objectcount}%
   \pgfsysprotocol@getcurrentprotocol\pgfsys@temp%
   {%
-    \pgfsysprotocol@setcurrentprotocol\pgf@empty%
+    \pgfsysprotocol@setcurrentprotocol\pgfutil@empty%
     \pgfsysprotocol@bufferedtrue%
     #4%
     \pgfsysprotocol@getcurrentprotocol\pgfsys@@temp%
@@ -168,7 +168,7 @@
 \def\pgfsys@useobject#1#2{%
   \pgfsysprotocol@getcurrentprotocol\pgfsys@temp%
   {%
-    \pgfsysprotocol@setcurrentprotocol\pgf@empty%
+    \pgfsysprotocol@setcurrentprotocol\pgfutil@empty%
     \pgfsysprotocol@bufferedfalse%
     #2%
     \pgfsysprotocol@invokecurrentprotocol%

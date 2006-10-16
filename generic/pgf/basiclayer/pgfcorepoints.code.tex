@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorepoints.code.tex,v 1.6 2006/10/15 15:54:25 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorepoints.code.tex,v 1.7 2006/10/16 22:32:58 tantau Exp $
 
 \newdimen\pgf@picminx
 \newdimen\pgf@picmaxx
@@ -419,8 +419,8 @@
 
 \def\pgfpointpolar#1#2{%
   \pgfsincos{#1}%
-  \in@/{#2}%
-  \ifin@%
+  \pgfutil@in@/{#2}%
+  \ifpgfutil@in@%
     \pgf@polar@#2\@@%
   \else%
     \pgf@polar@#2/#2\@@%
@@ -450,8 +450,8 @@
 
 \def\pgfpointpolarxy#1#2{%
   \pgfsincos{#1}%
-  \in@/{#2}%
-  \ifin@%
+  \pgfutil@in@/{#2}%
+  \ifpgfutil@in@%
     \pgf@polarxy@#2\@@%
   \else%
     \pgf@polarxy@#2/#2\@@%

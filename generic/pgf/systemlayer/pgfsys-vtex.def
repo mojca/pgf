@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-vtex.def,v 1.6 2006/10/11 15:22:26 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-vtex.def,v 1.7 2006/10/16 22:32:59 tantau Exp $
 
 
 % Driver commands for vtex
@@ -40,8 +40,8 @@
   \let\reset@color=\pgf@sys@vtex@reset@color%
 }
 \def\pgf@sys@vtex@setcolor#1{%
-  \colorlet{pgf@tempcolor}{#1}%
-  \pgf@ifundefined{applycolormixins}{}{\applycolormixins{pgf@tempcolor}}%
+  \pgfutil@colorlet{pgf@tempcolor}{#1}%
+  \pgfutil@ifundefined{applycolormixins}{}{\applycolormixins{pgf@tempcolor}}%
   \expandafter\expandafter\expandafter\pgf@sys@vtex@@setcolor\csname\string\color@pgf@tempcolor\endcsname%
 }
 \def\pgf@sys@vtex@@setcolor#1#2#3#4#5{%

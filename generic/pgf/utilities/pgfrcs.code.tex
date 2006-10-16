@@ -24,8 +24,6 @@
 \edef\pgfrcsatcode{\the\catcode`\@}
 \catcode`\@=11
 
-\def\@empty{}
-
 % Get date and version from RCS Ids
 \def\pgf@parseid $#1: #2.#3,v #4 #5/#6/#7 #8${%
   \pgf@parsercsfile$#2/$
@@ -35,7 +33,7 @@
 }
 \def\pgf@parsercsfile$#1/#2${
   \def\pgf@temp{#2}
-  \ifx\pgf@temp\@empty
+  \ifx\pgf@temp\pgfutil@empty
     \def\pgf@rcsfile{#1}
   \else
     \pgf@parsercsfile$#2$
@@ -88,7 +86,7 @@
   \def\ProvidesFile#1[#2]{\wlog{Loading file #1 version #2.}}
 \fi
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/utilities/pgfrcs.code.tex,v 1.12 2006/10/11 15:22:26 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/utilities/pgfrcs.code.tex,v 1.13 2006/10/16 22:32:59 tantau Exp $
 
 \catcode`\@=\pgfrcsatcode
 
