@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibrarytikzmindmap.code.tex,v 1.16 2006/10/17 08:16:28 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibrarytikzmindmap.code.tex,v 1.17 2006/10/17 18:57:25 tantau Exp $
 
 
 
@@ -53,7 +53,7 @@
     \setlength\pgf@xc{\pgfsnakesegmentamplitude}%
     \pgfpathrectangle
     {\pgfpoint{.5\@tempdima}{-.5\pgf@xc}}
-    {\pgfpoint{\pgfsnakeremainingdistance-.5\@tempdimb-.5\@tempdima}{\pgf@xc}}
+    {\pgfpoint{\pgfsnakeremainingdistance+-.5\@tempdimb+-.5\@tempdima}{\pgf@xc}}
   }
   \state{end}[width=0pt,next state=final]
   {
