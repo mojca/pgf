@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys.code.tex,v 1.19 2006/10/16 22:32:59 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys.code.tex,v 1.20 2006/11/01 13:24:31 tantau Exp $
 
 
 %
@@ -845,5 +845,12 @@
 \PackageInfo{pgfsys}{Driver file for pgf: \pgfsysdriver}
 \pgfutil@InputIfFileExists{\pgfsysdriver}{}{%
   \PackageError{pgfsys}{Driver file ``\pgfsysdriver'' not found.}{}}
+
+
+
+% Read aux file in plain and context mode:
+
+\pgfutil@aux@read@hook
+
 
 \endinput
