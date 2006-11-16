@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.68 2006/10/17 08:16:28 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.69 2006/11/16 16:57:52 tantau Exp $
 
 
 % Always-present libraries:
@@ -755,9 +755,11 @@
 \tikzoption{sibling distance}{\setlength\tikzsiblingdistance{#1}}
 
 \tikzoption{growth function}{\let\tikz@grow=#1}
+\tikzoption{growth parent anchor}{\def\tikz@growth@anchor{#1}}
 \tikzoption{grow}{\tikz@set@growth{#1}\edef\tikz@special@level{\the\tikztreelevel}}%
 \tikzoption{grow'}{\tikz@set@growth{#1}\tikz@swap@growth\edef\tikz@special@level{\the\tikztreelevel}}%
 
+\def\tikz@growth@anchor{center}
 
 \def\tikz@special@level{-1}% never
 
@@ -2742,7 +2744,7 @@
     \tikz@transform%            
     \let\tikzparentnode=\tikz@last@fig@name%
     % Transform to center of node
-    \pgftransformshift{\pgfpointanchor{\tikzparentnode}{center}}%
+    \pgftransformshift{\pgfpointanchor{\tikzparentnode}{\tikz@growth@anchor}}%
     \tikznumberofcurrentchild=0\relax%
     \tikz@children@list%
     \global\setbox\tikz@tempbox=\copy\tikz@figbox%
