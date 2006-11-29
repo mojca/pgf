@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys.code.tex,v 1.20 2006/11/01 13:24:31 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys.code.tex,v 1.21 2006/11/29 09:02:45 tantau Exp $
 
 
 %
@@ -668,6 +668,7 @@
 
 \def\pgfsys@hbox#1{%
   \pgfsys@beginscope%
+    \setbox#1=\hbox{\box#1}%
     \wd#1=0pt%
     \ht#1=0pt%
     \dp#1=0pt%
