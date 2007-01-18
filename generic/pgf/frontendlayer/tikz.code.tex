@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.74 2007/01/07 20:48:10 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.75 2007/01/18 21:34:27 tantau Exp $
 
 
 % Always-present libraries:
@@ -1621,11 +1621,22 @@
 
 \def\tikz@foreach{%
   \def\pgffor@beginhook{\setbox\tikz@figbox=\box\tikz@tempbox\expandafter\tikz@scan@next@command\@firstofone}%
-  \def\pgffor@endhook{\pgfextra{\global\setbox\tikz@tempbox=\copy\tikz@figbox\pgfutil@gobble}}%
-  \def\pgffor@afterhook{\setbox\tikz@figbox=\box\tikz@tempbox\tikz@scan@next@command}%
+  \def\pgffor@endhook{\pgfextra{%
+      \xdef\tikz@foreach@save@lastx{\the\tikz@lastx}%
+      \xdef\tikz@foreach@save@lasty{\the\tikz@lasty}%
+      \xdef\tikz@foreach@save@lastxsaved{\the\tikz@lastxsaved}%
+      \xdef\tikz@foreach@save@lastysaved{\the\tikz@lastysaved}%
+      \global\setbox\tikz@tempbox=\copy\tikz@figbox\pgfutil@gobble}}%
+  \def\pgffor@afterhook{%
+    \tikz@lastx=\tikz@foreach@save@lastx%
+    \tikz@lasty=\tikz@foreach@save@lasty%
+    \tikz@lastxsaved=\tikz@foreach@save@lastxsaved%
+    \tikz@lastysaved=\tikz@foreach@save@lastysaved%
+    \setbox\tikz@figbox=\box\tikz@tempbox\tikz@scan@next@command}%
   \global\setbox\tikz@tempbox=\copy\tikz@figbox%
   \foreach}
 
+  
 % Syntax for againpath: 
 % \againpath \somepathname
 
