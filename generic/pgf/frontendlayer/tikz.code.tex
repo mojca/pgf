@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.75 2007/01/18 21:34:27 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.76 2007/01/30 16:51:17 tantau Exp $
 
 
 % Always-present libraries:
@@ -2117,7 +2117,7 @@
   \tikz@path@lineto{\pgfqpoint{\pgf@xa}{\tikz@lasty}}%
   \tikz@path@lineto{\pgfqpoint{\tikz@lastx}{\tikz@lasty}}%
   \tikz@path@lineto{\pgfqpoint{\tikz@lastx}{\pgf@ya}}%
-  \tikz@path@close{\pgfqpoint{\pgf@xa}{\pgf@ya}}%
+  \tikz@path@close{\expandafter\pgfpoint\pgfsyssoftpath@lastmoveto}%
   \pgfpathmoveto{\pgfqpoint{\tikz@lastx}{\tikz@lasty}}%
   \def\pgfstrokehook{}%
   \tikz@scan@next@command%
