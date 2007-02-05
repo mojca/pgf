@@ -7,8 +7,12 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibrarytikzcalendar.code.tex,v 1.4 2007/02/05 11:23:22 tantau Exp $
+\edef\pgfcalendaratcode{\the\catcode`\@}
+\catcode`\@=11
 
+\input pgfrcs.tex
+\input pgfcalendar.code.tex
 
+\catcode`\@=\pgfcalendaratcode
 
 \endinput
