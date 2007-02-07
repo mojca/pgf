@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.9 2007/01/12 20:45:49 tantau Exp $
+% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.10 2007/02/07 17:02:39 tantau Exp $
 
 \providecommand\href[2]{\texttt{#1}}
 
@@ -308,6 +308,11 @@
 \def\itemstyle#1{\item \texttt{style=}\declare{\texttt{#1}}%
   \index{#1@\protect\texttt{#1} style}%
   \index{Styles!#1@\protect\texttt{#1}}%
+}
+
+\def\itemcalendaroption#1{\item \declare{\texttt{#1}}%
+  \index{#1@\protect\texttt{#1} date test}%
+  \index{Date tests!#1@\protect\texttt{#1}}%
 }
 
 
