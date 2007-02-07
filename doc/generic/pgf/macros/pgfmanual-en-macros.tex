@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.10 2007/02/07 17:02:39 tantau Exp $
+% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.11 2007/02/07 22:35:24 tantau Exp $
 
 \providecommand\href[2]{\texttt{#1}}
 
@@ -442,7 +442,7 @@
 \catcode`\%=13
 \catcode`\^^M=13
 \gdef\commenthandler{\catcode`\%=13\def%{\@gobble@till@return}}
-\gdef\@gobble@till@return#1^^M{}
+\gdef\@gobble@till@return#1^^M{\ignorespaces}
 \gdef\typesetcomment{\catcode`\%=13\def%{\@typeset@till@return}}
 \gdef\@typeset@till@return#1^^M{{\def%{\char`\%}\textsl{\char`\%#1}}\par}
 \endgroup
@@ -454,6 +454,7 @@
 \define@key{codeexample}{code only}[]{\code@executefalse}
 \define@key{codeexample}{pre}{\def\code@pre{#1}}
 \define@key{codeexample}{post}{\def\code@post{#1}}
+\define@key{codeexample}{vbox}[]{\def\code@pre{\vbox\bgroup\setlength{\hsize}{\linewidth-6pt}}\def\code@post{\egroup}}
 
 \def\code@pre{}
 \def\code@post{}
