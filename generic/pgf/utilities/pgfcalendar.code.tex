@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/utilities/pgfcalendar.code.tex,v 1.3 2007/02/07 22:35:24 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/utilities/pgfcalendar.code.tex,v 1.4 2007/02/09 14:12:28 tantau Exp $
 
 
 % Translation stuff
@@ -244,7 +244,7 @@
 \define@key{pgfcalendar}{weekend}[]{\ifnum\pgfcalendarifdateweekday>4\relax\pgfcalendarmatchestrue\fi}
 
 \define@key{pgfcalendar}{equals}{%
-  \def\pgf@@temp{#1}%
+  \edef\pgf@@temp{#1}%
   \edef\pgf@temp{\pgfcalendarifdateyear-\pgfcalendarifdatemonth-\pgfcalendarifdateday}%
   \ifx\pgf@temp\pgf@@temp\relax%
     \pgfcalendarmatchestrue%

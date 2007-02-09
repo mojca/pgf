@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.76 2007/01/30 16:51:17 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.77 2007/02/09 14:12:27 tantau Exp $
 
 
 % Always-present libraries:
@@ -1234,6 +1234,7 @@
   \let\tikz@orignode=\node%
   \let\tikz@origcoordinate=\coordinate%
   \let\tikz@origmatrix=\matrix%
+  \let\tikz@origcalendar=\calendar%
   %
   \tikz@deactivatthings%
   %
@@ -1255,7 +1256,11 @@
   \def\node{\path node}
   \def\coordinate{\path coordinate}
   \def\matrix{\path node[matrix]}
+  \def\calendar{\tikz@lib@cal@calendar}%
 }
+\ifx\tikz@lib@cal@calendar\@undefined
+\def\tikz@lib@cal@calendar{\PackageError{tikz}{You need to load the calendar library}{}}
+\fi
 
 \def\tikz@uninstallcommands{%
   \ifnum\the\catcode`\;=\active\relax\expandafter\let\tikz@activesemicolon=\tikz@origsemi\fi%
@@ -1278,6 +1283,7 @@
   \let\node=\tikz@orignode%
   \let\coordinate=\tikz@origcoordinate%
   \let\matrix=\tikz@origmatrix%
+  \let\calendar=\tikz@origcalendar%
 }
 
 
