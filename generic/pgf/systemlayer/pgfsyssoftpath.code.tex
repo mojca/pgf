@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsyssoftpath.code.tex,v 1.4 2006/10/16 22:32:59 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsyssoftpath.code.tex,v 1.5 2007/02/19 13:18:57 tantau Exp $
 
 
 % This package provides the pgf system path abstraction layer. This
@@ -42,13 +42,18 @@
 
 \def\pgfsyssoftpath@lastmoveto{{0pt}{0pt}}
 
+\newif\ifpgfsyssoftpathmovetorelevant
+\pgfsyssoftpathmovetorelevanttrue
+
 % Add a moveto element to the current path
 \def\pgfsyssoftpath@moveto#1#2{%
   \edef\pgfsyssoftpath@temp{{%
     \noexpand\pgfsyssoftpath@movetotoken{#1}{#2}%
   }}%
   \expandafter\pgfutil@g@addto@macro\expandafter\pgfsyssoftpath@currentpath\pgfsyssoftpath@temp%
-  \xdef\pgfsyssoftpath@lastmoveto{{#1}{#2}}%
+  \ifpgfsyssoftpathmovetorelevant%
+    \xdef\pgfsyssoftpath@lastmoveto{{#1}{#2}}%
+  \fi%
 }
 
 % Add a lineto element to the current path
