@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-dvips.def,v 1.15 2006/10/26 17:19:43 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-dvips.def,v 1.16 2007/02/26 11:04:32 tantau Exp $
 
 % Driver commands for dvips
 
@@ -75,7 +75,7 @@
     /.setopacityalpha where {pop} {/.setopacityalpha{pop}def} ifelse % install .setopacityalpha 
     /.pgfsetfillopacityalpha{/pgffoa exch def
       /pgffill{gsave pgffoa .setopacityalpha fill 1 .setopacityalpha newpath fill grestore}B
-      /pgfeofill{gsave pgffoa .setopacityalpha eofill1 .setopacityalpha newpath eofill grestore}B}B
+      /pgfeofill{gsave pgffoa .setopacityalpha eofill 1 .setopacityalpha newpath eofill grestore}B}B
     /.pgfsetstrokeopacityalpha{/pgfsoa exch def
       /pgfstr{gsave pgfsoa .setopacityalpha stroke grestore}B}B
     /pgffoa 1 def
