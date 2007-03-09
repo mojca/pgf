@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibrarytikzpetri.code.tex,v 1.4 2006/10/17 08:16:28 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibrarytikzpetri.code.tex,v 1.5 2007/03/09 17:49:32 tantau Exp $
 
 
 % Styles for places:
@@ -64,8 +64,8 @@
 
 
 \def\tikz@grow@tokens{%
-  \setlength{\pgf@xa}{\tikz@token@distance}%
-  \setlength{\pgf@ya}{\tikz@token@distance}%
+  \pgfmathsetlength{\pgf@xa}{\tikz@token@distance}%
+  \pgfmathsetlength{\pgf@ya}{\tikz@token@distance}%
   \pgf@xc=0pt%
   \pgf@yc=0pt%
   \csname tikz@grow@tokens@placer@\the\tikznumberofchildren @\the\tikznumberofcurrentchild\endcsname%

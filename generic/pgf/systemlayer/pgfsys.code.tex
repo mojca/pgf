@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys.code.tex,v 1.21 2006/11/29 09:02:45 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys.code.tex,v 1.22 2007/03/09 17:49:33 tantau Exp $
 
 
 %
@@ -48,6 +48,12 @@
 \newdimen\pgf@yb
 \newdimen\pgf@xc
 \newdimen\pgf@yc
+
+% internal counters that are alwyas present when pgfsys is loaded
+\newcount\c@pgf@counta
+\newcount\c@pgf@countb
+\newcount\c@pgf@countc
+\newcount\c@pgf@countd
 
 
 % The following \if decides, whether even-odd filling and clipping is
