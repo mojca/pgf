@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.81 2007/04/11 13:04:15 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.82 2007/04/19 11:57:08 tantau Exp $
 
 
 % Always-present libraries:
@@ -3341,9 +3341,11 @@
 
 \newif\iftikz@isdimension
 \def\tikz@checkunit#1{%
-  \@tempdima\z@%
-  \afterassignment\tikz@@checkunit%
-  \@tempdima#1\@tempdima\tikz@unique%
+%  \@tempdima\z@%
+%  \afterassignment\tikz@@checkunit%
+%  \@tempdima#1\@tempdima\tikz@unique%
+  \pgfmathparse{#1}%
+  \let\iftikz@isdimension=\ifpgfmath@unitsdeclared%
 }
 \def\tikz@@checkunit{\pgfutil@ifnextchar\tikz@unique{\tikz@checkunit@number}{\tikz@checkunit@dimension}}
 \def\tikz@checkunit@number\tikz@unique{\tikz@isdimensionfalse}
