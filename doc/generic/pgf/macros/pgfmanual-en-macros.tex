@@ -7,7 +7,8 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.14 2007/04/25 17:38:38 vibrovski Exp $
+% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.15 2007/04/30 20:45:09 tantau Exp $
+
 
 \providecommand\href[2]{\texttt{#1}}
 
@@ -45,12 +46,15 @@
 %% M.W: START MATH MACROS
 \def\mvar#1{{\rmfamily\textit{#1}}}
 
+\makeatletter
+
 \def\extractmathfunctionname#1{\extractmathfunctionname@#1(,)\tmpa\tmpb}
 \def\extractmathfunctionname@#1(#2)#3\tmpb{\def\mathname{#1}}
 
 \def\extractmathoperatorname{\begingroup\def\mvar##1{}\def\ {}\extractmathoperatorname@}
 \def\extractmathoperatorname@#1{\xdef\mathname{#1}\endgroup}
 
+\makeatother
 	
 \def\vskipspecial#1{\vskip#1\vskip0em}
 
