@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-dvips.def,v 1.16 2007/02/26 11:04:32 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-dvips.def,v 1.17 2007/05/28 18:39:57 tantau Exp $
 
 % Driver commands for dvips
 
@@ -86,13 +86,13 @@
 
 \AtBeginDocument{ % needed for plain TeX
   \pgfsys@atbegindocument
-  \let\pgfsys@atbegindocument=\relax
+  \let\pgfsys@atbegindocument=\pgfutil@empty
 }
 
 
 
 %
-% Position tracking (needs pdftex >= 1.40.0-alpha-20051205 in dvi mode)
+% Position tracking (needs pdftex >= 1.40 in dvi mode)
 %
 \ifx\pdftexversion\@undefined
 \else

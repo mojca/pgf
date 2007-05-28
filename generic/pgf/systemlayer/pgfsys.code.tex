@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys.code.tex,v 1.22 2007/03/09 17:49:33 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys.code.tex,v 1.23 2007/05/28 18:39:57 tantau Exp $
 
 
 %
@@ -838,12 +838,6 @@
 
 
 
-\AtBeginDocument{
-  \pgfsys@atbegindocument
-  \let\pgfsys@atbegindocument=\relax
-}
-
-
 
 
 % Discern the driver:
@@ -852,6 +846,15 @@
 \PackageInfo{pgfsys}{Driver file for pgf: \pgfsysdriver}
 \pgfutil@InputIfFileExists{\pgfsysdriver}{}{%
   \PackageError{pgfsys}{Driver file ``\pgfsysdriver'' not found.}{}}
+
+
+
+% This will insert always-present-specials at the beginning of the
+% code. 
+\AtBeginDocument{
+  \pgfsys@atbegindocument
+  \let\pgfsys@atbegindocument=\pgfutil@empty
+}
 
 
 
