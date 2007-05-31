@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.85 2007/05/21 10:10:25 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.86 2007/05/31 10:31:52 tantau Exp $
 
 
 % Always-present libraries:
@@ -1599,7 +1599,7 @@
 \def\tikz@expand{%
   \advance\tikz@expandcount by -1%
   \ifnum\tikz@expandcount<0\relax%
-    \PackageError{tikz}{Giving up on this path}{}%
+    \PackageError{tikz}{Giving up on this path. Did you forget a semicolon?}{}%
     \let\@next=\tikz@finish%
   \else%
     \let\@next=\tikz@@expand
