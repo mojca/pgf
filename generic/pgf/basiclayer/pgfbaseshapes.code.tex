@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/Attic/pgfbaseshapes.code.tex,v 1.18 2007/03/09 17:49:32 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/Attic/pgfbaseshapes.code.tex,v 1.19 2007/06/07 07:41:10 tantau Exp $
 
 
 \newbox\pgfnodeparttextbox
@@ -873,15 +873,15 @@
   % Background path
   %
   \backgroundpath{
-    \@tempdima=\radius%
+    \pgfutil@tempdima=\radius%
     \pgfmathsetlength{\pgf@xb}{\pgfshapeouterxsep}%  
     \pgfmathsetlength{\pgf@yb}{\pgfshapeouterysep}%  
     \ifdim\pgf@xb<\pgf@yb%
-      \advance\@tempdima by-\pgf@yb%
+      \advance\pgfutil@tempdima by-\pgf@yb%
     \else%
-      \advance\@tempdima by-\pgf@xb%
+      \advance\pgfutil@tempdima by-\pgf@xb%
     \fi%
-    \pgfpathcircle{\centerpoint}{\@tempdima}%
+    \pgfpathcircle{\centerpoint}{\pgfutil@tempdima}%
   }
 }
 

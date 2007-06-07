@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibrarytikztopaths.code.tex,v 1.6 2007/03/09 17:49:32 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibrarytikztopaths.code.tex,v 1.7 2007/06/07 07:41:11 tantau Exp $
 
 
 % Straight to
@@ -201,19 +201,19 @@
   \pgf@xa=\tikz@to@out@looseness\pgf@x%
   \pgf@xb=\tikz@to@in@looseness\pgf@x%
   % Adjust as necessary
-  \setlength{\pgf@ya}{\tikz@to@out@min}
+  \pgfmathsetlength{\pgf@ya}{\tikz@to@out@min}
   \ifdim\pgf@xa<\pgf@ya%
     \pgf@xa=\pgf@ya%
   \fi%
-  \setlength{\pgf@ya}{\tikz@to@out@max}
+  \pgfmathsetlength{\pgf@ya}{\tikz@to@out@max}
   \ifdim\pgf@xa>\pgf@ya%
     \pgf@xa=\pgf@ya%
   \fi%
-  \setlength{\pgf@ya}{\tikz@to@in@min}
+  \pgfmathsetlength{\pgf@ya}{\tikz@to@in@min}
   \ifdim\pgf@xb<\pgf@ya%
     \pgf@xb=\pgf@ya%
   \fi%
-  \setlength{\pgf@ya}{\tikz@to@in@max}
+  \pgfmathsetlength{\pgf@ya}{\tikz@to@in@max}
   \ifdim\pgf@xb>\pgf@ya%
     \pgf@xb=\pgf@ya%
   \fi%

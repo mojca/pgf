@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorescopes.code.tex,v 1.23 2007/03/15 16:42:49 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorescopes.code.tex,v 1.24 2007/06/07 07:41:10 tantau Exp $
 
 % Globals
 
@@ -516,7 +516,7 @@
           \let\addtolength\pgf@addtolengthorig%
           \let\selectfont\pgf@selectfontorig%
         \fi%
-        \selectfont%
+        \pgfutil@selectfont%
         \pgfpicturefalse%
         \pgf@savelayers%
 }
