@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibrarytikzshapes.geometric.code.tex,v 1.2 2007/06/18 07:19:31 vibrovski Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibrarytikzshapes.geometric.code.tex,v 1.3 2007/06/20 06:55:32 vibrovski Exp $
 
 
 \tikzoption{star points}{\pgfsetstarpoints{#1}}
@@ -20,6 +20,10 @@
 
 \tikzoption{isosceles triangle apex angle}{\pgfsettriangleapexangle{#1}}%
 \tikzoption{isosceles triangle rotate}{\pgfsettrianglerotate{#1}}%
+
+\tikzoption{trapezium left extension}{\pgfsettrapeziumleftextension{#1}}
+\tikzoption{trapezium right extension}{\pgfsettrapeziumrightextension{#1}}
+\tikzoption{trapezium extension}{\pgfsettrapeziumextension{#1}}
 
 \usepgflibrary{shapes.geometric}
 
