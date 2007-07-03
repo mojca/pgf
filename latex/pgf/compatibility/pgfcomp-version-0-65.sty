@@ -9,7 +9,7 @@
 
 \RequirePackage{pgfrcs}
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/latex/pgf/compatibility/pgfcomp-version-0-65.sty,v 1.4 2006/10/11 15:22:27 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/latex/pgf/compatibility/pgfcomp-version-0-65.sty,v 1.5 2007/07/03 07:46:19 tantau Exp $
 
 \def\pgfdirection#1{\csname pgf@direction#1\endcsname}
 
@@ -113,6 +113,12 @@
 \def\pgf@perform@fill{\pgffill}
 \def\pgf@perform@fillstroke{\pgffillstroke}
 \def\pgf@perform@clip{\pgfclip}
+
+\def\pgfsincos#1{%
+  \pgfmathparse{#1}%
+  \pgfmathcos@{#1}\pgf@x=\pgfmathresult pt%
+  \pgfmathsin@{#1}\pgf@x=\pgfmathresult pt%
+}
 
 \let\pgfdegree=\pgfsincos
 
