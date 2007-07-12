@@ -7,8 +7,14 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys.code.tex,v 1.24 2007/06/07 07:41:11 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys.code.tex,v 1.25 2007/07/12 21:54:09 tantau Exp $
 
+
+% Load key mechanism
+\input pgfkeys.code.tex
+
+% "pgf" is a family
+\pgfset{pgf/.is family}
 
 %
 % The following conversion functions are used to convert from TeX
