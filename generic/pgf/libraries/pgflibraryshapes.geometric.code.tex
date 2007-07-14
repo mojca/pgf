@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibraryshapes.geometric.code.tex,v 1.7 2007/07/10 14:09:15 vibrovski Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibraryshapes.geometric.code.tex,v 1.8 2007/07/14 14:19:19 vibrovski Exp $
 
 \pgfdeclareshape{ellipse}
 %
@@ -2558,7 +2558,7 @@
 			% Now calculate vertical offset (yc) between the center of 
 			% the incircle, and the intersection of the kite diagonals.
 			%
-			% yc = y * cos(90 - a/2) * (a/4 - b/4) / sin(90 - a/4 - b/4)
+			% yc = ya * cos(90 - a/2) * sin(a/4 - b/4) / sin(90 - a/4 - b/4)
 			%
 			% where
 			%
