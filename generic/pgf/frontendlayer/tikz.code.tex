@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.91 2007/07/16 17:20:57 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.92 2007/07/20 08:31:12 tantau Exp $
 
 
 % Always-present libraries:
@@ -1194,14 +1194,17 @@
   \def\shadedraw{\path[shade,draw]}
   \def\clip{\path[clip]}
   \def\useasboundingbox{\path[use as bounding box]}
-  \def\node{\path node}
-  \def\coordinate{\path coordinate}
-  \def\matrix{\path node[matrix]}
+  \def\node{\tikz@path@overlay{node}}
+  \def\coordinate{\tikz@path@overlay{coordinate}}
+  \def\matrix{\tikz@path@overlay{node[matrix]}}
   \def\calendar{\tikz@lib@cal@calendar}%
 }
 \ifx\tikz@lib@cal@calendar\@undefined
 \def\tikz@lib@cal@calendar{\PackageError{tikz}{You need to load the calendar library}{}}
 \fi
+
+\def\tikz@path@overlay#1{\pgfutil@ifnextchar<{\tikz@path@overlayed{#1}}{\path #1}}
+\def\tikz@path@overlayed#1<#2>{\path<#2> #1}
 
 \def\tikz@uninstallcommands{%
   \ifnum\the\catcode`\;=\active\relax\expandafter\let\tikz@activesemicolon=\tikz@origsemi\fi%
