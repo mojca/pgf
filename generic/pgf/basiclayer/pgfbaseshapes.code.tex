@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/Attic/pgfbaseshapes.code.tex,v 1.21 2007/06/21 10:23:58 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/Attic/pgfbaseshapes.code.tex,v 1.22 2007/07/21 18:20:42 vibrovski Exp $
 
 
 \newbox\pgfnodeparttextbox
@@ -160,7 +160,14 @@
 }
 
 % MW
+\newtoks\toks@savedmacro
 \def\pgf@sh@resavedmacro#1#2{%
+	\let#1\pgfutil@empty%
+	\def\addtosavedmacro##1{%
+		\expandafter\def\expandafter\pgf@sh@addtomacro@temp\expandafter{#1\noexpand\def\noexpand##1{##1}}%
+		\expandafter\toks@savedmacro\expandafter{\pgf@sh@addtomacro@temp}%
+		\expandafter\def\expandafter#1\expandafter{\the\toks@savedmacro}%
+	}%
   #2\relax%
   \edef\pgf@sh@marshal{%
     \noexpand\pgfutil@g@addto@macro\noexpand\pgf@sh@savedmacros{%
