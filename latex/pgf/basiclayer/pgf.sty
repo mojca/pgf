@@ -10,14 +10,18 @@
 
 \RequirePackage{pgfrcs}
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/latex/pgf/basiclayer/pgf.sty,v 1.8 2007/01/01 13:51:54 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/latex/pgf/basiclayer/pgf.sty,v 1.9 2007/07/23 21:23:14 tantau Exp $
 
 \def\pgf@draft{}
 \DeclareOption{draft}{\def\pgf@draft{\pgf@draftmodetrue}}
 
-\def\pgf@obsolete{\RequirePackage{pgfcomp-version-0-65}}
-\DeclareOption{version=0.65}{}
-\DeclareOption{version=0.96}{\def\pgf@obsolete{}}
+% the following obsolete stuff is loaded by default:
+\def\pgf@obsolete{\RequirePackage{pgfcomp-version-0-65,pgfcomp-version-1-18}}
+
+\DeclareOption{version=0.65}{} % obsolete stuff is loaded
+\DeclareOption{version=0.96}{\def\pgf@obsolete{\RequirePackage{pgfcomp-version-1-18}}} % less obsolete stuff is loaded
+\DeclareOption{version=1.18}{\def\pgf@obsolete{\RequirePackage{pgfcomp-version-1-18}}} % less obsolete stuff is loaded
+\DeclareOption{version=latest}{\def\pgf@obsolete{}} % no obsolete stuff is loaded
 
 \ProcessOptions
 

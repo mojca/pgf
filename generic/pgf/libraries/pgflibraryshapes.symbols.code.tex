@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibraryshapes.symbols.code.tex,v 1.1 2007/06/08 11:24:59 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibraryshapes.symbols.code.tex,v 1.2 2007/07/23 21:23:14 tantau Exp $
 
 \pgfdeclareshape{forbidden sign}
 {
@@ -34,8 +34,8 @@
     \pgf@xc=\pgf@x%
     \pgf@yc=\pgf@y%
     \pgfutil@tempdima=\radius%
-    \pgfmathsetlength{\pgf@xb}{\pgfshapeouterxsep}%  
-    \pgfmathsetlength{\pgf@yb}{\pgfshapeouterysep}%  
+    \pgfmathsetlength{\pgf@xb}{\pgfkeysvalueof{/pgf/outer xsep}}%  
+    \pgfmathsetlength{\pgf@yb}{\pgfkeysvalueof{/pgf/outer ysep}}%  
     \ifdim\pgf@xb<\pgf@yb%
       \advance\pgfutil@tempdima by-\pgf@yb%
     \else%
