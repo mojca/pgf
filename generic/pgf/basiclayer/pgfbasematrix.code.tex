@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/Attic/pgfbasematrix.code.tex,v 1.12 2007/06/21 10:23:58 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/Attic/pgfbasematrix.code.tex,v 1.13 2007/07/31 16:03:31 tantau Exp $
 
 
 \newif\ifpgfmatrix
@@ -364,7 +364,7 @@
     % Find out whether the cell is empty:
     \pgfutil@ifnextchar\let%
     {% ok, candidate, check following symbol
-      \afterassignment\pgf@matrix@empty@check\let\pgf@next=% get rid of \let
+      \afterassignment\pgf@matrix@empty@check\let\pgf@matrix@temp=% get rid of \let
     }%
     {% no, not empty
       \pgf@matrix@empty@cell@false%
@@ -372,19 +372,22 @@
     }%
 }
 
-\def\pgf@matrix@empty@check{%
-  \pgfutil@ifnextchar\pgf@matrix@signal@cell@end%
-  {% Bingo!
+\def\pgf@matrix@empty@check{\futurelet\pgf@matrix@check@token\pgf@matrix@empty@check@cont}
+\def\pgf@matrix@empty@check@cont{%
+  \ifx\pgf@matrix@check@token\pgf@matrix@signal@cell@end%
     \pgf@matrix@empty@cell@true%
+    \expandafter%
     \pgfmatrixemptycode%
+    \expandafter%
     \let% reinserted
-  }%
-  {% Nope!
+  \else%
     \pgf@matrix@empty@cell@false%
+    \expandafter%
     \pgfmatrixbegincode%
+    \expandafter
     \let% reinserted
-  }
-}%
+  \fi%
+}   
 
 \newif\ifpgf@matrix@empty@cell@
 
