@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibrarytikzshapes.geometric.code.tex,v 1.8 2007/08/09 11:01:59 vibrovski Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibrarytikzshapes.geometric.code.tex,v 1.9 2007/08/10 08:42:42 vibrovski Exp $
 
 
 \pgfkeys{/tikz/star points/.value required}
@@ -26,13 +26,14 @@
 \pgfkeys{/tikz/isosceles triangle apex angle/.value required}
 \pgfkeys{/tikz/isosceles triangle apex angle/.code={\pgfkeys{/pgf/isosceles triangle apex angle=#1}}}
 
-\pgfkeys{/tikz/trapezium left extension/.value required}
-\pgfkeys{/tikz/trapezium left extension/.code={\pgfkeys{/pgf/trapezium left extension=#1}}}
-\pgfkeys{/tikz/trapezium right extension/.value required}
-\pgfkeys{/tikz/trapezium right extension/.code={\pgfkeys{/pgf/trapezium right extension=#1}}}
-\pgfkeys{/tikz/trapezium extension/.style={%
-		/pgf/trapezium left extension=#1,
-		/pgf/trapezium right extension=#1%
+
+\pgfkeys{/tikz/trapezium left angle/.value required}
+\pgfkeys{/tikz/trapezium left angle/.code={\pgfkeys{/pgf/trapezium left angle=#1}}}
+\pgfkeys{/tikz/trapezium right angle/.value required}
+\pgfkeys{/tikz/trapezium right angle/.code={\pgfkeys{/pgf/trapezium right angle=#1}}}
+\pgfkeys{/tikz/trapezium angle/.style={%
+		/pgf/trapezium left angle=#1,
+		/pgf/trapezium right angle=#1%
 	}%
 }
 
