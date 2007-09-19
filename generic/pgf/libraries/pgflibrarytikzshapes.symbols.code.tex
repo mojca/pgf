@@ -7,8 +7,11 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibrarytikzshapes.symbols.code.tex,v 1.1 2007/06/08 11:24:59 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibrarytikzshapes.symbols.code.tex,v 1.2 2007/09/19 06:25:03 vibrovski Exp $
 
+\pgfkeysifdefined{/tikz/shape border uses incircle}{}{%
+	\pgfkeys{/tikz/shape border uses incircle/.is if=pgfshapeborderusesincircle}}
+	
 \usepgflibrary{shapes.symbols}
 
 \endinput

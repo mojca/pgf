@@ -7,10 +7,11 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibrarytikzshapes.geometric.code.tex,v 1.10 2007/08/20 12:48:40 vibrovski Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibrarytikzshapes.geometric.code.tex,v 1.11 2007/09/19 06:25:03 vibrovski Exp $
 
-\pgfkeys{/tikz/shape border uses incircle/.is if=pgfshapeborderusesincircle}
-
+\pgfkeysifdefined{/tikz/shape border uses incircle}{}{%
+	\pgfkeys{/tikz/shape border uses incircle/.is if=pgfshapeborderusesincircle}}
+	
 \usepgflibrary{shapes.geometric}
 
 \endinput
