@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorepoints.code.tex,v 1.11 2007/08/20 12:44:06 vibrovski Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorepoints.code.tex,v 1.12 2007/10/13 10:08:36 vibrovski Exp $
 
 \newdimen\pgf@picminx
 \newdimen\pgf@picmaxx
@@ -30,13 +30,15 @@
 %
 % Example:
 %
-% \pgfsavepgf@process\mypoint{\pgf@x=10pt \pgf@y10pt}
-% \pgfsavepgf@process\myarcpoint{\pgfpointpolar{30}{5cm and 2cm}}
+% \pgfextract@process\mypoint{\pgf@x=10pt \pgf@y10pt}
+% \pgfextract@process\myarcpoint{\pgfpointpolar{30}{5cm and 2cm}}
 
-\def\pgfsavepgf@process#1#2{%
+\def\pgfextract@process#1#2{%
 	\pgf@process{#2}%
 	\edef#1{\noexpand\pgf@x\the\pgf@x\noexpand\pgf@y\the\pgf@y}%
 }
+% This needed until old shapes code changed.
+\let\pgfsavepgf@process\pgfextract@process%
 
 
 % Return a point
