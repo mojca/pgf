@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/Attic/pgfbasematrix.code.tex,v 1.13 2007/07/31 16:03:31 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/Attic/pgfbasematrix.code.tex,v 1.14 2007/10/15 12:09:15 tantau Exp $
 
 
 \newif\ifpgfmatrix
@@ -615,7 +615,7 @@
   \pgf@ya=-\pgf@y%
   \global\advance\pgf@ya by\csname pgf@matrix@miny\the\pgfmatrixcurrentrow\endcsname%
   \expandafter\xdef\csname pgf@matrix@miny\the\pgfmatrixcurrentrow\endcsname{\the\pgf@ya}%
-  \@ifnextchar\egroup{\cr\pgf@end@matrix}{\pgf@matrix@no@eom@found}%
+  \pgfutil@ifnextchar\egroup{\cr\pgf@end@matrix}{\pgf@matrix@no@eom@found}%
 }
 
 \def\pgf@matrix@eom@found{%
