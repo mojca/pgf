@@ -7,8 +7,10 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibrarytikzshapes.arrows.code.tex,v 1.1 2007/06/08 11:24:59 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibrarytikzshapes.arrows.code.tex,v 1.2 2007/10/28 15:24:30 vibrovski Exp $
 
 \usepgflibrary{shapes.arrows}
+
+\pgfkeys{/tikz/arrow box arrows/.code={\pgf@lib@arrowbox@parsearrows{#1}}}
 
 \endinput
