@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.97 2007/10/15 12:09:16 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.98 2007/10/29 15:27:31 tantau Exp $
 
 
 % Always-present libraries:
@@ -1059,7 +1059,7 @@
 \pgfkeys{/tikz/.unknown/.code=%
   % Is it a pgf key?
   \let\tikz@key\pgfkeyscurrentname% 
-  \pgfkeys{/pgf/\tikz@key/.try=#1}%
+  \pgfkeys{/pgf/\tikz@key/.try={#1}}%
   \ifpgfkeyssuccess%
   \else%
     \expandafter\pgfutil@in@\expandafter!\expandafter{\tikz@key}%
