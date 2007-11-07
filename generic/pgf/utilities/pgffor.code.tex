@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/utilities/pgffor.code.tex,v 1.7 2007/11/07 22:32:31 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/utilities/pgffor.code.tex,v 1.8 2007/11/07 23:21:48 tantau Exp $
 
 
 
@@ -41,7 +41,7 @@
 }
 
 \def\pgffor@collectforeach\foreach#1in{%
-  \pgfutil@ifnextchar\bgroup{\pgffor@collectforeach@normal#1}{\pgffor@collectforeach@macro#1}}
+  \pgfutil@ifnextchar\bgroup{\pgffor@collectforeach@normal{#1}}{\pgffor@collectforeach@macro{#1}}}
 \def\pgffor@collectforeach@macro#1#2{%
   \expandafter\long\expandafter\def\expandafter\pgffor@body\expandafter{\pgffor@body\foreach#1in#2}%
   \pgffor@collectbody%
