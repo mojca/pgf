@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibraryshapes.symbols.code.tex,v 1.6 2007/09/19 06:25:03 vibrovski Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibraryshapes.symbols.code.tex,v 1.7 2007/11/08 08:11:42 vibrovski Exp $
 
 \pgfdeclareshape{forbidden sign}
 {
@@ -596,6 +596,8 @@
 		\ifdim\pgf@ya<\pgf@y%
 			\pgf@ya\pgfmathresult\pgf@xa%
 		\fi%
+		\pgf@xa\pgf@x%
+		\pgf@ya\pgf@y%
 		\edef\xinnerradius{\the\pgf@xa}%
 		\edef\yinnerradius{\the\pgf@ya}%
 		\edef\xdefaultinnerradius{\the\pgf@xa}%
