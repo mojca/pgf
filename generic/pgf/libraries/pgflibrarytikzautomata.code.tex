@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibrarytikzautomata.code.tex,v 1.3 2006/10/11 15:22:26 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibrarytikzautomata.code.tex,v 1.4 2007/11/25 21:14:37 tantau Exp $
 
 
 % Styles for states:
@@ -46,6 +46,8 @@
   }
 }]
 \tikzstyle{every initial by arrow}=[]
+
+\tikzstyle{initial by diamond}=[shape=diamond]
 
 
 \tikzoption{initial text}{\tikzaddafternodepathoption{\def\tikz@initial@text{#1}}}
