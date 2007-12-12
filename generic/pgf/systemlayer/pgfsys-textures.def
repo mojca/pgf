@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-textures.def,v 1.4 2006/10/11 15:22:26 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-textures.def,v 1.5 2007/12/12 16:57:17 tantau Exp $
 
 
 % Driver commands for textures driver
@@ -51,7 +51,7 @@
 }
 \def\pgfsys@color@unstacked#1{\special{rawpostscript \XC@usecolor{#1}}}
 
-\def\pgfsys@imagesuffixlist{epsi:eps:ps}
+\def\pgfsys@imagesuffixlist{.epsi:.eps:.ps:}
 
 \AtBeginDocument{
   % Always present specials.

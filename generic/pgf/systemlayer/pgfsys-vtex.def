@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-vtex.def,v 1.7 2006/10/16 22:32:59 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-vtex.def,v 1.8 2007/12/12 16:57:17 tantau Exp $
 
 
 % Driver commands for vtex
@@ -62,7 +62,7 @@
   restore}}
 
 % Graphics:
-\def\pgfsys@imagesuffixlist{epsi:eps:ps:pdf}
+\def\pgfsys@imagesuffixlist{.epsi:.eps:.ps:.pdf:}
 
 % Starting and ending a box:
 \def\pgfsys@hbox#1{%

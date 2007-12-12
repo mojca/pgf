@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-dvipdfm.def,v 1.16 2007/11/12 22:52:06 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-dvipdfm.def,v 1.17 2007/12/12 16:57:17 tantau Exp $
 
 % Driver commands for dvipdfm
 
@@ -57,7 +57,7 @@
   \special{pdf: put @resources << /ExtGState @pgfopacities >>}%
 }
 
-\def\pgfsys@imagesuffixlist{pdf:jpg:jpeg:png}
+\def\pgfsys@imagesuffixlist{.pdf:.jpg:.jpeg:.png:}
 \def\pgfsys@horishading#1#2#3{%
   {%
     \pgf@parsefunc{#3}%
@@ -141,6 +141,10 @@
     \let\pgf@sys@continue@hyper=\HyPL@EveryPage%
   \fi%
 }
+
+
+
+
 
 %
 % Position tracking (needs pdftex >= 1.40.0-alpha-20051205 in dvi mode)

@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex,v 1.7 2007/03/09 17:49:32 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcoregraphicstate.code.tex,v 1.8 2007/12/12 16:57:17 tantau Exp $
 
 % Globals
 
@@ -224,34 +224,6 @@
 % \pgfsetnonzerorule
 
 \def\pgfsetnonzerorule{\pgfsys@eorulefalse\ignorespaces}
-
-
-% Sets the opacity of stroking operations.
-% 
-% #1 = opacity, where 1 means fully opaque and 0 means fully
-% transparent. 
-%
-% Example:
-%
-% \pgfsetstrokeopacity{0.5}
-
-\def\pgfsetstrokeopacity#1{%
-  \edef\pgf@temp{{#1}}%
-  \expandafter\pgfsys@stroke@opacity\pgf@temp}
-
-
-% Sets the opacity of stroking operations.
-% 
-% #1 = opacity, where 1 means fully opaque and 0 means fully
-% transparent. 
-%
-% Example:
-%
-% \pgfsetfillopacity{0.5}
-
-\def\pgfsetfillopacity#1{%
-  \edef\pgf@temp{{#1}}%
-  \expandafter\pgfsys@fill@opacity\pgf@temp}
 
 
 
