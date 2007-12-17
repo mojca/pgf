@@ -7,10 +7,10 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-common-pdf.def,v 1.7 2006/10/16 22:32:59 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-common-pdf.def,v 1.8 2007/12/17 14:52:31 tantau Exp $
 
 
-% Driver commands for pdf
+% Common driver commands for all drivers that produce pdf
 
 % Path construction:
 \def\pgfsys@lineto#1#2{\pgf@sys@bp{#1}\pgf@sys@bp{#2}\pgfsysprotocol@literal{l}}
