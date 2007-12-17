@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibrarytikzbackgrounds.code.tex,v 1.6 2007/07/12 21:54:09 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibrarytikzbackgrounds.code.tex,v 1.7 2007/12/17 10:42:10 tantau Exp $
 
 
 % Layers
@@ -61,6 +61,7 @@
 % Implementation
 
 \def\tikz@background@save{%
+  \pgftransformreset%
   \ifx\tikz@bg@minx\@undefined%
     \pgf@xb=\pgf@picminx%
     \pgf@yb=\pgf@picminy%
