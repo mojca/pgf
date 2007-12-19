@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.105 2007/12/18 23:07:54 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/Attic/tikz.code.tex,v 1.106 2007/12/19 17:30:22 tantau Exp $
 
 
 % Always-present libraries:
@@ -886,13 +886,6 @@
       \let\tikz@snake=\tikz@@snake%
     \fi%
   \fi}
-
-\tikzoption{segment amplitude}{\pgfmathsetlength{\pgfsnakesegmentamplitude}{#1}}
-\tikzoption{segment length}{\pgfmathsetlength{\pgfsnakesegmentlength}{#1}}
-\tikzoption{segment angle}{\pgfmathparse{#1}\let\pgfsnakesegmentangle=\pgfmathresult}
-\tikzoption{segment aspect}{\pgfmathparse{#1}\let\pgfsnakesegmentaspect=\pgfmathresult}
-
-\tikzoption{segment object length}{\pgfmathparse{#1}\edef\pgfsnakesegmentobjectlength{\pgfmathresult pt}}
 
 \tikzoption{raise snake}{\def\pgf@snake@raise{\pgftransformyshift{#1}}}
 \tikzoption{mirror snake}[true]{%
