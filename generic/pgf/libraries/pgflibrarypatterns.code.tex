@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/pgflibrarypatterns.code.tex,v 1.10 2007/12/20 11:22:24 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/pgflibrarypatterns.code.tex,v 1.11 2007/12/20 19:16:30 tantau Exp $
 
 
 % Lines in different directions
@@ -170,6 +170,18 @@
   \pgfpathrectangle{\pgfpointorigin}{\pgfpoint{100pt}{2.5pt}}
   \pgfusepath{fill}
   \pgfsetfillcolor{black!15}
+  \pgfpathrectangle{\pgfpoint{0pt}{2pt}}{\pgfpoint{100pt}{2.5pt}}
+  \pgfusepath{fill}
+}
+
+\pgfdeclarepatterninherentlycolored{horizontal lines gray}
+{\pgfpointorigin}{\pgfpoint{100pt}{4pt}}
+{\pgfpoint{100pt}{4pt}}
+{
+  \pgfsetfillcolor{black!30}
+  \pgfpathrectangle{\pgfpointorigin}{\pgfpoint{100pt}{2.5pt}}
+  \pgfusepath{fill}
+  \pgfsetfillcolor{black!35}
   \pgfpathrectangle{\pgfpoint{0pt}{2pt}}{\pgfpoint{100pt}{2.5pt}}
   \pgfusepath{fill}
 }
