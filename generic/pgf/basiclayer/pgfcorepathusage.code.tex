@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorepathusage.code.tex,v 1.9 2007/07/23 21:23:14 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorepathusage.code.tex,v 1.10 2008/01/09 17:57:15 tantau Exp $
 
 
 % Stroke/fill/clip/etc. the current path. Depending on the options,
@@ -61,6 +61,7 @@
     \fi%
   \fi%  
   \pgfprocessround{\pgfsyssoftpath@currentpath}{\pgfsyssoftpath@currentpath}% change the current path
+  \pgfsyssoftpath@getcurrentpath\pgf@last@processed@path%
   %
   % Check whether the path is stroked. If so, add half the line width
   % to the bounding box.
