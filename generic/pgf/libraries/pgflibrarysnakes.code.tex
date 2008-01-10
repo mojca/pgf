@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/pgflibrarysnakes.code.tex,v 1.19 2007/12/19 17:30:22 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/pgflibrarysnakes.code.tex,v 1.20 2008/01/10 10:59:57 tantau Exp $
 
 
 \newdimen\pgfsnakesegmentamplitude
@@ -424,6 +424,29 @@
   }
   \state{final}
   {}
+}
+
+
+
+% random steps snake
+%
+% A snake that consists of random steps heading towards the target
+%
+% Parameters: \pgfsnakesegmentamplitude, \pgfsnakesegmentlength
+
+\pgfdeclaresnake{random steps}{step}
+{
+  \state{step}[width=+\pgfsnakesegmentlength,next state=step]
+  {
+    \pgfpathlineto{
+      \pgfpointadd
+      {\pgfqpoint{\pgfsnakesegmentlength}{0pt}}
+      {\pgfpoint{rand*\pgfsnakesegmentamplitude}{rand*\pgfsnakesegmentamplitude}}
+    }
+  }
+
+  \state{final}
+  { \pgfpathlineto{\pgfqpoint{\pgfsnakeremainingdistance}{0pt}} }
 }
 
 
