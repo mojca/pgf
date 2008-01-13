@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-common-pdf-via-dvi.def,v 1.1 2007/12/17 14:52:31 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-common-pdf-via-dvi.def,v 1.2 2008/01/13 15:30:04 tantau Exp $
 
 % Common driver commands for all drivers that produce pdf via the
 % detour of a dvi file
@@ -115,7 +115,6 @@
       \hbox to\the\pgfutil@tempdima{\vbox to\the\pgfutil@tempdima{\vfil\special{pdf: usexobj @pgfshade#1}}\hfil}}% 
   }%
 }%
-
 
 \def\pgf@sys@atbeginpage#1{\AtBeginDvi{#1}}
 \AtBeginDocument{% hyperref hack

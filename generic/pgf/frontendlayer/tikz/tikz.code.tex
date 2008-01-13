@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/tikz.code.tex,v 1.1 2008/01/09 17:57:15 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/tikz.code.tex,v 1.2 2008/01/13 15:30:04 tantau Exp $
 
 
 % Always-present libraries:
@@ -1637,6 +1637,7 @@
 \def\tikz@extra@preaction#1{%
   {%
     \pgfsys@beginscope%
+      \setbox\tikz@figbox=\box\voidb@x%
       \path[#1];% do extra path
       \pgfsyssoftpath@setcurrentpath\tikz@actions@path% restore
       \tikz@restorepathsize%
@@ -1647,6 +1648,7 @@
 \def\tikz@extra@postaction#1{%
   {%
     \pgfsys@beginscope%
+      \setbox\tikz@figbox=\box\voidb@x%
       \tikz@restorepathsize%
       \path[#1]\pgfextra{\pgfsyssoftpath@setcurrentpath\tikz@actions@path};% do extra path
       \pgf@resetpathsizes%
@@ -2566,6 +2568,8 @@
       \let\tikz@afternodepathoptions=\pgfutil@empty%
       \let\tikz@transform=\pgfutil@empty%
       \let\tikz@mode=\pgfutil@empty%
+      \let\tikz@preactions=\pgfutil@empty%
+      \let\tikz@postactions=\pgfutil@empty%
       \def\tikz@node@at{\pgfqpoint{\the\tikz@lastx}{\the\tikz@lasty}}%
       \iftikz@node@is@a@label%
       \else%
