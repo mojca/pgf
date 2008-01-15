@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/Attic/pgfbaselayers.code.tex,v 1.5 2006/10/16 22:32:58 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorelayers.code.tex,v 1.1 2008/01/15 10:27:34 tantau Exp $
 
 
 % Creates a new pgf layer
@@ -70,6 +70,9 @@
       \hss
     \egroup%
 }
+
+\let\startpgfonlayer=\pgfonlayer
+\let\stoppgfonlayer=\endpgfonlayer
 
 
 
