@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.23 2007/12/20 19:16:30 tantau Exp $
+% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.24 2008/01/15 17:17:22 tantau Exp $
 
 
 \providecommand\href[2]{\texttt{#1}}
@@ -362,6 +362,19 @@
   \end{pgfmanualentry}
 }
 
+
+\newenvironment{pgfmodule}[1]{
+  \begin{pgfmanualentry}
+    \pgfmanualentryheadline{{\ttfamily\char`\\usepgfmodule\char`\{\declare{#1}\char`\}\space\space\space
+        \char`\%\space\space  \LaTeX\space and plain \TeX\space and pure pgf}}
+    \index{#1@\protect\texttt{#1} module}%
+    \index{Modules!#1@\protect\texttt{#1}}%
+    \pgfmanualentryheadline{{\ttfamily\char`\\usepgfmodule[\declare{#1}]\space\space \char`\%\space\space  Con\TeX t\space and pure pgf}}
+    \pgfmanualbody
+}
+{
+  \end{pgfmanualentry}
+}
 
 \newenvironment{pgflibrary}[1]{
   \begin{pgfmanualentry}

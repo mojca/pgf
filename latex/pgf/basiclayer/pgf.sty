@@ -10,7 +10,7 @@
 
 \RequirePackage{pgfrcs}
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/latex/pgf/basiclayer/pgf.sty,v 1.11 2008/01/13 10:35:47 vibrovski Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/latex/pgf/basiclayer/pgf.sty,v 1.12 2008/01/15 17:17:22 tantau Exp $
 
 \def\pgf@draft{}
 \DeclareOption{draft}{\def\pgf@draft{\pgf@draftmodetrue}}
@@ -26,15 +26,12 @@
 \ProcessOptions
 
 \RequirePackage{pgfcore}
-\RequirePackage{pgfbaseshapes}
-\RequirePackage{pgfbaseplot}
-\RequirePackage{pgfbaseimage}
-\RequirePackage{pgfbaselayers}
-\RequirePackage{pgfbasesnakes}
-\RequirePackage{pgfbasedecorations}
-\RequirePackage{pgfbasepatterns}
-\RequirePackage{pgfbasematrix}
-\RequirePackage{pgfbasetransparency}
+
+\usepgfmodule{shapes,plot}
+
+%\RequirePackage{pgfbasesnakes}
+%\RequirePackage{pgfbasedecorations}
+%\RequirePackage{pgfbasematrix}
 
 \pgf@obsolete
 \pgf@draft

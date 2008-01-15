@@ -13,17 +13,15 @@
 
 
 \input pgfrcs.tex
-\ProvidesPackageRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/plain/pgf/basiclayer/pgf.tex,v 1.9 2008/01/13 10:35:47 vibrovski Exp $
+\ProvidesPackageRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/plain/pgf/basiclayer/pgf.tex,v 1.10 2008/01/15 17:17:22 tantau Exp $
 
 \input pgfcore.tex
-\input pgfbaseshapes.tex
-\input pgfbaseplot.tex
-\input pgfbaseimage.tex
-\input pgfbaselayers.tex
-\input pgfbasesnakes.tex
-\input pgfbasedecorations.tex
-\input pgfbasepatterns.tex
-\input pgfbasematrix.tex
+
+\usepgfmodule{shapes,plot}
+
+%\input pgfbasesnakes.tex
+%\input pgfbasedecorations.tex
+%\input pgfbasematrix.tex
 
 \catcode`\@=\pgfatcode
 
