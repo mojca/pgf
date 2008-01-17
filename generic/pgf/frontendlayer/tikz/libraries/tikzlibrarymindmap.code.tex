@@ -7,18 +7,18 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarymindmap.code.tex,v 1.1 2008/01/09 17:57:16 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarymindmap.code.tex,v 1.2 2008/01/17 20:09:16 tantau Exp $
 
 
-\usetikzlibrary{trees}
+\usetikzlibrary{trees,decorations}
 
 
-% A snake for connecting circle nodes
+% A decoration for connecting circle nodes
 %
 % Parameters: \pgfsnakecirclestartradius, \pgfsnakecircleendradius,
 %             \pgfsnakesegmentamplitude, \pgfsnakesegmentangle
 
-\pgfdeclaresnake{circle connection bar}{initial}
+\pgfdeclaredecoration{circle connection bar}{initial}
 {
   \state{initial}[width=0pt,next state=bar]
   {

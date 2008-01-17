@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/tikz.code.tex,v 1.7 2008/01/16 14:29:04 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/tikz.code.tex,v 1.8 2008/01/17 20:09:16 tantau Exp $
 
 
 % Always-present libraries:
@@ -883,7 +883,7 @@
 
 
 % Snakes are in a lib:
-\tikzset{snake/.code=\PackageError{tikz}{You need to say \string\usetikzlibrary{snakes}}{}}
+\tikzset{snake/.code=\PackageError{tikz}{You need to say \string\usetikzlibrary{decorations}}{}}
 
 % Decorations are in a lib
 \tikzset{decoration/.code=\PackageError{tikz}{You need to say \string\usetikzlibrary{decorations}}{},
