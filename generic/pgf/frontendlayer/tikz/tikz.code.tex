@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/tikz.code.tex,v 1.10 2008/01/19 16:52:30 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/tikz.code.tex,v 1.11 2008/01/22 09:09:29 tantau Exp $
 
 
 % Always-present libraries:
@@ -1638,8 +1638,16 @@
 
 \def\tikz@beginscope{\begingroup\tikz@scan@next@command}
 \def\tikz@endscope{%
-  \global\setbox\tikz@tempbox=\box\tikz@figbox%
+    \global\setbox\tikz@tempbox=\box\tikz@figbox%
+    \xdef\tikz@scope@save@lastx{\the\tikz@lastx}%
+    \xdef\tikz@scope@save@lasty{\the\tikz@lasty}%
+    \xdef\tikz@scope@save@lastxsaved{\the\tikz@lastxsaved}%
+    \xdef\tikz@scope@save@lastysaved{\the\tikz@lastysaved}%
   \endgroup%
+  \tikz@lastx=\tikz@scope@save@lastx%
+  \tikz@lasty=\tikz@scope@save@lasty%
+  \tikz@lastxsaved=\tikz@scope@save@lastxsaved%
+  \tikz@lastysaved=\tikz@scope@save@lastysaved%
   \setbox\tikz@figbox=\box\tikz@tempbox%
   \tikz@scan@next@command}
 
