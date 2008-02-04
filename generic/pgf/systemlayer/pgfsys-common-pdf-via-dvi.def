@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-common-pdf-via-dvi.def,v 1.2 2008/01/13 15:30:04 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-common-pdf-via-dvi.def,v 1.3 2008/02/04 17:19:55 tantau Exp $
 
 % Common driver commands for all drivers that produce pdf via the
 % detour of a dvi file
@@ -116,22 +116,21 @@
   }%
 }%
 
+% The following is an ugly hack. We need something like
+% "everyshipout".
+% But it should be ultra-portable...
 \def\pgf@sys@atbeginpage#1{\AtBeginDvi{#1}}
-\AtBeginDocument{% hyperref hack
-  \ifx\HyPL@EveryPage\@undefined%
+\AtBeginDocument{% hack for old hyperref
+  \ifx\Hy@begindvi\@undefined%
     \let\pgf@sys@continue@hyper=\pgfutil@empty%
   \else%
-    \pgf@sys@hy@implicit@check
+    \ifHy@implicit%
+      \let\pgf@sys@continue@hyper=\Hy@begindvi%
+    \else%
+      \let\pgf@sys@continue@hyper=\HyPL@EveryPage%
+    \fi%
   \fi%
   \def\@begindvi{\unvbox\@begindvibox\pgf@sys@continue@hyper}
-}
-
-\def\pgf@sys@hy@implicit@check{%
-  \ifHy@implicit%
-    \let\pgf@sys@continue@hyper=\Hy@begindvi%
-  \else%
-    \let\pgf@sys@continue@hyper=\HyPL@EveryPage%
-  \fi%
 }
 
 
