@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/pgflibraryfadings.code.tex,v 1.2 2008/01/09 17:57:16 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/pgflibraryfadings.code.tex,v 1.3 2008/02/07 19:25:41 tantau Exp $
 
 
 % Axial fadings
@@ -51,7 +51,7 @@
   color(25bp)=(pgftransparent!100); color(50bp)=(pgftransparent!100)}
 \pgfdeclarefading{circle with fuzzy edge 20 percent}{\pgfuseshading{tikz@lib@fade@circle@20}}
 
-\pgfdeclareradialshading{tikz@lib@fade@circle@15}{\pgfpointorigin}{
+\pgfdeclareradialshading{tikz@lib@fade@fuzzy@15}{\pgfpointorigin}{
   color(0pt)=(pgftransparent!100); color(21.25bp)=(pgftransparent!100); color(23.125bp)=(pgftransparent!0);
   color(25bp)=(pgftransparent!100); color(50bp)=(pgftransparent!100)}
-\pgfdeclarefading{fuzzy ring 15 percent}{\pgfuseshading{tikz@lib@fade@circle@15}}
+\pgfdeclarefading{fuzzy ring 15 percent}{\pgfuseshading{tikz@lib@fade@fuzzy@15}}
