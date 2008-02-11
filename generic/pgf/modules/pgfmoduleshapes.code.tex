@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/modules/pgfmoduleshapes.code.tex,v 1.1 2008/01/15 10:27:34 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/modules/pgfmoduleshapes.code.tex,v 1.2 2008/02/11 23:20:30 tantau Exp $
 
 
 
@@ -143,6 +143,33 @@
     \pgfmultipartnode{#1}{#2}{#4}{#5}%
   }
 }  
+
+% Alias a node
+%
+% #1 = new node name
+% #2 = existing node name
+%
+% Description:
+%
+% This command allows you to subsequently access the node #2 using the
+% name #1.
+%
+% Example:
+%
+% \pgfnode{rectangle}{center}{Hallo}{hellonode}{}
+% \pgfnodealias{mynode}{hellonode}
+
+\def\pgfnodealias#1#2{%
+  \pgf@node@gnamelet{pgf@sh@ns@#1}{pgf@sh@ns@#2}%
+  \pgf@node@gnamelet{pgf@sh@np@#1}{pgf@sh@np@#2}%
+  \pgf@node@gnamelet{pgf@sh@nt@#1}{pgf@sh@nt@#2}%
+  \pgf@node@gnamelet{pgf@sh@pi@#1}{pgf@sh@pi@#2}%
+}
+\def\pgf@node@gnamelet#1#2{%
+  \expandafter\let\expandafter\pgf@temp\csname #2\endcsname%
+  \expandafter\global\expandafter\let\csname #1\endcsname=\pgf@temp%
+}
+
 
 \def\pgf@sh@resavedanchor#1#2{%
   \pgf@process{#2}%
