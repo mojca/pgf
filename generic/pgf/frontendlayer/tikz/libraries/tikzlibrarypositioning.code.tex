@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex,v 1.4 2008/02/10 19:23:16 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex,v 1.5 2008/02/12 23:41:59 tantau Exp $
 
 
 \tikzset{above/.code=\tikz@lib@place@handle@{#1}{south}{0}{1}{north}{1}}
@@ -24,6 +24,9 @@
 \tikzset{right/.code=\tikz@lib@place@handle@{#1}{west}{1}{0}{east}{1}}
 
 \newif\iftikz@lib@ignore@size
+
+% Hook into resets:
+\pgfutil@g@addto@macro\tikz@node@reset@hook{\tikz@addtransform{\tikz@lib@pos@call}\let\tikz@lib@pos@call=\relax}
 
 \tikzset{on grid/.is if=tikz@lib@ignore@size}
 
@@ -48,8 +51,7 @@
     \expandafter\tikz@lib@place@parse@nums\expandafter{\tikz@lib@place@nums}%
     \pgf@x=#2\pgf@x%
     \pgf@y=#3\pgf@y%
-    \edef\pgf@marshal{\noexpand\tikz@addtransform{\noexpand\pgftransformshift{\noexpand\pgfqpoint{\the\pgf@x}{\the\pgf@y}}}}%
-    \pgf@marshal%
+    \edef\tikz@lib@pos@call{\noexpand\pgftransformshift{\noexpand\pgfqpoint{\the\pgf@x}{\the\pgf@y}}}%
   \fi%
 }
 
