@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryautomata.code.tex,v 1.1 2008/01/09 17:57:15 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryautomata.code.tex,v 1.2 2008/02/14 10:31:22 tantau Exp $
 
 
 % Styles for states:
@@ -57,7 +57,7 @@
 \tikzoption{accepting where}{\tikzaddafternodepathoption{\csname tikz@accepting@compute@#1\endcsname}}
 
 \tikzoption{initial distance}{\tikzaddafternodepathoption{\def\tikz@initial@distance{#1}}}
-\tikzoption{accepting distance}{\tikzaddafternodepathoption{\def\tikz@initial@distance{#1}}}
+\tikzoption{accepting distance}{\tikzaddafternodepathoption{\def\tikz@accepting@distance{#1}}}
 
 \def\tikz@initial@text{start}
 \def\tikz@accepting@text{}
