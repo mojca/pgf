@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytrees.code.tex,v 1.1 2008/01/09 17:57:16 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarytrees.code.tex,v 1.2 2008/02/24 10:00:52 tantau Exp $
 
 
 
@@ -53,6 +53,8 @@
   \pgf@temp%
 }
 
+
+
 %
 % Circle grow
 %
@@ -78,6 +80,10 @@
 \def\tikz@grow@circle@from@{%
   \pgftransformshift{\pgfpointpolar{\tikz@grow@circle@from@start-(\pgfkeysvalueof{/tikz/sibling angle})*(\tikznumberofcurrentchild-1)}{\the\tikzleveldistance}}%
 }
+
+
+
+
 
 
 

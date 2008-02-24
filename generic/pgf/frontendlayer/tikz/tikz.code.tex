@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/tikz.code.tex,v 1.27 2008/02/13 19:48:11 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/tikz.code.tex,v 1.28 2008/02/24 10:00:52 tantau Exp $
 
 
 % Always-present libraries:
@@ -831,6 +831,9 @@
 \tikzoption{sibling distance}{\pgfmathsetlength\tikzsiblingdistance{#1}}
 
 \tikzoption{growth function}{\let\tikz@grow=#1}
+
+\tikzset{grow siblings on line/.style={growth function=\tikz@grow@direction}}
+
 \tikzoption{growth parent anchor}{\def\tikz@growth@anchor{#1}}
 \tikzoption{grow}{\tikz@set@growth{#1}\edef\tikz@special@level{\the\tikztreelevel}}%
 \tikzoption{grow'}{\tikz@set@growth{#1}\tikz@swap@growth\edef\tikz@special@level{\the\tikztreelevel}}%
