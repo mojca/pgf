@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-pdftex.def,v 1.20 2007/12/20 10:56:53 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-pdftex.def,v 1.21 2008/03/03 13:52:35 tantau Exp $
 
 
 % Driver commands for pdf
@@ -61,12 +61,16 @@
   /ExtGState \pgf@sys@pdf@extgs@objnum\space 0 R
 }
 
-{
-  \edef\temp{
-    \pgf@sys@pdf@possible@resources
+\def\pgf@sys@pdf@install@pageresources{
+  {
+    \edef\temp{
+      \pgf@sys@pdf@possible@resources
+    }
+    \expandafter\global\expandafter\pdfpageresources\expandafter{\temp}
   }
-  \expandafter\global\expandafter\pdfpageresources\expandafter{\temp}
 }
+\pgf@sys@pdf@install@pageresources
+\expandafter\def\expandafter\pgfutil@everyaftershipout\expandafter{\pgfutil@everyaftershipout\pgf@sys@pdf@install@pageresources}
 
 \expandafter\pgfutil@everybye\expandafter{%
   \the\pgfutil@everybye%
