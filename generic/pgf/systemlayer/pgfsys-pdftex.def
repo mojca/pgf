@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-pdftex.def,v 1.21 2008/03/03 13:52:35 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-pdftex.def,v 1.22 2008/04/03 17:04:46 tantau Exp $
 
 
 % Driver commands for pdf
@@ -70,7 +70,7 @@
   }
 }
 \pgf@sys@pdf@install@pageresources
-\expandafter\def\expandafter\pgfutil@everyaftershipout\expandafter{\pgfutil@everyaftershipout\pgf@sys@pdf@install@pageresources}
+\let\pgfutil@everyaftershipout=\pgf@sys@pdf@install@pageresources% for context
 
 \expandafter\pgfutil@everybye\expandafter{%
   \the\pgfutil@everybye%

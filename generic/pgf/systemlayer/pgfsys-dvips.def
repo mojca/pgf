@@ -7,13 +7,13 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-dvips.def,v 1.19 2007/12/12 16:57:17 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-dvips.def,v 1.20 2008/04/03 17:04:45 tantau Exp $
 
 % Driver commands for dvips
 
 \def\pgfsys@invoke#1{\special{ps:: #1}}
 \def\pgfsys@outerinvoke#1{\special{ps: #1}}
-\def\pgf@sys@postscript@header#1{\AtBeginDvi{\special{! #1}}}
+\def\pgf@sys@postscript@header#1{\pgfutil@insertatbegincurrentpage{\special{! #1}}}
 \def\pgf@sys@postscript@object#1{\special{! #1}}
 
 
