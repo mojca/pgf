@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorearrows.code.tex,v 1.8 2007/06/07 07:41:10 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorearrows.code.tex,v 1.9 2008/04/03 15:25:13 tantau Exp $
 
 
 % Sets the end arrow
@@ -507,6 +507,25 @@
   \pgfpathlineto{\pgfqpoint{0.25\pgflinewidth}{\pgfutil@tempdima}}
   \pgfusepathqstroke
 }
+
+
+% A space arrow
+%
+% This arrow can be combined with other arrows to add "space" around
+% them. 
+%
+% Example:
+%
+% \pgfarrowsdeclarecombine{my<}{my>}{<}{>}{space}{space}
+
+\pgfarrowsdeclare{space}{space}
+{
+  \pgfutil@tempdima=0.88pt%
+  \advance\pgfutil@tempdima by.3\pgflinewidth%
+  \pgfarrowsleftextend{0pt}
+  \pgfarrowsrightextend{\pgfutil@tempdima}
+}
+{}
 
 
 
