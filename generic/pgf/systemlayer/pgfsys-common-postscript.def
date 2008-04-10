@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-common-postscript.def,v 1.20 2008/04/03 17:04:45 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-common-postscript.def,v 1.21 2008/04/10 09:35:45 tantau Exp $
 
 
 % Driver commands for postscript
@@ -293,7 +293,8 @@
   \pgf@sys@bp@correct\pgf@yb%
   \pgf@sys@bp@correct\pgf@xc%
   \pgf@sys@bp@correct\pgf@yc%
-  \pgfutil@insertatbegincurrentpage{\pgfsys@outerinvoke{
+  \edef\pgf@sys@marshal{%
+  \noexpand\pgfutil@insertatbegincurrentpage{\noexpand\pgfsys@outerinvoke{
     save true setglobal globaldict begin /pgfpat#1
     {
     \ifnum#9=0 [/Pattern /DeviceRGB] \else /Pattern \fi\space
@@ -318,6 +319,8 @@
     setcolor
     } bind def end restore
   }}% <<
+  }%
+  \pgf@sys@marshal%
 }
 
 \def\pgfsys@setpatternuncolored#1#2#3#4{%
