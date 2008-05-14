@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/tikz.code.tex,v 1.35 2008/05/14 07:05:40 vibrovski Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/tikz.code.tex,v 1.36 2008/05/14 16:05:56 tantau Exp $
 
 
 % Always-present libraries:
@@ -122,8 +122,8 @@
 \tikzoption{double distance}{%
   \pgfmathsetlength{\pgf@x}{#1}%
   \edef\tikz@double@setup{%
-    \pgf@x=2\pgflinewidth%
-    \advance\pgf@x by\the\pgf@x%
+    \pgf@x=\the\pgf@x%
+    \advance\pgf@x by2\pgflinewidth%
     \pgflinewidth=\pgf@x%
     \noexpand\pgfsetlinewidth{\pgflinewidth}%
     \noexpand\pgfsetinnerlinewidth{\the\pgf@x}%

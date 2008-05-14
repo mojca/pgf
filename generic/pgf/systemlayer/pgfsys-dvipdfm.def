@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-dvipdfm.def,v 1.18 2007/12/17 14:52:31 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-dvipdfm.def,v 1.19 2008/05/14 16:05:56 tantau Exp $
 
 % Driver commands for dvipdfm
 
@@ -21,6 +21,7 @@
 % dvipdfm-specific stuff:
 %
 
+\def\pgfsys@invoke#1{\special{pdf: content Q #1 q}} % ugly, but necessary...
 
 
 %

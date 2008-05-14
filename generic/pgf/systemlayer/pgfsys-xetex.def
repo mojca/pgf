@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-xetex.def,v 1.1 2007/12/17 14:52:31 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-xetex.def,v 1.2 2008/05/14 16:05:56 tantau Exp $
 
 % Driver commands for dvipdfm
 
@@ -18,8 +18,12 @@
 \input pgfsys-common-pdf-via-dvi.def
 
 %
-% dvipdfm-specific stuff:
+% dvipdfmx-specific stuff:
 %
+
+\def\pgfsys@invoke#1{\special{pdf:literal direct #1 }}
+
+
 \ifx\XeTeXversion\@undefined
   \PackageError{pgfsys}{XeTeX is not running, but it should. Somehow
     the wrong driver got selected}{}
