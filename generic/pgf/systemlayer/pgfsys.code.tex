@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys.code.tex,v 1.31 2008/02/07 19:25:41 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys.code.tex,v 1.32 2008/05/14 22:01:48 tantau Exp $
 
 
 % Load key mechanism
@@ -880,6 +880,12 @@
 
 
 % Discern the driver:
+
+% Default driver:
+\ifx\pgfsysdriver\@undefined
+  \pgfutil@guessdriver
+\fi
+
 \input pgf.cfg
 
 \PackageInfo{pgfsys}{Driver file for pgf: \pgfsysdriver}
