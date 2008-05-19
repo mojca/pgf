@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/modules/pgfmoduledatavisualization.code.tex,v 1.8 2008/05/19 09:31:26 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/modules/pgfmoduledatavisualization.code.tex,v 1.9 2008/05/19 10:25:55 tantau Exp $
 
 \usepgfmodule{oo,shapes}
 
@@ -398,7 +398,11 @@
 \def\pgf@dataset@do@external{%
   \csname pgfdv@format@\pgfkeysvalueof{/pgf/data visualization/format}@catcodes\endcsname%
   \immediate\openin1=\pgfkeysvalueof{/pgf/data visualization/source} %
-  \pgf@dataset@readline%
+  \ifeof1\relax
+     \PackageError{pgf}{Data source '\pgfkeysvalueof{/pgf/data visualization/source}' not found}{}%
+  \else
+    \pgf@dataset@readline%
+  \fi
   \immediate\closein1%
 }
 
