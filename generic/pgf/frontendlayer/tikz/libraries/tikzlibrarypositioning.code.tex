@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex,v 1.5 2008/02/12 23:41:59 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex,v 1.6 2008/06/09 10:29:49 tantau Exp $
 
 
 \tikzset{above/.code=\tikz@lib@place@handle@{#1}{south}{0}{1}{north}{1}}
@@ -19,8 +19,8 @@
 \tikzset{below left/.code=\tikz@lib@place@handle@{#1}{north east}{-1}{-1}{south west}{0.707106781}}
 \tikzset{below right/.code=\tikz@lib@place@handle@{#1}{north west}{1}{-1}{south east}{0.707106781}}
 \tikzset{left/.code =\tikz@lib@place@handle@{#1}{east}{-1}{0}{west}{1}}
-\tikzset{mid left/.code =\tikz@lib@place@handle@{#1}{mid east}{-1}{0}{base west}{1}}
-\tikzset{mid right/.code=\tikz@lib@place@handle@{#1}{mid west}{1}{0}{base east}{1}}
+\tikzset{mid left/.code =\tikz@lib@place@handle@{#1}{mid east}{-1}{0}{mid west}{1}}
+\tikzset{mid right/.code=\tikz@lib@place@handle@{#1}{mid west}{1}{0}{mid east}{1}}
 \tikzset{right/.code=\tikz@lib@place@handle@{#1}{west}{1}{0}{east}{1}}
 
 \newif\iftikz@lib@ignore@size
