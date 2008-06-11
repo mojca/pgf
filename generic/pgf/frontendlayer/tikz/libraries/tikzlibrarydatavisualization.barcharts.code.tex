@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/Attic/tikzlibrarydatavisualization.barcharts.code.tex,v 1.3 2008/06/11 15:59:22 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/Attic/tikzlibrarydatavisualization.barcharts.code.tex,v 1.4 2008/06/11 22:12:22 tantau Exp $
 
 \usetikzlibrary{datavisualization}
 \usepgflibrary{datavisualization.barcharts}
@@ -15,12 +15,12 @@
 
 \tikzdatavisualizationset{%
   candle stick plot/.style={
-    make object={counter}{count up(day)},
-    make linear axis=y axis,
-    y axis/in max=100,
+    make object before survey={counter}{count up(day)},
+    make axis=y axis,
     y axis/source=dax,
-    make object={x line trans}{line transformer(day,\pgfqpoint{3mm}{0mm})},
-    make object={index}{candle stick visualizer(\tikz@dvvalue{index/source})},
+    y axis/source max=100,
+    make object before survey={x line trans}{line transformer(day,\pgfqpoint{3mm}{0mm})},
+    make object before survey={index}{candle stick visualizer(\tikz@dvvalue{index/source})},
   },
   index/source/.initial=index,
 }
