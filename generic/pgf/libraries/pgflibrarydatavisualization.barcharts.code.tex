@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibrarydatavisualization.barcharts.code.tex,v 1.2 2008/05/19 09:31:26 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/Attic/pgflibrarydatavisualization.barcharts.code.tex,v 1.3 2008/06/13 08:16:27 tantau Exp $
 
 \usepgfmodule{datavisualization}
 
@@ -31,7 +31,7 @@
   }
 
   \method default connects() {
-    \pgfoothis.object(\pgf@dv@me)
+    \pgfoothis.get handle(\pgf@dv@me)
     \pgfsignalvisualizedatapoint.connect(\pgf@dv@me,visualize)
   }
 
