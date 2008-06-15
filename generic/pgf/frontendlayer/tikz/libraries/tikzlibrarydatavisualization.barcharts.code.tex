@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/Attic/tikzlibrarydatavisualization.barcharts.code.tex,v 1.6 2008/06/13 09:27:26 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/Attic/tikzlibrarydatavisualization.barcharts.code.tex,v 1.7 2008/06/15 20:37:57 tantau Exp $
 
 \usetikzlibrary{datavisualization}
 \usepgflibrary{datavisualization.barcharts}
@@ -16,8 +16,8 @@
 \tikzdatavisualizationset{%
   candle stick plot/.style={
     new object={
-      store=/tikz/data visualization/counter,
-      class=count up,
+      store=/tikz/data visualization/count,
+      class=count,
       arg1=day
     },
     new axis=y axis,
