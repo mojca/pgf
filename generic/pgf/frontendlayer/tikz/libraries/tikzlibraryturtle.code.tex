@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryturtle.code.tex,v 1.1 2008/06/16 21:44:39 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryturtle.code.tex,v 1.2 2008/06/17 21:23:44 tantau Exp $
 
 
 
@@ -36,7 +36,7 @@
       every turtle movement}
     % Ok, compute new position
     \pgf@process{\pgfpointadd{\tikz@last@position}{\pgfpointpolar{\tikz@lib@turtle@dir}{#1}}}%
-    \edef\tikz@marshal{\noexpand\pgfkeysalso{after option path={to[turtle to path options](\the\pgf@x,\the\pgf@y)}
+    \edef\tikz@marshal{\noexpand\pgfkeysalso{after option path={to[line to,turtle to path options](\the\pgf@x,\the\pgf@y)}
       }}%
     \tikz@marshal%
   }
