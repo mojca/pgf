@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorepoints.code.tex,v 1.13 2008/02/03 19:37:26 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorepoints.code.tex,v 1.14 2008/06/18 14:57:56 tantau Exp $
 
 \newdimen\pgf@picminx
 \newdimen\pgf@picmaxx
@@ -172,8 +172,9 @@
 
 \def\pgfpointscale#1#2{%
   \pgf@process{#2}%
-  \pgf@x=#1\pgf@x%
-  \pgf@y=#1\pgf@y%
+  \pgfmathparse{#1}%
+  \pgf@x=\pgfmathresult\pgf@x%
+  \pgf@y=\pgfmathresult\pgf@y%
 }
 
 
