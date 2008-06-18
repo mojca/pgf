@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypetri.code.tex,v 1.1 2008/01/09 17:57:16 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypetri.code.tex,v 1.2 2008/06/18 23:34:49 tantau Exp $
 
 
 % Styles for places:
@@ -48,17 +48,17 @@
 
 \tikzoption{tokens}{%
   \ifnum#1>0\relax%
-    \tikz@add@after@node@path{%
+    \tikzset{append after command={}
      {[children are tokens]child foreach \tikz@dummy in {1,...,#1} {node[token]{}}}}%
   \fi}
 
 \tikzoption{colored tokens}{%
-  \tikz@add@after@node@path{%
+  \tikzset{append after command={}%
     {[children are tokens]child foreach \tikz@child@color in {#1} {node[token,\tikz@child@color]{}}}}%
   }
 
 \tikzoption{structured tokens}{%
-  \tikz@add@after@node@path{%
+  \tikzset{append after command={}%
     {[children are tokens]child foreach \tikz@child@name in {#1} {node[token]{\tikz@child@name}}}}%
   }
 
