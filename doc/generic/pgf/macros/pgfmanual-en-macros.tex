@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.34 2008/06/18 19:13:41 ludewich Exp $
+% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.35 2008/06/21 10:51:10 ludewich Exp $
 
 
 \providecommand\href[2]{\texttt{#1}}
@@ -195,6 +195,25 @@
   \end{pgfmanualentry}
 }
 
+\def\choicesep{$\vert$}%
+\def\choicearg#1{\texttt{#1}}
+
+\newif\iffirstchoice
+
+% \mchoice{choice1,choice2,choice3}
+\newcommand\mchoice[1]{%
+	\begingroup
+	\firstchoicetrue
+	\foreach \mchoice@ in {#1} {%
+		\iffirstchoice
+			\global\firstchoicefalse
+		\else
+			\choicesep
+		\fi
+		\choicearg{\mchoice@}%
+	}%
+	\endgroup
+}%
 
 % \begin{key}{/path/x=value}
 % \begin{key}{/path/x=value (initially XXX)}
@@ -527,6 +546,7 @@
 
 \def\beamer{\textsc{beamer}}
 \def\pdf{\textsc{pdf}}
+\def\eps{\texttt{eps}}
 \def\pgfname{\textsc{pgf}}
 \def\tikzname{Ti\emph{k}Z}
 \def\pstricks{\textsc{pstricks}}
