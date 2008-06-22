@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/modules/pgfmoduleoo.code.tex,v 1.5 2008/06/13 08:16:27 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/modules/pgfmoduleoo.code.tex,v 1.6 2008/06/22 21:26:19 tantau Exp $
 
 
 
@@ -215,6 +215,37 @@
 
 \def\pgfoolet#1#2{%
   \expandafter\global\expandafter\let\csname pgfooX\the\pgfoothis@count @#1\endcsname#2%
+}
+
+
+% Add something to an attribute at the end
+%
+% #1 = attr
+% #2 = code
+%
+% This method adds the give code to the attr at the end.
+
+\def\pgfooappend#1#2{%
+  \expandafter\expandafter\expandafter\def%
+  \expandafter\expandafter\expandafter\pgf@oo@temp\expandafter\expandafter\expandafter{\csname pgfooX\the\pgfoothis@count @#1\endcsname#2}%
+  \expandafter\global\expandafter\let\csname pgfooX\the\pgfoothis@count @#1\endcsname\pgf@oo@temp%
+}
+
+
+% Add something to an attribute at the beginning
+%
+% #1 = attr
+% #2 = code
+%
+% This method adds the give code to the attr at the beginning.
+
+\def\pgfooprefix#1#2{%
+  \pgfooget{#1}\pgf@oo@temp%
+  \def\pgf@oo@@temp{#2}%
+  \expandafter\expandafter\expandafter\def%
+  \expandafter\expandafter\expandafter\pgf@oo@temp%
+  \expandafter\expandafter\expandafter{\expandafter\pgf@oo@@temp\pgf@oo@temp}%
+  \pgfoolet{#1}\pgf@oo@temp%
 }
 
 

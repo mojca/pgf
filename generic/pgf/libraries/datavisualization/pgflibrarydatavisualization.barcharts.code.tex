@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/datavisualization/pgflibrarydatavisualization.barcharts.code.tex,v 1.1 2008/06/16 19:45:21 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/datavisualization/pgflibrarydatavisualization.barcharts.code.tex,v 1.2 2008/06/22 21:26:19 tantau Exp $
 
 \usepgfmodule{datavisualization}
 
@@ -32,7 +32,7 @@
 
   \method default connects() {
     \pgfoothis.get handle(\pgf@dv@me)
-    \pgfsignalvisualizedatapoint.connect(\pgf@dv@me,visualize)
+    \pgfkeysvalueof{/pgf/data visualization/obj}.connect(\pgf@dv@me,visualize,visualize datapoint signal)
   }
 
   \method set stick width(#1) {
