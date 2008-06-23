@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/modules/pgfmoduledatavisualization.code.tex,v 1.15 2008/06/22 21:26:19 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/modules/pgfmoduledatavisualization.code.tex,v 1.16 2008/06/23 21:56:43 tantau Exp $
 
 \usepgfmodule{oo,shapes}
 
@@ -1313,10 +1313,10 @@
     \else%
       \ifx\pgfdvmax\pgfutil@empty%
       \else%
-        \pgfmathsetmarco\pgf@dv@minpa{#1}% min adjust aboslute
-        \pgfmathsetmarco\pgf@dv@minpr{#2}% min adjust relative
-        \pgfmathsetmarco\pgf@dv@maxpa{#3}% max adjust aboslute
-        \pgfmathsetmarco\pgf@dv@maxpr{#4}% max adjust relative
+        \pgfmathsetmacro\pgf@dv@minpa{#1}% min adjust aboslute
+        \pgfmathsetmacro\pgf@dv@minpr{#2}% min adjust relative
+        \pgfmathsetmacro\pgf@dv@maxpa{#3}% max adjust aboslute
+        \pgfmathsetmacro\pgf@dv@maxpr{#4}% max adjust relative
         \pgfmathsubtract{\pgfdvmax}{\pgfdvmin}%
         \let\pgf@dv@diff\pgfmathresult%
         % Start with minimum
