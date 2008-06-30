@@ -7,13 +7,14 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex,v 1.15 2008/06/06 10:52:57 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex,v 1.16 2008/06/30 12:16:12 vibrovski Exp $
 
 
 \newdimen\pgf@path@lastx
 \newdimen\pgf@path@lasty
 
-
+\let\pgfgetpath=\pgfsyssoftpath@getcurrentpath
+\let\pgfsetpath=\pgfsyssoftpath@setcurrentpath
 
 % Replace corners by arcs.
 %
