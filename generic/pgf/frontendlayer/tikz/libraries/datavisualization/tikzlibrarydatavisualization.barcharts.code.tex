@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/datavisualization/tikzlibrarydatavisualization.barcharts.code.tex,v 1.1 2008/06/16 19:45:21 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/datavisualization/tikzlibrarydatavisualization.barcharts.code.tex,v 1.2 2008/07/21 06:22:22 tantau Exp $
 
 \usetikzlibrary{datavisualization}
 \usepgflibrary{datavisualization.barcharts}
@@ -23,6 +23,7 @@
     new axis=y axis,
     y axis/source=dax,
     y axis/source max=100,
+    y axis/vec=\pgfqpoint{0cm}{1cm},
     new object={
       store=/tikz/data visualization/x line trans,
       class=line transformer,
