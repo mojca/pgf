@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcoreimage.code.tex,v 1.4 2008/06/21 10:51:13 ludewich Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcoreimage.code.tex,v 1.5 2008/08/05 13:03:47 ludewich Exp $
 
 
 
@@ -389,7 +389,7 @@
 		\read1 to\pgfincludeexternalgraphics@dp
 		\closein1
 		\dimen0=\pgfincludeexternalgraphics@dp\relax
-		\hbox{\lower\dimen0\box1}%
+		\hbox{\lower\dimen0 \box1 }%
 	\fi
 	\endgroup
 }
