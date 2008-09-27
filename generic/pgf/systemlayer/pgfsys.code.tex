@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys.code.tex,v 1.32 2008/05/14 22:01:48 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys.code.tex,v 1.33 2008/09/27 18:54:33 ludewich Exp $
 
 
 % Load key mechanism
@@ -55,6 +55,8 @@
 \newdimen\pgf@yb
 \newdimen\pgf@xc
 \newdimen\pgf@yc
+
+\newwrite\w@pgf@writea
 
 % internal counters that are alwyas present when pgfsys is loaded
 \newcount\c@pgf@counta
