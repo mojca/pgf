@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-common-postscript.def,v 1.21 2008/04/10 09:35:45 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-common-postscript.def,v 1.22 2008/10/01 14:19:33 tantau Exp $
 
 
 % Driver commands for postscript
@@ -358,7 +358,7 @@
       /pgfdiff 8 index round cvi 8 index round cvi sub 2 mul 1 add def
       2 index 6 index sub pgfdiff div % put red-step on stack
       2 index 6 index sub pgfdiff div % put green-step on stack
-      2 index 6 index sub pgfdiff div % put green-step on stack
+      2 index 6 index sub pgfdiff div % put blue-step on stack
       pgfheight 9 index 9 index 9 index 14 index
       pgfdiff {
         3 index 3 index 3 index setrgbcolor % Set color
