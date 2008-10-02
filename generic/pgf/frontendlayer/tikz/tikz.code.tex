@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/tikz.code.tex,v 1.53 2008/09/27 20:47:25 ludewich Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/tikz.code.tex,v 1.54 2008/10/02 18:02:10 vibrovski Exp $
 
 
 % Always-present libraries:
@@ -4004,12 +4004,18 @@
 % Check to see if the y-coordinate is inside {}. If it is, scan it and
 % reinsert it into the stream inside an extra group. 
 %
+% MW: 
+% Check to see if the y-coordinate is inside {}. If it is, scan it and
+% reinsert it into the stream inside an extra group. 
+%
 \def\tikz@parse@regular#1(#2,{%
 	\pgfutil@ifnextchar\bgroup{\tikz@@parse@regular#1{#2}}{\tikz@@@parse@regular#1{#2}}%
 }
-\def\tikz@@parse@regular#1#2#3{\tikz@@@parse@regular#1{#2}{{#3}}}%
-
-
+\def\tikz@@parse@regular#1#2#3{%
+	\pgfutil@ifnextchar[{% Uh oh! An array index.
+		\tikz@@@parse@regular#1{#2}{#3}}%
+	  {\tikz@@@parse@regular#1{#2}{{#3}}}}
+	  
 % Originally \def\tikz@parse@regular#1(#2,#3){%
 %
 \def\tikz@@@parse@regular#1#2#3){%
