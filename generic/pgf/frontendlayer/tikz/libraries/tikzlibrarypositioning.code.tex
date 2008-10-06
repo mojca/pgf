@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex,v 1.6 2008/06/09 10:29:49 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarypositioning.code.tex,v 1.7 2008/10/06 09:35:29 tantau Exp $
 
 
 \tikzset{above/.code=\tikz@lib@place@handle@{#1}{south}{0}{1}{north}{1}}
@@ -34,6 +34,7 @@
 
 \def\tikz@lib@place@handle@#1#2#3#4#5#6{%
   \def\tikz@anchor{#2}%
+  \let\tikz@do@auto@anchor=\relax%
   \edef\tikz@temp{#1}%
   \def\tikz@lib@place@single@factor{#6}%
   \expandafter\tikz@lib@place@handle@@\expandafter{\tikz@temp}{#3}{#4}{#5}%
