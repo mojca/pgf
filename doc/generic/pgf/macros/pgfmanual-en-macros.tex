@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.38 2008/09/27 18:54:32 ludewich Exp $
+% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.39 2008/10/30 14:24:15 tantau Exp $
 
 
 \providecommand\href[2]{\texttt{#1}}
@@ -258,6 +258,17 @@
   	\pgfmanualentryheadline{Shape {\ttfamily\declare{#1}}}%
     \index{#1@\protect\texttt{#1} shape}%
     \index{Shapes!#1@\protect\texttt{#1}}
+    \pgfmanualbody
+}
+{
+  \end{pgfmanualentry}
+}
+
+\newenvironment{shading}[1]{
+  \begin{pgfmanualentry}
+    \pgfmanualentryheadline{Shading {\ttfamily\declare{#1}}}%
+    \index{#1@\protect\texttt{#1} shading}%
+    \index{Shadings!#1@\protect\texttt{#1}}
     \pgfmanualbody
 }
 {
