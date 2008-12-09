@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.39 2008/10/30 14:24:15 tantau Exp $
+% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.40 2008/12/09 00:12:10 tantau Exp $
 
 
 \providecommand\href[2]{\texttt{#1}}
@@ -275,6 +275,17 @@
   \end{pgfmanualentry}
 }
 
+
+\newenvironment{dataformat}[1]{
+  \begin{pgfmanualentry}
+  	\pgfmanualentryheadline{Format {\ttfamily\declare{#1}}}%
+    \index{#1@\protect\texttt{#1} format}%
+    \index{Formats!#1@\protect\texttt{#1}}
+    \pgfmanualbody
+}
+{
+  \end{pgfmanualentry}
+}
 
 \newenvironment{handler}[1]{
   \begin{pgfmanualentry}
@@ -602,6 +613,21 @@
 {
   \end{pgfmanualentry}
 }
+\newenvironment{datavisualizationoperation}[3][]{
+  \begin{pgfmanualentry}
+    \pgfmanualentryheadline{\textcolor{gray}{{\ttfamily\char`\\datavisualization}\
+        \ \dots}
+      \declare{\texttt{#2}}#3\ \textcolor{gray}{\dots\texttt{;}}}%
+    \def\pgfmanualtest{#1}%
+    \ifx\pgfmanualtest\@empty%
+      \index{#2@\protect\texttt{#2} (data visualization)}%
+      \index{Data visualization!#2@\protect\texttt{#2}}%
+    \fi%
+    \pgfmanualbody
+}
+{
+  \end{pgfmanualentry}
+}
 \makeatother
 
 \def\extractcommand#1#2\@@{%
@@ -923,7 +949,8 @@
 \catcode`\^^M=13
 \catcode`\^^I=13
 \catcode`\ =13%
-\gdef\returntospace{\catcode`\ =13\def {\space}\catcode`\^^I=13\def^^I{\space}\catcode`\^^M=13\def^^M{}}%
+\gdef\returntospace{\catcode`\ =13\def {\space}\catcode`\^^I=13\def^^I{\space}}
+\gdef\showreturn{\show^^M}
 \endgroup
 
 \begingroup
@@ -1045,6 +1072,7 @@
           \commenthandler%
           \xdef\code@temp{#1}% removes returns and comments
         }%
+        \catcode`\^^M=9%
         \colorbox{graphicbackground}{\color{black}\ignorespaces%
           \code@pre\expandafter\scantokens\expandafter{\code@temp\ignorespaces}\code@post\ignorespaces}%
       }%
@@ -1101,7 +1129,8 @@
           \fi}%
         \obeylines
         \everypar \expandafter{\the\everypar \unpenalty}%
-        #1}
+        #1%
+      }
     \end{minipage}}%
   \code@end%
   \par%
