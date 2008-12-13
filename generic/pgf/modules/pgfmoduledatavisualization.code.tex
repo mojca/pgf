@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/modules/pgfmoduledatavisualization.code.tex,v 1.26 2008/12/09 00:12:10 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/modules/pgfmoduledatavisualization.code.tex,v 1.27 2008/12/13 23:23:17 tantau Exp $
 
 \usepgfmodule{oo,shapes}
 
@@ -1333,7 +1333,7 @@
   \method set in to(#1) {
     \pgfooget{in range obj}\pgfdvinrangeinterval
     \pgfdvinrangeinterval.get min and max()%
-    \def\pgf@temp{#1}
+    \edef\pgf@temp{#1}
     \ifx\pgf@temp\pgf@min@text
       \let\pgfmathresult\pgfdvmin
     \else
