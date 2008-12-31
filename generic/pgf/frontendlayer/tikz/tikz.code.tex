@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/tikz.code.tex,v 1.57 2008/12/07 10:49:26 ludewich Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/tikz.code.tex,v 1.58 2008/12/31 14:26:20 ludewich Exp $
 
 
 % Always-present libraries:
@@ -935,7 +935,7 @@
   \let\tikz@temp@start=\pgfmathresult%
   \pgfmathparse{#2}%
   \let\tikz@temp@end=\pgfmathresult%
-  \pgfmathparse{\tikz@temp@start+(\tikz@temp@end-\tikz@temp@start)/\tikz@plot@samples}%
+  \pgfmathparse{\tikz@temp@start+(\tikz@temp@end-\tikz@temp@start)/(\tikz@plot@samples-1)}%
   \edef\tikz@plot@samplesat{\tikz@temp@start,\pgfmathresult,...,\tikz@temp@end}%
 }
 
