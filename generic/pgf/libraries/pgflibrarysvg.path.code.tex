@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/pgflibrarysvg.path.code.tex,v 1.5 2009/01/22 10:27:29 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/pgflibrarysvg.path.code.tex,v 1.6 2009/01/24 17:07:14 tantau Exp $
 
 
 \usepgfmodule{parser}
@@ -44,8 +44,12 @@
 
 \def\pgfpathsvg#1{%
   \let\pgf@lib@svg@finish@prev\relax%
-  \pgf@lib@svg@last@x0pt%
-  \pgf@lib@svg@last@y0pt%
+  {%
+    \pgftransforminvert%
+    \pgf@process{\pgfpointtransformed{\pgfqpoint{\pgf@path@lastx}{\pgf@path@lasty}}}
+  }
+  \pgf@lib@svg@last@x\pgf@x%
+  \pgf@lib@svg@last@y\pgf@y%
   \let\pgf@lib@svg@num=\pgfutil@empty%
   \pgfparserparse{svgpath}#1"%
 }
