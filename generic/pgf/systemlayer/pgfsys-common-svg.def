@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-common-svg.def,v 1.20 2008/02/07 19:25:41 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-common-svg.def,v 1.21 2009/03/20 10:31:30 tantau Exp $
 
 
 % Driver commands for svg
@@ -19,8 +19,8 @@
   {%
     \pgf@x=#1\relax%
     \edef\temp{\expandafter\Pgf@geT\the\pgf@x\space}%
-    \toks@\expandafter\expandafter\expandafter{\expandafter\pgf@sys@svgpath\temp}%
-    \xdef\pgf@sys@svgpath{\the\toks@}%
+    \pgfutil@toks@\expandafter\expandafter\expandafter{\expandafter\pgf@sys@svgpath\temp}%
+    \xdef\pgf@sys@svgpath{\the\pgfutil@toks@}%
   }%
 }
 \def\pgf@sys@addtosvgpath#1{\pgfutil@g@addto@macro\pgf@sys@svgpath{#1\space}}

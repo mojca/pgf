@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/modules/pgfmoduleshapes.code.tex,v 1.6 2008/11/13 17:29:21 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/modules/pgfmoduleshapes.code.tex,v 1.7 2009/03/20 10:31:30 tantau Exp $
 
 
 
@@ -225,8 +225,8 @@
 	\let#1\pgfutil@empty%
 	\def\addtosavedmacro##1{%
 		\expandafter\def\expandafter\pgf@sh@addtomacro@temp\expandafter{#1\noexpand\def\noexpand##1{##1}}%
-		{\expandafter\toks@\expandafter{\pgf@sh@addtomacro@temp}\expandafter}%
-		\expandafter\def\expandafter#1\expandafter{\the\toks@}%
+		{\expandafter\pgfutil@toks@\expandafter{\pgf@sh@addtomacro@temp}\expandafter}%
+		\expandafter\def\expandafter#1\expandafter{\the\pgfutil@toks@}%
 	}%
   #2\relax%
   \edef\pgf@sh@marshal{%
