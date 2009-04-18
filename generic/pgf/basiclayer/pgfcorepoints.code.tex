@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorepoints.code.tex,v 1.18 2008/07/11 15:19:21 ludewich Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorepoints.code.tex,v 1.19 2009/04/18 18:49:52 ludewich Exp $
 
 \newdimen\pgf@picminx
 \newdimen\pgf@picmaxx
@@ -175,6 +175,13 @@
   \pgfmathparse{#1}%
   \pgf@x=\pgfmathresult\pgf@x%
   \pgf@y=\pgfmathresult\pgf@y%
+}
+% A "quick" variant of \pgfpointscale which doesn't invoke the math parser for '#1'.
+% #1 must be a number without units, no registers are accepted.
+\def\pgfqpointscale#1#2{%
+  \pgf@process{#2}%
+  \pgf@x=#1\pgf@x%
+  \pgf@y=#1\pgf@y%
 }
 
 
