@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/tikz.code.tex,v 1.62 2009/03/22 10:56:32 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/tikz.code.tex,v 1.63 2009/06/11 11:08:47 ludewich Exp $
 
 
 % Always-present libraries:
@@ -910,7 +910,7 @@
 
 \tikzoption{only marks}[]{\let\tikz@plot@handler\pgfplothandlerdiscard}
 
-\tikzoption{mark}{
+\tikzoption{mark}{%
 	\def\tikz@plot@mark{#1}%
 	\def\tikz@temp{none}%
 	\ifx\tikz@temp\tikz@plot@mark
@@ -918,6 +918,8 @@
 	\fi
 }
 \tikzset{
+	no marks/.style={mark=none},%
+	no markers/.style={mark=none},%
 	every mark/.style={},
 	mark options/.style={%
 		every mark/.style={#1}%
