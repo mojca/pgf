@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarycalc.code.tex,v 1.5 2008/02/04 17:19:55 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarycalc.code.tex,v 1.6 2009/09/04 17:22:59 tantau Exp $
 
 %
 %
@@ -378,7 +378,7 @@
     \pgfmathparse{veclen(\the\pgf@xa,\the\pgf@ya)}
     \pgfmathparse{acos(\the\pgf@xc/\pgfmathresult)}
     \ifnum\pgfkeysvalueof{/tikz/cs/solution}>1\relax%
-      \pgfmathsubtract{0}{\pgfmathresult}%
+      \pgfmathparse{0-\pgfmathresult}%
     \fi%
     \let\tikz@lib@temp=\pgfmathresult%
     %

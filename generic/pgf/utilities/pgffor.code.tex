@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/utilities/pgffor.code.tex,v 1.15 2008/08/31 18:48:42 vibrovski Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/utilities/pgffor.code.tex,v 1.16 2009/09/04 17:22:59 tantau Exp $
 
 
 \newdimen\pgffor@iter
@@ -402,7 +402,11 @@
 	\pgffor@dotsnext%
 }	
 	
-\def\pgffor@dotscharcheck#1#2\pgffor@@stop{%
+\def\pgffor@dotscharcheck#1\pgffor@@stop{%
+  \edef\pgffor@dotscharcheck@temp{#1}%
+  \expandafter\pgffor@@dotscharcheck\pgffor@dotscharcheck@temp\pgffor@@stop%
+}
+\def\pgffor@@dotscharcheck#1#2\pgffor@@stop{%
   \pgffor@charuppercasefalse%
   \pgffor@charlowercasefalse%
   \pgffor@ifitemregister{#1}{}%
