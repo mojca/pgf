@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.42 2009/10/15 20:31:50 ludewich Exp $
+% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.43 2009/10/20 21:27:15 ludewich Exp $
 
 
 
@@ -634,6 +634,7 @@
     \ifx\pgfmanualtest\@empty%
       \index{#2@\protect\texttt{#2} path operation}%
       \index{Path operations!#2@\protect\texttt{#2}}%
+      \pgfmanualpdflabel{#2}{}%
     \fi%
     \pgfmanualbody
 }
@@ -649,6 +650,7 @@
     \ifx\pgfmanualtest\@empty%
       \index{#2@\protect\texttt{#2} (data visualization)}%
       \index{Data visualization!#2@\protect\texttt{#2}}%
+      \pgfmanualpdflabel{#2}{}%
     \fi%
     \pgfmanualbody
 }
@@ -1186,6 +1188,15 @@
 \makeatother
 
 \usepackage{pgfmanual}
+
+%\iffalse
+\iftrue
+	\def\pgfmanualpdflabel#1#2{#2}% NO-OP FIXME
+	\def\pgfmanualpdfref#1#2{#2}%
+	\pgfkeys{
+		/pdflinks/codeexample links=false,% DISABLED.
+	}%
+\fi
 
 %%% Local Variables: 
 %%% mode: latex
