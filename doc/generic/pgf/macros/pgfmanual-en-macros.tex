@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.43 2009/10/20 21:27:15 ludewich Exp $
+% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.44 2009/11/14 11:24:31 ludewich Exp $
 
 
 
@@ -1189,14 +1189,16 @@
 
 \usepackage{pgfmanual}
 
-%\iffalse
-\iftrue
+\makeatletter
+% \pgfautoxrefs will be defined by 'make dist'
+\pgfutil@ifundefined{pgfautoxrefs}{%
 	\def\pgfmanualpdflabel#1#2{#2}% NO-OP FIXME
 	\def\pgfmanualpdfref#1#2{#2}%
 	\pgfkeys{
 		/pdflinks/codeexample links=false,% DISABLED.
 	}%
-\fi
+}{}
+\makeatother
 
 %%% Local Variables: 
 %%% mode: latex
