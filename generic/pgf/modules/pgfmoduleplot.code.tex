@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/modules/pgfmoduleplot.code.tex,v 1.4 2009/11/15 19:12:54 ludewich Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/modules/pgfmoduleplot.code.tex,v 1.5 2009/11/29 16:48:00 ludewich Exp $
 
 
 % PGF's plotting interface works as follows:
@@ -187,8 +187,8 @@
 \def\pgfplotxyfile#1{%
   \begingroup%
     \pgfplotstreamstart%
-    \openin1=#1
-    \ifeof1
+    \openin\r@pgf@reada=#1
+    \ifeof\r@pgf@reada
       \PackageWarning{pgf}{Plot data file `#1' not found.}
      \else
       \catcode`\#=14
@@ -201,7 +201,7 @@
 \let\pgf@savedpar=\par%
 \def\pgf@partext{\par}
 \def\pgf@readxyfile{%
-  \read1 to \pgf@temp%
+  \read\r@pgf@reada to \pgf@temp%
   \let\par=\pgf@savedpar%
   \edef\pgf@temp{\pgf@temp}%
   \ifx\pgf@temp\pgfutil@empty%
@@ -209,7 +209,7 @@
   \else%
     \expandafter\pgf@parsexyline\pgf@temp\pgf@stop%
   \fi\fi%
-  \ifeof1\else\expandafter\pgf@readxyfile\fi%
+  \ifeof\r@pgf@reada\else\expandafter\pgf@readxyfile\fi%
 }
 
 \def\pgf@parsexyline#1 #2 #3\pgf@stop{%
@@ -236,8 +236,8 @@
 \def\pgfplotxyzfile#1{%
   \begingroup%
     \pgfplotstreamstart%
-    \openin1=#1
-    \ifeof1
+    \openin\r@pgf@reada=#1
+    \ifeof\r@pgf@reada
       \PackageWarning{pgf}{Plot data file `#1' not found.}
     \else
       \catcode`\#=14
@@ -248,13 +248,13 @@
 }
 
 \def\pgf@readxyzfile{%
-  \read1 to \pgf@temp%
+  \read\r@pgf@reada to \pgf@temp%
   \ifx\pgf@temp\pgfutil@empty%
   \else\ifx\pgf@temp\pgf@partext%
   \else%
     \expandafter\pgf@parsexyzline\pgf@temp\pgf@stop%
   \fi\fi%
-  \ifeof1\else\expandafter\pgf@readxyzfile\fi%
+  \ifeof\r@pgf@reada\else\expandafter\pgf@readxyzfile\fi%
 }
 
 \def\pgf@parsexyzline#1 #2 #3 #4\pgf@stop{%

@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcoreimage.code.tex,v 1.8 2009/06/10 16:13:59 ludewich Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcoreimage.code.tex,v 1.9 2009/11/29 16:47:59 ludewich Exp $
 
 
 
@@ -378,13 +378,13 @@
 % stored in #1.dpth.
 \def\pgfincludeexternalgraphics#1{%
 	\begingroup
-	\openin1=#1.dpth
+	\openin\r@pgf@reada=#1.dpth
 	\setbox1=\hbox{\pgfkeysvalueof{/pgf/images/include external/.@cmd}{#1}\pgfeov}%
-	\ifeof1
+	\ifeof\r@pgf@reada
 		\box1
 	\else
-		\read1 to\pgfincludeexternalgraphics@dp
-		\closein1
+		\read\r@pgf@reada to\pgfincludeexternalgraphics@dp
+		\closein\r@pgf@reada
 		\dimen0=\pgfincludeexternalgraphics@dp\relax
 		\hbox{\lower\dimen0 \box1 }%
 	\fi
