@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/modules/pgfmoduleplot.code.tex,v 1.5 2009/11/29 16:48:00 ludewich Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/modules/pgfmoduleplot.code.tex,v 1.6 2009/12/02 19:47:41 ludewich Exp $
 
 
 % PGF's plotting interface works as follows:
@@ -321,7 +321,20 @@
     \immediate\closeout\pgf@plotwrite%
     \immediate\write18{gnuplot \pgf@plotgnuplotfile}
   \fi%
+  % temporarily redefine \pgf@parsexyline
+  \let\pgf@savedparsexyline=\pgf@parsexyline%
+  \let\pgf@parsexyline=\pgf@parsegnuplotxyline%
   \pgfplotxyfile{\pgf@plottablefile}%
+  \let\pgf@parsexyline=\pgf@savedparsexyline%
+}
+
+\def\pgf@parsegnuplotxyline#1 #2 #3\pgf@stop{%
+  \edef\pgf@xyline@flag@val{#3}%
+  \edef\pgf@xyline@flag@undef{u\space}%
+  \ifx\pgf@xyline@flag@val\pgf@xyline@flag@undef%
+  \else%
+    \pgfplotstreampoint{\pgfpointxy{#1}{#2}}%
+  \fi%
 }
 
 
