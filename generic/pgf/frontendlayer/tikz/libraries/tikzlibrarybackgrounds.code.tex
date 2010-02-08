@@ -7,13 +7,19 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarybackgrounds.code.tex,v 1.1 2008/01/09 17:57:15 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/tikzlibrarybackgrounds.code.tex,v 1.2 2010/02/08 11:21:46 tantau Exp $
 
 
 % Layers
 
 \pgfdeclarelayer{background}
 \pgfsetlayers{background,main}
+
+
+% Switch command
+\tikzset{on background layer/.style={
+    execute at begin scope={\pgfonlayer{background}},
+    execute at end scope={\endpgfonlayer}}}
 
 
 % Main style
