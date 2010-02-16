@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-xetex.def,v 1.2 2008/05/14 16:05:56 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-xetex.def,v 1.3 2010/02/16 10:56:09 tantau Exp $
 
 % Driver commands for dvipdfm
 
@@ -35,6 +35,12 @@
 %
 \pgf@sys@pdf@dvi@tracker
 
+% 
+% Page size stuff
+% 
+\def\pgfsys@papersize#1#2{%
+ \pdfpageheight#2%
+ \pdfpagewidth#1}
 
 
 \endinput
