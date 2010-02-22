@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/utilities/pgffor.code.tex,v 1.16 2009/09/04 17:22:59 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/utilities/pgffor.code.tex,v 1.17 2010/02/22 22:49:21 tantau Exp $
 
 
 \newdimen\pgffor@iter
@@ -169,7 +169,7 @@
 \def\pgffor@dots{...}%
 
 \def\pgffor@scan{\pgfutil@ifnextchar({\pgffor@scanround}{\pgffor@scanone}}
-\def\pgffor@scanround(#1)#2,{\def\pgffor@value{(#1)}\pgffor@scanned}
+\def\pgffor@scanround(#1)#2,{\def\pgffor@value{(#1)#2}\pgffor@scanned}
 \def\pgffor@scanone#1,{\def\pgffor@value{#1}\pgffor@scanned}
 
 \def\pgffor@scanned{%

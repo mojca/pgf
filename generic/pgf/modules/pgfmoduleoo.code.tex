@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/modules/pgfmoduleoo.code.tex,v 1.7 2008/11/07 19:02:40 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/modules/pgfmoduleoo.code.tex,v 1.8 2010/02/22 22:49:21 tantau Exp $
 
 
 
@@ -211,7 +211,7 @@
 % #2 = value
 %
 % This method sets the given attribute for the current object to the
-% given value.
+% given value using \let.
 
 \def\pgfoolet#1#2{%
   \expandafter\global\expandafter\let\csname pgfooX\the\pgfoothis@count @#1\endcsname#2%
