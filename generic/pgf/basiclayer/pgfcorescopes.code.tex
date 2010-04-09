@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorescopes.code.tex,v 1.28 2009/03/22 10:56:32 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorescopes.code.tex,v 1.29 2010/04/09 08:10:22 ludewich Exp $
 
 % Globals
 
@@ -191,6 +191,13 @@
 % \end{pgfpicture}
 
 \newif\ifpgfpicture
+
+\def\pgfresetboundingbox{%
+    \global\pgf@picmaxx=-16000pt\relax%
+    \global\pgf@picminx=16000pt\relax%
+    \global\pgf@picmaxy=-16000pt\relax%
+    \global\pgf@picminy=16000pt\relax%
+}%
 
 \def\pgfpicture{%
   \begingroup%
