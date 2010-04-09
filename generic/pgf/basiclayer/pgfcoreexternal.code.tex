@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcoreexternal.code.tex,v 1.2 2010/04/09 07:35:07 ludewich Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcoreexternal.code.tex,v 1.3 2010/04/09 08:53:44 ludewich Exp $
 
 
 
@@ -191,6 +191,10 @@
 \def\pgfincludeexternalgraphics#1{%
 	\begingroup
 	\pgfexternalreaddpth{#1}%
+	\pgfkeysifdefined{/pgf/images/include external/#1/.@cmd}{%
+		\pgfkeysgetvalue{/pgf/images/include external/#1/.@cmd}\pgf@tempa
+		\pgfkeysgetlet{/pgf/images/include external/.@cmd}\pgf@tempa
+	}{}%
 	\setbox1=\hbox{\pgfkeysvalueof{/pgf/images/include external/.@cmd}{#1}\pgfeov}%
 	\ifdim\pgfretval=0pt
 		\box1

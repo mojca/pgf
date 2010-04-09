@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorepoints.code.tex,v 1.19 2009/04/18 18:49:52 ludewich Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorepoints.code.tex,v 1.20 2010/04/09 08:53:45 ludewich Exp $
 
 \newdimen\pgf@picminx
 \newdimen\pgf@picmaxx
@@ -1140,6 +1140,13 @@
   \pgf@process{#2}%
   #1=\pgf@y\relax}
 
+
+% Stores the most recently used (x,y) coordinates into two macros, #1
+% and #2.
+\def\pgfgetlastxy#1#2{%
+	\edef#1{\the\pgf@x}%
+	\edef#2{\the\pgf@y}%
+}%
 
 
 \def\pgf@def#1#2#3{\expandafter\def\csname pgf@#1#2\endcsname{#3}}
