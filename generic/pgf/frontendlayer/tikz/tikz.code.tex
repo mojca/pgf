@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/tikz.code.tex,v 1.66 2010/03/23 17:01:13 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/tikz.code.tex,v 1.68 2010/06/09 10:28:57 ludewich Exp $
 
 
 % Always-present libraries:
@@ -1307,6 +1307,12 @@
   \catcode`\;=\active
   \gdef\tikz@collectactivesemicolon#1;{#1;\endtikzpicture}
 }
+
+% Invokes '#1' if the command is invoked withing a tikzpicture and
+% '#2' if not.
+\def\tikzifinpicture#1#2{%
+	\pgfutil@ifundefined{filldraw}{#2}{#1}%
+}%
 
 
 
@@ -3337,7 +3343,7 @@
           \else%
             \begingroup%
             	\pgfmathsetlength{\pgf@x}{\tikz@text@width}%
-              \pgfutil@minipage[t]{\pgf@x}%
+              \pgfutil@minipage[t]{\pgf@x}\leavevmode\hbox{}%
                 \tikz@text@action%
           \fi%
           \bgroup%
@@ -4273,7 +4279,6 @@
   \tikz@updatecurrentfalse%
   \tikz@scan@absolute\tikz@add%
 } 
-
 
 
 % Loading further libraries
