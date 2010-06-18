@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/datavisualization/tikzlibrarydatavisualization.code.tex,v 1.25 2010/06/17 20:31:35 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/datavisualization/tikzlibrarydatavisualization.code.tex,v 1.26 2010/06/18 11:59:28 tantau Exp $
 
 \usepgfmodule{datavisualization}
 
@@ -1410,7 +1410,7 @@
       arg1/.expand once=\tikz@dv@label@attribute,
       arg2=\tikz@dv@label@threshold,
       arg3/.expand once=\tikz@dv@label@code,
-      arg4/.expand once=\tikz@visualizer
+      arg4/.expanded=\noexpand\pgfdvvisualizerfilter{\tikz@visualizer}
     },
     /utils/exec=\expandafter\tikz@create@label@count\expandafter{\tikz@visualizer}
   }
