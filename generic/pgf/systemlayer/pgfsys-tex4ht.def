@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-tex4ht.def,v 1.21 2010/06/30 10:25:08 ludewich Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-tex4ht.def,v 1.22 2010/06/30 13:06:37 ludewich Exp $
 
 
 \RequirePackage{xcolor}
@@ -188,9 +188,9 @@
   \wd#1=\pgf@picmaxx%
   \dp#1=0pt%
   \leavevmode
-  \pgf@xa=\pgf@hshift@baseline\relax%
-  \ifdim\pgf@xa=0pt \else\hskip\pgf@xa\fi
+  \pgf@xa=\pgf@trimleft@final\relax  \ifdim\pgf@xa=0pt \else\kern\pgf@xa\fi
   \raise-\pgf@ya\box#1%
+  \pgf@xa=\pgf@trimright@final\relax \ifdim\pgf@xa=0pt \else\kern\pgf@xa\fi
   \pgfsys@invoke{</g>\Hnewline </svg>\Hnewline }%
   \special{t4ht<\jobname-\the\pgf@sys@svg@picnum.svg}%
 }%
