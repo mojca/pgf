@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/tikz.code.tex,v 1.68 2010/06/09 10:28:57 ludewich Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/tikz.code.tex,v 1.69 2010/06/30 10:25:08 ludewich Exp $
 
 
 % Always-present libraries:
@@ -67,6 +67,10 @@
 \tikzoption{baseline}[0pt]{\pgfutil@ifnextchar({\tikz@baseline@coordinate}{\tikz@baseline@simple}#1\@nil}%)
 \def\tikz@baseline@simple#1\@nil{\pgfsetbaseline{#1}}
 \def\tikz@baseline@coordinate#1\@nil{\pgfsetbaselinepointlater{\tikz@scan@one@point\pgfutil@firstofone#1}}
+
+\tikzoption{hbaseline}[0pt]{\pgfutil@ifnextchar({\tikz@hbaseline@coordinate}{\tikz@hbaseline@simple}#1\@nil}%)
+\def\tikz@hbaseline@simple#1\@nil{\pgfsethbaseline{#1}}
+\def\tikz@hbaseline@coordinate#1\@nil{\pgfsethbaselinepointlater{\tikz@scan@one@point\pgfutil@firstofone#1}}
 
 % Draw options
 \tikzoption{line width}{\tikz@semiaddlinewidth{#1}}%
@@ -1274,9 +1278,11 @@
 \def\endtikzpicture{%
     \tikz@atend@picture%
     \global\let\pgf@shift@baseline=\pgf@baseline%
+    \global\let\pgf@hshift@baseline=\pgf@hbaseline%
     \global\let\pgf@remember@smuggle=\ifpgfrememberpicturepositiononpage%
     \endscope%
     \let\pgf@baseline=\pgf@shift@baseline%
+    \let\pgf@hbaseline=\pgf@hshift@baseline%
     \let\ifpgfrememberpicturepositiononpage=\pgf@remember@smuggle%
   \endpgfpicture}
   
