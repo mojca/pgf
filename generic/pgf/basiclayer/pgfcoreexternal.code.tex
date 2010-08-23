@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcoreexternal.code.tex,v 1.10 2010/08/16 12:44:12 ludewich Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcoreexternal.code.tex,v 1.11 2010/08/23 19:23:21 ludewich Exp $
 
 
 
@@ -420,6 +420,8 @@
     \parindent0pt % leave the space
 %    \leftmargin0pt%
 %    \rightmargin0pt%
+    \hoffset=0pt % reset to default
+    \voffset=0pt
     \dimen0\ht\pgfpic%
     \advance\dimen0\dp\pgfpic%
     \ifdim\dp\pgfpic=0pt\relax
