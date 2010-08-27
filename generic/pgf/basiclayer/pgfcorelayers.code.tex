@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorelayers.code.tex,v 1.1 2008/01/15 10:27:34 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorelayers.code.tex,v 1.2 2010/08/27 12:51:47 ludewich Exp $
 
 
 % Creates a new pgf layer
@@ -50,7 +50,7 @@
 %
 % Note:
 %
-% You cannot anything to the ``main'' layer using this command.
+% You cannot add anything to the ``main'' layer using this command.
 %
 % Example:
 %
@@ -59,11 +59,17 @@
 % \end{pgfonlayer}
 
 \def\pgfonlayer#1{%
-  \expandafter\global\expandafter%
-  \setbox\csname pgf@layerbox@#1\endcsname=\hbox to 0pt%
-    \bgroup%
-      \expandafter\box\csname pgf@layerbox@#1\endcsname%
-      \begingroup%
+  \pgfutil@ifundefined{pgf@layerbox@#1}{%
+     \PackageError{pgf}{Sorry, the requested layer '#1' could not be found. Maybe you misspelled it?}{}%
+	 \bgroup
+	 	\begingroup
+  }{%
+	  \expandafter\global\expandafter%
+	  \setbox\csname pgf@layerbox@#1\endcsname=\hbox to 0pt%
+		\bgroup%
+		  \expandafter\box\csname pgf@layerbox@#1\endcsname%
+		  \begingroup%
+  }%
 }
 \def\endpgfonlayer{%
       \endgroup%
