@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcoreexternal.code.tex,v 1.12 2010/08/30 11:50:37 ludewich Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcoreexternal.code.tex,v 1.13 2010/08/30 11:52:23 ludewich Exp $
 
 
 
@@ -435,6 +435,9 @@
     \advance\dimen0\dp\pgfpic%
     \ifdim\dp\pgfpic=0pt\relax
     \else% store the picture's depth. Otherwise, it would be lost.
+      \def\pgf@external@store@dpth{1}%
+    \fi
+    \ifpgfexternal@info
       \def\pgf@external@store@dpth{1}%
     \fi
     %
