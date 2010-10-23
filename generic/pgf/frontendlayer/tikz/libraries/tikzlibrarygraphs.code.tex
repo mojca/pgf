@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/Attic/tikzlibrarygraphs.code.tex,v 1.3 2010/09/27 14:35:05 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/Attic/tikzlibrarygraphs.code.tex,v 1.4 2010/10/23 16:35:41 tantau Exp $
 
 
 % 
@@ -23,20 +23,57 @@
 }
 
 
+%
+% Keys for using nodes declared outside a graph inside a graph as if
+% it were declared there
+% 
+
+\tikzset{
+  graphs/use existing nodes/.code=\tikz@lib@graph@alltrue
+}
+
+\tikzset{
+  new set/.code={
+    \expandafter\global\expandafter\let\csname tikz@lg@node@set #1\endcsname\pgfutil@empty%
+  },
+  set/.code={
+    \expandafter\def\expandafter\tikz@alias\expandafter{\tikz@alias%
+      \expandafter\def\expandafter\pgf@temp\expandafter{\csname tikz@lg@node@set #1\endcsname}%
+      \expandafter\expandafter\expandafter\pgfutil@g@addto@macro\expandafter\pgf@temp\expandafter{\expandafter\tikz@lg@do\expandafter{\tikz@fig@name}}%
+    }%
+  },%
+}
+
+\newif\iftikz@lib@graph@all
+
+
+% 
+% Basic options 
+%
+
+\tikzset{
+  graphs/@nodes styling/.style=,
+  graphs/nodes/.style={/tikz/graphs/@nodes styling/.append style={,#1}},
+  graphs/@edges styling/.initial=,
+  graphs/edges/.style={/tikz/graphs/@edges styling/.append={,#1}},
+  graphs/join/.initial=match,
+  graphs/connect as/.initial=,
+}
+
+
+% 
+% The parser 
+%
 
 \def\tikz@lib@graph@parser{%
   \pgfutil@ifnextchar[{\tikz@lib@graph@parser@}{\tikz@lib@graph@parser@[]}%]
 }
 
 \long\def\tikz@lib@graph@parser@[#1]#2{%
-  \pgfutil@ifnextchar[{\tikz@lib@graph@parser@opt[#1]{#2}}{\tikz@lib@graph@parser@opt[#1]{#2}[]}%]
-}
-
-\long\def\tikz@lib@graph@parser@opt[#1]#2[#3]{%
-  \scope[#1]%
+  \scope[graphs/.cd,every graph/.try,#1]%
     \let\tikz@lib@graph@options\pgfutil@empty%
     \let\tikz@lib@graph@node@list\pgfutil@empty%
-    \tikz@lib@graph@parse@group{#2}[#3]%
+    \tikz@lib@graph@parse@group{#2}%
     \let\tikz@lg@do=\tikz@lib@graph@cleanup%
     \tikz@lib@graph@node@list%
   \endscope%
@@ -94,12 +131,25 @@
 
 \def\tikz@lib@graph@semi#1;{%
   \pgfutil@ifnextchar\pgf@stop@eogroup{%
-    \expandafter\tikz@lib@graph@main@parser\tikz@lib@graph@group@conta#1,}{%
+    \expandafter\tikz@lib@graph@start@group\tikz@lib@graph@group@conta#1,}{%
     \expandafter\def\expandafter\tikz@lib@graph@group@conta\expandafter{\tikz@lib@graph@group@conta#1,}%
     \tikz@lib@graph@semi%
   }%
 }
 
+
+
+% 
+% Start of a group 
+%
+\def\tikz@lib@graph@start@group{%
+  \pgfutil@ifnextchar[\tikz@lib@graph@start@group@opt{\tikz@lib@graph@start@group@opt[]}%]
+}
+
+\def\tikz@lib@graph@start@group@opt[#1]{%
+  \pgfkeys{/tikz/graphs/.cd,connect as=,every group/.try,#1}%
+  \tikz@lib@graph@main@parser%
+}
 
 
 % 
@@ -205,10 +255,8 @@
   \pgfkeys{/tikz/graph node/recolor in'' by=in}
   {%
     \pgfkeyssetvalue{/tikz/graphs/default edge kind}{#1}%
-    \def\pgf@temp{#2}%
-    \ifx\pgf@temp\pgfutil@empty%
-      \pgfkeysgetvalue{/tikz/join connector}\pgf@temp%
-    \fi%
+    \pgfkeys{/tikz/graphs/.cd,#2}%
+    \pgfkeysgetvalue{/tikz/graphs/join}\pgf@temp%
     \expandafter\tikz@lg@do@connector\expandafter{\pgf@temp}%
   }%
   \pgfkeys{/tikz/graph node/!in',/tikz/graph node/!out'}
@@ -226,14 +274,9 @@
   \tikz@lib@graph@main@parser%
 }
 
-\def\tikz@lib@graph@graph@group@done\pgf@stop@eogroup[#1]{%
-  {%
-    \def\pgf@temp{#1}%
-    \ifx\pgf@temp\pgfutil@empty%
-      \pgfkeysgetvalue{/tikz/connector}\pgf@temp%
-    \fi%
-    \expandafter\tikz@lg@do@connector\expandafter{\pgf@temp}  
-  }%
+\def\tikz@lib@graph@graph@group@done\pgf@stop@eogroup{%
+  \pgfkeysgetvalue{/tikz/graphs/connect as}\tikz@lib@graph@group@connector
+  \expandafter\tikz@lg@do@connector\expandafter{\tikz@lib@graph@group@connector}  
 }
 
 \def\tikz@lg@do@connector#1{%
@@ -245,8 +288,31 @@
 %
 % Handle node
 %
-\def\tikz@lib@graph@grab@name#1[{%
-  \tikz@lib@graph@paren@check#1\pgf@stop%
+\def\tikz@lib@graph@grab@name{%
+  \pgfutil@ifnextchar\foreach\tikz@lib@graph@do@foreach\tikz@lib@graph@grab@name@@%
+}
+
+\def\tikz@lib@graph@do@foreach\foreach#1in#2#3[\pgf@stop{%
+  % Ok, we do a parse on a foreach loop.
+  % We have to make sure that we
+  \begingroup
+    \let\tikz@lib@graph@node@list@saved\pgfutil@empty%
+    \foreach #1 in {#2}%
+    {%
+      \let\tikz@lib@graph@node@list\tikz@lib@graph@node@list@saved%
+      \tikz@lib@graph@parse@group{#3}%
+      \global\let\tikz@lib@graph@node@list@saved\tikz@lib@graph@node@list%
+    }%
+    \expandafter%  
+  \endgroup%
+  \expandafter\expandafter\expandafter\def%
+  \expandafter\expandafter\expandafter\tikz@lib@graph@node@list%
+  \expandafter\expandafter\expandafter{\expandafter\tikz@lib@graph@node@list\tikz@lib@graph@node@list@saved}%  
+}
+
+
+\def\tikz@lib@graph@grab@name@@#1[{%
+  \tikz@lib@graph@read#1\pgf@stop%
   \let\tikz@lib@graph@as\tikz@lib@graph@as@default%
   \pgfutil@ifnextchar\pgf@stop{%
     \ifx\tikz@lib@graph@name\pgfutil@empty%
@@ -258,68 +324,92 @@
 \def\tikz@lib@graph@noskip{\tikz@lib@graph@node@opt[][}%]
 
 \def\tikz@lib@graph@as@default{%
-  \expandafter\tikz@lib@graph@typesetter\tikz@lib@graph@name\pgf@stop%
+  \let\tikzgraphnodename\tikz@lib@graph@name%
+  \tikz@lib@graph@typesetter%
 }
 
-\newif\iftikz@lib@graph@is@reference
-
-\def\tikz@lib@graph@paren@check{%
-  \pgfutil@ifnextchar({\tikz@lib@graph@paren@read}{\tikz@lib@graph@noparen@read}%)
-}
-\def\tikz@lib@graph@paren@read(#1)#2\pgf@stop{%
+\def\tikz@lib@graph@read#1\pgf@stop{%
   \pgfkeys@spdef\tikz@lib@graph@name{#1}%
-  \tikz@lib@graph@is@referencetrue%
-}
-\def\tikz@lib@graph@noparen@read#1\pgf@stop{%
-  \pgfkeys@spdef\tikz@lib@graph@name{#1}%
-  \tikz@lib@graph@is@referencefalse%
+  \edef\tikz@lib@graph@name{\tikz@lib@graph@path\tikz@lib@graph@name}%
 }
 
 
 \def\tikz@lib@graph@node@opt[#1]#2[\pgf@stop{%
-  {%
-    \edef\tikz@lib@graph@node@list{\noexpand\tikz@lg@do{\tikz@lib@graph@name}}%
-    \tikz@lg@if@local@node{\tikz@lib@graph@name}%
-    {\tikzset{/tikz/graph node/.cd,in,out,#1}}%
-    {%
-      \tikz@lg@init@color{\tikz@lib@graph@name}{\tikz@lgc@all@true\tikz@lgc@in@true\tikz@lgc@out@true}%
-      \iftikz@lib@graph@is@reference%
-        \tikzset{/tikz/graph node/.cd,#1}%
-      \else%
-        \node [name=\tikz@lib@graph@name,/tikz/graph node/.cd,#1] {\tikz@lib@graph@as};%
-      \fi%
-    }%
-  }%
-  \expandafter\expandafter\expandafter\def%
-  \expandafter\expandafter\expandafter\tikz@lib@graph@node@list%
-  \expandafter\expandafter\expandafter{%
-    \expandafter\tikz@lib@graph@node@list\expandafter\tikz@lg@do\expandafter{\tikz@lib@graph@name}}%
+  \ifx\tikz@lib@graph@name\tikz@lib@graph@usetext
+    % Ok, make a list of the nodes stored in #1:
+    \let\tikz@lg@temp\pgfutil@empty%
+    \foreach \tikz@lg@node@name in {#1} {\expandafter\tikz@lib@graph@handle@use\expandafter{\tikz@lg@node@name}}
+    % Ok, now add the nodes to the node list
+    \expandafter\expandafter\expandafter\def%
+    \expandafter\expandafter\expandafter\tikz@lib@graph@node@list%
+    \expandafter\expandafter\expandafter{%
+      \expandafter\tikz@lib@graph@node@list\tikz@lg@temp}%
+    % Then color and initialize them:
+    \let\tikz@lg@do\tikz@lib@graph@do@use%
+    \tikz@lg@temp%
+  \else%
+    \expandafter\ifx\csname tikz@lib@graph@def@\tikz@lib@graph@name\endcsname\relax%
+      {%
+        \edef\tikz@lib@graph@node@list{\noexpand\tikz@lg@do{\tikz@lib@graph@name}}%
+        \tikz@lg@if@local@node{\tikz@lib@graph@name}%
+        {\tikzset{/tikz/graph node/.cd,in,out,#1}}%
+        {%
+          \tikz@lg@init@color{\tikz@lib@graph@name}{\tikz@lgc@all@true\tikz@lgc@in@true\tikz@lgc@out@true}%
+          \iftikz@lib@graph@all%
+            \tikzset{/tikz/graph node/.cd,#1}%
+          \else%
+            \node [name=\tikz@lib@graph@name,/tikz/graph
+              node/.cd,/tikz/graphs/@nodes styling,#1]
+              {\tikz@lib@graph@as};% 
+          \fi
+        }%
+      }%
+      \expandafter\expandafter\expandafter\def%
+      \expandafter\expandafter\expandafter\tikz@lib@graph@node@list%
+      \expandafter\expandafter\expandafter{%
+        \expandafter\tikz@lib@graph@node@list\expandafter\tikz@lg@do\expandafter{\tikz@lib@graph@name}}%
+    \else
+      % The name of the node is a graph name
+      \tikz@lib@graph@handle@graph{#1}%      
+    \fi
+  \fi%  
 }
 
+\def\tikz@lib@graph@handle@use#1{%
+  % Is #1 the name of a node set?
+  \expandafter\let\expandafter\pgf@temp\csname tikz@lg@node@set #1\endcsname
+  \ifx\pgf@temp\relax
+    \pgfutil@g@addto@macro\tikz@lg@temp{\tikz@lg@do{#1}}    
+  \else%
+    \expandafter\pgfutil@g@addto@macro\expandafter\tikz@lg@temp\expandafter{\pgf@temp}
+  \fi  
+}
+
+\def\tikz@lib@graph@do@use#1{%
+  \tikz@lg@init@color{#1}{\tikz@lgc@all@true\tikz@lgc@in@true\tikz@lgc@out@true}%
+}
+
+\def\tikz@lib@graph@usetext{use}
 
 \def\tikz@lib@graph@typeset@def#1 as #2\pgf@stop{
   \def\tikz@lib@graph@typesetter#1\pgf@stop{#2}
 }
 
 \tikzset{
-  graph typeset/.code=\tikz@lib@graph@typeset@def#1\pgf@stop,
-  math graph nodes/.style={graph typeset=#1 as $#1$},
+  graphs/typeset/.store in=\tikz@lib@graph@typesetter,
+  graphs/math nodes/.style={/tikz/graphs/typeset=$\tikzgraphnodename$},
+  graphs/empty nodes/.style={/tikz/graphs/typeset=},
+  graphs/typeset=\tikzgraphnodename
 }
-
-\def\tikz@lib@graph@typesetter#1\pgf@stop{#1}
 
 
 % 
 % Handle scope 
 %
-\def\tikz@lib@graph@scope#1{%
-  \pgfutil@ifnextchar[{\tikz@lib@graph@scope@opt{#1}}{\tikz@lib@graph@scope@opt{#1}[]}%]
-}
-
-\def\tikz@lib@graph@scope@opt#1[#2]{%
+\def\tikz@lib@graph@scope#1{
   \begingroup
     \let\tikz@lib@graph@node@list\pgfutil@empty%
-    \tikz@lib@graph@parse@group{#1}[#2]%
+    \tikz@lib@graph@parse@group{#1}%
     \expandafter%  
   \endgroup%
   \expandafter\expandafter\expandafter\def%
@@ -346,6 +436,41 @@
 }
 
 \def\tikz@lib@graph@scope@less<-{\tikz@lib@graph@back@arrow}%
+
+
+
+
+% 
+% Predefining graphs 
+% 
+
+\def\tikzdefgraph#1#2#3{%
+  \expandafter\def\csname tikz@lib@graph@def@#1\endcsname{\tikz@lib@graph@do@graph{#2}{#3}}%
+}
+
+\def\tikz@lib@graph@handle@graph#1{%
+  \begingroup%
+    \let\tikz@lib@graph@node@list\pgfutil@empty%
+    \tikzset{graphs/.cd,#1}%
+    \csname tikz@lib@graph@def@\tikz@lib@graph@name\endcsname%
+    \expandafter%  
+  \endgroup%
+  \expandafter\expandafter\expandafter\def%
+  \expandafter\expandafter\expandafter\tikz@lib@graph@node@list%
+  \expandafter\expandafter\expandafter{\expandafter\tikz@lib@graph@node@list\tikz@lib@graph@node@list}% 
+}
+
+\def\tikz@lib@graph@do@graph#1#2{%
+  #1%
+  \tikz@lib@graph@parse@group{#2}%
+}
+
+\let\tikz@lib@graph@path\pgfutil@empty
+
+\tikzset{graphs/name/.code={%
+    \edef\tikz@lib@graph@path{#1\space\tikz@lib@graph@path}%
+  }%
+}
 
 
 %
@@ -530,17 +655,6 @@
 
 
 
-% 
-% Connectors
-% 
-
-\let\tikz@lib@graph@connector\relax
-
-\tikzset{
-  connector/.initial=,
-  join connector/.initial=match,
-}
-
 
 % 
 % The bipartite connector 
@@ -568,8 +682,12 @@
   \fi%
 }
 
-\def\tikz@lib@graph@default@new@edge#1#2{%
-  \pgfkeys{/tikz/graphs/.cd,new edge \pgfkeysvalueof{/tikz/graphs/default edge kind}={#1}{#2}{}}%
+\def\tikz@lib@graph@default@new@edge{%
+  \pgfkeysgetvalue{/tikz/graphs/@edges styling}\pgf@temp
+  \expandafter\tikz@lib@graph@default@new@edge@\expandafter{\pgf@temp}%
+}
+\def\tikz@lib@graph@default@new@edge@#1#2#3{%
+  \pgfkeys{/tikz/graphs/.cd,new edge \pgfkeysvalueof{/tikz/graphs/default edge kind}={#2}{#3}{#1}}%
 }
 
   
@@ -605,18 +723,18 @@
 
 
 % 
-% The list connector 
+% The path connector 
 %
 
 \tikzset{
-  connectors/list/.code={%
+  connectors/path/.code={%
     \let\tikz@lg@prev\relax%
-    \tikzlibgraphforeachcolorednode{#1}\tikz@lib@graph@list@do%
+    \tikzlibgraphforeachcolorednode{#1}\tikz@lib@graph@path@do%
   },
-  connectors/list/.default=all
+  connectors/path/.default=all
 }
 
-\def\tikz@lib@graph@list@do#1{%
+\def\tikz@lib@graph@path@do#1{%
   \ifx\tikz@lg@prev\relax%
   \else%
     \tikz@lib@graph@default@new@edge{\tikz@lg@prev}{#1}%
@@ -754,3 +872,6 @@
   \fi%
   \tikz@lib@graph@default@new@edge{\csname tikz@lg\the\c@pgf@countc\endcsname}{#1}%
 }
+
+
+
