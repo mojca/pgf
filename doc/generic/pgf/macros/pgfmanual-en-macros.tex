@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.46 2010/11/29 23:05:18 tantau Exp $
+% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.47 2010/12/02 21:32:52 tantau Exp $
 
 
 
@@ -285,6 +285,18 @@
   \end{pgfmanualentry}
 }
 
+
+\newenvironment{graph}[1]{
+  \begin{pgfmanualentry}
+  	\pgfmanualentryheadline{Graph {\ttfamily\declare{#1}}}%
+    \index{#1@\protect\texttt{#1} graph}%
+    \index{Graphs!#1@\protect\texttt{#1}}
+    \pgfmanualpdflabel{#1}{}%
+    \pgfmanualbody
+}
+{
+  \end{pgfmanualentry}
+}
 
 \newenvironment{dataformat}[1]{
   \begin{pgfmanualentry}
