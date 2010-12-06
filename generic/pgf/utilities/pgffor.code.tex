@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/utilities/pgffor.code.tex,v 1.19 2010/10/27 14:39:59 cjorssen Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/utilities/pgffor.code.tex,v 1.20 2010/12/06 17:16:26 tantau Exp $
 
 
 \newdimen\pgffor@iter
@@ -133,14 +133,14 @@
 }  
 
 \def\pgffor@iterate{%
-	% Must do all of these in case the internal stack is used.
-	\let\pgffor@last=\pgfutil@empty%
+  % Must do all of these in case the internal stack is used.
+  \let\pgffor@last=\pgfutil@empty%
   \let\pgffor@prevlast=\pgfutil@empty%
   \let\pgffor@dotsend=\pgfutil@empty%
-	\let\pgffor@dots@pre=\pgfutil@empty%
-	\let\pgffor@dots@post=\pgfutil@empty%
-	%
-	\expandafter\pgffor@scan\pgffor@values}
+  \let\pgffor@dots@pre=\pgfutil@empty%
+  \let\pgffor@dots@post=\pgfutil@empty%
+  % 
+  \expandafter\pgffor@scan\pgffor@values}
 
 \def\pgffor@stop{\pgffor@stop}%
 \def\pgffor@dots{...}%
