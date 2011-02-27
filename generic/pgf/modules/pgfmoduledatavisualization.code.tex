@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/modules/pgfmoduledatavisualization.code.tex,v 1.39 2011/02/22 22:07:24 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/modules/pgfmoduledatavisualization.code.tex,v 1.40 2011/02/27 22:50:38 tantau Exp $
 
 \usepgfmodule{oo,shapes}
 \usepgflibrary{fpu}
@@ -2806,6 +2806,12 @@
   }  
   \method set max(#1) {
     \pgfooset{max}{#1}
+  }
+  \method let min(#1) {
+    \pgfoolet{min}{#1}
+  }  
+  \method let max(#1) {
+    \pgfoolet{max}{#1}
   }
 
   % Getter
