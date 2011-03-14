@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.47 2010/12/02 21:32:52 tantau Exp $
+% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.48 2011/03/14 23:17:51 tantau Exp $
 
 
 
@@ -304,6 +304,18 @@
     \index{#1@\protect\texttt{#1} format}%
     \index{Formats!#1@\protect\texttt{#1}}
 	\pgfmanualpdflabel{#1}{}%
+    \pgfmanualbody
+}
+{
+  \end{pgfmanualentry}
+}
+
+\newenvironment{stylesheet}[1]{
+  \begin{pgfmanualentry}
+  	\pgfmanualentryheadline{Style sheet {\ttfamily\declare{#1}}}%
+    \index{#1@\protect\texttt{#1} style sheet}%
+    \index{Style sheets!#1@\protect\texttt{#1}}
+    \pgfmanualpdflabel{#1}{}%
     \pgfmanualbody
 }
 {
