@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.48 2011/03/14 23:17:51 tantau Exp $
+% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.49 2011/04/13 19:56:43 matthiasschulz Exp $
 
 
 
@@ -42,6 +42,15 @@
 \newenvironment{command}[1]{
   \begin{pgfmanualentry}
     \extractcommand#1\@@
+    \pgfmanualbody
+}
+{
+  \end{pgfmanualentry}
+}
+
+\newenvironment{luacommand}[1]{
+  \begin{pgfmanualentry}
+    \luaextractcommand#1\@@
     \pgfmanualbody
 }
 {
@@ -203,6 +212,13 @@
   \removeats{#1}%
   \index{\strippedat @\protect\myprintocmmand{\strippedat}}
   \pgfmanualpdflabel{\textbackslash\strippedat}{}%
+}
+
+\def\luaextractcommand#1#2\@@{%
+  \pgfmanualentryheadline{\declare{\texttt{\string#1}}#2}%
+%  \removeats{#1}%
+ % \index{\strippedat @\protect\myprintocmmand{\strippedat}}
+ % \pgfmanualpdflabel{\textbackslash\strippedat}{}%
 }
 
 
