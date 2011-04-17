@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex,v 1.24 2010/08/03 12:27:36 ludewich Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorepathconstruct.code.tex,v 1.25 2011/04/17 20:20:46 ludewich Exp $
 
 
 \newdimen\pgf@path@lastx
@@ -819,7 +819,7 @@
 		\pgfpatharcofellipse@{%
 			\pgfpoint
 				{\pgfpath@center@x + #5*cos(\pgfpath@angle@i)}
-				{\pgfpath@center@y + #6*sin(\pgfpath@angle@i)}
+				{\pgfpath@center@y + #6*sin(\pgfpath@angle@i)}%
 		}%
 		%
 		\advance\c@pgf@countd by1
