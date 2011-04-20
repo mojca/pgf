@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-position.lua,v 1.1 2011/04/13 19:56:44 matthiasschulz Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-position.lua,v 1.2 2011/04/20 17:50:27 matthiasschulz Exp $
 
 -- This file defines a position class, representing absolute and
 -- relative positions.
@@ -77,6 +77,7 @@ end
 
 --- Returns a readable string representation of the position.
 -- @return string representation of the position.
+-- @ignore This should not appear in the documentation.
 function Position:__tostring()
    return "(" .. self.x .. "," .. self.y .. ")"
 end

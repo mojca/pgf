@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.49 2011/04/13 19:56:43 matthiasschulz Exp $
+% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.50 2011/04/20 17:50:26 matthiasschulz Exp $
 
 
 
@@ -55,6 +55,14 @@
 }
 {
   \end{pgfmanualentry}
+}
+
+\newenvironment{parameterdescription}{
+  \list{}{\labelwidth=0pt \leftmargin=0.5cm
+    \let\makelabel\descriptionlabel}
+}
+{
+  \endlist
 }
 
 \newenvironment{commandlist}[1]{%
@@ -307,6 +315,18 @@
   	\pgfmanualentryheadline{Graph {\ttfamily\declare{#1}}}%
     \index{#1@\protect\texttt{#1} graph}%
     \index{Graphs!#1@\protect\texttt{#1}}
+    \pgfmanualpdflabel{#1}{}%
+    \pgfmanualbody
+}
+{
+  \end{pgfmanualentry}
+}
+
+\newenvironment{gdalgorithm}[1]{
+  \begin{pgfmanualentry}
+  	\pgfmanualentryheadline{Graph Drawing Algorithm {\ttfamily\declare{#1}}}%
+    \index{#1@\protect\texttt{#1} graph drawing algorithm}%
+    \index{Graph Drawing Algorithms!#1@\protect\texttt{#1}}
     \pgfmanualpdflabel{#1}{}%
     \pgfmanualbody
 }

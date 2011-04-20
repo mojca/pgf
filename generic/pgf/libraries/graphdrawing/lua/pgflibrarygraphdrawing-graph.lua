@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-graph.lua,v 1.1 2011/04/13 19:56:44 matthiasschulz Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-graph.lua,v 1.2 2011/04/20 17:50:27 matthiasschulz Exp $
 
 -- This file defines a graph class, which later represents user created
 -- graphs.
@@ -318,6 +318,7 @@ end
 
 --- Returns a string representation of this graph including all nodes and edges.
 -- @return Graph as string.
+-- @ignore This should not appear in the documentation.
 function Graph:__tostring()
    local tmp = Graph.__tostring
    Graph.__tostring = nil

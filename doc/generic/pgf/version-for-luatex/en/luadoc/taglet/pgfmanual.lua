@@ -1,5 +1,5 @@
 -------------------------------------------------------------------------------
--- @release $Id: pgfmanual.lua,v 1.1 2011/04/13 19:56:44 matthiasschulz Exp $
+-- @release $Id: pgfmanual.lua,v 1.2 2011/04/20 17:50:26 matthiasschulz Exp $
 -------------------------------------------------------------------------------
 
 local assert, pairs, tostring, type = assert, pairs, tostring, type

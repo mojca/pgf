@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/algorithms/Attic/pgflibrarygraphdrawing-algorithms-simpleexample.lua,v 1.1 2011/04/13 19:56:44 matthiasschulz Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/algorithms/Attic/pgflibrarygraphdrawing-algorithms-simpleexample.lua,v 1.2 2011/04/20 17:50:27 matthiasschulz Exp $
 
 -- This file contains an example of how a very simple algorithm can be
 -- implemented by a user.

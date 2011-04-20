@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-interface.lua,v 1.1 2011/04/13 19:56:44 matthiasschulz Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-interface.lua,v 1.2 2011/04/20 17:50:27 matthiasschulz Exp $
 
 -- This file defines the Interface global object, which is used as a
 -- simplified frontend in the TeX part of the library.
@@ -67,6 +67,11 @@ function Interface:addNode(name, xMin, yMin, xMax, yMax, options)
    self.graph:addNode(node)
    Sys:logMessage("GD:INT: addNode(" .. name ..", " .. "maxX = " .. node.tex.maxX .. ", minX = " .. node.tex.minX 
      .. ", maxY = " .. node.tex.maxY.. ", minY = " .. node.tex.minY .. ",...)")
+   -- TODO: maybe the first node can automatically be assigned as the
+   -- root node? i.e. if graph.root is nil, assign it, else leave it be
+   -- then provide a new method getRoot, which first searches for a
+   -- node with "root" attribute and, if none exists, uses the
+   -- graph.root node as root ... will remove one step for the user
 end
 
 --- Adds an edge from one node to another by name.  That is, both

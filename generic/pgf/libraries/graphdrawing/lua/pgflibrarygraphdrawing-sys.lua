@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more details.
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-sys.lua,v 1.1 2011/04/13 19:56:44 matthiasschulz Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-sys.lua,v 1.2 2011/04/20 17:50:27 matthiasschulz Exp $
 
 -- This file contains methods dealing with the output back to the TeX
 -- side and some TeX and PGF specialties.
@@ -98,19 +98,17 @@ function Sys:putEdge(edge)
    tex.print(drawStr)
 end
 
---- Prints objects to the TeX output, formatting them with tostring.
+--- Prints objects to the TeX output, formatting them with tostring and
+-- separated by spaces.
 -- @param ... List of parameters.
 function Sys:logMessage(...)
    if self._verbose then
       texio.write_nl("")
-      -- if a given string is NIL, logging is corrupted.
-      -- example:
-      -- if you call this function like
-      --  Sys:logMessage("a","b",nil,"c")
-      -- only "a" and "b" will be printed
-      for i, v in ipairs(arg) do
+      -- this is to even print out nil arguments in between
+      local args = {...}
+      for i = 1, table.getn(args) do
 	 if i ~= 1 then texio.write(" ") end
-	 texio.write(tostring(v))
+	 texio.write(tostring(args[i]))
       end
       texio.write_nl("")
    end
