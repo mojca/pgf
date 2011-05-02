@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-positioning-helpers.lua,v 1.1 2011/05/02 02:00:55 jannis-pohlmann Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-positioning-helpers.lua,v 1.2 2011/05/02 02:40:18 jannis-pohlmann Exp $
 
 --- This file contains a number of helper functions for tables, including
 --- functions to create key and value iterators, copy tables, map table
@@ -33,9 +33,6 @@ end
 
 
 function positioning.random(graph)
-  -- generate seed for the random number generator
-  math.randomseed(os.time())
-
   -- compute the number of nodes in the graph
   local count = table.count_pairs(graph.nodes)
 
