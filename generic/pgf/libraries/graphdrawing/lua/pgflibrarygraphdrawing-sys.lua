@@ -1,4 +1,5 @@
 -- Copyright 2010 by Renée Ahrens, Olof Frahm, Jens Kluttig, Matthias Schulz, Stephan Schuster
+-- Copyright 2011 by Jannis Pohlmann
 --
 -- This file may be distributed and/or modified
 --
@@ -7,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more details.
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-sys.lua,v 1.4 2011/05/02 02:05:59 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-sys.lua,v 1.5 2011/05/02 02:07:43 jannis-pohlmann Exp $
 
 -- This file contains methods dealing with the output back to the TeX
 -- side and some TeX and PGF specialties.
