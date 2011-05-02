@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-helper.lua,v 1.3 2011/05/02 01:47:09 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-helper.lua,v 1.4 2011/05/02 02:02:08 jannis-pohlmann Exp $
 
 -- This file includes several helper utilities, which aren't found in
 -- the Lua standard library.
@@ -26,17 +26,7 @@ function countKeys(table)
    return numItems
 end
 
---- Finds an object in a table.
--- @return The first index for a value which is equal to the object or nil.
 function findTable(table, object)
-   for i, v in ipairs(table) do
-      if object == v then
-	 return i
-      end
-   end
-   return nil
-end
-
 --- Merges two tables.
 -- Every nil value in values is replaced by its default value in
 -- defaults.  The metatable from defaults is likewise preserved.

@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-interface.lua,v 1.2 2011/04/20 17:50:27 matthiasschulz Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-interface.lua,v 1.3 2011/05/02 02:02:08 jannis-pohlmann Exp $
 
 -- This file defines the Interface global object, which is used as a
 -- simplified frontend in the TeX part of the library.
@@ -140,7 +140,7 @@ function Interface:finishGraph()
 
    Sys:logMessage("GD:INT: graph = " .. tostring(graph))
 
-   for node in values(graph.nodes) do
+   for node in table.value_iter(graph.nodes) do
       Sys:logMessage("GD:INT: node = " .. tostring(node))
       self:drawNode(node)
    end
