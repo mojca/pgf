@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-table-helpers.lua,v 1.9 2011/05/02 02:18:28 jannis-pohlmann Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-table-helpers.lua,v 1.10 2011/05/02 02:22:25 jannis-pohlmann Exp $
 
 --- This file contains a number of helper functions for tables, including
 --- functions to create key and value iterators, copy tables, map table
@@ -343,6 +343,9 @@ end
 
 --- Iterate over all values of a table.
 --
+-- FIXME: The iterators stops if a key's value is nil. But we actually want 
+-- to continue iterating until the end of the table.
+--
 -- @param table The table whose values to iterate over.
 --
 -- @return An iterator for the values of the table.
@@ -371,8 +374,10 @@ end
 
 
 
---- Removes all key/value pairs from the table for whom the 
---- remove function returns true.
+--- Removes all values from the array for which the remove function is true.
+--
+-- Important note: this method does not work with associative arrays. 
+-- Make sure only to process number-indexed arrays with it.
 --
 -- @param input
 -- @param remove_func
@@ -380,16 +385,16 @@ end
 -- @return
 --
 function table.remove_values(input, remove_func)
-  local remove_keys = {}
+  local removals = {}
   
-  for key, value in pairs(input) do
+  for index, value in ipairs(input) do
     if remove_func(value) then
-      table.insert(remove_keys, key)
+      table.insert(removals, index)
     end
   end
 
-  for key in table.value_iter(remove_keys) do
-    input[key] = nil
+  for removal_number, index in ipairs(removals) do
+    table.remove(input, index - removal_number + 1)
   end
 
   return input
