@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-edge.lua,v 1.8 2011/05/02 02:20:36 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-edge.lua,v 1.9 2011/05/02 02:23:51 jannis-pohlmann Exp $
 
 -- This file defines an edge class, used in the graph representation.
 
@@ -223,7 +223,7 @@ function Edge:copy()
 -- @return String representation of the edge.
 -- @ignore This should not appear in the documentation.
 function Edge:__tostring()
-   local tmp = Edge.__tostring
+   local result = "Edge(" .. self.direction .. ", reversed = " .. tostring(self.reversed) .. ", "
    if table.count_pairs(self.nodes) > 0 then
       local node_strings = table.map_values(self.nodes, function (node)
          return tostring(node)
