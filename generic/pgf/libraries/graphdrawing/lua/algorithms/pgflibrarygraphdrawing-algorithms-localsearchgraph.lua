@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/algorithms/Attic/pgflibrarygraphdrawing-algorithms-localsearchgraph.lua,v 1.2 2011/04/20 17:50:27 matthiasschulz Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/algorithms/Attic/pgflibrarygraphdrawing-algorithms-localsearchgraph.lua,v 1.3 2011/05/02 02:31:01 jannis-pohlmann Exp $
 
 -- This contains an algorithm for drawing a graph using local search.
 
@@ -87,8 +87,8 @@ function drawGraphAlgorithm_localsearchgraph(graph)
    --create paths
    local paths = {}
    for edge in values(graph.edges) do
-      local newPath = Path:createPath(nodes[edge:getNodes()[1].name].pos,
-         nodes[edge:getNodes()[2].name].pos) 
+      local newPath = Path:createPath(nodes[edge.nodes[1].name].pos,
+         nodes[edge.nodes[2].name].pos) 
       table.insert(paths, newPath)
    end
    --instantiate startstate
@@ -167,8 +167,9 @@ function cloneState(state)
    end
    for val in values(state.edges) do
       local newPath = Path:createPath(
-         nodeMap[val:getNodes()[1].name].pos,
-         nodeMap[val:getNodes()[2].name].pos)
+         nodeMap[val.nodes[1].name].pos,
+         nodeMap[val.nodes[2].name].pos,
+         false)
       table.insert(ret.paths, newPath)
    end
    return ret

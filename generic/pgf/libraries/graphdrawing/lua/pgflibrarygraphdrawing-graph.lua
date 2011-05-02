@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-graph.lua,v 1.8 2011/05/02 02:24:25 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-graph.lua,v 1.9 2011/05/02 02:31:01 jannis-pohlmann Exp $
 
 -- This file defines a graph class, which later represents user created
 -- graphs.
@@ -286,18 +286,18 @@ function Graph:subGraph(root, graph, visited)
    for edge in values(edges) do
       local copy = edge:copy()
       local canAdd = true
-      for v in values(edge:getNodes()) do
+      for v in values(edge.nodes) do
 	 local translated = translate[v]
 	 if not translated then
 	    canAdd = false
 	 end
       end
       if canAdd then
-	 for v in values(edge:getNodes()) do
+	 for v in values(edge.nodes) do
 	    local translated = translate[v]
 	    copy:addNode(translated)
 	 end
-	 for node in values(copy:getNodes()) do
+	 for node in values(copy.nodes) do
 	    node:addEdge(copy)
 	 end
 	 graph:addEdge(copy)
