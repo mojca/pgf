@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/algorithms/Attic/pgflibrarygraphdrawing-algorithms-arbitrarytree.lua,v 1.2 2011/04/20 17:50:27 matthiasschulz Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/algorithms/Attic/pgflibrarygraphdrawing-algorithms-arbitrarytree.lua,v 1.3 2011/05/02 02:20:36 jannis-pohlmann Exp $
 
 -- This file contains an algorithm for drawing arbitrary shaped trees.
 
@@ -65,7 +65,7 @@ end
 -- @return false if node has already been visited
 function checkNodes(graph, node, visitedNodes, parent)
    local visited = false
-   if node:degree() > 1 then
+   if node:getDegree() > 1 then
       for edge in values(node:getEdges()) do   
         --check if all nodes of the edge have already been visited
         for node in values(edge:getNodes()) do
@@ -112,8 +112,7 @@ function treePositioning(tree, placeBoxes, compareBoxes, drawPath, leveldistance
     local resultBox
    local boxes = {}
    local edges = {}
-   --if leaf
-   if(tree.root:degree() == 0) then
+	if(tree.root:degree() == 0) then
       resultBox = tree.root
    else
       resultBox = Box:new{}
