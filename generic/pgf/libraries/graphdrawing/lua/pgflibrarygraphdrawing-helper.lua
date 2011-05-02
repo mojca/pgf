@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-helper.lua,v 1.7 2011/05/02 02:57:31 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-helper.lua,v 1.8 2011/05/02 03:36:23 jannis-pohlmann Exp $
 
 -- This file includes several helper utilities, which aren't found in
 -- the Lua standard library.
@@ -108,7 +108,7 @@ function parseBraces(str, default)
   if str then
     local level = 0
     local key = nil
-    local value = nil
+    local value = ''
     local in_key = false
     local in_value = false
     local skip_char = false
@@ -140,7 +140,7 @@ function parseBraces(str, default)
             options[key] = value
 
             key = nil
-            value = nil
+            value = ''
 
             in_value = false
           end

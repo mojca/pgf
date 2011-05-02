@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more details.
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-sys.lua,v 1.10 2011/05/02 02:30:23 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-sys.lua,v 1.11 2011/05/02 03:36:23 jannis-pohlmann Exp $
 
 -- This file contains methods dealing with the output back to the TeX
 -- side and some TeX and PGF specialties.
@@ -19,7 +19,7 @@ Sys = {}
 Sys.__index = Sys
 
 --- Switch for verbose output.
-Sys._verbose = false
+Sys._verbose = true
 
 --- Holds the content of the boxes of the current graph.
 --  This is done save box registes.
@@ -93,7 +93,7 @@ end
 function Sys:putEdge(edge)
    -- map nodes to node strings
    local node_strings = table.map_values(edge.nodes, function (node) 
-      return '(' .. string.sub(node.name, string.len('not yet positioned@') + 1) .. ')'
+      return '(' .. string.sub(node.name, string.len('not yet positionedPGFGDINTERNAL') + 1) .. ')'
    end)
 
    -- reverse strings if the edge is reversed

@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-orientation.lua,v 1.7 2011/05/02 03:15:19 jannis-pohlmann Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-orientation.lua,v 1.8 2011/05/02 03:36:23 jannis-pohlmann Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -40,7 +40,7 @@ end
 --
 function orientation.rotate(graph)
   local function shortname(node)
-    return string.sub(node.name, string.len('not yet positioned@') + 1)
+    return string.sub(node.name, string.len('not yet positionedPGFGDINTERNAL') + 1)
   end
 
   local axis_node1, axis_node2, desired_angle, swap = orientation.parse_orientation(graph)
