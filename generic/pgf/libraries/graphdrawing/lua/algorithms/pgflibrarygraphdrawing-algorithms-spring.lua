@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/algorithms/Attic/pgflibrarygraphdrawing-algorithms-spring.lua,v 1.6 2011/05/02 02:02:09 jannis-pohlmann Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/algorithms/Attic/pgflibrarygraphdrawing-algorithms-spring.lua,v 1.7 2011/05/02 02:03:09 jannis-pohlmann Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -135,9 +135,8 @@ end
 --
 function computeAttractiveForce(edge, k, max_repulsion)
   -- determine the two nodes of the edge
-  local nodes = edge:getNodes()
-  local node1 = nodes[1]
-  local node2 = nodes[2]
+  local node1 = edge.nodes[1]
+  local node2 = edge.nodes[2]
 
   -- compute the distance between the two nodes
   local diff = node2.position:subtract(node1.position)

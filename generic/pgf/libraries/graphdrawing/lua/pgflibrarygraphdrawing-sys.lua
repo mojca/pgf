@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more details.
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-sys.lua,v 1.2 2011/04/20 17:50:27 matthiasschulz Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-sys.lua,v 1.3 2011/05/02 02:03:09 jannis-pohlmann Exp $
 
 -- This file contains methods dealing with the output back to the TeX
 -- side and some TeX and PGF specialties.
@@ -90,11 +90,12 @@ end
 --- Assembles and outputs the TeX command to draw an edge.
 -- @param Edge A lua edge object.
 function Sys:putEdge(edge)
-   local drawStr = '\\draw[' .. edge.direction .. '] '
-   for node in values(edge:getNodes()) do
-      drawStr = drawStr .. '(' .. self:unescapeTeXNodeName(node.name) .. ') -- '
+   local drawStr = '\\draw '
+   for node in table.value_iter(edge.nodes) do
+      local name = string.sub(node.name, string.len("not yet positioned@") + 1)
+      drawStr = drawStr .. '(' .. name .. ') ' .. edge.direction .. ' '
    end
-   drawStr = string.sub(drawStr, 0, string.len(drawStr) - 4) .. ';'
+   drawStr = string.sub(drawStr, 0, string.len(drawStr) - 2 - string.len(edge.direction)) .. ';'
    tex.print(drawStr)
 end
 
