@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-table-helpers.lua,v 1.10 2011/05/02 02:22:25 jannis-pohlmann Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-table-helpers.lua,v 1.11 2011/05/02 03:21:41 jannis-pohlmann Exp $
 
 --- This file contains a number of helper functions for tables, including
 --- functions to create key and value iterators, copy tables, map table
@@ -355,6 +355,48 @@ function table.value_iter(table)
   return function ()
     key, value = pair_iter(state, key)
     return value
+  end
+end
+
+
+
+function table.randomized_value_iter(table)
+  local served = {}
+  local served_indices = 0
+
+  return function ()
+    if served_indices < #table then
+      local index = math.random(1, #table)
+      while served[index] do
+        index = math.random(1, #table)
+      end
+      served[index] = true
+      served_indices = served_indices + 1
+      return table[index]
+    else
+      return nil
+    end
+  end
+end
+
+
+
+function table.randomized_pair_iter(table)
+  local served = {}
+  local served_indices = 0
+
+  return function ()
+    if served_indices < #table then
+      local index = math.random(1, #table)
+      while served[index] do
+        index = math.random(1, #table)
+      end
+      served[index] = true
+      served_indices = served_indices + 1
+      return index, table[index]
+    else
+      return nil, nil
+    end
   end
 end
 
