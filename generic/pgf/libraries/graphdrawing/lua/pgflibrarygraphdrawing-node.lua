@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-node.lua,v 1.8 2011/05/02 02:25:23 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-node.lua,v 1.9 2011/05/02 02:47:03 jannis-pohlmann Exp $
 
 -- This file defines a node class, used in the graph representation.
 
@@ -174,4 +174,8 @@ function Node:__tostring()
    Node.__tostring = tmp
 
    return result
+end
+
+function Node:shortname()
+  return string.sub(self.name, string.len('not yet positioned@') + 1)
 end

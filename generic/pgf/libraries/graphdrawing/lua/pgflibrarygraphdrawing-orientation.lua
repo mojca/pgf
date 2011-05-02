@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-orientation.lua,v 1.2 2011/05/02 02:38:31 jannis-pohlmann Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-orientation.lua,v 1.3 2011/05/02 02:47:03 jannis-pohlmann Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -73,7 +73,7 @@ function orientation.rotate(graph)
     local vec2 = Vector:new(2, function (n) return pos2[n] end)
 
     -- compute the difference vector which also is the graph axis vector
-    gaxis_vector = vec2:subtract(gbase_vector)
+    gaxis_vector = vec2:minus(gbase_vector)
   end
 
   -- both base and axis vector have to be set, or none of them
