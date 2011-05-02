@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/graphdrawing/Attic/tikzlibrarygraphdrawing.standard.code.tex,v 1.5 2011/05/02 02:52:29 jannis-pohlmann Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/graphdrawing/Attic/tikzlibrarygraphdrawing.standard.code.tex,v 1.6 2011/05/02 02:53:03 jannis-pohlmann Exp $
 
 \usepgflibrary{graphdrawing}
 \usetikzlibrary{graphs}
@@ -89,7 +89,8 @@
     graph drawing engine,
     algorithm=standard spring electrical,
     initial positioning=random,
-    random seed=42,
+    natural spring dimension=28.5pt,
+    random seed=5, % TODO set to 42 by default
   }
 }
 
