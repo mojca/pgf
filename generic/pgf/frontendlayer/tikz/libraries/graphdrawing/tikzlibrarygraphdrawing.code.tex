@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/graphdrawing/Attic/tikzlibrarygraphdrawing.code.tex,v 1.6 2011/05/02 02:38:31 jannis-pohlmann Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/graphdrawing/Attic/tikzlibrarygraphdrawing.code.tex,v 1.7 2011/05/02 02:55:45 jannis-pohlmann Exp $
 
 \usepgflibrary{graphdrawing}
 \usetikzlibrary{graphs}
@@ -72,6 +72,16 @@
     /tikz/graphs/#1/.code={
       \pgfmathsetmacro{\tikz@gd@temp}{##1}%
       \edef\tikz@gd@marshal{\noexpand\pgfkeys{/tikz/graphs/graph drawing/@node@options/.append={#1}{\tikz@gd@temp}}}%
+      \tikz@gd@marshal%
+    }
+  },
+  register node coordinate key/.style={
+    /tikz/graphs/#1/.code={
+      \expandafter\tikz@scan@one@point\expandafter\pgf@process##1
+      \pgfmathsetmacro{\tikz@gd@temp@x}{\the\pgf@x}
+      \pgfmathsetmacro{\tikz@gd@temp@y}{\the\pgf@y}
+      \def\tikz@gd@temp{{\tikz@gd@temp@x}{\tikz@gd@temp@y}}
+      \edef\tikz@gd@marshal{\noexpand\pgfkeys{/tikz/graphs/graph drawing/@node@options/.append={#1}{\noexpand\tikz@gd@temp}}}%
       \tikz@gd@marshal%
     }
   },
