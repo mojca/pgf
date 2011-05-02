@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-helper.lua,v 1.6 2011/05/02 02:31:01 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-helper.lua,v 1.7 2011/05/02 02:57:31 jannis-pohlmann Exp $
 
 -- This file includes several helper utilities, which aren't found in
 -- the Lua standard library.
@@ -102,15 +102,63 @@ end
 
 --- Parses a braced list of {key}{value} pairs and returns a table
 -- mapping keys to values.
-function parseBraces(string, default)
-   local fields = {}
-   string.gsub(string, "{([^}]*)}", function(x) table.insert(fields, x) end)
+function parseBraces(str, default)
+  local options = {}
 
-   local i, result = 1, {}
-   while fields[i] do
-      result[fields[i]] = fields[i + 1]
-      i = i + 2
-   end
+  if str then
+    local level = 0
+    local key = nil
+    local value = nil
+    local in_key = false
+    local in_value = false
+    local skip_char = false
 
-   return result
+    for i = 1,str:len() do
+      skip_char = false
+
+      local char = string.sub(str, i, i)
+
+      if char == '{' then
+        if level == 0 then
+          if not key then
+            in_key = true
+          else
+            in_value = true
+          end
+          skip_char = true
+        end
+        level = level + 1
+      elseif char == '}' then
+        level = level - 1
+
+        assert(level >= 0) -- otherwise there's a bug in the parsing algorithm
+
+        if level == 0 then
+          if in_key then
+            in_key = false
+          else 
+            options[key] = value
+
+            key = nil
+            value = nil
+
+            in_value = false
+          end
+          skip_char = true
+        end
+      end
+
+      if not skip_char then
+        if in_key then
+          key = (key or '') .. char
+        else
+          value = (value or '') .. char
+        end
+      end
+
+      assert(not (in_key and in_value))
+    end
+  end
+
+  return options
 end
