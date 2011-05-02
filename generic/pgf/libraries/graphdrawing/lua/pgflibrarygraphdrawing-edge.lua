@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-edge.lua,v 1.4 2011/05/02 02:03:09 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-edge.lua,v 1.5 2011/05/02 02:16:14 jannis-pohlmann Exp $
 
 -- This file defines an edge class, used in the graph representation.
 
@@ -29,7 +29,9 @@ Edge.NONE = "-!-"
 function Edge:new(values)
    local defaults = {
       nodes = {},
+      edge_nodes = '',
       options = {},
+      tikz_options = {},
       direction = Edge.DIRECTED,
    }
    setmetatable(defaults, Edge)

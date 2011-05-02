@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more details.
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-sys.lua,v 1.7 2011/05/02 02:09:05 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-sys.lua,v 1.8 2011/05/02 02:16:14 jannis-pohlmann Exp $
 
 -- This file contains methods dealing with the output back to the TeX
 -- side and some TeX and PGF specialties.
@@ -96,20 +96,11 @@ function Sys:putEdge(edge)
       return '(' .. string.sub(node.name, string.len('not yet positioned@') + 1) .. ')'
    end)
 
-   -- map options to option strings
-   local option_strings = table.map(edge.options, function (key, val)
-      if not val or val == '' then
-         return tostring(key)
-      else
-         return tostring(key) .. '={' .. tostring(val) .. '}'
-      end
-   end)
-
    -- determine the direction string, which is '' for undirected edges
    local direction = edge.direction == Edge.UNDIRECTED and '' or edge.direction
 
    -- generate string for the entire edge
-   local edge_string = ' ' .. 'edge' .. '[' .. table.concat(option_strings, ',') .. '] '
+   local edge_string = ' ' .. 'edge' .. '[' .. edge.tikz_options .. '] '
    local draw_string = '\\draw[' .. direction .. '] ' .. table.concat(node_strings, edge_string) .. ';'
 
    -- hand TikZ code over to TeX

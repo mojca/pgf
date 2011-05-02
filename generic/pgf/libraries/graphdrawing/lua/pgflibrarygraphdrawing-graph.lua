@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-graph.lua,v 1.5 2011/05/02 02:07:43 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-graph.lua,v 1.6 2011/05/02 02:16:14 jannis-pohlmann Exp $
 
 -- This file defines a graph class, which later represents user created
 -- graphs.
@@ -169,8 +169,13 @@ end
 -- @param direction The direction of the new edge.
 -- @param options The options of the new edge.
 -- @return The newly created edge.
-function Graph:createEdge(nodeA, nodeB, direction, options)
-   local edge = Edge:new{direction = direction, options = options}
+function Graph:createEdge(nodeA, nodeB, direction, edge_nodes, options, tikz_options)
+   local edge = Edge:new{
+      direction = direction, 
+      edge_nodes = edge_nodes,
+      options = options, 
+      tikz_options = tikz_options
+   }
    edge:addNode(nodeA)
    edge:addNode(nodeB)
    self:addEdge(edge)
