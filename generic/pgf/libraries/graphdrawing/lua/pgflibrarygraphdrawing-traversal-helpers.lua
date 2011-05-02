@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-traversal-helpers.lua,v 1.2 2011/05/02 17:09:24 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-traversal-helpers.lua,v 1.3 2011/05/02 21:40:31 jannis-pohlmann Exp $
 
 --- This file implements a number of graph traversal functions including
 --- depth-first and breadth-first search, traversal using a topological sorting
@@ -15,23 +15,25 @@
 
 pgf.module("pgf.graphdrawing")
 
+
+
 traversal = {}
 
 
 
---- Iterator for traversing a directed graph using a topological sorting.
+--- Iterator for traversing a directed \meta{graph} using a topological sorting.
 --
 -- A topological sorting of a directed graph is a linear ordering of its
--- nodes such that, for every edge (u,v), u comes before v.
+-- nodes such that, for every edge |(u,v)|, |u| comes before |v|.
 --
 -- Important note: if performed on a graph with at least one cycle a
 -- topological sorting is impossible. Thus, the nodes returned from the
--- iterator are not guaranteed to satisfy the "u comes before v" 
+-- iterator are not guaranteed to satisfy the ``|u| comes before |v|''
 -- criterion. The iterator may even terminate early or loop forever.
 --
 -- @param graph A directed acyclic graph.
 --
--- @return An iterator for traversing the graph in a topological order.
+-- @return An iterator for traversing \meta{graph} in a topological order.
 --
 function traversal.topological_sorting(graph)
   -- track visited edges 
@@ -86,7 +88,12 @@ end
 
 
 
---- TODO add documentation
+--- Iterator for traversing a directed acyclic \meta{graph} in depth-first order.
+--
+-- @param graph A directed acyclic graph.
+--
+-- @return An iterator for traversing \meta{graph} in a depth-first order.
+--
 function traversal.depth_first_dag(graph, initial_nodes)
   local visited = {}
   local stack = {}
