@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more details.
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-sys.lua,v 1.6 2011/05/02 02:08:19 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-sys.lua,v 1.7 2011/05/02 02:09:05 jannis-pohlmann Exp $
 
 -- This file contains methods dealing with the output back to the TeX
 -- side and some TeX and PGF specialties.
@@ -105,17 +105,10 @@ function Sys:putEdge(edge)
       end
    end)
 
-   local direction = edge.direction
-   if direction == '--' then direction = '' end
+   -- determine the direction string, which is '' for undirected edges
+   local direction = edge.direction == Edge.UNDIRECTED and '' or edge.direction
 
    -- generate string for the entire edge
-   -- FIXME Eigentlich sollte das hier funktionieren, aber wahrscheinlich
-   -- klappt es nicht, weil wir den Code nicht in einen \graph { ... } 
-   -- schreiben:
-   -- local edge_string = ' ' .. edge.direction .. ' [' .. table.concat(option_strings, ',') .. '] '
-   -- local draw_string = table.concat(node_strings, edge_string) .. ';'
-   --
-   -- Stattdessen geht im Moment nur das hier:
    local edge_string = ' ' .. 'edge' .. '[' .. table.concat(option_strings, ',') .. '] '
    local draw_string = '\\draw[' .. direction .. '] ' .. table.concat(node_strings, edge_string) .. ';'
 
