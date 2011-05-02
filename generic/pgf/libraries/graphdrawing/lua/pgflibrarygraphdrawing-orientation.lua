@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-orientation.lua,v 1.8 2011/05/02 03:36:23 jannis-pohlmann Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-orientation.lua,v 1.9 2011/05/02 17:09:24 jannis-pohlmann Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -39,10 +39,6 @@ end
 -- @param graph A graph to rotate.
 --
 function orientation.rotate(graph)
-  local function shortname(node)
-    return string.sub(node.name, string.len('not yet positionedPGFGDINTERNAL') + 1)
-  end
-
   local axis_node1, axis_node2, desired_angle, swap = orientation.parse_orientation(graph)
 
   local angle = 0
@@ -52,12 +48,12 @@ function orientation.rotate(graph)
   if axis_node1 and axis_node2 then
     -- try to find the first node
     local node1 = graph:findNodeIf(function (node) 
-      return shortname(node) == axis_node1
+      return node.name == axis_node1
     end)
 
     -- try to find the second node
     local node2 = graph:findNodeIf(function (node)
-      return shortname(node) == axis_node2
+      return node.name == axis_node2
     end)
 
     if node1 and node2 then
@@ -73,10 +69,10 @@ function orientation.rotate(graph)
       gaxis_vector = vec2:minus(gbase_vector)
     else
       if not node1 then
-        Sys:logMessage('axis node ' .. axis_node1 .. ' does not exist')
+        Sys:log('axis node ' .. axis_node1 .. ' does not exist')
       end
       if not node2 then
-        Sys:logMessage(node2, 'axis node ' .. axis_node2 .. ' deoes not exist')
+        Sys:log(node2, 'axis node ' .. axis_node2 .. ' deoes not exist')
       end
     end
   end

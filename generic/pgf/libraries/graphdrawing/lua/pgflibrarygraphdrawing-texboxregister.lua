@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-texboxregister.lua,v 1.2 2011/04/20 17:50:27 matthiasschulz Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-texboxregister.lua,v 1.3 2011/05/02 17:09:24 jannis-pohlmann Exp $
 
 -- This class stores the TeX nodes which were copied from
 -- the TeX box register.
@@ -28,7 +28,7 @@ TeXBoxRegister.__index = TeXBoxRegister
 -- @returns Box reference.
 function TeXBoxRegister:insertBox(texbox)
    table.insert(self.boxes, texbox)
-   Sys:logMessage("GD:TBR: inserting tex box in slot " .. # self.boxes)
+   Sys:log("GD:TBR: inserting tex box in slot " .. # self.boxes)
    return # self.boxes
 end
 
@@ -39,7 +39,7 @@ end
 function TeXBoxRegister:getBox(boxReference)
    local ret = self.boxes[boxReference]
    assert(ret, "GD:TBR: fetching box " .. boxReference .. " returned a nil value")
-   Sys:logMessage("GD:TBR: fetching box " .. boxReference)
+   Sys:log("GD:TBR: fetching box " .. boxReference)
    self.boxes[boxReference] = nil
    return ret
 end

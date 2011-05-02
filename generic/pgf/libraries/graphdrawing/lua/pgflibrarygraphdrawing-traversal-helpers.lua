@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-traversal-helpers.lua,v 1.1 2011/05/02 02:29:12 jannis-pohlmann Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-traversal-helpers.lua,v 1.2 2011/05/02 17:09:24 jannis-pohlmann Exp $
 
 --- This file implements a number of graph traversal functions including
 --- depth-first and breadth-first search, traversal using a topological sorting
@@ -111,7 +111,7 @@ function traversal.depth_first_dag(graph, initial_nodes)
   return function ()
     while #stack > 0 do
       local node = table.remove(stack)
-      Sys:logMessage('VISIT: ' .. tostring(node))
+      Sys:log('VISIT: ' .. tostring(node))
 
       local out_edges = node:getOutgoingEdges()
       for edge in iter.filter(table.value_iter(out_edges), edgeNotExplored) do

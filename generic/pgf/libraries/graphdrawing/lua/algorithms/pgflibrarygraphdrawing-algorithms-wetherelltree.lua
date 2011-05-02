@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/algorithms/Attic/pgflibrarygraphdrawing-algorithms-wetherelltree.lua,v 1.3 2011/05/02 02:05:07 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/algorithms/Attic/pgflibrarygraphdrawing-algorithms-wetherelltree.lua,v 1.4 2011/05/02 17:09:24 jannis-pohlmann Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -55,7 +55,7 @@ function drawGraphAlgorithm_wetherelltree(graph, options)
     -- x coordinate of its level (often needed for average-positioned nodes)
     if node.pos.x < (next_x[node.level] or 0) then
       node.pos.shift = next_x[node.level] - node.pos.x
-      Sys:logMessage('wetherelltree: ' .. formatNode(node) .. ' shifted by ' .. node.pos.shift)
+      Sys:log('wetherelltree: ' .. formatNode(node) .. ' shifted by ' .. node.pos.shift)
       node.pos.x = next_x[node.level] or 0
     end
 
@@ -74,7 +74,7 @@ function drawGraphAlgorithm_wetherelltree(graph, options)
     -- compute the shift (maximum of the last shift at this level and the shift
     -- required by the parent node)
     local shift = math.max(shift_x[node.level] or 0, node.parent.pos.shift or 0)
-    Sys:logMessage('wetherelltree: ' .. formatNode(node) .. ' needs shifting by ' .. shift)
+    Sys:log('wetherelltree: ' .. formatNode(node) .. ' needs shifting by ' .. shift)
     node.pos.x = node.pos.x + shift
 
     -- cumulate the parent's shift and the shift of the node itself so that
