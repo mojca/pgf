@@ -7,25 +7,14 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-helper.lua,v 1.2 2011/04/20 17:50:27 matthiasschulz Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-helper.lua,v 1.3 2011/05/02 01:47:09 jannis-pohlmann Exp $
 
 -- This file includes several helper utilities, which aren't found in
 -- the Lua standard library.
 
 pgf.module("pgf.graphdrawing")
 
---- Copies a table, preserving its metatable.
--- @param table The table from which values are copied.
--- @param result The table to which values are copied or nil.
--- @return A new table containing all the keys and values.
 function copyTable(table, result)
-   result = result or {}
-   for k, v in pairs(table) do
-      result[k] = v
-   end
-   return setmetatable(result, getmetatable(table))
-end
-
 --- Counts keys in an dictionary, where value is nil.
 -- @param table Dictionary.
 -- @return Number of keys.

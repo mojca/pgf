@@ -1,4 +1,4 @@
--- Copyright 2011 by Jannis Pohlmann <jannis@xfce.org>
+-- Copyright 2011 by Jannis Pohlmann
 --
 -- This file may be distributed and/or modified
 --
@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/algorithms/Attic/pgflibrarygraphdrawing-algorithms-spring.lua,v 1.1 2011/05/02 00:59:33 jannis-pohlmann Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/algorithms/Attic/pgflibrarygraphdrawing-algorithms-spring.lua,v 1.2 2011/05/02 01:47:09 jannis-pohlmann Exp $
 
 pgf.module("pgf.graphdrawing")
 
