@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-node.lua,v 1.9 2011/05/02 02:47:03 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-node.lua,v 1.10 2011/05/02 03:05:04 jannis-pohlmann Exp $
 
 -- This file defines a node class, used in the graph representation.
 
@@ -160,7 +160,6 @@ end
 -- @param object The node to be compared to self
 -- @return True if self is equal to object.
 function Node:__eq(object)
-   Sys:logMessage('LAY: node eq function called')
    return self.name == object.name
 end
 
