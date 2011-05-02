@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-table-helpers.lua,v 1.3 2011/05/02 01:49:54 jannis-pohlmann Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-table-helpers.lua,v 1.4 2011/05/02 02:00:55 jannis-pohlmann Exp $
 
 --- This file contains a number of helper functions for tables, including
 --- functions to create key and value iterators, copy tables, map table
@@ -224,4 +224,16 @@ function table.value_iter(table)
     key, value = pair_iter(state, key)
     return value
   end
+end
+
+
+
+--- Count the key/value pairs in the table.
+--
+-- @param input The table whose key/value pairs to count.
+--
+-- @return Number of key/value pairs in the table.
+--
+function table.count_pairs(input)
+  return table.combine(input, function (count, k, v) return count + 1 end, 0)
 end
