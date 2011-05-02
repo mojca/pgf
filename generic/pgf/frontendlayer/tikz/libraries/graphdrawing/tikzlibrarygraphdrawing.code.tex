@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/graphdrawing/Attic/tikzlibrarygraphdrawing.code.tex,v 1.5 2011/05/02 02:34:04 jannis-pohlmann Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/graphdrawing/Attic/tikzlibrarygraphdrawing.code.tex,v 1.6 2011/05/02 02:38:31 jannis-pohlmann Exp $
 
 \usepgflibrary{graphdrawing}
 \usetikzlibrary{graphs}
@@ -152,57 +152,5 @@
   graph drawing/register node key=root,
   graph drawing/register math key=level distance,
   graph drawing/register math key=sibling distance
-
-
-
-%
-% General options for changing the orientation and component packing
-% of graph drawings.
-%
-\tikzgraphsset{
-  graph drawing/register key=orientation,
-}
-
-
-
-%
-% Experimental layout style for trying new ideas.
-%
-\tikzgraphsset{
-  experimental layout/.style={
-    graph drawing engine,
-    algorithm=experimental,
-  }
-}
-
-
-
-%%
-%% Example of how to register graph, node and edge keys 
-%% as well as how to create graph, node and edge styles.
-%%
-%\tikzgraphsset{
-%  graph drawing/register node key=my dummy node key,
-%  graph drawing/register node math key=my dummy node math key,
-%  graph drawing/register edge key=my dummy edge key,
-%  graph drawing/register edge math key=my dummy edge math key,
-%  % Graph style
-%  my dummy tree/.style={
-%    graph drawing engine,
-%    algorithm=whetherelltree
-%  },
-%  % Node style
-%  my dummy node/.style={
-%    my dummy node key=foo,
-%    fill=yellow
-%  },
-%  % Edge style (needs to registered differently)
-%  graph drawing/register edge style={%
-%    my dummy edge/.style={
-%      color=blue,
-%      my dummy edge math key=2cm
-%    }
-%  }
-%}
 
 \endinput
