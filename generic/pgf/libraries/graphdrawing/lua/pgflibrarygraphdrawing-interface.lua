@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-interface.lua,v 1.7 2011/05/02 02:16:14 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-interface.lua,v 1.8 2011/05/02 02:41:42 jannis-pohlmann Exp $
 
 -- This file defines the Interface global object, which is used as a
 -- simplified frontend in the TeX part of the library.
@@ -108,7 +108,7 @@ end
 -- @param name Name of  the algorithm, like ``xyz''.
 -- @return The algorithm function or nil.
 function Interface:loadAlgorithm(name)
-   local functionName = "drawGraphAlgorithm_" .. name
+   local functionName = "drawGraphAlgorithm_" .. name:gsub('-', '_')
    local filename = "pgflibrarygraphdrawing-algorithms-" .. name .. ".lua"
    pgf.load(filename, "tex")
    return pgf.graphdrawing[functionName]
@@ -126,8 +126,8 @@ function Interface:drawGraph()
       return
    end
 
-   local name = self:getOption("algorithm")
-   local functionName = "drawGraphAlgorithm_" .. name
+   local name = self:getOption("algorithm"):gsub('%s', '-')
+   local functionName = "drawGraphAlgorithm_" .. name:gsub('-', '_')
    local algorithm = pgf.graphdrawing[functionName]
 
    -- if not defined, try to load the corresponding file
