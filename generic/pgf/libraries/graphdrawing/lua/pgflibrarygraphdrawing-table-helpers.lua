@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-table-helpers.lua,v 1.8 2011/05/02 02:09:39 jannis-pohlmann Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-table-helpers.lua,v 1.9 2011/05/02 02:18:28 jannis-pohlmann Exp $
 
 --- This file contains a number of helper functions for tables, including
 --- functions to create key and value iterators, copy tables, map table
@@ -113,6 +113,22 @@ function table.copy(source, target)
     target[key] = val
   end
   return setmetatable(target, getmetatable(source))
+end
+
+
+
+-- Reverses the values of a table. The metatable is not preserved.
+--
+-- @param source Input table whose values are to be reversed.
+--
+-- @return A new table with the values of the source table reversed.
+--
+function table.reverse_values(source)
+  local copy = {}
+  for i = 1,#source do
+    copy[i] = source[#source-i+1]
+  end
+  return copy
 end
 
 
