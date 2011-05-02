@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-table-helpers.lua,v 1.2 2011/05/02 01:48:52 jannis-pohlmann Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-table-helpers.lua,v 1.3 2011/05/02 01:49:54 jannis-pohlmann Exp $
 
 --- This file contains a number of helper functions for tables, including
 --- functions to create key and value iterators, copy tables, map table
@@ -158,6 +158,40 @@ function table.map_values(table, map_func)
     copy[key] = map_func(val)
   end
   return copy
+end
+
+
+
+--- Update values of the table using an update function.
+--
+-- @param table
+-- @param update_func
+--
+-- @return
+function table.update_values(table, update_func)
+  for key, val in pairs(table) do
+    table[key] = update_func(key, val)
+  end
+  return table
+end
+
+
+
+--- Combine all key/value pairs of the table to a single value
+--- using a combine function.
+--
+-- @param table
+-- @param combine_func
+-- @param initial_value
+--
+-- @return
+--
+function table.combine(table, combine_func, initial_value)
+  local combination = initial_value or nil
+  for key, val in pairs(table) do
+    combination = combine_func(combination, key, val)
+  end
+  return combination
 end
 
 
