@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-vector.lua,v 1.5 2011/05/02 02:16:43 jannis-pohlmann Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-vector.lua,v 1.6 2011/05/02 02:33:08 jannis-pohlmann Exp $
 
 --- This file contains a class for defining arbitrary vectors and
 --- perform operations on them.
@@ -44,6 +44,18 @@ function Vector:subtract(other)
   return Vector:new(#self.elements, function (n) 
     return self.elements[n] - other.elements[n]
   end)
+end
+
+
+
+function Vector:dotProduct(other)
+  assert(#self.elements == #other.elements)
+
+  local product = 0
+  for n = 1,#self.elements do
+    product = product + self.elements[n] * other.elements[n]
+  end
+  return product
 end
 
 
