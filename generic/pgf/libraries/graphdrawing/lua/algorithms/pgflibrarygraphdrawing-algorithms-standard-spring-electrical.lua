@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/algorithms/Attic/pgflibrarygraphdrawing-algorithms-standard-spring-electrical.lua,v 1.3 2011/05/02 02:52:29 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/algorithms/Attic/pgflibrarygraphdrawing-algorithms-standard-spring-electrical.lua,v 1.4 2011/05/02 02:54:21 jannis-pohlmann Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -42,9 +42,15 @@ pgf.module("pgf.graphdrawing")
 --       alternative steps?)
 --   - /tikz/influence cutoff distance (with the multilevel approach)
 --   - /tikz/coarsening etc.
---   - /tikz/electric charge
---   - /tikz/nail at
+--   - /tikz/electric charge (ideally per node, not globally)
+--   - /tikz/nail at (or overload /tikz/at)
 --   - /tikz/spring stiffness
+--   - /tikz/natural spring dimension (ideally per edge, not globally)
+--
+-- TODO Implement the following features:
+--   - clustering of nodes using color classes
+--   - different cluster layouts (vertical line, horizontal line,
+--     normal cluster, internally fixed subgraph)
 --
 -- @param graph
 --
