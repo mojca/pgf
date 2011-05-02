@@ -8,13 +8,15 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-iter-helpers.lua,v 1.1 2011/05/02 01:47:09 jannis-pohlmann Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-iter-helpers.lua,v 1.2 2011/05/02 01:48:52 jannis-pohlmann Exp $
 
 --- This file contains a several functions that are helpful when dealing
 --- with iterators. Included are functions to filter values of an iterator,
 --- map iterator values to something else etc.
 
 pgf.module("pgf.graphdrawing")
+
+iter = {}
 
 
 

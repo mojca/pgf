@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-table-helpers.lua,v 1.1 2011/05/02 01:47:09 jannis-pohlmann Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-table-helpers.lua,v 1.2 2011/05/02 01:48:52 jannis-pohlmann Exp $
 
 --- This file contains a number of helper functions for tables, including
 --- functions to create key and value iterators, copy tables, map table
@@ -30,7 +30,7 @@ pgf.module("pgf.graphdrawing")
 --
 function table.copy(source, target)
   target = target or {}
-  for key, val in pairs(table) do
+  for key, val in pairs(source) do
     target[key] = val
   end
   return setmetatable(target, getmetatable(source))
