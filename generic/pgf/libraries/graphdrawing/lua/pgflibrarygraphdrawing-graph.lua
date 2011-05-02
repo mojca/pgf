@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-graph.lua,v 1.3 2011/05/02 02:02:08 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-graph.lua,v 1.4 2011/05/02 02:07:09 jannis-pohlmann Exp $
 
 -- This file defines a graph class, which later represents user created
 -- graphs.
@@ -116,9 +116,9 @@ end
 function Graph:deleteNode(node)
    local node = self:removeNode(node)
    if node then
-      for edge in values(node:getEdges()) do
+      for edge in table.value_iter(node.edges) do
          self:removeEdge(edge)
-         for node in values(edge:getNodes()) do
+         for node in table.value_iter(edge.nodes) do
             node.removeEdge(edge)
          end
       end
@@ -130,7 +130,7 @@ end
 --- Adds an edge to the graph.
 -- @param edge The edge to be added.
 function Graph:addEdge(edge)
-   if not findTable(self.edges, edge) then
+   if not table.find(self.edges, function (other) return other == edge end) then
       table.insert(self.edges, edge)
    end
 end
@@ -139,8 +139,7 @@ end
 -- @param edge The edge to be removed.
 -- @return The edge or nil.
 function Graph:removeEdge(edge)
-   local index = findTable(self.edges, edge)
-   if index then
+   if table.find(self.edges, function (other) return other == edge end) then
       table.remove(self.edges, edge)
       return edge
    else
@@ -155,8 +154,8 @@ end
 function Graph:deleteEdge(edge)
    local edge = self:removeEdge(edge)
    if edge then
-      for node in edge:getNodes() do
-         node.removeEdge(edge)
+      for node in table.value_iter(edge.nodes) do
+         node:removeEdge(edge)
       end
    end
    return edge
@@ -206,14 +205,14 @@ function Graph:walkAux(root, visited, removeIndex)
    function ()
       while #edgeQueue > 0 do
          local currentEdge = remove(edgeQueue)
-         for node in values(currentEdge:getNodes()) do
+         for node in table.value_iter(currentEdge.nodes) do
             insertVisited(nodeQueue, node)
          end
          return currentEdge
       end
       while #nodeQueue > 0 do
          local currentNode = remove(nodeQueue)
-         for edge in values(currentNode:getEdges()) do
+         for edge in table.value_iter(currentNode.edges) do
             insertVisited(edgeQueue, edge)
          end
          return currentNode
@@ -303,7 +302,7 @@ function Graph:subGraphParent(root, parent, graph)
    visited[parent] = true
 
    -- mark edges with root and parent as visited
-   for edge in values(root:getEdges()) do
+   for edge in table.value_iter(root.edges) do
       if edge:containsNode(root) and edge:containsNode(parent) then
          visited[edge] = true
       end
