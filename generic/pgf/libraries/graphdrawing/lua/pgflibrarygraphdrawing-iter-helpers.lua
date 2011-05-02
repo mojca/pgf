@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-iter-helpers.lua,v 1.2 2011/05/02 01:48:52 jannis-pohlmann Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-iter-helpers.lua,v 1.3 2011/05/02 02:25:58 jannis-pohlmann Exp $
 
 --- This file contains a several functions that are helpful when dealing
 --- with iterators. Included are functions to filter values of an iterator,
@@ -53,5 +53,30 @@ function iter.map(iterator, map_func)
       result = map_func(result)
     end
     return result
+  end
+end
+
+
+
+--- Cause a loop to run multiple times.
+--
+-- Use this iterator like this to perform 100 loops:
+--
+--   for n in iter.times(100) do
+--     print(n) -- this will print numbers from 1 to 100 consecutively
+--   end
+--
+-- @param n Number of loops.
+--
+function iter.times(n)
+  local last_value = 0
+
+  return function ()
+    if last_value >= n then
+      return nil
+    else
+      last_value = last_value + 1
+      return last_value
+    end
   end
 end
