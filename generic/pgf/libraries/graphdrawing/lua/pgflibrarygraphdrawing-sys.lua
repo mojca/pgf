@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more details.
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-sys.lua,v 1.3 2011/05/02 02:03:09 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-sys.lua,v 1.4 2011/05/02 02:05:59 jannis-pohlmann Exp $
 
 -- This file contains methods dealing with the output back to the TeX
 -- side and some TeX and PGF specialties.
@@ -90,13 +90,32 @@ end
 --- Assembles and outputs the TeX command to draw an edge.
 -- @param Edge A lua edge object.
 function Sys:putEdge(edge)
-   local drawStr = '\\draw '
-   for node in table.value_iter(edge.nodes) do
-      local name = string.sub(node.name, string.len("not yet positioned@") + 1)
-      drawStr = drawStr .. '(' .. name .. ') ' .. edge.direction .. ' '
-   end
-   drawStr = string.sub(drawStr, 0, string.len(drawStr) - 2 - string.len(edge.direction)) .. ';'
-   tex.print(drawStr)
+   -- map nodes to node strings
+   local node_strings = table.map_values(edge.nodes, function (node) 
+      return '(' .. string.sub(node.name, string.len('not yet positioned@') + 1) .. ')'
+   end)
+
+   -- map options to option strings
+   local option_strings = table.map(edge.options, function (key, val)
+      if not val or val == '' then
+         return tostring(key)
+      else
+         return tostring(key) .. '={' .. tostring(val) .. '}'
+      end
+   end)
+
+   -- generate string for the entire edge
+   -- FIXME Eigentlich sollte das hier funktionieren:
+   -- local edge_string = ' ' .. edge.direction .. ' [' .. table.concat(option_strings, ',') .. '] '
+   -- local draw_string = table.concat(node_strings, edge_string) .. ';'
+   --
+   -- Stattdessen geht im Moment nur das hier:
+   local edge_string = ' ' .. 'edge' .. '[' .. table.concat(option_strings, ',') .. '] '
+   local draw_string = '\\draw ' .. table.concat(node_strings, edge_string) .. ';'
+
+   -- hand TikZ code over to TeX
+   texio.write_nl(draw_string)
+   tex.print(draw_string)
 end
 
 --- Prints objects to the TeX output, formatting them with tostring and

@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-table-helpers.lua,v 1.6 2011/05/02 02:03:09 jannis-pohlmann Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-table-helpers.lua,v 1.7 2011/05/02 02:05:59 jannis-pohlmann Exp $
 
 --- This file contains a number of helper functions for tables, including
 --- functions to create key and value iterators, copy tables, map table
@@ -137,6 +137,23 @@ function table.filter_values(input, filter_func)
     if filter_func(val) then
       table.insert(copy, val)
     end
+  end
+  return copy
+end
+
+
+
+--- Maps key/value pairs to a flat table of new values.
+--
+-- @param input
+-- @param map_func
+--
+-- @return
+--
+function table.map(input, map_func)
+  local copy = {}
+  for key, val in pairs(input) do
+    table.insert(copy, map_func(key, val))
   end
   return copy
 end
