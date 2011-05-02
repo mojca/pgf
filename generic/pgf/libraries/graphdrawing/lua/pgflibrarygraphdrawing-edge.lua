@@ -1,4 +1,5 @@
 -- Copyright 2010 by Renée Ahrens, Olof Frahm, Jens Kluttig, Matthias Schulz, Stephan Schuster
+-- Copyright 2011 by Jannis Pohlmann
 --
 -- This file may be distributed an/or modified
 --
@@ -7,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-edge.lua,v 1.2 2011/04/20 17:50:27 matthiasschulz Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-edge.lua,v 1.3 2011/05/02 01:34:46 jannis-pohlmann Exp $
 
 -- This file defines an edge class, used in the graph representation.
 
@@ -34,6 +35,19 @@ function Edge:new(values)
    setmetatable(defaults, Edge)
    local result = mergeTable(values, defaults)
    return result
+end
+
+function Edge:setOption(name, value)
+   self.options[name] = value
+end
+
+function Edge:getOption(name)
+   return self.options[name]
+end
+
+--- Merges options.
+function Edge:mergeOptions(options)
+   self.options = table.merge(options, self.options)
 end
 
 --- Sets the path of an edge.

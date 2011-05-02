@@ -7,9 +7,9 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-vector.lua,v 1.1 2011/05/02 00:59:33 jannis-pohlmann Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-vector.lua,v 1.2 2011/05/02 01:34:46 jannis-pohlmann Exp $
 
---pgf.module('pgf.graphdrawing')
+pgf.module('pgf.graphdrawing')
 
 
 
