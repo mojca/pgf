@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/Attic/pgflibrarygraphdrawing.code.tex,v 1.2 2011/05/02 02:16:14 jannis-pohlmann Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/Attic/pgflibrarygraphdrawing.code.tex,v 1.3 2011/05/02 02:27:07 jannis-pohlmann Exp $
 
 %\catcode`\@11\relax
 
@@ -55,8 +55,16 @@
 %   \pgfgdbeginscope
 %
 \def\pgfgdbeginscope{%
-  \pgf@gd@logmessage{GD:SYS: scope began}
-  \pgf@gd@beginscope%
+  \begingroup
+  \pgf@gd@logmessage{GD:SYS: scope began}%
+  % get options
+  \pgfkeysgetvalue{/tikz/graphs/graph drawing/@options}\pgf@gd@graph@options%
+  \pgf@gd@logmessage{GD:SYS: key options: \pgf@gd@graph@options}
+  \directlua{
+    pgf.graphdrawing.Interface:newGraph("\luaescapestring{\pgf@gd@graph@options}")
+  }%
+  \begingroup
+  \pgf@gd@positionnodelater
 }
 
 %
@@ -68,11 +76,14 @@
 % See \pgfgdbeginscope
 %
 \def\pgfgdendscope{%
+  \endgroup
   \pgf@gd@logmessage{GD:SYS: scope ended}%
   \directlua{
     pgf.graphdrawing.Interface:drawGraph()
     pgf.graphdrawing.Interface:finishGraph()
-  }}
+  }
+  \endgroup
+}
 
 %
 % Adds an edge to the graph
@@ -178,20 +189,6 @@
     % clear node options
     \pgfkeyslet{/tikz/graphs/graph drawing/@options}\pgfutil@empty
   }%
-}
-
-%
-% Begins a new graph drawing scope
-%
-\def\pgf@gd@beginscope{%
-  \pgf@gd@logmessage{GD:SYS: begin scope}%
-  % get options
-  \pgfkeysgetvalue{/tikz/graphs/graph drawing/@options}\pgf@gd@graph@options%
-  \pgf@gd@logmessage{GD:SYS: key options: \pgf@gd@graph@options}
-  \directlua{
-    pgf.graphdrawing.Interface:newGraph("\luaescapestring{\pgf@gd@graph@options}")
-  }%
-  \pgf@gd@positionnodelater
 }
 
 %
