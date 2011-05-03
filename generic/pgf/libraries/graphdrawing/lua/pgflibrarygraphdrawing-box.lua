@@ -1,4 +1,5 @@
 -- Copyright 2010 by Renée Ahrens, Olof Frahm, Jens Kluttig, Matthias Schulz, Stephan Schuster
+-- Copyright 2011 by Jannis Pohlmann
 --
 -- This file may be distributed an/or modified
 --
@@ -7,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-box.lua,v 1.3 2011/05/03 11:24:43 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-box.lua,v 1.4 2011/05/03 13:06:36 jannis-pohlmann Exp $
 
 -- This files defines a box class.  Boxes can contain other boxes.  Used
 -- in the algorithm implementations.
