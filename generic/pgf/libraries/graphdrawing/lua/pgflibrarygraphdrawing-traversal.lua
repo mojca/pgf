@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-traversal-helpers.lua,v 1.3 2011/05/02 21:40:31 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-traversal.lua,v 1.1 2011/05/03 11:24:43 jannis-pohlmann Exp $
 
 --- This file implements a number of graph traversal functions including
 --- depth-first and breadth-first search, traversal using a topological sorting

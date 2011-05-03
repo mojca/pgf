@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-node.lua,v 1.13 2011/05/02 21:40:31 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-node.lua,v 1.14 2011/05/03 11:24:43 jannis-pohlmann Exp $
 
 -- This file defines a node class, used in the graph representation.
 
@@ -44,11 +44,11 @@ function Node:new(values)
       minY = 0 
     },
     edges = {},
-    pos = Position:new(),
+    pos = Vector:new(2),
     options = {},
   }
   setmetatable(defaults, Node)
-  local result = mergeTable(values, defaults)
+  local result = table.custom_merge(values, defaults)
   return result
 end
 
@@ -211,10 +211,9 @@ end
 -- @return Copy of the node.
 --
 function Node:copy()
-  obj = Node:new()
-  local result = copyTable(self, obj)
-  obj.edges = {}
-  return obj
+  local result = table.custom_copy(self, Node:new())
+  result.edges = {}
+  return result
 end
 
 

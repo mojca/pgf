@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-graph.lua,v 1.12 2011/05/02 21:40:31 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-graph.lua,v 1.13 2011/05/03 11:24:43 jannis-pohlmann Exp $
 
 -- This file defines a graph class, which later represents user created
 -- graphs.
@@ -37,11 +37,11 @@ function Graph:new(values)
   local defaults = {
     nodes = {},
     edges = {},
-    pos = Position:new(),
+    pos = Vector:new(2),
     options = {},
   }
   setmetatable(defaults, Graph)
-  local result = mergeTable(values, defaults)
+  local result = table.custom_merge(values, defaults)
   return result
 end
 
@@ -72,12 +72,12 @@ end
 
 --- Merges the given options into the options of the graph.
 --
+-- @see table.custom_merge
+--
 -- @param options The options to be merged.
 --
--- @see mergeTable
---
 function Graph:mergeOptions(options)
-  self.options = mergeTable(options, self.options)
+  self.options = table.custom_merge(options, self.options)
 end
 
 
@@ -89,7 +89,7 @@ end
 -- @return A shallow copy of the graph.
 --
 function Graph:copy ()
-  local result = copyTable(self, Graph:new())
+  local result = table.custom_copy(self, Graph:new())
   result.nodes = {}
   result.edges = {}
   result.root = nil
@@ -397,7 +397,7 @@ function Graph:subGraph(root, graph, visited)
   end
   
   -- create new nodes (without edges)
-  for node in values(nodes) do
+  for node in table.value_iter(nodes) do
     local copy = node:copy()
     graph:addNode(copy)
     assert(copy)
@@ -406,21 +406,21 @@ function Graph:subGraph(root, graph, visited)
   end
   
   -- create new edges and adds them to graph and nodes
-  for edge in values(edges) do
+  for edge in table.value_iter(edges) do
     local copy = edge:copy()
     local canAdd = true
-    for v in values(edge.nodes) do
+    for v in table.value_iter(edge.nodes) do
       local translated = translate[v]
       if not translated then
          canAdd = false
       end
     end
     if canAdd then
-      for v in values(edge.nodes) do
+      for v in table.value_iter(edge.nodes) do
         local translated = translate[v]
         graph:addNode(translated)
       end
-      for node in values(copy.nodes) do
+      for node in table.value_iter(copy.nodes) do
         node:addEdge(copy)
       end
       graph:addEdge(copy)
@@ -472,13 +472,13 @@ function Graph:__tostring()
   Graph.__tostring = tmp
 
   local first = true
-  for node in values(self.nodes) do
+  for node in table.value_iter(self.nodes) do
     if first then first = false else result = result .. ", " end
     result = result .. tostring(node)
   end
   result = result .. "), ("
   first = true
-  for edge in values(self.edges) do
+  for edge in table.value_iter(self.edges) do
     if first then first = false else result = result .. ", " end
     result = result .. tostring(edge)
   end

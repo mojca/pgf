@@ -7,31 +7,28 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-files.lua,v 1.8 2011/05/02 02:47:03 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-files.lua,v 1.9 2011/05/03 11:24:43 jannis-pohlmann Exp $
 
 -- This file defines a list of initial files to load.
 
 local files = {
    "module",
-   "helper",
+   "table",
+   "iter",
+   "string",
    "sys",
-   "position",
+   "vector",
    "path",
    "box",
    "node",
    "edge",
    "graph",
-   "algorithms-localsearchgraph",
+   "traversal",
    "component-packing",
    "interface",
-   "iter-helpers",
    "orientation",
    "positioning-helpers",
-   "vector",
-   "traversal-helpers",
-   "table-helpers",
    "texboxregister",
-   "test-position",
    "test-path",
    "test-box",
    "test-vector",

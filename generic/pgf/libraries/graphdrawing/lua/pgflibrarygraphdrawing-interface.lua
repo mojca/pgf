@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-interface.lua,v 1.10 2011/05/02 21:40:31 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-interface.lua,v 1.11 2011/05/03 11:24:43 jannis-pohlmann Exp $
 
 -- This file defines the Interface global object, which is used as a
 -- simplified frontend in the TeX part of the library.
@@ -40,7 +40,7 @@ function Interface:newGraph(options)
   self.graph = Graph:new()
   table.insert(self.graphStack, self.graph)
   Sys:log("GD:INT: options = " .. options)
-  self.graph:mergeOptions(parseBraces(options))
+  self.graph:mergeOptions(string.parse_braces(options))
 end
 
 
@@ -93,7 +93,7 @@ function Interface:addNode(name, xMin, yMin, xMax, yMax, options)
   local node = Node:new{
     name = Sys:unescapeTeXNodeName(name), 
     tex = tex, 
-    options = parseBraces(options)
+    options = string.parse_braces(options)
   }
   self.graph:addNode(node)
   Sys:log("GD:INT: addNode(" .. node.name ..", " .. "maxX = " .. node.tex.maxX .. ", minX = " .. node.tex.minX .. ", maxY = " .. node.tex.maxY.. ", minY = " .. node.tex.minY .. ",...)")
@@ -126,7 +126,7 @@ function Interface:addEdge(from, to, direction, edge_nodes, options, tikz_option
   from = self.graph:findNode(from)
   to = self.graph:findNode(to)
   assert(from and to, "at least one node doesn't exist yet")
-  self.graph:createEdge(from, to, direction, edge_nodes, parseBraces(options), tikz_options)
+  self.graph:createEdge(from, to, direction, edge_nodes, string.parse_braces(options), tikz_options)
 end
 
 
@@ -237,7 +237,8 @@ function Interface:drawNode(node)
                 node.tex.minY,
                 node.tex.maxX,
                 node.tex.maxY,
-                node.pos:getAbsCoordinates())
+                node.pos:x(),
+                node.pos:y())
 end
 
 
