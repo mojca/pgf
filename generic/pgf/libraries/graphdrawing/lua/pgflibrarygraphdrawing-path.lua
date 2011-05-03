@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-path.lua,v 1.3 2011/05/03 11:24:43 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-path.lua,v 1.4 2011/05/03 23:57:16 jannis-pohlmann Exp $
 
 -- This file defines a path class, containing multiple points.  It is
 -- used in the algorithm implementations.
@@ -51,6 +51,7 @@ end
 -- @param keepAbsPosition true if the coordinates of the point are absolute
 function Path:addPoint(point, keepAbsPosition)
 	if #self._points > 0 then
+    assert(point ~= self._points[#self._points])
 		point:setOrigin(self._points[#self._points], keepAbsPosition)
 	end
 	table.insert(self._points, point)

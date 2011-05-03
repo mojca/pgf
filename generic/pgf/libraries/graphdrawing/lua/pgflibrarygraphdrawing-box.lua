@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-box.lua,v 1.4 2011/05/03 13:06:36 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-box.lua,v 1.5 2011/05/03 23:57:16 jannis-pohlmann Exp $
 
 -- This files defines a box class.  Boxes can contain other boxes.  Used
 -- in the algorithm implementations.
@@ -43,6 +43,7 @@ end
 --- Adds new internal Box.
 -- @param box The box to be added.
 function Box:addBox(box)
+   assert(box.pos ~= self.pos)
    box.pos:setOrigin(self.pos)
    self._boxes[box] = true
    self:recalculateSize()

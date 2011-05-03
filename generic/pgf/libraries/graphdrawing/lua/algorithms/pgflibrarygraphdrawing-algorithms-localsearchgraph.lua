@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/algorithms/Attic/pgflibrarygraphdrawing-algorithms-localsearchgraph.lua,v 1.5 2011/05/03 11:24:43 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/algorithms/Attic/pgflibrarygraphdrawing-algorithms-localsearchgraph.lua,v 1.6 2011/05/03 23:57:16 jannis-pohlmann Exp $
 
 -- This contains an algorithm for drawing a graph using local search.
 
@@ -109,9 +109,16 @@ function drawGraphAlgorithm_localsearchgraph(graph)
       origNodesMap[node.name].pos:set{x = node.pos:x()}
       origNodesMap[node.name].pos:set{y = node.pos:y()}
    end
-   for path in table.value_iter(endState.paths) do
-      Sys:log("LSG:GD: Path ", tostring(path))
-   end
+
+   -- NOTE: Printing these paths will result in an infinite loop
+   -- because there is a circle of node positions that depend on
+   -- each other; printing the path will try to compute the 
+   -- absolute values of each of these node positions and will
+   -- loop infinitely.
+   --
+   --for path in table.value_iter(endState.paths) do
+   --   Sys:log("LSG:GD: Path ", tostring(path))
+   --end
 end
 
 --- generic local search algorithm
