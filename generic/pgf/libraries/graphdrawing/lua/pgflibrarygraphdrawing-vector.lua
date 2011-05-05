@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-vector.lua,v 1.12 2011/05/05 20:22:55 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-vector.lua,v 1.13 2011/05/05 23:14:31 jannis-pohlmann Exp $
 
 --- This file contains a class for defining arbitrary vectors and
 --- perform operations on them.
@@ -40,14 +40,18 @@ function Vector:new(n, fill_function, origin)
   }
   setmetatable(vector, Vector)
 
-  -- fill vector elements with values
-  if not fill_function then
-    for i = 1,n do
-      vector.elements[i] = 0
-    end
+  if type(n) == 'table' then
+    vector:set(n)
   else
-    for i = 1,n do
-      vector.elements[i] = fill_function(i)
+    -- fill vector elements with values
+    if not fill_function then
+      for i = 1,n do
+        vector.elements[i] = 0
+      end
+    else
+      for i = 1,n do
+        vector.elements[i] = fill_function(i)
+      end
     end
   end
 
@@ -286,11 +290,17 @@ end
 --
 function Vector:set(index, value)
   if type(index) == 'table' then
-    if index.x then
-      self.elements[1] = index.x
-    end
-    if index.y then
-      self.elements[2] = index.y
+    if index.x or index.y then
+      if index.x then
+        self.elements[1] = index.x
+      end
+      if index.y then
+        self.elements[2] = index.y
+      end
+    else
+      for i = 1,#index do
+        self.elements[i] = index[i]
+      end
     end
   else
     self.elements[index] = value
