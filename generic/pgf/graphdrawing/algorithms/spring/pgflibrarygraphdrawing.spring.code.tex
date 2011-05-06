@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/spring/Attic/pgflibrarygraphdrawing.spring.code.tex,v 1.1 2011/05/06 15:12:16 jannis-pohlmann Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/spring/Attic/pgflibrarygraphdrawing.spring.code.tex,v 1.2 2011/05/06 16:11:12 jannis-pohlmann Exp $
 
 
 
@@ -35,7 +35,9 @@
   {algorithm=hu spring}
   {
     natural spring dimension/.graph drawing graph parameter=evaluate math expression,
+    coarsening/.is if=,
     coarsening/.graph drawing graph parameter,
+    quadtree/.is if=,
     quadtree/.graph drawing graph parameter,
     maximum iterations/.graph drawing graph parameter,
   }
