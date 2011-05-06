@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/algorithms/Attic/pgflibrarygraphdrawing-algorithms-wetherelltree.lua,v 1.5 2011/05/03 11:24:43 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/algorithms/Attic/pgflibrarygraphdrawing-algorithms-wetherelltree.lua,v 1.6 2011/05/06 11:15:33 tantau Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -15,7 +15,7 @@ pgf.module("pgf.graphdrawing")
 
 function drawGraphAlgorithm_wetherelltree(graph, options)
   -- find the root node of the graph
-  graph.root = graph:findNodeIf(function (node) return node:getOption('root') end)
+  graph.root = graph:findNodeIf(function (node) return node:getOption('/graph drawing/root') end)
   if not graph.root then
     error('no root node specified. aborting')
   end
@@ -86,7 +86,7 @@ function drawGraphAlgorithm_wetherelltree(graph, options)
   end
 
   -- determine the node distance
-  local node_distance = tonumber(graph:getOption('node distance') or 28.5)
+  local node_distance = tonumber(graph:getOption('/graph drawing/node distance') or 28.5)
 
   -- map simplified x,y coordinates to real coordinates in the drawing
   for node in table.value_iter(graph.nodes) do

@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/algorithms/Attic/pgflibrarygraphdrawing-algorithms-naivetree.lua,v 1.3 2011/05/02 17:09:24 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/algorithms/Attic/pgflibrarygraphdrawing-algorithms-naivetree.lua,v 1.4 2011/05/06 11:15:33 tantau Exp $
 
 -- This is about the most naive implementation of a tree drawing algorithm.
 
@@ -26,13 +26,13 @@ pgf.module("pgf.graphdrawing")
 --
 function drawGraphAlgorithm_naivetree(graph, options)
   -- find the root note
-  graph.root = graph:findNodeIf(function (node) return node:getOption("root") end)
+  graph.root = graph:findNodeIf(function (node) return node:getOption("/graph drawing/root") end) or graph.nodes[1]
   if graph.root == nil then
     error("no root node specified. aborting")
   end
 
   -- determine the node distance
-  local node_distance = tonumber(graph:getOption('node distance') or 28.5)
+  local node_distance = tonumber(graph:getOption('/graph drawing/node distance') or 28.5)
 
   -- array for incrementing the x coordinate at each level
   local column = {}
@@ -48,8 +48,8 @@ function drawGraphAlgorithm_naivetree(graph, options)
 
     -- position the node, using the level as the y coordinate and
     -- the column as the x coordinate
-    node.pos.y = -1 * node.level * node_distance
-    node.pos.x = column[node.level] * node_distance
+    node.pos:set{y = -1 * node.level * node_distance}
+    node.pos:set{x = column[node.level] * node_distance}
   end
 end
 

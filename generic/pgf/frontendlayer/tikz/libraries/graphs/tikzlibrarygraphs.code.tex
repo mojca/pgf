@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/graphs/tikzlibrarygraphs.code.tex,v 1.18 2011/04/21 23:14:35 jannis-pohlmann Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/graphs/tikzlibrarygraphs.code.tex,v 1.19 2011/05/06 11:15:33 tantau Exp $
 
 
 % 
@@ -1023,6 +1023,7 @@
 }
 
 
+
 % Prepare a color 
 %
 % #1 is the color name
@@ -1251,7 +1252,9 @@
   \ifnum\c@pgf@countb>\c@pgf@counta\relax%
     \c@pgf@countb=\c@pgf@counta\relax%
   \fi%
-  \tikz@lib@graph@default@new@edge{\csname tikz@lg\the\c@pgf@countb\endcsname}{#1}%
+  \ifnum\c@pgf@countb>0\relax%
+    \tikz@lib@graph@default@new@edge{\csname tikz@lg\the\c@pgf@countb\endcsname}{#1}%
+  \fi%
   \def\tikz@lg@prev{#1}%
 }
 

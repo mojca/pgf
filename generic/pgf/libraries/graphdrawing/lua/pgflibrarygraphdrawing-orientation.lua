@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-orientation.lua,v 1.10 2011/05/03 11:24:43 jannis-pohlmann Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-orientation.lua,v 1.11 2011/05/06 11:15:33 tantau Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -146,7 +146,7 @@ end
 -- @return TODO
 --
 function orientation.parse_orientation(graph)
-  local option = graph:getOption('orientation')
+  local option = graph:getOption('/graph drawing/orientation')
   if option then
     local item = '{([^}]*)}'
     local pattern = item .. item .. item .. item

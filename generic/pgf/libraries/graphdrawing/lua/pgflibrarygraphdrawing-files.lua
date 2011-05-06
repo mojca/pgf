@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-files.lua,v 1.10 2011/05/03 23:57:16 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/libraries/graphdrawing/lua/Attic/pgflibrarygraphdrawing-files.lua,v 1.11 2011/05/06 11:15:33 tantau Exp $
 
 -- This file defines a list of initial files to load.
 
@@ -30,10 +30,10 @@ local files = {
    "orientation",
    "positioning-helpers",
    "texboxregister",
-   "test-path",
-   "test-box",
-   "test-vector",
-   "test-quadtree",
+--   "test-path",
+--   "test-box",
+--   "test-vector",
+--   "test-quadtree",
 }
 
 return files
