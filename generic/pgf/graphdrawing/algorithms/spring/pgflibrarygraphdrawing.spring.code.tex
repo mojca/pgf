@@ -7,11 +7,23 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/spring/Attic/pgflibrarygraphdrawing.spring.code.tex,v 1.2 2011/05/06 16:11:12 jannis-pohlmann Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/spring/Attic/pgflibrarygraphdrawing.spring.code.tex,v 1.3 2011/05/09 11:58:05 tantau Exp $
 
 
 
 \usepgflibrary{graphdrawing}
+
+
+%
+% Dispatcher for deciding on a default spring layout
+% 
+
+
+\pgfgddeclarecommonkeys{
+  spring layout/.forward to={/graph drawing/\pgfkeysvalueof{/graph drawing/spring layout/default algorithm}}
+}
+
+\pgfkeys{/graph drawing/spring layout/default algorithm/.initial=walshaw spring electrical}
 
 
 
@@ -35,9 +47,9 @@
   {algorithm=hu spring}
   {
     natural spring dimension/.graph drawing graph parameter=evaluate math expression,
-    coarsening/.is if=,
+    coarsening/.default=true,
     coarsening/.graph drawing graph parameter,
-    quadtree/.is if=,
+    quadtree/.default=true,
     quadtree/.graph drawing graph parameter,
     maximum iterations/.graph drawing graph parameter,
   }

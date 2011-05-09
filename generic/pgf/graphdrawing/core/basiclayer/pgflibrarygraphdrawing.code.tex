@@ -8,7 +8,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/basiclayer/pgflibrarygraphdrawing.code.tex,v 1.3 2011/05/06 16:11:13 jannis-pohlmann Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/basiclayer/pgflibrarygraphdrawing.code.tex,v 1.4 2011/05/09 11:58:05 tantau Exp $
 
 
 
@@ -77,6 +77,9 @@
       \pgfpositionnodelater{\pgf@gd@positionnode@callback}
       % Switch on late edges
       \pgfgd@latecallback%
+      % Kill transformations (will be added by the position now
+      % macros)
+      \pgftransformreset
 }
 
 
