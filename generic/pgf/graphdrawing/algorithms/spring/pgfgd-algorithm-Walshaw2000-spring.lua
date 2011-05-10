@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/spring/Attic/pgfgd-algorithm-Walshaw2000-spring.lua,v 1.1 2011/05/09 23:12:50 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/spring/Attic/pgfgd-algorithm-Walshaw2000-spring.lua,v 1.2 2011/05/10 16:31:31 jannis-pohlmann Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -58,7 +58,7 @@ walshaw_spring = {}
 --
 function drawGraphAlgorithm_Walshaw2000_spring(graph)
   -- apply the random seed specified by the user
-  local seed = tonumber(graph:getOption('/graph drawing/spring layout/random seed')) or 42
+  local seed = tonumber(graph:getOption('/graph drawing/spring layout/random seed'))
   if seed == 0 then seed = os.time() end
   math.randomseed(seed)
 
@@ -75,14 +75,15 @@ function drawGraphAlgorithm_Walshaw2000_spring(graph)
   local use_quadtree = graph:getOption('/graph drawing/spring layout/quadtree') == 'true'
 
   -- determine parameters for the algorithm
-  local k = tonumber(graph:getOption('/graph drawing/spring layout/natural spring dimension')) or 28.5
-  local C = tonumber(graph:getOption('/graph drawing/spring layout/spring constant')) or 0.01
-  local iterations = tonumber(graph:getOption('/graph drawing/spring layout/maximum iterations')) or 500
+  local k = tonumber(graph:getOption('/graph drawing/spring layout/natural spring dimension'))
+  local C = tonumber(graph:getOption('/graph drawing/spring layout/spring constant'))
+  local iterations = tonumber(graph:getOption('/graph drawing/spring layout/maximum iterations'))
 
   Sys:setVerbose(true)
   Sys:log('WALSHAW: use_coarsening = ' .. tostring(use_coarsening))
   Sys:log('WALSHAW: use_quadtree = '   .. tostring(use_quadtree))
   Sys:log('WALSHAW: iterations = ' .. tostring(iterations))
+  Sys:log('WALSHAW: temperature: ' .. tostring(graph:getOption('/graph drawing/spring layout/temperature')))
   Sys:setVerbose(false)
 
   --Sys:log('WALSHAW: graph:')
