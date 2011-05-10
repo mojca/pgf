@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/spring/Attic/pgfgd-algorithm-Walshaw2000-spring.lua,v 1.2 2011/05/10 16:31:31 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/spring/Attic/pgfgd-algorithm-Walshaw2000-spring.lua,v 1.3 2011/05/10 17:46:48 jannis-pohlmann Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -63,9 +63,7 @@ function drawGraphAlgorithm_Walshaw2000_spring(graph)
   math.randomseed(seed)
 
   for key, val in pairs(graph.options) do
-    Sys:setVerbose(true)
     Sys:log(tostring(key) .. ' => ' .. tostring(val))
-    Sys:setVerbose(false)
   end
 
   -- check if we should use the multilevel approach
@@ -79,12 +77,10 @@ function drawGraphAlgorithm_Walshaw2000_spring(graph)
   local C = tonumber(graph:getOption('/graph drawing/spring layout/spring constant'))
   local iterations = tonumber(graph:getOption('/graph drawing/spring layout/maximum iterations'))
 
-  Sys:setVerbose(true)
   Sys:log('WALSHAW: use_coarsening = ' .. tostring(use_coarsening))
   Sys:log('WALSHAW: use_quadtree = '   .. tostring(use_quadtree))
   Sys:log('WALSHAW: iterations = ' .. tostring(iterations))
   Sys:log('WALSHAW: temperature: ' .. tostring(graph:getOption('/graph drawing/spring layout/temperature')))
-  Sys:setVerbose(false)
 
   --Sys:log('WALSHAW: graph:')
   --for node in table.value_iter(graph.nodes) do
@@ -100,9 +96,7 @@ function drawGraphAlgorithm_Walshaw2000_spring(graph)
     local graphs = walshaw_spring.compute_coarse_graphs(graph)
 
     for i = #graphs,1,-1 do
-      --Sys:setVerbose(true)
       --Sys:log('WALSHAW: lay out coarse graph ' .. i-1 .. ' (' .. #graphs[i].nodes .. ' nodes)')
-      --Sys:setVerbose(false)
 
       if i == #graphs then
         -- compute initial natural spring length in a way that will
@@ -542,7 +536,6 @@ function walshaw_spring.compute_force_layout(graph, C, iterations, use_quadtree)
                               max_pos:y() - min_pos:y())
 
       -- insert nodes into the quadtree
-      --Sys:setVerbose(true)
       --Sys:log(' ')
       for node in table.value_iter(graph.nodes) do
         --Sys:log(' ')
@@ -555,7 +548,6 @@ function walshaw_spring.compute_force_layout(graph, C, iterations, use_quadtree)
         --Sys:log(' ')
       end
       --Sys:log(' ')
-      --Sys:setVerbose(false)
     end
 
     local function nodeNotFixed(node) return not node.fixed end
