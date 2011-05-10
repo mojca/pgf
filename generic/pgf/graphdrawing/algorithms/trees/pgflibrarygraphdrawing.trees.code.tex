@@ -8,7 +8,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/trees/pgflibrarygraphdrawing.trees.code.tex,v 1.1 2011/05/09 12:01:57 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/trees/pgflibrarygraphdrawing.trees.code.tex,v 1.2 2011/05/10 14:21:00 tantau Exp $
 
 
 
@@ -48,6 +48,10 @@
   sibling distance/.graph drawing graph parameter=evaluate math expression
 }
 
+\pgfgdset{
+  level distance/.graph drawing parameter initial=1cm,
+  sibling distance/.graph drawing parameter initial=1cm,
+}
 
 
 

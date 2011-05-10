@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/trees/pgfgd-algorithm-AhrensFKSS2011-tree.lua,v 1.1 2011/05/09 12:01:57 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/trees/pgfgd-algorithm-AhrensFKSS2011-tree.lua,v 1.2 2011/05/10 14:21:00 tantau Exp $
 
 -- This file contains an algorithm for drawing arbitrary shaped trees.
 
@@ -34,8 +34,8 @@ function drawGraphAlgorithm_AhrensFKSS2011_tree(graph)
    end  
    -- read TEX-options
    -- leveldistance: determines the vertical space between the nodes
-   local leveldistance = graph:getOption("/graph drawing/level distance") or 10 
-   local siblingdistance = graph:getOption("/graph drawing/sibling distance") or 10
+   local leveldistance = graph:getOption("/graph drawing/level distance") 
+   local siblingdistance = graph:getOption("/graph drawing/sibling distance")
    treePositioning(graph, advancedPlace, simpleCompare, nil, leveldistance, siblingdistance)
 end
 
