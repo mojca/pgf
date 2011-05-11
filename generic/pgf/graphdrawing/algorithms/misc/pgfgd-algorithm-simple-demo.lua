@@ -7,25 +7,27 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/misc/pgfgd-algorithm-simple-demo.lua,v 1.3 2011/05/10 22:08:17 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/misc/pgfgd-algorithm-simple-demo.lua,v 1.4 2011/05/11 17:22:39 tantau Exp $
 
 -- This file contains an example of how a very simple algorithm can be
 -- implemented by a user.
 
 pgf.module("pgf.graphdrawing")
 
---- A very, yery simple node placing algorithm for demonstration purposes.
+--- A trivial node placing algorithm for demonstration purposes.
 -- All nodes are positioned on a fixed size circle.
 function drawGraphAlgorithm_simple_demo(graph)
-   local radius = graph:getOption("/graph drawing/radius")
+   local radius = tonumber(graph:getOption("/graph drawing/radius"))
    local nodeCount = table.count_pairs(graph.nodes)
 
    local alpha = (2 * math.pi) / nodeCount
    local i = 0
    for node in table.value_iter(graph.nodes) do
       -- the interesting part...
-      node.pos:set{x = radius * math.cos(i * alpha)}
-      node.pos:set{y = radius * math.sin(i * alpha)}
+      local node_radius = tonumber(node:getOption('/graph drawing/node radius')
+                                   or radius)
+      node.pos:set{x = node_radius * math.cos(i * alpha)}
+      node.pos:set{y = node_radius * math.sin(i * alpha)}
       i = i + 1
    end
 end

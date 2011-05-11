@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/tikzlayer/tikzlibrarygraphdrawing.code.tex,v 1.1 2011/05/06 15:12:17 jannis-pohlmann Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/tikzlayer/tikzlibrarygraphdrawing.code.tex,v 1.2 2011/05/11 17:22:39 tantau Exp $
 
 \usepgflibrary{graphdrawing}
 
@@ -53,9 +53,11 @@
 \pgfgdappendtoforwardinglist{/tikz/,/tikz/graphs/}
 
 \def\pgfgdtikzedgecallback#1#2#3#4#5#6#7{%
-  \draw [#3,#4,/graph drawing/.cd,#6]
+  \draw 
+    [to path={#7 -- (\tikztotarget) \tikztonodes}]
+    [#3,#4,/graph drawing/.cd,#6]
      (#1\tikzparentanchor)
-       to [to path={#7 -- (\tikztotarget) \tikztonodes}]
+       to
        #5
      (#2\tikzchildanchor);%
 }
