@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-coarse-graph.lua,v 1.2 2011/05/11 01:26:41 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-coarse-graph.lua,v 1.3 2011/05/11 14:40:14 jannis-pohlmann Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -234,6 +234,11 @@ function CoarseGraph:revertSuperedge(superedge)
   -- TODO we can probably skip adding edges that have one or more
   -- subedges with the same level. But that needs more testing.
 
+  -- TODO we might have to pass the corresponding supernode to 
+  -- this method so that we can move subnodes to the same
+  -- position, right? Interpolating seems to work fine without
+  -- though...
+
   if #superedge.subedges == 1 then
     local subedge = superedge.subedges[1]
 
@@ -283,9 +288,13 @@ function CoarseGraph:interpolate()
       --Sys:log('      split up supernode ' .. supernode.name)
     
       --Sys:log('        create subnode ' .. supernode.subnodes[1].name)
+      -- move the subnode to the position of the supernode and add it to the graph
+      supernode.subnodes[1].pos:set{x = supernode.pos:x(), y = supernode.pos:y()}
       self.graph:addNode(supernode.subnodes[1])
 
       --Sys:log('        create subnode ' .. supernode.subnodes[2].name)
+      -- move the subnode to the position of the supernode and add it to the graph
+      supernode.subnodes[2].pos:set{x = supernode.pos:x(), y = supernode.pos:y()}
       self.graph:addNode(supernode.subnodes[2])
 
       --Sys:log('        create subnode edge ' .. tostring(supernode.subnode_edge))
