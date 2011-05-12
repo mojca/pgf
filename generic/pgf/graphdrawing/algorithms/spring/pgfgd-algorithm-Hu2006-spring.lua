@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/spring/Attic/pgfgd-algorithm-Hu2006-spring.lua,v 1.5 2011/05/11 14:40:13 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/spring/Attic/pgfgd-algorithm-Hu2006-spring.lua,v 1.6 2011/05/12 02:10:36 jannis-pohlmann Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -63,7 +63,7 @@ function drawGraphAlgorithm_Hu2006_spring(graph)
     --Sys:log('generating coarse graphs')
 
     local coarse_graph = CoarseGraph:new(graph)
-      
+
     --Sys:log('  initial graph:')
     --for node in table.value_iter(coarse_graph:getGraph().nodes) do
     --  Sys:log('    node ' .. node.name .. ' at ' .. tostring(node.pos))
@@ -111,17 +111,26 @@ function drawGraphAlgorithm_Hu2006_spring(graph)
       coarse_graph:coarsen()
     end
 
-    -- TODO k is currently scaled as in the Walshaw2000 algorithm. 
-    -- Replace this with the mechanism that is actually used in the 
-    -- paper by Hu.
-    k = k / math.pow(math.sqrt(4/7), coarse_graph.level)
-
+    -- compute a random initial layout for the coarsest graph
     hu_spring.compute_initial_layout(coarse_graph.graph, k)
 
     while coarse_graph:getLevel() > 0 do
+      -- compute the diameter of the parent coarse graph
+      local parent_diameter = coarse_graph.graph:getPseudoDiameter()
+
+      -- interpolate the previous coarse graph from its parent
       coarse_graph:interpolate()
-      -- see above TODO
-      k = k * math.sqrt(4/7)
+
+      -- compute the diameter of the current coarse graph
+      local current_diameter = coarse_graph.graph:getPseudoDiameter()
+
+      -- scale node positions by the quotient of the pseudo diameters
+      for node in table.value_iter(coarse_graph.graph) do
+        node.pos:update(function (n, value)
+          return value * (current_diameter / parent_diameter)
+        end)
+      end
+
       hu_spring.apply_forces(coarse_graph.graph, iterations, use_quadtree, k, C, t, tol)
     end
   else
