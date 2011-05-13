@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/force/Attic/pgfgd-algorithm-Walshaw2000-spring.lua,v 1.1 2011/05/13 01:23:49 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/force/Attic/pgfgd-algorithm-Walshaw2000-spring.lua,v 1.2 2011/05/13 02:30:56 jannis-pohlmann Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -80,7 +80,7 @@ function drawGraphAlgorithm_Walshaw2000_spring(graph)
 
   Sys:setVerbose(true)
   Sys:log('WALSHAW: use_coarsening = ' .. tostring(use_coarsening))
-  Sys:log('WALSHAW: use_quadtree = '   .. tostring(use_quadtree))
+  Sys:log('WALSHAW: approximate repulsive forces = ' .. tostring(use_quadtree))
   Sys:log('WALSHAW: iterations = ' .. tostring(iterations))
   Sys:log('WALSHAW: min_graph_size: ' .. tostring(min_graph_size))
   Sys:setVerbose(false)
