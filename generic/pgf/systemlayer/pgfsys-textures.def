@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-textures.def,v 1.5 2007/12/12 16:57:17 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/systemlayer/pgfsys-textures.def,v 1.6 2011/05/13 10:16:37 tantau Exp $
 
 
 % Driver commands for textures driver
@@ -71,10 +71,12 @@
           pgffoa .setopacityalpha}bind def% save
     /.setopacityalpha where {pop} {/.setopacityalpha{pop}def} ifelse % install .setopacityalpha 
     /.pgfsetfillopacityalpha{/pgffoa exch def
-      /pgffill{gsave pgffoa .setopacityalpha fill 1 .setopacityalpha newpath fill grestore}bind def
-      /pgfeofill{gsave pgffoa .setopacityalpha eofill1 .setopacityalpha newpath eofill grestore}bind def}bind def
+      /pgffill{gsave pgffoa .setopacityalpha fill 1 .setopacityalpha
+        newpath fill grestore newpath}bind def
+      /pgfeofill{gsave pgffoa .setopacityalpha eofill1
+        .setopacityalpha newpath eofill grestore newpath}bind def}bind def
     /.pgfsetstrokeopacityalpha{/pgfsoa exch def
-      /pgfstr{gsave pgfsoa .setopacityalpha stroke grestore}bind def}bind def
+      /pgfstr{gsave pgfsoa .setopacityalpha stroke grestore newpath}bind def}bind def
     /pgffoa 1 def
     /pgfsoa 1 def
     }

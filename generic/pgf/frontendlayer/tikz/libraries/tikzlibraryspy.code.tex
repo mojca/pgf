@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryspy.code.tex,v 1.2 2009/12/04 11:59:38 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/tikzlibraryspy.code.tex,v 1.3 2011/05/13 10:16:37 tantau Exp $
 
 
 
@@ -43,10 +43,10 @@
     width/.style={minimum width=##1},
     execute at begin scope={%
       \let\tikz@lib@spy@save=\tikz@lib@spy@collection%
-      \setbox\tikz@lib@spybox=\hbox\bgroup%
+      \setbox\tikz@lib@spybox=\hbox\bgroup\bgroup%
       \let\spy=\tikz@lib@spy@parse},
     execute at end scope={%
-      \egroup%
+      \egroup\egroup%
       {%
         \copy\tikz@lib@spybox%
         \tikz@lib@spy@collection%
@@ -99,13 +99,15 @@
     }]{};
     \node [alias=tikzspyinnode,inner sep=0pt,outer sep=0pt,at={#2},every spy in node/.try,
     path picture={\node[anchor=center,tikz@lib@reset@gs]{\nullfont%
+        \pgfpicture\relax%
         \pgftransformreset%
         \let\tikz@transform=\relax%
         \expandafter\tikzset\expandafter{\tikz@lib@spy@lens}%
         \pgflowlevelsynccm%
         \tikz@scan@one@point\tikz@lib@spy@shift#2%
         \pgflowlevelsynccm%
-        \copy\tikz@lib@spybox};}]#3{};
+        \copy\tikz@lib@spybox%
+        \endpgfpicture};}]#3{};
     \tikz@lib@spy@path
   \endscope
 }
