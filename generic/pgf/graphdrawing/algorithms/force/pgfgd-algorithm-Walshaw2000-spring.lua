@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/spring/Attic/pgfgd-algorithm-Walshaw2000-spring.lua,v 1.4 2011/05/11 14:40:13 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/force/Attic/pgfgd-algorithm-Walshaw2000-spring.lua,v 1.1 2011/05/13 01:23:49 jannis-pohlmann Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -67,20 +67,23 @@ function drawGraphAlgorithm_Walshaw2000_spring(graph)
   end
 
   -- check if we should use the multilevel approach
-  local use_coarsening = graph:getOption('/graph drawing/spring layout/coarsening') == 'true'
+  local use_coarsening = graph:getOption('/graph drawing/spring layout/coarsen') == 'true'
 
   -- check if we should use the quadtree optimization
-  local use_quadtree = graph:getOption('/graph drawing/spring layout/quadtree') == 'true'
+  local use_quadtree = graph:getOption('/graph drawing/spring layout/approximate repulsive forces') == 'true'
 
   -- determine parameters for the algorithm
   local k = tonumber(graph:getOption('/graph drawing/spring layout/natural spring dimension'))
   local C = tonumber(graph:getOption('/graph drawing/spring layout/spring constant'))
   local iterations = tonumber(graph:getOption('/graph drawing/spring layout/maximum iterations'))
+  local min_graph_size = tonumber(graph:getOption('/graph drawing/spring layout/coarsening/minimum graph size'))
 
+  Sys:setVerbose(true)
   Sys:log('WALSHAW: use_coarsening = ' .. tostring(use_coarsening))
   Sys:log('WALSHAW: use_quadtree = '   .. tostring(use_quadtree))
   Sys:log('WALSHAW: iterations = ' .. tostring(iterations))
-  Sys:log('WALSHAW: temperature: ' .. tostring(graph:getOption('/graph drawing/spring layout/temperature')))
+  Sys:log('WALSHAW: min_graph_size: ' .. tostring(min_graph_size))
+  Sys:setVerbose(false)
 
   --Sys:log('WALSHAW: graph:')
   --for node in table.value_iter(graph.nodes) do
@@ -103,7 +106,7 @@ function drawGraphAlgorithm_Walshaw2000_spring(graph)
     local coarse_graph = CoarseGraph:new(graph)
     
     -- coarsen the graph repeatedly until only two nodes are left
-    while coarse_graph:getSize() > 2 do
+    while coarse_graph:getSize() > min_graph_size do
       coarse_graph:coarsen()
     end
     
@@ -154,8 +157,7 @@ function walshaw_spring.compute_initial_layout(graph)
   walshaw_spring.fixate_nodes(graph)
 
   -- decide what technique to use for the initial layout
-  local initial_positioning = graph:getOption('/graph drawing/spring layout/initial positioning') or 'random'
-  local positioning_func = positioning.technique(initial_positioning, graph, graph.k)
+  local positioning_func = positioning.technique('random', graph, graph.k)
 
   local function nodeNotFixed(node) return not node.fixed end
 

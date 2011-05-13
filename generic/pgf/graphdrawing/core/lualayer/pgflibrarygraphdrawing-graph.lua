@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-graph.lua,v 1.3 2011/05/12 02:10:37 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-graph.lua,v 1.4 2011/05/13 01:23:49 jannis-pohlmann Exp $
 
 -- This file defines a graph class, which later represents user created
 -- graphs.
@@ -499,11 +499,8 @@ function Graph:getPseudoDiameter()
     old_diameter = diameter
     diameter = #levels
 
-    Sys:log('  improved the diameter from ' .. old_diameter .. ' to ' .. diameter)
-
     -- abort if the diameter could not be improved
     if diameter == old_diameter then
-      Sys:log('  aborting')
       end_node = levels[#levels][1]
       break
     end
@@ -519,8 +516,6 @@ function Graph:getPseudoDiameter()
     end, levels[#levels][1])
 
     assert(start_node)
-
-    Sys:log('  selecting ' .. start_node.name .. ' as the new start node')
   end
 
   assert(start_node)
