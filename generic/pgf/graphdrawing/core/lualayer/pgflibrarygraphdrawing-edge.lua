@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-edge.lua,v 1.3 2011/05/11 01:26:41 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-edge.lua,v 1.4 2011/05/14 16:49:11 jannis-pohlmann Exp $
 
 -- This file defines an edge class, used in the graph representation.
 
@@ -81,7 +81,7 @@ end
 -- @return The value of the edge option \meta{name} or |nil|.
 --
 function Edge:getOption(name)
-   return self.options[name]
+   return self.options[name] or Interface.defaultGraphParameters[name]
 end
 
 

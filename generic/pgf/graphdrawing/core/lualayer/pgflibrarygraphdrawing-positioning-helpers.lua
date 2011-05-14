@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-positioning-helpers.lua,v 1.2 2011/05/13 01:23:49 jannis-pohlmann Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-positioning-helpers.lua,v 1.3 2011/05/14 16:49:11 jannis-pohlmann Exp $
 
 --- This file contains a number of helper functions for tables, including
 --- functions to create key and value iterators, copy tables, map table
@@ -33,10 +33,9 @@ end
 
 
 function positioning.random(graph, distance)
-  -- compute the number of nodes in the graph
-  local count = table.count_pairs(graph.nodes)
-
   return function (n)
+    -- TODO revise this and check which of the two lines is batter
+    -- return math.random(0, math.modf(math.sqrt(#graph.nodes)) * 2 * distance)
     return math.random(0, 2.5 * distance)
   end
 end

@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-interface.lua,v 1.4 2011/05/10 17:46:48 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-interface.lua,v 1.5 2011/05/14 16:49:11 jannis-pohlmann Exp $
 
 -- This file defines the Interface global object, which is used as a
 -- simplified frontend in the TeX part of the library.
@@ -125,7 +125,7 @@ function Interface:addEdge(from, to, direction, parameters, tikz_options, aux)
   from = self.graph:findNode(from)
   to = self.graph:findNode(to)
   assert(from and to, "at least one node doesn't exist yet")
-  self.graph:createEdge(from, to, direction, aux, string.parse_braces(options), tikz_options)
+  self.graph:createEdge(from, to, direction, aux, string.parse_braces(parameters), tikz_options)
 end
 
 
@@ -268,20 +268,5 @@ end
 -- @param value A string containing the value
 --
 function Interface:setGraphParameterDefault(key,value)
-   self.defaultGraphParameters[key] = value
-end
-
-
-
-
---- Defines a default value for a graph parameter. 
---
--- Whenever a graph parameter has not been set by the user explicitly,
--- the value that was last set using this function is used instead.
---
--- @param key The commplete path of the to-be-defined key
--- @param value A string containing the value
---
-function Interface:setGraphParameterDefault(key,value)
-   self.defaultGraphParameters[key] = value
+  self.defaultGraphParameters[key] = value
 end
