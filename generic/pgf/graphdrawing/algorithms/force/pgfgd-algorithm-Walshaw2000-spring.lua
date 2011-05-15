@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/force/Attic/pgfgd-algorithm-Walshaw2000-spring.lua,v 1.4 2011/05/15 21:48:48 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/force/Attic/pgfgd-algorithm-Walshaw2000-spring.lua,v 1.5 2011/05/15 23:42:35 jannis-pohlmann Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -321,7 +321,7 @@ function Walshaw2000:computeForceLayout(graph, spring_length)
                 end
 
                 -- compute the repulsive force vector
-                local repulsive_force = quadtree_fg(delta_norm, real_particle.mass)
+                local repulsive_force = approximated_repulsive_force(delta_norm, real_particle.mass)
                 local force = delta:normalized():timesScalar(repulsive_force)
 
                 -- remember the repulsive force for the particle so that we can 
@@ -346,7 +346,7 @@ function Walshaw2000:computeForceLayout(graph, spring_length)
             end
 
             -- compute the repulsive force vector
-            local repulsive_force = repulsive_force_approximated(delta_norm, cell.mass)
+            local repulsive_force = approximated_repulsive_force(delta_norm, cell.mass)
             local force = delta:normalized():timesScalar(repulsive_force)
 
             -- TODO for each neighbour of v, check if it is in this cell.
