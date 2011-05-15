@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/tikzlayer/tikzlibrarygraphdrawing.code.tex,v 1.2 2011/05/11 17:22:39 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/tikzlayer/tikzlibrarygraphdrawing.code.tex,v 1.3 2011/05/15 14:15:45 jannis-pohlmann Exp $
 
 \usepgflibrary{graphdrawing}
 
@@ -39,6 +39,7 @@
     /tikz/graphs/new <-/.code n args={4}{\pgfgdedge{##1}{##2}{<-}{/tikz,##3}{##4}},
     /tikz/graphs/new --/.code n args={4}{\pgfgdedge{##1}{##2}{--}{/tikz,##3}{##4}},
     /tikz/graphs/new <->/.code n args={4}{\pgfgdedge{##1}{##2}{<->}{/tikz,##3}{##4}},
+    /tikz/graphs/new -!-/.code n args={4}{\pgfgdedge{##1}{##2}{-!-}{/tikz,##3}{##4}},
     /tikz/graphs/placement/compute position/.code=,%
     % 
     % Setup for the tree syntax

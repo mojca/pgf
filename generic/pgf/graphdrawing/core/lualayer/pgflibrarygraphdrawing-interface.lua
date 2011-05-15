@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-interface.lua,v 1.5 2011/05/14 16:49:11 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-interface.lua,v 1.6 2011/05/15 14:15:45 jannis-pohlmann Exp $
 
 -- This file defines the Interface global object, which is used as a
 -- simplified frontend in the TeX part of the library.
@@ -125,7 +125,11 @@ function Interface:addEdge(from, to, direction, parameters, tikz_options, aux)
   from = self.graph:findNode(from)
   to = self.graph:findNode(to)
   assert(from and to, "at least one node doesn't exist yet")
-  self.graph:createEdge(from, to, direction, aux, string.parse_braces(parameters), tikz_options)
+  if direction == Edge.NONE then
+    self.graph:deleteEdgeBetweenNodes(from, to)
+  else
+    self.graph:createEdge(from, to, direction, aux, string.parse_braces(parameters), tikz_options)
+  end
 end
 
 

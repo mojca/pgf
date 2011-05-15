@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-graph.lua,v 1.4 2011/05/13 01:23:49 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-graph.lua,v 1.5 2011/05/15 14:15:45 jannis-pohlmann Exp $
 
 -- This file defines a graph class, which later represents user created
 -- graphs.
@@ -238,6 +238,29 @@ function Graph:deleteEdge(edge)
     end
   end
   return edge
+end
+
+
+
+--- Removes an edge between two nodes and also removes it from these nodes.
+--
+-- @param from Start node of the edge.
+-- @param to   End node of the edge.
+--
+-- @return The deleted edge.
+--
+function Graph:deleteEdgeBetweenNodes(from, to)
+  -- try to find the edge
+  local edge = table.find(self.edges, function (edge)
+    return edge.nodes[1] == from and edge.nodes[2] == to
+  end)
+
+  -- delete and return the edge
+  if edge then
+    return self:deleteEdge(edge)
+  else
+    return nil
+  end
 end
 
 
