@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-algorithms.lua,v 1.1 2011/05/12 02:10:37 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-algorithms.lua,v 1.2 2011/05/17 21:45:33 jannis-pohlmann Exp $
 
 --- This file contains a number of standard graph algorithms such as Dijkstra.
 
@@ -81,4 +81,35 @@ function algorithms.dijkstra(graph, source)
   end
 
   return distance, levels, parent
+end
+
+
+
+function algorithms.floyd_warshall(graph)
+  local distance = {}
+  local infinity = #graph.nodes + 1
+
+  for i in table.value_iter(graph.nodes) do
+    for edge in table.value_iter(i.edges) do
+      local j = edge:getNeighbour(i)
+
+      distance[i] = distance[i] or {}
+      distance[i][j] = edge.weight or 1
+    end
+  end
+
+  for k = 1, #graph.nodes do
+    for i = 1, #graph.nodes do
+      for j = i + 1, #graph.nodes do
+        local d_ij = (distance[i] and distance[i][j]) and distance[i][j] or infinity
+        local d_ik = (distance[i] and distance[i][k]) and distance[i][k] or infinity
+        local d_kj = (distance[k] and distance[k][j]) and distance[k][j] or infinity
+
+        distance[i] = distance[i] or {}
+        distance[i][j] = math.min(d_ij, d_ik + d_kj)
+      end
+    end
+  end
+
+  return distance
 end
