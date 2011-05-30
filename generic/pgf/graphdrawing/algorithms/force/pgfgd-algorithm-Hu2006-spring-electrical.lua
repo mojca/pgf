@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/force/pgfgd-algorithm-Hu2006-spring-electrical.lua,v 1.1 2011/05/17 21:45:33 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/force/pgfgd-algorithm-Hu2006-spring-electrical.lua,v 1.2 2011/05/30 17:09:26 jannis-pohlmann Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -25,8 +25,7 @@ Hu2006SpringElectrical.__index = Hu2006SpringElectrical
 --   "Efficient and High Quality Force-Directed Graph Drawing"
 --   Yifan Hu, 2006
 --
--- Modifications compared to the original algorithm are explained in 
--- the manual.
+-- Modifications compared to the original algorithm are explained in the manual.
 --
 function drawGraphAlgorithm_Hu2006_spring_electrical(graph)
   local hu = Hu2006SpringElectrical:new(graph)
