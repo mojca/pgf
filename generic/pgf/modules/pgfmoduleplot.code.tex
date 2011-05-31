@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/modules/pgfmoduleplot.code.tex,v 1.8 2010/10/22 17:34:17 ludewich Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/modules/pgfmoduleplot.code.tex,v 1.9 2011/05/31 13:48:41 cjorssen Exp $
 
 
 % PGF's plotting interface works as follows:
@@ -313,6 +313,9 @@
 
 \let\pgf@plotwrite=\w@pgf@writea
 \newif\ifpgf@resample@plot
+
+\pgfkeys{%
+  /pgf/plot/gnuplot call/.initial={gnuplot}}
 
 \def\pgfplotgnuplot{\pgfutil@ifnextchar[{\pgf@plotgnuplot}{\pgf@plotgnuplot[\jobname]}}%}
 \def\pgf@plotgnuplot[#1]#2{%
