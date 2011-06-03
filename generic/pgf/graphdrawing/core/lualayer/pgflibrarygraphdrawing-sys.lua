@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more details.
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-sys.lua,v 1.3 2011/05/30 17:09:26 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-sys.lua,v 1.4 2011/06/03 21:32:17 jannis-pohlmann Exp $
 
 -- This file contains methods dealing with the output back to the TeX
 -- side and some TeX and PGF specialties.
@@ -146,6 +146,9 @@ function Sys:putEdge(edge)
     local bend_strings = table.map_values(edge.bend_points, function (vector)
       return '(' .. tostring(vector:get(1)) .. 'pt,' .. tostring(vector:get(2)) .. 'pt)'
     end)
+    if edge.reversed then
+      bend_strings = table.reverse_values(bend_strings, bend_strings)
+    end
     bend_string = '-- ' .. table.concat(bend_strings, '--')
   end
   
@@ -158,8 +161,6 @@ function Sys:putEdge(edge)
 			      .. tostring(k) .. '={' .. tostring(v) .. '}' end, '')
      .. '}{' .. bend_string .. '}'
 
-  print(callback)
-  
   -- hand TikZ code over to TeX
   tex.print(callback)
 end
