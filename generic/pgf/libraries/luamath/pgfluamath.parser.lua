@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more details.
 --
--- $Id: pgfluamath.parser.lua,v 1.2 2011/06/02 21:32:07 cjorssen Exp $	
+-- $Id: pgfluamath.parser.lua,v 1.3 2011/06/04 10:31:44 cjorssen Exp $	
 --
 -- See http://journal.stuffwithstuff.com/2011/03/19/pratt-parsers-expression-parsing-made-easy/ for precedence with peg grammar
 
@@ -143,27 +143,45 @@ local V = lpeg.V
 
 local space_pattern = S(" \n\r\t")^0
 
-local integer_pattern = P("-")^-1 * R("09")^1
-local positive_decimal_pattern = (R("09")^1 * P(".") * R("09")^1) +
-                                 (P(".") * R("09")^1) +
-			         (R("09")^1 * P("."))
+local digit = R("09")
+local integer_pattern = P("-")^-1 * digit^1
+-- Valid positive decimals are |xxx.xxx|, |.xxx| and |xxx.|
+local positive_decimal_pattern = (digit^1 * P(".") * digit^1) +
+                                 (P(".") * digit^1) +
+			         (digit^1 * P("."))
 local decimal_pattern = P("-")^-1 * positive_decimal_pattern
 local integer = Cc("integer") * C(integer_pattern) * space_pattern
 local decimal = Cc("decimal") * C(decimal_pattern) * space_pattern
 local float = Cc("float") * C(decimal_pattern) * S("eE") * 
               C(integer_pattern) * space_pattern
 
+local lower_letter = R("az")
+local upper_letter = R("AZ")
+local letter = lower_letter + upper_letter
+local alphanum = letter + digit
+local alphanum_ = alphanum + S("_")
+local alpha_ = letter + S("_")
+-- TODO: Something like _1 should *not* be allowed as a function name
+local func_pattern = alpha_ * alphanum_^0
+local func = Cc("function") * C(func_pattern) * space_pattern
+
 local openparen = Cc("openparen")  * C(P("(")) * space_pattern
 local closeparen = Cc("closeparen") * C(P(")")) * space_pattern
+local opencurlybrace = Cc("opencurlybrace")  * C(P("{")) * space_pattern
+local closecurlybrace = Cc("closecurlybrace") * C(P("}")) * space_pattern
+local openbrace = Cc("openbrace")  * C(P("[")) * space_pattern
+local closebrace = Cc("closebrace") * C(P("]")) * space_pattern
 
 local addop = Cc("addop") * C(S("+-")) * space_pattern
 local mulop = Cc("mulop") * C(S("*/")) * space_pattern
+local powop = Cc("powop") * C(S("^")) * space_pattern
 
 local grammar = P {
    "E",
    E = Ct(V("T") * (addop * V("T"))^0),
    T = Ct(V("F") * (mulop * V("F"))^0),
-   F = Ct(float + decimal + integer + (openparen * V("E") * closeparen)),
+   F = Ct(float + decimal + integer + (openparen * V("E") * closeparen))
+   + (func * openparen * V("E") * closeparen),
 }
 
 local parser = space_pattern * grammar * -1
