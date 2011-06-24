@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-table.lua,v 1.2 2011/06/03 21:32:17 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-table.lua,v 1.3 2011/06/24 13:45:19 jannis-pohlmann Exp $
 
 --- This file contains a number of helper functions for tables, including
 --- functions to create key and value iterators, copy tables, map table
@@ -52,6 +52,25 @@ function table.custom_merge(table1, table2, first_metatable)
     end
   end
 
+  if not first_metatable or not getmetatable(result) then
+    setmetatable(result, getmetatable(table2))
+  end
+
+  return result
+end
+
+
+
+--- Concatenates the values of two flat tables.
+--
+function table.merge_values(table1, table2, first_metatable)
+  local result = table1 and table.custom_copy(table1) or {}
+  local first_metatable = first_metatable == true or false
+
+  for value in table.value_iter(table2) do
+    table.insert(result, value)
+  end
+  
   if not first_metatable or not getmetatable(result) then
     setmetatable(result, getmetatable(table2))
   end
