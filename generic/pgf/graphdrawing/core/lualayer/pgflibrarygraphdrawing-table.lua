@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-table.lua,v 1.3 2011/06/24 13:45:19 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-table.lua,v 1.4 2011/06/28 01:22:04 jannis-pohlmann Exp $
 
 --- This file contains a number of helper functions for tables, including
 --- functions to create key and value iterators, copy tables, map table
@@ -484,6 +484,25 @@ function table.count_pairs(input)
   return table.combine_pairs(input, function (count, k, v) 
     return count + 1 
   end, 0)
+end
+
+
+
+-- TODO: Jannis: Document this method.
+function table.remove_pairs(input, remove_func)
+  local removals = {}
+
+  for key, value in pairs(input) do
+    if remove_func(key, value) then
+      table.insert(removals, key)
+    end
+  end
+
+  for key in table.value_iter(removals) do
+    input[key] = nil
+  end
+  
+  return input
 end
 
 
