@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-table.lua,v 1.4 2011/06/28 01:22:04 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-table.lua,v 1.5 2011/06/30 22:35:16 jannis-pohlmann Exp $
 
 --- This file contains a number of helper functions for tables, including
 --- functions to create key and value iterators, copy tables, map table
@@ -415,6 +415,22 @@ function table.value_iter(table)
   return function ()
     key, value = pair_iter(state, key)
     return value
+  end
+end
+
+
+
+--- Iterates over all values of a flat table or array in reverse order.
+function table.reverse_value_iter(input)
+  local index = #input
+  return function ()
+    if index <= 0 then
+      return nil
+    else
+      local value = input[index]
+      index = index - 1
+      return value
+    end
   end
 end
 
