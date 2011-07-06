@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more details.
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-sys.lua,v 1.4 2011/06/03 21:32:17 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-sys.lua,v 1.5 2011/07/06 21:50:03 jannis-pohlmann Exp $
 
 -- This file contains methods dealing with the output back to the TeX
 -- side and some TeX and PGF specialties.
@@ -98,7 +98,7 @@ end
 --  @param posY    Y coordinate where to put the node in the output.
 --
 function Sys:putTeXBox(node, texnode, minX, minY, maxX, maxY, posX, posY)
-  tex.print(string.format("\\pgfgdinternalshipoutnode{%s}{%s}{%s}{%s}{%s}{%s}{%s}{%s}",
+  tex.print(string.format("\\pgfgdinternalshipoutnode{%s}{%fpt}{%fpt}{%fpt}{%fpt}{%s}{%s}{%s}",
    	        Sys:escapeTeXNodeName(node.name),
    	        minX, maxX,
    	        minY, maxY,
