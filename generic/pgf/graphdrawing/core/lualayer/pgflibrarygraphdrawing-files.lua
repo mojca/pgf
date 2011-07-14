@@ -7,13 +7,14 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-files.lua,v 1.5 2011/06/30 12:55:38 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-files.lua,v 1.6 2011/07/14 13:16:25 jannis-pohlmann Exp $
 
 -- This file defines a list of initial files to load.
 
 local files = {
    "module",
    "table",
+   "stack",
    "iter",
    "string",
    "sys",
@@ -24,6 +25,7 @@ local files = {
    "node",
    "edge",
    "graph",
+   "depth-first-search",
    "traversal",
    "fibonacci-heap",
    "priority-queue",

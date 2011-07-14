@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-network-simplex.lua,v 1.4 2011/07/12 22:35:15 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-network-simplex.lua,v 1.5 2011/07/14 13:16:25 jannis-pohlmann Exp $
 
 --- This file contains an implementation of the network simplex method
 --- for node ranking and x coordinate optimization in layered drawing 
@@ -790,23 +790,34 @@ end
 
 
 
--- Jannis: This function works correctly.
+-- Jannis: This function works correctly even with the iterative
+-- solution implemented below.
 function NetworkSimplex:rerank(node, delta)
-  local orig_node = self.orig_node[node]
-  
-  self.ranking:setRank(orig_node, self.ranking:getRank(orig_node) - delta)
-  
-  for edge in table.value_iter(node:getOutgoingEdges()) do
-    if edge ~= self.parent_edge[node] then
-      self:rerank(edge:getHead(), delta)
+  local function init(search)
+    search:push({ node = node, delta = delta })
+  end
+
+  local function visit(search, data)
+    search:setVisited(data, true)
+
+    local orig_node = self.orig_node[data.node]
+    self.ranking:setRank(orig_node, self.ranking:getRank(orig_node) - data.delta)
+
+    for edge in table.reverse_value_iter(data.node:getIncomingEdges()) do
+      if edge ~= self.parent_edge[data.node] then
+        search:push({ node = edge:getTail(), delta = data.delta })
+      end
+    end
+
+    for edge in table.reverse_value_iter(data.node:getOutgoingEdges()) do
+      if edge ~= self.parent_edge[data.node] then
+        search:push({ node = edge:getHead(), delta = data.delta })
+      end
     end
   end
-  
-  for edge in table.value_iter(node:getIncomingEdges()) do
-    if edge ~= self.parent_edge[node] then
-      self:rerank(edge:getTail(), delta)
-    end
-  end
+
+  local search = DepthFirstSearch:new(self.tree, init, visit)
+  search:run()
 end
 
 
