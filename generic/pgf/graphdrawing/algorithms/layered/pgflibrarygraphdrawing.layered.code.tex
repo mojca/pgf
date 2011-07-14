@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgflibrarygraphdrawing.layered.code.tex,v 1.2 2011/06/24 13:45:18 jannis-pohlmann Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgflibrarygraphdrawing.layered.code.tex,v 1.3 2011/07/14 18:18:53 jannis-pohlmann Exp $
 
 
 
@@ -22,7 +22,7 @@
   layered drawing/.forward to={/graph drawing/\pgfkeysvalueof{/graph drawing/layered drawing/default algorithm}}
 }
 
-\pgfkeys{/graph drawing/layered drawing/default algorithm/.initial=GansnerKNV layered}
+\pgfkeys{/graph drawing/layered drawing/default algorithm/.initial=GansnerKNV1993 layered}
 
 
 %
@@ -61,10 +61,10 @@
 %   Gansner, Koutsofios, North, Vo, 1993
 %
 \pgfgddeclarealgorithmkey
-  {GansnerKNV layered}
+  {GansnerKNV1993 layered}
   {layered drawing}
   {
-    algorithm=GansnerKNV layered,
+    algorithm=GansnerKNV1993 layered,
   }
 
 
