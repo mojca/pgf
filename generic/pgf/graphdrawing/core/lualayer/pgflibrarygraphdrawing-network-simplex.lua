@@ -7,11 +7,14 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-network-simplex.lua,v 1.8 2011/07/14 18:18:54 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-network-simplex.lua,v 1.9 2011/07/15 15:53:28 jannis-pohlmann Exp $
 
 --- This file contains an implementation of the network simplex method
 --- for node ranking and x coordinate optimization in layered drawing 
---- algorithms.
+--- algorithms, as proposed in
+---
+--- "A Technique for Drawing Directed Graphs" 
+--  by Gansner, Koutsofios, North, Vo, 1993.
 
 pgf.module("pgf.graphdrawing")
 
