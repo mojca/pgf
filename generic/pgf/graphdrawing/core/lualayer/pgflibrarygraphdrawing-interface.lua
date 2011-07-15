@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-interface.lua,v 1.6 2011/05/15 14:15:45 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-interface.lua,v 1.7 2011/07/15 15:52:56 jannis-pohlmann Exp $
 
 -- This file defines the Interface global object, which is used as a
 -- simplified frontend in the TeX part of the library.
@@ -164,6 +164,74 @@ function Interface:loadAlgorithm(name)
 
   -- look up the main algorithm function
   return pgf.graphdrawing[function_name]
+end
+
+
+
+-- TODO: Jannis: Document this method.
+function Interface:convertFilenameToClassname(filename)
+  local pre_substitutions = {
+    ['-'] = ' ',
+    ['_'] = ' ',
+  }
+  for char, replacement in pairs(pre_substitutions) do
+    filename = filename:gsub(char, replacement)
+  end
+
+  filename = filename:gsub("^(%a)", string.upper, 1)
+  filename = filename:gsub("%s+(%a)", string.upper, 1)
+
+  local post_substitutions = {
+    [' '] = '',
+  }
+  for char, replacement in pairs(post_substitutions) do
+    filename = filename:gsub(char, replacement)
+  end
+
+  return filename
+end
+
+
+
+-- TODO: Jannis: Document this method.
+function Interface:convertClassnameToFilename(classname)
+  local source = {}
+  for n = 1, classname:len() do
+    source[n] = classname:sub(n, n)
+  end
+
+  local target = {}
+
+  local source_pos = 1
+  local target_pos = 1
+
+  for source_pos = 1, #source do
+    if source[source_pos]:gsub('%a', '') == '' then
+      if source[source_pos] == source[source_pos]:upper() then
+        if source_pos == 1 then
+          target[target_pos] = source[source_pos]
+          target_pos = target_pos + 1
+        else
+          if source[source_pos-1] == source[source_pos-1]:upper() then
+            target[target_pos] = source[source_pos]
+            target_pos = target_pos + 1
+          else
+            target[target_pos] = ' '
+            target[target_pos + 1] = source[source_pos]
+            target_pos = target_pos + 2
+          end
+        end
+      else
+        target[target_pos] = source[source_pos]
+        target_pos = target_pos + 1
+      end
+    else
+      target[target_pos] = source[source_pos]
+      target_pos = target_pos + 1
+    end
+  end
+
+  return table.concat(target, '')
 end
 
 
