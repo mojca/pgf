@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-loader.lua,v 1.2 2011/05/10 17:46:48 jannis-pohlmann Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-loader.lua,v 1.3 2011/07/15 15:52:45 jannis-pohlmann Exp $
 
 -- This file is the main entry point from the TeX part of the
 -- library.  It defines a module system, which is used in all other Lua
@@ -263,19 +263,21 @@ local function userLoad(filename, format, reload, fallback)
     return
   end
   local path = find_file(filename, format)
-  if path then
+  if path and path:len() > 0 then
     userLoaded[filename] = true
     -- load the file
     return dofile(path)
-  else
+  elseif fallback then
     path = find_file(fallback, format)
-    if path then
+    if path and path:len() > 0 then
       userLoaded[filename] = true
       -- load the fallback file
       return dofile(path)
     else
       error("GD:LOADER: found neither file " .. filename .. " nor fallback " .. fallback)
     end
+  else
+    error('GD:LOADER: could not find the file ' .. filename)
   end
 end
 
