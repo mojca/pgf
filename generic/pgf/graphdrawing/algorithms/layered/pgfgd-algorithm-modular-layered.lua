@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgfgd-algorithm-modular-layered.lua,v 1.1 2011/07/15 15:53:28 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgfgd-algorithm-modular-layered.lua,v 1.2 2011/07/16 11:42:30 jannis-pohlmann Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -267,10 +267,16 @@ end
 
 
 function ModularLayered:loadSubAlgorithm(step, name)
-  local classname = Interface:convertFilenameToClassname(step .. '-' .. name)
+  -- make sure the first character of the class name is uppercase
+  classname = name:gsub('^(%a)', string.upper, 1)
+
+  -- make sure there are no spaces in the file name
+  escaped_name = name:gsub(' ', '-')
+
+  local classname = Interface:convertFilenameToClassname(step .. '-' .. classname)
   local filename = 'pgfgd-algorithm-modular-layered-' 
                    .. Interface:convertClassnameToFilename(step) 
-                   .. '-' .. name .. '.lua'
+                   .. '-' .. escaped_name .. '.lua'
 
   Sys:log('load class = ' .. classname .. ', file = ' .. filename)
 
