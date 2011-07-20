@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgfgd-algorithm-modular-layered.lua,v 1.5 2011/07/20 21:00:47 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgfgd-algorithm-modular-layered.lua,v 1.6 2011/07/20 21:01:37 jannis-pohlmann Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -249,11 +249,9 @@ end
 function ModularLayered:removeLoops()
   self.loops = {}
 
-  for node in table.value_iter(self.graph.nodes) do
-    for edge in table.value_iter(node.edges) do
-      if edge:getHead() == edge:getTail() then
-        table.insert(self.loops, edge)
-      end
+  for edge in table.value_iter(self.graph.edges) do
+    if edge:getHead() == edge:getTail() then
+      table.insert(self.loops, edge)
     end
   end
 
@@ -424,9 +422,7 @@ end
 function ModularLayered:restoreLoops()
   for edge in table.value_iter(self.loops) do
     self.graph:addEdge(edge)
-    for node in table.value_iter(edge.nodes) do
-      node:addEdge(edge)
-    end
+    edge:getTail():addEdge(edge)
   end
 end
 
