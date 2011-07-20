@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-edge.lua,v 1.7 2011/07/20 21:00:35 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-edge.lua,v 1.8 2011/07/20 21:01:11 jannis-pohlmann Exp $
 
 -- This file defines an edge class, used in the graph representation.
 
@@ -143,10 +143,10 @@ end
 -- @return The first neighbour of the node.
 --
 function Edge:getNeighbour(node)
-  if self:isHead(node) then
-    return self:getTail()
+  if node == self.nodes[1] then
+    return self.nodes[#self.nodes]
   else
-    return self:getHead()
+    return self.nodes[1]
   end
 end
 

@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-graph.lua,v 1.8 2011/07/20 21:00:58 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-graph.lua,v 1.9 2011/07/20 21:01:11 jannis-pohlmann Exp $
 
 -- This file defines a graph class, which later represents user created
 -- graphs.
@@ -190,6 +190,18 @@ function Graph:deleteNode(node)
     node.edges = {}
   end
   return node
+end
+
+
+
+-- Checks whether the edge already exists in the graph and returns it if possible.
+--
+-- @param edge Edge to search for.
+--
+-- @return The edge if it was found in the graph, |nil| otherwise.
+--
+function Graph:findEdge(edge)
+  return table.find(self.edges, function (other) return other == edge end)
 end
 
 
