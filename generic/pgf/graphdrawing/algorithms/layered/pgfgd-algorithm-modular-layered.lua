@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgfgd-algorithm-modular-layered.lua,v 1.4 2011/07/20 21:00:35 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgfgd-algorithm-modular-layered.lua,v 1.5 2011/07/20 21:00:47 jannis-pohlmann Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -285,7 +285,7 @@ function ModularLayered:mergeMultiEdges()
           multiedge[neighbour] = Edge:new{
             direction = Edge.RIGHT,
             weight = 0,
-            minimum_levels = 1,
+            minimum_levels = 0,
           }
 
           self.individual_edges[multiedge[neighbour]] = {}
@@ -305,7 +305,7 @@ function ModularLayered:mergeMultiEdges()
           multiedge[neighbour] = Edge:new{
             direction = Edge.RIGHT,
             weight = 0,
-            minimum_levels = 1,
+            minimum_levels = 0,
           }
 
           self.individual_edges[multiedge[neighbour]] = {}
