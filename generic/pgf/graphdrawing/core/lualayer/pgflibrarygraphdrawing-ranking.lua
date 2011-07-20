@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-ranking.lua,v 1.3 2011/07/06 21:50:29 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-ranking.lua,v 1.4 2011/07/20 21:00:10 jannis-pohlmann Exp $
 
 --- This file contains a helper class for managing node rankings as used
 --- in layered drawing algorithms.
@@ -177,7 +177,7 @@ end
 
 
 function Ranking:normalizeRanks()
-  Sys:log('normalize ranks:')
+  --Sys:log('normalize ranks:')
 
   -- get the current ranks
   local ranks = self:getRanks()
@@ -185,7 +185,7 @@ function Ranking:normalizeRanks()
   local min_rank = ranks[1]
   local max_rank = ranks[#ranks]
 
-  Sys:log('  min_rank = ' .. min_rank .. ', max_rank = ' .. max_rank)
+  --Sys:log('  min_rank = ' .. min_rank .. ', max_rank = ' .. max_rank)
 
   -- clear ranks
   self.rank_to_nodes = {}
@@ -195,7 +195,7 @@ function Ranking:normalizeRanks()
     local rank, pos = self:getNodeInfo(node)
     local new_rank = rank - (min_rank - 1)
 
-    Sys:log('    rerank ' .. node.name .. ' from ' .. rank .. ' to ' .. new_rank)
+    --Sys:log('    rerank ' .. node.name .. ' from ' .. rank .. ' to ' .. new_rank)
     
     self.rank_to_nodes[new_rank] = self.rank_to_nodes[new_rank] or {}
     self.rank_to_nodes[new_rank][pos] = node

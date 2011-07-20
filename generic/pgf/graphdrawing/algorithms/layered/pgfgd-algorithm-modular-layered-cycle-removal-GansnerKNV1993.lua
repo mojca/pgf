@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgfgd-algorithm-modular-layered-cycle-removal-GansnerKNV1993.lua,v 1.1 2011/07/15 15:53:28 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgfgd-algorithm-modular-layered-cycle-removal-GansnerKNV1993.lua,v 1.2 2011/07/20 21:00:09 jannis-pohlmann Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -52,7 +52,7 @@ function CycleRemovalGansnerKNV1993:run()
 
   -- reverse the back edges in order to make the graph acyclic
   for edge in table.value_iter(back_edges) do
-    Sys:log('reverse back edge ' .. tostring(edge))
+    --Sys:log('reverse back edge ' .. tostring(edge))
     edge.reversed = true
   end
 end
