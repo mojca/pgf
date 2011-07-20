@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-node.lua,v 1.4 2011/07/06 21:50:03 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-node.lua,v 1.5 2011/07/20 21:00:58 jannis-pohlmann Exp $
 
 -- This file defines a node class, used in the graph representation.
 
@@ -102,9 +102,9 @@ end
 -- @param edge The edge to be added.
 --
 function Node:addEdge(edge)
-  if not table.find(self.edges, function (other) return other == edge end) then
+  --if not table.find(self.edges, function (other) return other == edge end) then
     table.insert(self.edges, edge)
-  end
+  --end
 end
 
 
