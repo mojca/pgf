@@ -8,7 +8,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/basiclayer/pgflibrarygraphdrawing.code.tex,v 1.12 2011/07/21 11:44:47 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/basiclayer/pgflibrarygraphdrawing.code.tex,v 1.13 2011/07/26 11:29:06 jannis-pohlmann Exp $
 
 
 
@@ -895,7 +895,7 @@
 % Desired positiong for a node
 % 
 % #1 = an x-position
-% #2 = a y-position
+% #2 = an y-position
 % 
 % Description:
 % 
@@ -909,6 +909,24 @@
 
 
 
+% Add a node to a node cluster.
+%
+% #1 = name of the cluster.
+% #2 = name of the node to add.
+%
+% Description:
+%
+% This adds the node #2 to the cluster with the name #1.
+%
+% Clusters can be used to group nodes logically and, depending on the
+% type of drawing, influence the behavior of certain graph drawing 
+% algorithms. A layered drawing algorithm, for instance, could place
+% nodes in a cluster with the name "minimum layer" at the minimum 
+% layer in the final drawing.
+
+\def\pgfgdaddnodetocluster#1#2{
+  \directlua{pgf.graphdrawing.Interface:addNodeToCluster("\luaescapestring{#2}", "\luaescapestring{#1}")}
+}
 
 
 

@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-ranking.lua,v 1.4 2011/07/20 21:00:10 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-ranking.lua,v 1.5 2011/07/26 11:29:06 jannis-pohlmann Exp $
 
 --- This file contains a helper class for managing node rankings as used
 --- in layered drawing algorithms.
@@ -101,7 +101,6 @@ end
 
 function Ranking:setRank(node, new_rank)
   assert(node.__index == Node)
-  assert(type(new_rank) == type(0))
 
   local rank, pos = self:getNodeInfo(node)
 
