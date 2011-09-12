@@ -1,0 +1,39 @@
+\writestatus{loading}{pgf catcodes}
+
+\startmodule[pgfcatcodes]
+\unprotect
+
+\newcatcodetable \pgfcatcodes
+
+% AFAIK, these are the catcodes that pgf/tikz assumes. Someone should
+% verify that these are correct.
+\startcatcodetable \pgfcatcodes
+    \catcode\tabasciicode       \spacecatcode
+    \catcode\endoflineasciicode \endoflinecatcode
+    \catcode\formfeedasciicode  \endoflinecatcode
+    \catcode\spaceasciicode     \spacecatcode
+    \catcode\endoffileasciicode \ignorecatcode
+    \catcode\circumflexasciicode\superscriptcatcode
+    \catcode\underscoreasciicode\subscriptcatcode
+    \catcode\ampersandasciicode \alignmentcatcode
+    \catcode\backslashasciicode \escapecatcode
+    \catcode\leftbraceasciicode \begingroupcatcode
+    \catcode\rightbraceasciicode\endgroupcatcode
+    \catcode\dollarasciicode    \mathshiftcatcode
+    \catcode\hashasciicode      \parametercatcode
+    \catcode\commentasciicode   \commentcatcode
+    \catcode`\@                 \lettercatcode
+    \catcode`\!                 \othercatcode
+    \catcode\barasciicode       \othercatcode
+    \catcode\tildeasciicode     \activecatcode
+\stopcatcodetable
+
+\def\startpgfcatcodes
+    {\pushcatcodetable
+     \setcatcodetable\pgfcatcodes}
+
+\def\stoppgfcatcodes
+    {\popcatcodetable}
+
+\protect
+\stopmodule
