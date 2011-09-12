@@ -10,25 +10,17 @@
 
 % ConTeXt module tikz.
 
-% \input xkeyval.tex   % no longer used/needed
+\writestatus{loading}{tikz module}
+\startmodule[tikz]
 
-\input t-pgf.tex
-\input t-pgffor.tex
+\usemodule[pgfcatcodes]
+\usemodule[pgf, pgffor]
 
-\edef\tikzatcode{\the\catcode`\@}
-\edef\tikzbarcode{\the\catcode`\|}
-\edef\tikzexclaimcode{\the\catcode`\!}
-\catcode`\@=11
-\catcode`\|=12
-\catcode`\!=12
-
-\input tikz.code.tex
-
-\catcode`\@=\tikzatcode
-\catcode`\|=\tikzbarcode
-\catcode`\!=\tikzexclaimcode
+\startpgfcatcodes
+\readsysfile{tikz.code.tex}
 
 \let\starttikzpicture=\tikzpicture
 \let\stoptikzpicture=\endtikzpicture
 
-\endinput
+\stoppgfcatcodes
+\stopmodule
