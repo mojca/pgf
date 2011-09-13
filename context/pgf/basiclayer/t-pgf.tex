@@ -10,18 +10,13 @@
 
 % ConTeXt module pgf.
 
+\writestatus{loading}{pgf module}
+\startmodule[pgf]
+\usemodule[pgfcatcodes]
 
-\ifx\pgfdefined\undefined
-\let\pgfdefined=\relax
-
-\input t-pgfcor.tex
-
+\startpgfcatcodes
+\usemodule[pgfcore]
 \usepgfmodule[shapes,plot]
 
-%\input t-pgfbsn.tex
-%\input t-pgfbde.tex
-%\input t-pgfbma.tex
-
-\fi
-
-\endinput
+\stoppgfcatcodes
+\stopmodule
