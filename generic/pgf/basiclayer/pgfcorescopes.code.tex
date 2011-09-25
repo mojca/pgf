@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorescopes.code.tex,v 1.35 2011/05/19 08:56:54 tantau Exp $
+\ProvidesFileRCS $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/basiclayer/pgfcorescopes.code.tex,v 1.36 2011/09/25 15:37:21 ludewich Exp $
 
 % Globals
 
@@ -271,9 +271,12 @@
               % note that \pgf@trimright@final is also queried
               % by the pgf image externalization.
               \xdef\pgf@trimright@final{\the\pgf@x}%
+			  %
+			  \global\let\pgf@layerlist@=\pgf@layerlist
             \endgroup%
             \hss%
           \egroup%
+		  \let\pgf@layerlist=\pgf@layerlist@
           \pgf@insertlayers%
         \endgroup%    
         \pgfsys@discardpath%
