@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/force/pgfgd-algorithm-Walshaw2000-spring-electrical.lua,v 1.2 2011/09/27 09:24:13 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/force/pgfgd-algorithm-Walshaw2000-spring-electrical.lua,v 1.3 2011/09/30 13:16:53 jannis-pohlmann Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -53,7 +53,7 @@ Walshaw2000.__index = Walshaw2000
 --
 -- @param graph
 --
-function drawGraphAlgorithm_Walshaw2000_spring_electrical(graph)
+function graph_drawing_algorithm_Walshaw2000_spring_electrical(graph)
   local walshaw = Walshaw2000:new(graph)
 
   Sys:log('Walshaw2000: random_seed = ' .. walshaw.random_seed)

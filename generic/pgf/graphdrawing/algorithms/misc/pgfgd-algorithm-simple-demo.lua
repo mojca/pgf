@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/misc/pgfgd-algorithm-simple-demo.lua,v 1.4 2011/05/11 17:22:39 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/misc/pgfgd-algorithm-simple-demo.lua,v 1.5 2011/09/30 13:16:53 jannis-pohlmann Exp $
 
 -- This file contains an example of how a very simple algorithm can be
 -- implemented by a user.
@@ -16,7 +16,7 @@ pgf.module("pgf.graphdrawing")
 
 --- A trivial node placing algorithm for demonstration purposes.
 -- All nodes are positioned on a fixed size circle.
-function drawGraphAlgorithm_simple_demo(graph)
+function graph_drawing_algorithm_simple_demo(graph)
    local radius = tonumber(graph:getOption("/graph drawing/radius"))
    local nodeCount = table.count_pairs(graph.nodes)
 

@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/trees/pgfgd-algorithm-naive-tree.lua,v 1.1 2011/05/06 15:12:16 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/trees/pgfgd-algorithm-naive-tree.lua,v 1.2 2011/09/30 13:16:53 jannis-pohlmann Exp $
 
 -- This is about the most naive implementation of a tree drawing algorithm.
 
@@ -24,7 +24,7 @@ pgf.module("pgf.graphdrawing")
 -- @param graph   The tree to draw.
 -- @param options Options passed to the algorithm from TikZ.
 --
-function drawGraphAlgorithm_naivetree(graph, options)
+function graph_drawing_algorithm_naivetree(graph, options)
   -- find the root note
   graph.root = graph:findNodeIf(function (node) return node:getOption("/graph drawing/root") end) or graph.nodes[1]
   if graph.root == nil then

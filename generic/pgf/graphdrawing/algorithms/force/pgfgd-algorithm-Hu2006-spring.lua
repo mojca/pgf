@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/force/pgfgd-algorithm-Hu2006-spring.lua,v 1.8 2011/09/27 09:32:10 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/force/pgfgd-algorithm-Hu2006-spring.lua,v 1.9 2011/09/30 13:16:53 jannis-pohlmann Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -28,7 +28,7 @@ Hu2006Spring.__index = Hu2006Spring
 -- Modifications compared to the original algorithm are explained in 
 -- the manual.
 --
-function drawGraphAlgorithm_Hu2006_spring(graph)
+function graph_drawing_algorithm_Hu2006_spring(graph)
   local hu = Hu2006Spring:new(graph)
 
   Sys:log('Hu2006 spring: random_seed = ' .. hu.random_seed)

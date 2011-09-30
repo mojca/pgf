@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/misc/pgfgd-algorithm-AhrensFKSS2011-minimize-crossings.lua,v 1.1 2011/05/09 12:01:09 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/misc/pgfgd-algorithm-AhrensFKSS2011-minimize-crossings.lua,v 1.2 2011/09/30 13:16:53 jannis-pohlmann Exp $
 
 -- This contains an algorithm for drawing a graph using local search.
 
@@ -15,8 +15,8 @@ pgf.module("pgf.graphdrawing")
 
 --- Node positioning with local search algorithm
 -- @param graph graph-Structure to generate layout for
-function drawGraphAlgorithm_AhrensFKSS2011_minimize_crossings(graph)
-   Sys:log("GD:LSG: drawGraphAlgorithm_localsearchgraph")
+function graph_drawing_algorithm_AhrensFKSS2011_minimize_crossings(graph)
+   Sys:log("GD:LSG: graph_drawing_algorithm_localsearchgraph")
    --read options from graph
    local hSpace = graph:getOption("/graph drawing/AhrensFKSS2011 minimize crossings/max width")
    local vSpace = graph:getOption("/graph drawing/AhrensFKSS2011 minimize crossings/max height")

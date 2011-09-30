@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-interface.lua,v 1.11 2011/07/26 11:29:06 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-interface.lua,v 1.12 2011/09/30 13:16:53 jannis-pohlmann Exp $
 
 -- This file defines the Interface global object, which is used as a
 -- simplified frontend in the TeX part of the library.
@@ -180,7 +180,7 @@ end
 -- @return The algorithm function or nil.
 --
 function Interface:loadAlgorithm(name)
-  local function_name = 'drawGraphAlgorithm_' .. name
+  local function_name = 'graph_drawing_algorithm_' .. name
   
   -- substitute special characters in the function name with
   -- something that Lua can handle
@@ -278,7 +278,7 @@ end
 -- |simple| this file is per convention called 
 -- |pgflibrarygraphdrawing-algorithms-simple.lua|. It is required to define
 -- at least one function as an entry point to the algorithm. The name of the
--- function is again predetermined as |drawGraphAlgorithm_simple|.
+-- function is again predetermined as |graph_drawing_algorithm_simple|.
 -- When a graph is to be layed out, this function is called with the graph
 -- as its only parameter.
 --
@@ -289,7 +289,7 @@ function Interface:drawGraph()
   end
 
   local name = self:getOption("/graph drawing/algorithm"):gsub('%s', '-')
-  local functionName = "drawGraphAlgorithm_" .. name:gsub('-', '_')
+  local functionName = "graph_drawing_algorithm_" .. name:gsub('-', '_')
   local algorithm = pgf.graphdrawing[functionName]
   
   -- if not defined, try to load the corresponding file
