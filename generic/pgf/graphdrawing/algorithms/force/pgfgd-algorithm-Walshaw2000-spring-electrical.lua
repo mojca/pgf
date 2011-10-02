@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/force/pgfgd-algorithm-Walshaw2000-spring-electrical.lua,v 1.3 2011/09/30 13:16:53 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/force/pgfgd-algorithm-Walshaw2000-spring-electrical.lua,v 1.4 2011/10/02 21:36:06 jannis-pohlmann Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -75,8 +75,6 @@ function graph_drawing_algorithm_Walshaw2000_spring_electrical(graph)
 
   walshaw:initialize()
   walshaw:run()
-
-  orientation.adjust(graph)
 end
 
 
