@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-quadtree.lua,v 1.4 2011/09/27 09:24:00 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-quadtree.lua,v 1.5 2011/10/16 08:39:54 jannis-pohlmann Exp $
 
 --- This file contains a class for defining arbitrary vectors and
 --- perform operations on them.
@@ -136,6 +136,9 @@ function CubicalCell:insert(particle)
 
   self:updateMass()
   self:updateCenterOfMass()
+
+  assert(self.mass)
+  assert(self.center_of_mass)
 end
 
 
@@ -194,16 +197,13 @@ end
 
 
 function CubicalCell:findInteractionCells(particle, test_func, cells)
-  -- FIXME TODO We also need to return leaf cells here, otherwise the forces
-  -- are not computed correctly!!!
-
   if #self.subcells == 0 or test_func(self, particle) then
     table.insert(cells, self)
   else
     for subcell in table.value_iter(self.subcells) do
-      if subcell.mass > 0 and subcell.center_of_mass then
+      --if subcell.mass > 0 and subcell.center_of_mass then
         subcell:findInteractionCells(particle, test_func, cells)
-      end
+      --end
     end
   end
 end
