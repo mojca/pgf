@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgfgd-algorithm-modular-layered.lua,v 1.9 2011/10/02 21:36:07 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgfgd-algorithm-modular-layered.lua,v 1.10 2011/10/16 08:40:10 jannis-pohlmann Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -26,9 +26,11 @@ end
 
 function ModularLayered:new(graph)
   local algorithm = {
+    random_seed = tonumber(graph:getOption('/graph drawing/layered drawing/random seed')),
+
     -- read graph input parameters
-    level_distance = tonumber(graph:getOption('/graph drawing/layered drawing/level distance')),
-    sibling_distance = tonumber(graph:getOption('/graph drawing/layered drawing/sibling distance')),
+    level_distance = tonumber(graph:getOption('/graph drawing/level distance')),
+    sibling_distance = tonumber(graph:getOption('/graph drawing/sibling distance')),
 
     -- read sub-algorithm parameters
     cycle_removal_algorithm = tostring(graph:getOption('/graph drawing/layered drawing/cycle removal')),
@@ -73,6 +75,11 @@ end
 
 
 function ModularLayered:run()
+  -- apply the random seed specified by the user (only if it is non-zero)
+  if self.random_seed ~= 0 then
+    math.randomseed(self.random_seed)
+  end
+
   self:dumpGraph('before preprocessing')
   self:preprocess()
 

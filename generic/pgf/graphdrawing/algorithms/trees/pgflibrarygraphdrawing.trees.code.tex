@@ -8,14 +8,13 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/trees/pgflibrarygraphdrawing.trees.code.tex,v 1.3 2011/05/11 15:02:32 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/trees/pgflibrarygraphdrawing.trees.code.tex,v 1.4 2011/10/16 08:40:10 jannis-pohlmann Exp $
 
 
 
 %
 % Common tree options
 %
-
 
 % Declare a root
 %
@@ -33,23 +32,6 @@
 % };
 
 \pgfgddeclareforwardedkeys{/graph drawing}{root/.node parameter}
-
-
-
-% Distances
-% 
-% Description:
-% 
-% These keys work as in the classical typesetting of tikz for trees. 
-
-\pgfgddeclareforwardedkeys{/graph drawing}{
-  level distance/.graph parameter=evaluate math expression,
-  level distance/.parameter initial=1cm,
-  %
-  sibling distance/.graph parameter=evaluate math expression,
-  sibling distance/.parameter initial=1cm,
-}
-
 
 
 

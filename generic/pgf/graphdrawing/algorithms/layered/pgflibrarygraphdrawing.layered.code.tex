@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgflibrarygraphdrawing.layered.code.tex,v 1.5 2011/07/26 11:29:05 jannis-pohlmann Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgflibrarygraphdrawing.layered.code.tex,v 1.6 2011/10/16 08:40:10 jannis-pohlmann Exp $
 
 
 
@@ -32,16 +32,11 @@
 \pgfgdset{
   layered drawing/.cd,
   %
-  % Graph parameters for layered drawing algorithms.
-  %
-  level distance/.graph parameter=evaluate math expression,
-  level distance/.parameter initial=1cm,
-  %
-  sibling distance/.graph parameter=evaluate math expression,
-  sibling distance/.parameter initial=1cm,
-  %
   first layer/.graph parameter,
   last layer/.graph parameter,
+  %
+  random seed/.graph parameter,
+  random seed/.parameter initial=42,
   %
   % Node parameters for layered drawing algorithms.
   %
@@ -98,3 +93,5 @@
     layered drawing/edge routing/.graph parameter,
     layered drawing/edge routing/.parameter initial=GansnerKNV1993,
   }
+
+\endinput
