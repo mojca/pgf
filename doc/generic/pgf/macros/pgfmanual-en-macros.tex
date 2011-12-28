@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.54 2011/05/11 17:22:36 tantau Exp $
+% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.55 2011/12/28 18:51:18 ludewich Exp $
 
 
 
@@ -759,13 +759,6 @@
   \end{pgfmanualentry}
 }
 \makeatother
-
-\def\extractcommand#1#2\@@{%
-  \pgfmanualentryheadline{\declare{\texttt{\string#1}}#2}%
-  \removeats{#1}%
-  \index{\strippedat @\protect\myprintocmmand{\strippedat}}
-	\pgfmanualpdflabel{\textbackslash\strippedat}{}%
-}
 
 \def\doublebs{\texttt{\char`\\\char`\\}}
 
