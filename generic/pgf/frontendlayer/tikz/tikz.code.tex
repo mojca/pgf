@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/tikz.code.tex,v 1.86 2011/12/02 14:50:18 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/tikz.code.tex,v 1.87 2011/12/28 18:51:18 ludewich Exp $
 
 
 % Always-present libraries (|\usepgflibrary| defined in
@@ -925,7 +925,9 @@
 \tikzoption{const plot}[]{\let\tikz@plot@handler=\pgfplothandlerconstantlineto}
 \tikzoption{const plot mark left}[]{\let\tikz@plot@handler=\pgfplothandlerconstantlineto}
 \tikzoption{const plot mark right}[]{\let\tikz@plot@handler=\pgfplothandlerconstantlinetomarkright}
+\tikzoption{const plot mark mid}[]{\let\tikz@plot@handler=\pgfplothandlerconstantlinetomarkmid}
 \tikzoption{jump mark right}[]{\let\tikz@plot@handler=\pgfplothandlerjumpmarkright}
+\tikzoption{jump mark mid}[]{\let\tikz@plot@handler=\pgfplothandlerjumpmarkmid}
 \tikzoption{jump mark left}[]{\let\tikz@plot@handler=\pgfplothandlerjumpmarkleft}
 
 \tikzoption{raw gnuplot}[true]{\csname tikz@plot@raw@gnuplot#1\endcsname}
