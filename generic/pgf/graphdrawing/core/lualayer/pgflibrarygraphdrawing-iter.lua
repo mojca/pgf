@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-iter.lua,v 1.1 2011/05/06 15:12:16 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-iter.lua,v 1.2 2012/01/06 14:26:51 tantau Exp $
 
 --- This file contains a several functions that are helpful when dealing
 --- with iterators. Included are functions to filter values of an iterator,
@@ -70,10 +70,10 @@ end
 
 --- Causes a loop to run multiple times.
 --
--- Use this iterator like this to perform 100 loops:
+-- Use this iterator like this to perform 100 loops:\\
 -- |for n in iter.times(100) do ... end|.
 --
--- To iterate over the values $0, 10, 20, 30, ..., 100$ do:
+-- To iterate over the values $0, 10, 20, 30, ..., 100$ do:\\
 -- |for n in iter.filter(iter.times(100), function (n) return n % 10 == 0 end)|
 --
 -- @param n Number of loops.
