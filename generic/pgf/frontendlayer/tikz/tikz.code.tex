@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/tikz.code.tex,v 1.88 2012/01/06 14:26:51 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/tikz.code.tex,v 1.89 2012/01/24 13:35:05 cjorssen Exp $
 
 
 % Always-present libraries (|\usepgflibrary| defined in
@@ -4275,15 +4275,15 @@
 
 \def\tikz@parse@polar#1(#2:#3){%
   \pgfutil@ifundefined{tikz@polar@dir@#2}
-  {\tikz@@parse@polar#1(#2:#3)}
-  {\tikz@@parse@polar#1(\csname tikz@polar@dir@#2\endcsname:#3)}%
+  {\tikz@@parse@polar#1({#2}:{#3})}
+  {\tikz@@parse@polar#1(\csname tikz@polar@dir@#2\endcsname:{#3})}%
 }
 \def\tikz@@parse@polar#1(#2:#3){%
   \pgfutil@in@{ and }{#3}%
   \ifpgfutil@in@%
-    \edef\tikz@args{(#2:#3)}%
+    \edef\tikz@args{({#2}:#3)}%
   \else%
-    \edef\tikz@args{(#2:#3 and #3)}%
+    \edef\tikz@args{({#2}:{#3} and {#3})}%
   \fi%
   \expandafter\tikz@@@parse@polar\expandafter#1\tikz@args%
 }
