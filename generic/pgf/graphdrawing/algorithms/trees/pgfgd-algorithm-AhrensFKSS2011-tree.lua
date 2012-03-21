@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/trees/pgfgd-algorithm-AhrensFKSS2011-tree.lua,v 1.4 2011/09/30 13:16:53 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/trees/pgfgd-algorithm-AhrensFKSS2011-tree.lua,v 1.5 2012/03/21 19:48:36 tantau Exp $
 
 -- This file contains an algorithm for drawing arbitrary shaped trees.
 
@@ -58,7 +58,7 @@ function checkNodes(graph, node, visitedNodes, parent)
    if node:getDegree() > 1 then
       for edge in table.value_iter(node.edges) do   
         --check if all nodes of the edge have already been visited
-	     for node in table.value_iter(edge.nodes) do
+	for node in table.value_iter(edge.nodes) do
            if table.find(visitedNodes, function (name) return name == node.name end) then
               visited = true
            else
@@ -247,9 +247,8 @@ function advancedPlace(root, boxes, leveldistance, siblingdistance)
          box.pos:set{x = 0}
          local pos = box:getPosAt(Box.UPPERRIGHT, false)
          width = width + box.width
-
       else
-          local pos = lastbox:getPosAt(Box.UPPERRIGHT, false)
+         local pos = lastbox:getPosAt(Box.UPPERRIGHT, false)
          box.pos:set{y = maxY - box.height}
          box.pos:set{x = pos:x() + siblingdistance}
          width = width + box.width + siblingdistance   

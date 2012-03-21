@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-graph.lua,v 1.11 2012/01/06 14:26:51 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-graph.lua,v 1.12 2012/03/21 19:48:36 tantau Exp $
 
 -- This file defines a graph class, which later represents user created
 -- graphs.
@@ -489,7 +489,7 @@ function Graph:subGraph(root, graph, visited)
     if canAdd then
       for v in table.value_iter(edge.nodes) do
         local translated = translate[v]
-        graph:addNode(translated)
+        copy:addNode(translated)
       end
       for node in table.value_iter(copy.nodes) do
         node:addEdge(copy)

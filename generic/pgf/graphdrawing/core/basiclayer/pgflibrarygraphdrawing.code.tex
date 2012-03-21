@@ -8,7 +8,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/basiclayer/pgflibrarygraphdrawing.code.tex,v 1.14 2011/10/16 08:40:10 jannis-pohlmann Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/basiclayer/pgflibrarygraphdrawing.code.tex,v 1.15 2012/03/21 19:48:36 tantau Exp $
 
 
 
@@ -731,7 +731,7 @@
     \ifx\pgf@gd@path\pgfutil@empty\else%
       \expandafter\pgfutil@g@addto@macro\expandafter\pgf@temp\expandafter{\expandafter\pgfkeys\expandafter{\pgf@gd@path#1/.forward to=/graph drawing/#1}}
     \fi%
-  }
+  }%
   \pgf@temp
 }
 

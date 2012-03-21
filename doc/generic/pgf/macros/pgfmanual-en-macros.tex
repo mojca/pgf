@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.56 2012/03/21 11:57:42 tantau Exp $
+% $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/doc/generic/pgf/macros/pgfmanual-en-macros.tex,v 1.57 2012/03/21 19:48:36 tantau Exp $
 
 
 
@@ -335,14 +335,17 @@
   \end{pgfmanualentry}
 }
 
-\newenvironment{gdalgorithm}[1]{
+\newenvironment{gdalgorithm}[2]{
   \begin{pgfmanualentry}
-  	\pgfmanualentryheadline{Graph drawing algorithm {\ttfamily\declare{#1}}}%
-    \index{#1@\protect\texttt{#1} graph drawing algorithm}%
-    \index{Graph drawing algorithms!#1@\protect\texttt{#1}}
-    \item{\small Usage: {\ttfamily/graph drawing/#1=}\meta{options}}\par
+  	\pgfmanualentryheadline{Layout {\ttfamily/graph drawing/\declare{#1}\opt{=}}\opt{\meta{options}}}%
+    \index{#1@\protect\texttt{#1} layout}%
+    \index{Layouts!#1@\protect\texttt{#1}}%
+    \foreach \algo in {#2}
+    {\edef\marshal{\noexpand\index{#2@\noexpand\protect\noexpand\texttt{#2} algorithm}}\marshal}%
+    \index{Graph drawing layouts!#1@\protect\texttt{#1}}
     \item{\small alias {\ttfamily/tikz/#1}}\par
     \item{\small alias {\ttfamily/tikz/graphs/#1}}\par
+    \item{\small Algorithm(s) used by this layout: {\ttfamily#2}}\par
     \pgfmanualpdflabel{#1}{}%
     \pgfmanualbody
 }
