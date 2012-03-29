@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more details.
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-sys.lua,v 1.6 2011/07/21 11:44:47 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-sys.lua,v 1.7 2012/03/29 19:38:38 tantau Exp $
 
 -- This file contains methods dealing with the output back to the TeX
 -- side and some TeX and PGF specialties.
@@ -208,6 +208,18 @@ function Sys:log(...)
     end
     texio.write_nl("")
   end
+end
+
+
+function Sys:debug(...)
+   texio.write_nl("")
+   -- this is to even print out nil arguments in between
+   local args = {...}
+   for i = 1, table.getn(args) do
+      if i ~= 1 then texio.write(" ") end
+      texio.write(tostring(args[i]))
+   end
+   texio.write_nl("")
 end
 
 

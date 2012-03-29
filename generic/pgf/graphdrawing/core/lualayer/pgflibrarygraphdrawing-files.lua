@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-files.lua,v 1.7 2011/07/26 11:29:06 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-files.lua,v 1.8 2012/03/29 19:38:38 tantau Exp $
 
 -- This file defines a list of initial files to load.
 
@@ -40,6 +40,7 @@ local files = {
    "texboxregister",
    "ranking",
    "network-simplex",
+   "anchoring",
 --   "test-path",
 --   "test-box",
 --   "test-vector",
