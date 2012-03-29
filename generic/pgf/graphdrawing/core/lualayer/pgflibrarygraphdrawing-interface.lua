@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-interface.lua,v 1.14 2011/10/16 08:39:54 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-interface.lua,v 1.15 2012/03/29 19:38:38 tantau Exp $
 
 -- This file defines the Interface global object, which is used as a
 -- simplified frontend in the TeX part of the library.
@@ -307,7 +307,8 @@ function Interface:drawGraph()
   Sys:log(' ')
 
   -- apply the orientation desired by the user
-  orientation.adjust(self.graph)
+  orientation.perform_post_layout_steps(self.graph)
+  anchoring.perform_post_layout_steps(self.graph)
 end
 
 

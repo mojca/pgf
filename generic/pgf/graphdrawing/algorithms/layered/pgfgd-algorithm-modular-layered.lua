@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgfgd-algorithm-modular-layered.lua,v 1.12 2012/03/21 19:48:36 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgfgd-algorithm-modular-layered.lua,v 1.13 2012/03/29 19:38:38 tantau Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -146,6 +146,9 @@ function ModularLayered:run()
   self:dumpGraph('final graph')
   Sys:log('finished')
   Sys:log(' ')
+    
+  -- This algorithm uses an orientation:
+  orientation.algorithm_has_grown_the_graph_in_a_direction(self.graph)  
 end
 
 

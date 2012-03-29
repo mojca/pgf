@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgfgd-algorithm-GansnerKNV1993-layered.lua,v 1.5 2011/12/02 14:50:18 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgfgd-algorithm-GansnerKNV1993-layered.lua,v 1.6 2012/03/29 19:38:38 tantau Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -96,6 +96,9 @@ function GansnerKNV1993Layered:run()
   self:makeSplines()
 
   self:postprocess()
+  
+  -- This algorithm uses an orientation:
+  orientation.algorithm_has_grown_the_graph_in_a_direction(self.graph)  
 end
 
 

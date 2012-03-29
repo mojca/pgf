@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-table.lua,v 1.5 2011/06/30 22:35:16 jannis-pohlmann Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-table.lua,v 1.6 2012/03/29 19:38:38 tantau Exp $
 
 --- This file contains a number of helper functions for tables, including
 --- functions to create key and value iterators, copy tables, map table
@@ -385,7 +385,28 @@ end
 
 
 
---- Iterate over all keys of a table in random order.
+--- Iterate over all keys of a table in deterministic order
+--
+-- Taken from "Programming in Lua", second edition, page 173.
+--
+-- @param t The table
+-- @param f Sorting function
+--
+-- @return An iterator
+
+function table.pairs_by_sorted_keys (t, f)
+   local a = {}
+   for n in pairs(t) do a[#a + 1] = n end
+   table.sort (a, f)
+   local i = 0
+   return function ()
+	     i = i + 1
+	     return a[i], t[a[i]]
+	  end
+end
+
+
+--- Iterate over all keys of a table in nondeterminisitc order.
 --
 -- @param table The table whose keys to iterate over.
 --

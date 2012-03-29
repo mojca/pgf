@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/tikz.code.tex,v 1.91 2012/03/22 10:40:12 tantau Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/tikz.code.tex,v 1.92 2012/03/29 19:38:38 tantau Exp $
 
 
 % Always-present libraries (|\usepgflibrary| defined in
@@ -1648,6 +1648,8 @@
     \tikz@decoratepathfalse%
     \tikz@node@is@a@labelfalse%
     \tikz@expandcount=100\relax%
+    \pgf@path@lastx=0pt%
+    \pgf@path@lasty=0pt%
     \tikz@lastx=0pt%
     \tikz@lasty=0pt%
     \tikz@lastxsaved=0pt%

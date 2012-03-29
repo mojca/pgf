@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-graph.lua,v 1.12 2012/03/21 19:48:36 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-graph.lua,v 1.13 2012/03/29 19:38:38 tantau Exp $
 
 -- This file defines a graph class, which later represents user created
 -- graphs.
@@ -107,21 +107,26 @@ end
 -- @param node The node to be added.
 --
 function Graph:addNode(node)
-  -- only add the node if it's not included in the graph yet
-  if not self:findNode(node.name) then
-    table.insert(self.nodes, node)
-    
-    if node.tex.maxY and node.tex.maxX and node.tex.minY and node.tex.minX then
-      node.height = string.sub(node.tex.maxY, 0, string.len(node.tex.maxY)-2) 
-                  - string.sub(node.tex.minY, 0, string.len(node.tex.minY)-2)
+   -- only add the node if it's not included in the graph yet
+   if not self:findNode(node.name) then
+      -- Does the node have an index, yet?
+      if not node.index then
+	 node.index = #self.nodes + 1
+      end
+      
+      table.insert(self.nodes, node)
+      
+      if node.tex.maxY and node.tex.maxX and node.tex.minY and node.tex.minX then
+	 node.height = string.sub(node.tex.maxY, 0, string.len(node.tex.maxY)-2) 
+	               - string.sub(node.tex.minY, 0, string.len(node.tex.minY)-2)
+      
+         node.width = string.sub(node.tex.maxX,0,string.len(node.tex.maxX)-2)
+                       - string.sub(node.tex.minX,0,string.len(node.tex.minX)-2)
+      end
 
-      node.width = string.sub(node.tex.maxX,0,string.len(node.tex.maxX)-2)
-                 - string.sub(node.tex.minX,0,string.len(node.tex.minX)-2)
-    end
-    
-    assert(node.height >= 0)
-    assert(node.width >= 0)
-  end
+      assert(node.height >= 0)
+      assert(node.width >= 0)
+   end
 end
 
 
@@ -215,9 +220,11 @@ end
 -- @param edge The edge to be added.
 --
 function Graph:addEdge(edge)
-  --if not table.find(self.edges, function (other) return other == edge end) then
-    table.insert(self.edges, edge)
-  --end
+   if not edge.index then
+      edge.index = #self.edges + 1
+   end
+
+   table.insert(self.edges, edge)
 end
 
 

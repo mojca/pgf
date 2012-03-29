@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-iter.lua,v 1.2 2012/01/06 14:26:51 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-iter.lua,v 1.3 2012/03/29 19:38:38 tantau Exp $
 
 --- This file contains a several functions that are helpful when dealing
 --- with iterators. Included are functions to filter values of an iterator,
@@ -90,3 +90,4 @@ function iter.times(n)
     end
   end
 end
+
