@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-interface.lua,v 1.15 2012/03/29 19:38:38 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-interface.lua,v 1.18 2012/04/01 22:29:44 tantau Exp $
 
 -- This file defines the Interface global object, which is used as a
 -- simplified frontend in the TeX part of the library.
@@ -172,103 +172,21 @@ end
 --- Attempts to load the algorithm with the given \meta{name}.
 --
 -- This function tries to look up the corresponding algorithm file
--- |pgflibrarygraphdrawing-algorithms-name.lua| and attempts to
--- look up the main function for calling the algorithm.
+-- |pgfgd-algorithms-<name>.lua| and attempts to
+-- look up the class for calling the algorithm.
 --
 -- @param name Name of the algorithm.
 --
 -- @return The algorithm function or nil.
 --
 function Interface:loadAlgorithm(name)
-  local function_name = 'graph_drawing_algorithm_' .. name
-  
-  -- substitute special characters in the function name with
-  -- something that Lua can handle
-  local substitutions = { ['-'] = '_' }
-  for char, replacement in pairs(substitutions) do
-    function_name = function_name:gsub(char, replacement)
-  end
-  
-  Sys:log('function_name = ' .. function_name)
-  Sys:log('name = ' .. name)
-  
-  -- try to load the algorithm file
-  -- delete the following after renaming of all files
-  local filename = "pgfgd-algorithm-" .. name .. ".lua"
-  pgf.load(filename, "tex", false, "pgflibrarygraphdrawing-algorithms-" .. name .. ".lua")
 
-  -- look up the main algorithm function
-  return pgf.graphdrawing[function_name]
+   -- Load the file (if necessary)
+   pgf.load("pgfgd-algorithm-" .. name .. ".lua", "tex", false)
+
+   -- look up the main algorithm function
+   return pgf.graphdrawing[name]
 end
-
-
-
--- TODO: Jannis: Document this method.
-function Interface:convertFilenameToClassname(filename)
-  local pre_substitutions = {
-    ['-'] = ' ',
-    ['_'] = ' ',
-  }
-  for char, replacement in pairs(pre_substitutions) do
-    filename = filename:gsub(char, replacement)
-  end
-
-  filename = filename:gsub("^(%a)", string.upper, 1)
-  filename = filename:gsub("%s+(%a)", string.upper)
-
-  local post_substitutions = {
-    [' '] = '',
-  }
-  for char, replacement in pairs(post_substitutions) do
-    filename = filename:gsub(char, replacement)
-  end
-
-  return filename
-end
-
-
-
--- TODO: Jannis: Document this method.
-function Interface:convertClassnameToFilename(classname)
-  local source = {}
-  for n = 1, classname:len() do
-    source[n] = classname:sub(n, n)
-  end
-
-  local target = {}
-
-  local source_pos = 1
-  local target_pos = 1
-
-  for source_pos = 1, #source do
-    if source[source_pos]:gsub('%a', '') == '' then
-      if source[source_pos] == source[source_pos]:upper() then
-        if source_pos == 1 then
-          target[target_pos] = source[source_pos]
-          target_pos = target_pos + 1
-        else
-          if source[source_pos-1] == source[source_pos-1]:upper() then
-            target[target_pos] = source[source_pos]
-            target_pos = target_pos + 1
-          else
-            target[target_pos] = ' '
-            target[target_pos + 1] = source[source_pos]
-            target_pos = target_pos + 2
-          end
-        end
-      else
-        target[target_pos] = source[source_pos]
-        target_pos = target_pos + 1
-      end
-    else
-      target[target_pos] = source[source_pos]
-      target_pos = target_pos + 1
-    end
-  end
-
-  return table.concat(target, '')
-end
-
 
 
 --- Arranges the current graph using the specified algorithm. 
@@ -288,27 +206,45 @@ function Interface:drawGraph()
     return
   end
 
-  local name = self:getOption("/graph drawing/algorithm"):gsub('%s', '-')
-  local functionName = "graph_drawing_algorithm_" .. name:gsub('-', '_')
-  local algorithm = pgf.graphdrawing[functionName]
+  local name = self:getOption("/graph drawing/algorithm"):gsub(' ', '')
+  local algorithm_class = pgf.graphdrawing[name]
   
   -- if not defined, try to load the corresponding file
-  if not algorithm then
-    algorithm = self:loadAlgorithm(name)
+  if not algorithm_class then
+    algorithm_class = self:loadAlgorithm(name)
   end
   
-  assert(algorithm, "the algorithm is nil, e.g. a function named "
-                    .. functionName .. " doesn't exist in the pgf.graphdrawing "
-                    .. "module")
+  assert(algorithm_class, "No algorithm named '" .. name .. "' was found. " ..
+                          "Either the file does not exist or the class declaration is wrong.")
   local start = os.clock()
-  algorithm(self.graph)
+  -- Ok, everything setup.
+
+
+  -- Step 1, create new object almost empty object:
+  local algorithm = { graph = self.graph }
+  setmetatable(algorithm, algorithm_class)
+
+
+  -- Step 2: Let the object init itself:
+  if algorithm.constructor then
+     algorithm:constructor ()
+  end
+
+  -- Step 3: Run the algorithm:
+  algorithm:run ()
+
+
+  -- Step 4: Post layout transformation:
+
+  -- Step 4.1: Compute orientation
+  orientation.perform_post_layout_steps(algorithm)
+
+  -- Step 4.2: Compute anchors
+  anchoring.perform_post_layout_steps(algorithm)
+
   local stop = os.clock()
   Sys:log(string.format("GD:INT: algorithm '" .. name .. "' took %.4f seconds", stop - start))
   Sys:log(' ')
-
-  -- apply the orientation desired by the user
-  orientation.perform_post_layout_steps(self.graph)
-  anchoring.perform_post_layout_steps(self.graph)
 end
 
 
