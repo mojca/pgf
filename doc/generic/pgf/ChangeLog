@@ -1,3 +1,19 @@
+2012-04-03 Till Tantau <tantau@users.sourceforge.net>
+
+	- Introduced new declaration mechanism for graph drawing
+	  algorithm classes
+	- Implemented preprocessing step of decomposing a graph into
+	  connected components.
+	
+2012-04-02 Till Tantau <tantau@users.sourceforge.net>
+
+	- Cleaned up graph drawing algorithm directories: Moved
+	obsolete algorithms to special directory.
+	- Switched graph drawing calling interface from function-base
+	to object-based: All graph drawing algorithms must now be
+	implemented in a class
+	- Cleaned up file and class names of graph drawing engine. 
+
 2012-03-30 Till Tantau <tantau@users.sourceforge.net>
 
 	- Fixed problem that in case math library is loaded before pgf

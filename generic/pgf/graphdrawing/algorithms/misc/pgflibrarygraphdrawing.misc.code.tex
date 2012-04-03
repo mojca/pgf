@@ -8,40 +8,33 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/misc/pgflibrarygraphdrawing.misc.code.tex,v 1.2 2011/05/11 15:02:31 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/misc/pgflibrarygraphdrawing.misc.code.tex,v 1.5 2012/04/03 22:53:13 tantau Exp $
 
 
 
-
-% Draw a graph with few intersections
 %
-% Description:
+% A circular layout
 %
-% This slow ad-hoc algorithm by Ahrens et al. 2011 (authors of the
-% graph drawing package) will try to draw a graph such that the number of 
-% intersections is minimized. If the graph is planar, it should be
-% drawn without intersections, but this will not always be the
-% case. The parameters ``max height'' and ``max width'' can be used to
-% guide the desired width and/or height of the resulting graph.
-%
-% Example:
-%
-% \tikz \graph [AhrensFKSS2011 minimize crossings] { a -> {b, c-> {d,e->b}, f->a} };
-
 \pgfgddeclarealgorithmkey
-{AhrensFKSS2011 minimize crossings}
-{AhrensFKSS2011 minimize crossings}
-{%
-  algorithm=AhrensFKSS2011 minimize crossings
-}
+  {circular layout}
+  {circular layout}
+  {
+    algorithm=Circular Layout Tantau 2012,
+    circular layout/radius/.graph parameter=evaluate math expression,
+  }
 
-\pgfgdset
-{%
-  AhrensFKSS2011 minimize crossings/.cd,
-  %
-  max height/.graph parameter=evaluate math expression,
-  max width/.graph parameter=evaluate math expression
-}
+
+%
+% An example algorithm
+%
+\pgfgddeclarealgorithmkey
+  {simple demo layout}
+  {simple demo layout}
+  {
+    algorithm=Simple Demo,
+    radius/.graph parameter=evaluate math expression,
+    radius/.parameter initial=1cm,
+  }
 
 
 
