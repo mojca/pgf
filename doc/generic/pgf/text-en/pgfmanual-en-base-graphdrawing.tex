@@ -886,7 +886,7 @@ reference.
 
 
 
-\subsection{Lua Layer: Installing  Graph Drawing Algorithms}
+\subsection{Lua Layer: Installing Graph Drawing Algorithms}
 \label{section-gd-implementing-algorithms}
 
 In the following we describe in detail how a new graph drawing
@@ -898,7 +898,7 @@ algorithm can be implemented and installed.
 First, before any graph drawing algorithms can be used, the graph
 drawing engine needs to be loaded. This is done by loading the
 \pgfname\ library |pgflibrarygraphdrawing.code.tex|. This will
-initialises the Lua graph drawing subsystem by invoking the Lua loader
+initialise the Lua graph drawing subsystem by invoking the Lua loader
 class.   
 
 In the most basic cases, no further \TeX\ code needs to be written to
@@ -909,23 +909,125 @@ algorithms will make the use of the algorithm somewhat simpler.\
 
 \subsubsection{Main File of the Graph Drawing Algorithm}
 
-As explained for the |algorithm| key on
+As indicated at in the description of the |algorithm| key on
 page~\ref{section-gd-algorithm-key}, each graph drawing algorithm  
-must be placed in a Lua function called
-|drawGraphAlgorithm_|\meta{algorithm name}, with spaces and the |-|
-character replaced by underscores, inside the |pgf.graphdrawing| Lua 
-module. This function, in turn, should typically be placed in a file 
-called |pgfgd-algorithm-|\meta{algorithm name}, again with spaces and
-|-| replaced by underscores. ``Typically'' means that it is only
-important that the function is already defined when the engine
+must be implemented in a class. The class name will be the value
+passed to the |algorithm| key, albeit without any spaces. This class
+is a normal class in the sense of Lua, but a special function called
+|graph_drawing_algorithm| is provided that makes the declaration of
+such classes easier (we will come to it in a moment). This class
+should typically be placed in a file called
+|pgfgd-algorithm-|\meta{algorithm name}, again with spaces
+ignored. ``Typically'' means that it is only 
+important that the class is already defined when the engine
 tries to invoke it or, when this is not the case, the file with the
 described name contains this function. You could also put several
 algorithms in a single file, but then you must ensure that loading of
 the file yourself.
 
-The function |drawGraphAlgorithm_|\meta{algorithm name} will be called
-during |\pgfgdendscope|. The function gets an object
-representing the graph as its single argument. 
+During |\pgfgdendscope|, the algorithm's class will be loaded, if
+necessary. Then, the following things happen, in turn, in normal
+operation mode: (Let \meta{class} by the class name.)
+
+\begin{enumerate}
+\item Some preprocessing is done, if the ``static'' attributes of the
+  class specify this.
+\item A new instance of the class is created by calling
+  \meta{class}|:new(graph)|, where |graph| is a variable holding the
+  graph object. 
+\item The |constructor| method of the instance is called, if such a
+  method exists.
+\item The |run| method of the instance is called. This method should now
+  compute ``good'' positions for the nodes in the graph represented by
+  the |graph|.
+\item Post layout operations are performed, namely orienting the
+  graph and then anchoring the graph. Both operations are performed
+  automatically, but it is possible to configure them.
+\end{enumerate}
+
+Let us now look at the |graph_drawing_algorithm| function in more
+detail. It takes a single parameter \meta{info}, which must be a
+table, and does the following:
+
+\begin{enumerate}
+\item It switches to the namespace |pgf.graphdrawing|.
+\item It declares a new class whose name is given by the |name| key in
+  the \meta{info}.
+\item It declares a |new| method for this class, which takes a single
+  parameter |g| and returns a new \meta{instance} of the class. The
+  parameter will be installed in the attribute |graph| of
+  \meta{instance}. The |new| method tests whether a key called
+  |graph_options| is defined in the \meta{info} table. If so, the
+  value for this key must be a table of \meta{options}. This table is
+  processed as follows: For each pair \meta{key} |=| \meta{value}
+  inside the \meta{options} table, an attribute \meta{key} is created
+  in \meta{instance}. Provided that \meta{value} is a string, the
+  \meta{key} of the \meta{instance} will be set to
+  \begin{quote}
+    |graph:getOption('/graph drawing/' .. |\meta{value}|)|
+  \end{quote}
+  If, however, \meta{value} is an array, it should have two entries:
+  The first is, as above, a string that is the name of a graph
+  parameter. The second entry must be a function, which will be
+  applied to the result of the |getOption| function. Typically, this
+  function will be something like |tonumber| to convert the strings
+  that come from |getOption| into a number. The function |toboolean|
+  is defined as a convenience function; it tests whether its argument
+  is |'true'|.
+
+  Finally, |new| calls the |constructor| method of \meta{instance},
+  provided it exists.   
+\item If the key |properties| is defined inside the \meta{info} table,
+  its value should be table of ``static'' or ``default'' values for
+  the class. More precisely, this table is used as the metatable of
+  the class.
+\end{enumerate}
+
+Let us have a look at an example: We redo our |SimpleDemo|, but this
+time using the full power of the |graph_drawing_algorithm| function:
+
+\begin{codeexample}[code only]
+graph_drawing_algorithm {
+  
+  -- Declare the name of the key (required key):
+  name = "SimpleDemo",
+
+  -- Declare a property:
+  properties = {
+    -- Ensures, that the graph is always connected when the graph
+    -- drawing algorithm is called
+    split_into_connected_components = true
+  },
+
+  -- Declare a graph parameter:
+  graph_parameters = {
+    label  = 'label',
+    radius = {'radius', tonumber}
+  }
+}
+\end{codeexample}
+
+The code is equivalent to the following:
+\begin{codeexample}[code only]
+pgf.module("pgf.graphdrawing")
+
+SimpleDemo = { split_into_connected_components = true }
+SimpleDemo.__index = SimpleDemo
+
+function SimpleDemo:new(g)
+  local obj = { graph = g }
+  setmetatable(obj, SimpleDemo)
+  
+  obj.label  = g:getOption('/graph drawing/label')
+  obj.radius = tonumber(g:getOption('/graph drawing/radius'))
+
+  if obj.constructor then
+    obj:constructor ()
+  end
+  return obj  
+end  
+\end{codeexample}
+
 
 
 \subsubsection{Coordinate Systems in Lua}
@@ -933,8 +1035,8 @@ representing the graph as its single argument.
 \label{section-gd-lua-coordinates}
 
 The main job of a graph drawing algorithm is to modify the
-coordinates of the nodes of the graph object that it gets passed as
-its argument. Before we have a look at how this can be done, let us
+coordinates of the nodes of the graph object in the |graph|
+attribute. Before we have a look at how this can be done, let us 
 first clarify how the different coordinate systems of \pgfname\
 interact with the graph drawing engine.
 
@@ -954,9 +1056,9 @@ coordinate system. For instance, when a user writes
 |node distance=1in|, then |getOption('/graph drawing/node distance')|
 will yield the string |'72.27'|.
 
-Let us now have a look at what happens when a transformation matrix is
+When a transformation matrix is
 set, such as a shift by 1cm to the right and a rotation by
-30$^\circ$. In this case, the following happens: At the beginning of a
+30$^\circ$, the following happens: At the beginning of a
 graph drawing scope, the transformation matrix is reset. Thus, for
 instance all nodes created inside the graph drawing scope for which no
 scaling or shifting is setup will be centered on the origin. When
@@ -974,12 +1076,10 @@ about \pgfname's transformation matrix.
 
 
 
-
-
 \subsubsection{Example of a Graph Drawing Algorithm's Code}
 
-For example, the following code fragment (taken and slightly altered
-from the file |pgfgd-algorithm-simple-demo.lua|)
+The following code fragment (taken and slightly altered
+from the file |pgfgd-algorithm-SimpleDemo.lua|)
 implements a trivial graph drawing algorithm that just places all
 nodes on a fixed-size circle.  
 
@@ -992,19 +1092,15 @@ nodes on a fixed-size circle.
 \begin{codeexample}[code only]
 -- File pgfgd-algorithm-simple-demo.lua
   
-pgf.module("pgf.graphdrawing")
+graph_drawing_algorithm { name = "SimpleDemo" }
 
---- A trivial node placing algorithm for demonstration purposes.
--- All nodes are positioned on a fixed-size circle.
-function drawGraphAlgorithm_simple_demo(graph)
-   local radius = 28.908  -- corresponds to 1cm in TeX points
-
-   -- count nodes
-   local nodeCount = table.count_pairs(graph.nodes)
+function SimpleDemo:run()
+   local radius = 28.908  -- this is 1cm in points
+   local nodeCount = table.count_pairs(self.graph.nodes)
 
    local alpha = (2 * math.pi) / nodeCount
    local i = 0
-   for node in table.value_iter(graph.nodes) do
+   for node in table.value_iter(self.graph.nodes) do
       -- the interesting part...
       node.pos:set{x = radius * math.cos(i * alpha)}
       node.pos:set{y = radius * math.sin(i * alpha)}
@@ -1016,7 +1112,7 @@ end
 The algorithm computes a circular layout like in the following:
 
 \begin{codeexample}[]
-\tikz [graph drawing scope, /graph drawing/algorithm=simple demo]
+\tikz [graph drawing scope, /graph drawing/algorithm=Simple Demo]
   \graph { f -> c -> e ->[bend right] a -> {b -> {c, d, f}, e -> b}};
 \end{codeexample}
 
@@ -1032,7 +1128,7 @@ that calls the above keys. For instance, you could create a small
 \begin{codeexample}[code only]
 \tikzset{circular layout/.style={
     graph drawing scope,
-    /graph drawing/algorithm=simple demo}}
+    /graph drawing/algorithm=Simple Demo}}
 \end{codeexample}
 
 However, there is a better command for this:
@@ -1042,16 +1138,17 @@ However, there is a better command for this:
 \pgfgddeclarealgorithmkey
 {circular layout}
 {circular layout}
-{algorithm=simple demo}
+{algorithm=Simple Demo}
 \end{codeexample}
 \pgfgddeclarealgorithmkey
 {circular layout}
 {circular layout}
-{algorithm=simple demo}
+{algorithm=Simple Demo}
 
 The |\pgfgddeclarealgorithmkey| takes care of setting up your style
 key in appropriate ways (including some ways you will not have thought
 of) and installs some additional handlers.
+
 
 \subsubsection{Setting Up Graph Parameters}
 
@@ -1062,7 +1159,7 @@ so-called ``graph parameters''. When a key is declared as a graph
 parameter, it will be available inside the algorithm: 
 
 \begin{codeexample}[code only]
-local radius = tonumber(graph:getOption("/graph drawing/radius"))
+local radius = tonumber(self.graph:getOption("/graph drawing/radius"))
 \end{codeexample}
 
 Using the |getOption| method we obtain the value of the
@@ -1104,8 +1201,8 @@ key, which allows us to change the radius of a single node. For this,
 we check for a node whether its radius key is set:
 
 \begin{codeexample}[code only]
--- In pgfgf-algorithm-simple-example.lua:
-   for node in table.value_iter(graph.nodes) do
+-- In pgfgf-algorithm-SimpleExample.lua:
+   for node in table.value_iter(self.graph.nodes) do
       -- the interesting part...
       local node_radius = tonumber(node:getOption('/graph drawing/node radius')
                                    or radius)
@@ -1114,7 +1211,7 @@ we check for a node whether its radius key is set:
       i = i + 1
    end
    
--- In pgflibrarygraphdrawing.circular.code.tex
+% In pgflibrarygraphdrawing.circular.code.tex
 \pgfgddeclareforwardedkeys{/graph drawing}{
   node radius/.node parameter=evaluate math expression
 }
@@ -1133,20 +1230,22 @@ Here is the complete code of the final algorithm:
 -- File pgfgd-algorithm-simple-demo.lua
 pgf.module("pgf.graphdrawing")
 
-function drawGraphAlgorithm_simple_demo(graph)
-   local radius = tonumber(graph:getOption("/graph drawing/radius"))
-   local nodeCount = table.count_pairs(graph.nodes)
+SimpleDemo = {}
+SimpleDemo.__index = SimpleDemo
+
+function SimpleDemo:run()
+   local radius = 28.908  -- this is 1cm in points
+   local nodeCount = table.count_pairs(self.graph.nodes)
 
    local alpha = (2 * math.pi) / nodeCount
    local i = 0
-   for node in table.value_iter(graph.nodes) do
+   for node in table.value_iter(self.graph.nodes) do
       -- the interesting part...
-      local node_radius = tonumber(node:getOption('/graph drawing/node radius') or radius)
-      node.pos:set{x = node_radius * math.cos(i * alpha)}
-      node.pos:set{y = node_radius * math.sin(i * alpha)}
+      node.pos:set{x = radius * math.cos(i * alpha)}
+      node.pos:set{y = radius * math.sin(i * alpha)}
       i = i + 1
    end
-end  
+end
 \end{codeexample}
 
 \begin{codeexample}[code only]
@@ -1155,7 +1254,7 @@ end
 \pgfgddeclarealgorithmkey
   {circular layout}
   {circular layout}
-  {algorithm=simple demo}
+  {algorithm=Simple Demo}
 
 \pgfgddeclareforwardedkeys{/graph drawing}{
   radius/.graph parameter=evaluate math expression,
@@ -1164,6 +1263,63 @@ end
 }
 \end{codeexample}
 
+
+
+
+\subsection{Lua Layer: Pre- and Postprocessing}
+
+A number of tasks in graph drawing can be performed independently of
+the actual algorithm used. For instance, many algorithms require that
+the graph is connected. In this case, unconnected input graphs first
+need to be decomposed into their connected components, which should
+then be processed independently. Such a step would be
+\emph{preprocessing} step. Similarly, once a graph has been laid out
+by an algorithm, it often still needs to be shifted around to its
+anchoring position. This step is the same for any algorithm and can be
+done in a \emph{postprocessing} step.
+
+It turns out that some pre- or postprocessing steps make sense for
+certain algorithms, but not for other algorithms. For this reason, an
+algorithm can specify which steps should (not) be performed by setting
+certain attributes in the algorithm's class. Usually, these attributes
+will be set using the |properties| key in the declaration of the
+algorithm's class.
+
+In the following, we describe which steps are performed and which keys
+influence them.
+
+
+\subsubsection{Preprocessing}
+
+The following preprocessing steps are performed for every graph:
+\begin{enumerate}
+\item If the |split_into_connected_components| property is set, the
+  connected components of the graph will first be computed.
+\item For each component or, if the property is not set, for the whole
+  graph, a new algorithm object is created.
+\item The |run| method is then called for each component,
+  \emph{unless} the size of the component is |1|. If, however, the
+  |run_also_for_single_node| property is set, the algorithm is even
+  invoked for a 1-node graph.
+\end{enumerate}
+
+\subsubsection{Postprocessing}
+
+Each time the |run| method finishes, the following postprocessing
+operations are performed:
+\begin{enumerate}
+\item The graph is oriented, see
+  Section~\ref{subsection-library-graphdrawing-standard-orientation}. A
+  graph drawing algorithm can set the |growth_direction| property in
+  case the graph has a natural growth direction. 
+\item The graph is anchored, see
+  Section~\ref{subsection-library-graphdrawing-anchoring}. 
+\end{enumerate}
+The above steps are applied to each connected component individually
+if the splitting key has been set.
+
+The components then need to be ``packed'', but this is not yet
+implemented.
 
 
 \subsection{Lua Layer: The Main Classes}
@@ -1203,19 +1359,14 @@ iterators over all nodes and edges in a depth-first or breadth-first
 order (other traversal orders may require a rewrite or extension of the
 |walkAux| method).
 
-Positions are represented using the dedicated class |Position|, the member
-variables |x| and |y| contain the coordinates.  Positions can also be
-relative to other positions, which can be tested using |isAbsPosition|.
-The conversion to absolute coordinates is done with |getAbsCoordinates|.
-The equality test method implements comparing two positions by using their
-absolute positions.
+Positions are represented using the class |Vector|.
 
 The following tasks are typical for manipulating the graph.
 
 \begin{itemize}
 \item Iterate over all nodes.
 \begin{codeexample}[code only]
-for node in table.value_iter(graph.nodes) do
+for node in table.value_iter(self.graph.nodes) do
    ...
 end
 \end{codeexample}
@@ -1238,7 +1389,7 @@ newNode.pos:setOrigin(node.pos)
 \end{codeexample}
 \item Iterate over all edges and all nodes of the current edge.
 \begin{codeexample}[code only]
-for edge in table.value_iter(graph.edges) do
+for edge in table.value_iter(self.graph.edges) do
    for node in table.value_iter(edge.nodes) do
       ...
    end
@@ -1256,6 +1407,7 @@ local nodeRight = edge.nodes[2]
 The following module simplifies the traversal of graphs:
 
 \input{generated/pgflibrarygraphdrawing-traversal-helpers}
+
 
 
 \subsubsection{Nodes and their Boxes}
@@ -1287,7 +1439,7 @@ Edges can be undirected or directed (denoted by the constants
 
 TT: More documentation is needed here!
 
-\input{generated/pgflibrarygraphdrawing-position}
+%\input{generated/pgflibrarygraphdrawing-position}
 \input{generated/pgflibrarygraphdrawing-vector}
 
 

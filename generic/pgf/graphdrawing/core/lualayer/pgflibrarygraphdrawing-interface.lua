@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-interface.lua,v 1.18 2012/04/01 22:29:44 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/Attic/pgflibrarygraphdrawing-interface.lua,v 1.19 2012/04/03 21:17:55 tantau Exp $
 
 -- This file defines the Interface global object, which is used as a
 -- simplified frontend in the TeX part of the library.
@@ -202,10 +202,10 @@ end
 --
 function Interface:drawGraph()
   if #self.graph.nodes == 0 then
-    Sys:log("GD:INT: no nodes, aborting")
+    -- Nothing needs to be done
     return
   end
-
+  
   local name = self:getOption("/graph drawing/algorithm"):gsub(' ', '')
   local algorithm_class = pgf.graphdrawing[name]
   
@@ -215,33 +215,35 @@ function Interface:drawGraph()
   end
   
   assert(algorithm_class, "No algorithm named '" .. name .. "' was found. " ..
-                          "Either the file does not exist or the class declaration is wrong.")
+	 "Either the file does not exist or the class declaration is wrong.")
   local start = os.clock()
   -- Ok, everything setup.
+  
 
+  -- Reset random number generator
+  math.randomseed(self.graph:getOption('/graph drawing/random seed'))
 
-  -- Step 1, create new object almost empty object:
-  local algorithm = { graph = self.graph }
-  setmetatable(algorithm, algorithm_class)
-
-
-  -- Step 2: Let the object init itself:
-  if algorithm.constructor then
-     algorithm:constructor ()
+  -- Decompose the graph into connected components, if necessary:
+  local graphs
+  
+  if algorithm_class.split_into_connected_components then
+    graphs = compute_component_decomposition(self.graph)
+  else
+    graphs = { self.graph }
   end
-
-  -- Step 3: Run the algorithm:
-  algorithm:run ()
-
-
-  -- Step 4: Post layout transformation:
-
-  -- Step 4.1: Compute orientation
-  orientation.perform_post_layout_steps(algorithm)
-
-  -- Step 4.2: Compute anchors
-  anchoring.perform_post_layout_steps(algorithm)
-
+  
+  for _,subgraph in ipairs(graphs) do
+    local algorithm = algorithm_class:new(subgraph)
+    
+    if #subgraph.nodes > 1 or algorithm_class.run_also_for_single_node then
+      -- Main run of the algorithm:
+      algorithm:run ()
+    end
+    
+    orientation.perform_post_layout_steps(algorithm)
+    anchoring.perform_post_layout_steps(algorithm)
+  end
+  
   local stop = os.clock()
   Sys:log(string.format("GD:INT: algorithm '" .. name .. "' took %.4f seconds", stop - start))
   Sys:log(' ')

@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-orientation.lua,v 1.5 2012/04/01 22:29:44 tantau Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/Attic/pgflibrarygraphdrawing-orientation.lua,v 1.6 2012/04/03 21:17:55 tantau Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -94,28 +94,6 @@ function orientation.orient_two_nodes(graph, first_node, second_node,
    end
 end
 
-
-
-
---- Helper function for graphs with a growth direction
---
--- This function can be called by algorithms that orient a graph in
--- a way that permits speaking of a natural "direction of growth", but
--- that do not wish to take the /graph drawing/grow node parameter
--- into account. In this case, they should call this function, the
--- necessary rotations will be performed in the postprocessing. If the
--- natural direction of growth computed by the algorithm is not
--- downward (the default), the direction must be given as a
--- parameter. 
--- 
--- @param graph The graph.
-
-function orientation.algorithm_has_grown_the_graph_in_a_direction(graph, angle)
-   local angle = angle or -90
-   for _, node in pairs(graph.nodes) do
-      node.growth_direction = angle
-   end
-end
 
 
 --- Perform a post-layout orientation of the graph
