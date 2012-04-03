@@ -8,8 +8,20 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/misc/pgflibrarygraphdrawing.misc.code.tex,v 1.4 2012/04/03 21:17:55 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/misc/pgflibrarygraphdrawing.misc.code.tex,v 1.5 2012/04/03 22:53:13 tantau Exp $
 
+
+
+%
+% A circular layout
+%
+\pgfgddeclarealgorithmkey
+  {circular layout}
+  {circular layout}
+  {
+    algorithm=Circular Layout Tantau 2012,
+    circular layout/radius/.graph parameter=evaluate math expression,
+  }
 
 
 %
