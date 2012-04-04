@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/texinterface/pgflibrarygraphdrawing-interface.lua,v 1.1 2012/04/03 21:41:45 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/texinterface/pgflibrarygraphdrawing-interface.lua,v 1.2 2012/04/04 22:42:11 tantau Exp $
 
 -- This file defines the Interface global object, which is used as a
 -- simplified frontend in the TeX part of the library.
@@ -86,6 +86,7 @@ end
 -- positioning like a label.
 --
 -- @param name      Name of the node.
+-- @param shape     The pgf shape of the node (e.g. "circle" or "rectangle")
 -- @param xMin      Minimum x point of the bouding box.
 -- @param yMin      Minimum y point of the bouding box.
 -- @param xMax      Maximum x point of the bouding box.
@@ -93,10 +94,11 @@ end
 -- @param options   Lua-Options for the node.
 -- @param lateSetup Options for the node.
 --
-function Interface:addNode(name, xMin, yMin, xMax, yMax, options, lateSetup)
+function Interface:addNode(name, shape, xMin, yMin, xMax, yMax, options, lateSetup)
   assert(self.graph, "no graph created")
   local tex = {
     texNode = TeXBoxRegister:insertBox(Sys:getTeXBox()), 
+    shape = shape,
     maxX = xMax,
     minX = xMin,
     maxY = yMax,
