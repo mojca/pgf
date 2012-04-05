@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/force/pgfgd-algorithm-Walshaw2000SpringElectrical.lua,v 1.3 2012/04/03 21:17:55 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/force/pgfgd-algorithm-SpringElectricalWalshaw2000.lua,v 1.1 2012/04/05 10:04:11 tantau Exp $
 
 
 
@@ -47,7 +47,7 @@
 
 
 graph_drawing_algorithm {
-  name = 'Walshaw2000SpringElectrical',
+  name = 'SpringElectricalWalshaw2000',
   properties = {
     split_into_connected_components = true
   },
@@ -70,7 +70,7 @@ graph_drawing_algorithm {
 }
 
 
-function Walshaw2000SpringElectrical:constructor()
+function SpringElectricalWalshaw2000:constructor()
 
   -- Adjust types
   self.downsize_ratio = math.max(0, math.min(1, self.downsize_ratio))
@@ -104,7 +104,7 @@ end
 
 
 
-function Walshaw2000SpringElectrical:run()
+function SpringElectricalWalshaw2000:run()
   -- initialize the coarse graph data structure. note that the algorithm
   -- is the same regardless whether coarsening is used, except that the 
   -- number of coarsening steps without coarsening is 0
@@ -157,7 +157,7 @@ end
 
 
 
-function Walshaw2000SpringElectrical:computeInitialLayout(graph, spring_length)
+function SpringElectricalWalshaw2000:computeInitialLayout(graph, spring_length)
   -- TODO how can supernodes and fixed nodes go hand in hand? 
   -- maybe fix the supernode if at least one of its subnodes is 
   -- fixated?
@@ -205,8 +205,8 @@ end
 
 
 
-function Walshaw2000SpringElectrical:computeForceLayout(graph, spring_length)
-  --Sys:log('Walshaw2000SpringElectrical:   compute force based layout')
+function SpringElectricalWalshaw2000:computeForceLayout(graph, spring_length)
+  --Sys:log('SpringElectricalWalshaw2000:   compute force based layout')
 
   -- global (=repulsive) force function
   local function accurate_repulsive_force(distance, weight) 
@@ -248,7 +248,7 @@ function Walshaw2000SpringElectrical:computeForceLayout(graph, spring_length)
   local i = 0
     
   while not converged and i < self.iterations do
-    --Sys:log('Walshaw2000SpringElectrical:     iteration ' .. i .. ' (max: ' .. self.iterations .. ')')
+    --Sys:log('SpringElectricalWalshaw2000:     iteration ' .. i .. ' (max: ' .. self.iterations .. ')')
   
     -- assume that we are converging
     converged = true
@@ -406,7 +406,7 @@ end
 
 --- Fixes nodes at their specified positions.
 --
-function Walshaw2000SpringElectrical:fixateNodes(graph)
+function SpringElectricalWalshaw2000:fixateNodes(graph)
   local number_of_fixed_nodes = 0
 
   for node in table.value_iter(graph.nodes) do
@@ -434,7 +434,7 @@ end
 
 
 
-function Walshaw2000SpringElectrical:buildQuadtree(graph)
+function SpringElectricalWalshaw2000:buildQuadtree(graph)
   -- compute the minimum x and y coordinates of all nodes
   local min_pos = table.combine_values(graph.nodes, function (min_pos, node)
     return Vector:new(2, function (n) 

@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/model/pgflibrarygraphdrawing-node.lua,v 1.1 2012/04/03 21:41:45 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/model/pgflibrarygraphdrawing-node.lua,v 1.2 2012/04/05 10:04:13 tantau Exp $
 
 -- This file defines a node class, used in the graph representation.
 
@@ -70,11 +70,14 @@ end
 --- Returns the value of the node option \meta{name}.
 --
 -- @param name Name of the node option.
+-- @param graph If this optional argument is given, 
+--        in case the option is not set as a node parameter, 
+--        we try to look it up as a graph parameter.
 --
 -- @return The value of the node option \meta{name} or |nil|.
 --
-function Node:getOption(name)
-   return self.options[name] or Interface.defaultGraphParameters[name]
+function Node:getOption(name, graph)
+   return self.options[name] or (graph and graph.options[name]) or Interface.defaultGraphParameters[name]
 end
 
 
