@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgflibrarygraphdrawing.layered.code.tex,v 1.8 2012/03/21 19:48:36 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgflibrarygraphdrawing.layered.code.tex,v 1.12 2012/04/05 10:04:12 tantau Exp $
 
 
 
@@ -52,7 +52,7 @@
   {layered layout}
   {layered layout}
   {
-    algorithm=modular layered,
+    algorithm=Modular Layered Sugiyama,
     %
     layered layout/cycle removal/.graph parameter,
     layered layout/cycle removal/.parameter initial=GansnerKNV1993,
@@ -71,20 +71,6 @@
   }
 
 
-
-%
-% Algorithm for generating layered layouts of directed graphs, based
-% on the paper
-%
-%   "A Technique for Drawing Directed Graphs"
-%   Gansner, Koutsofios, North, Vo, 1993
-%
-\pgfgddeclarealgorithmkey
-  {layered layout'}
-  {layered layout}
-  {
-    algorithm=GansnerKNV1993 layered,
-  }
 
 
 \endinput

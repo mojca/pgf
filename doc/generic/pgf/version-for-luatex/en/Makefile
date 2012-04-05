@@ -5,6 +5,8 @@ luadoc = luadoc --doclet luadoc.doclet.tex -t "luadoc/doclet/tex" --taglet luado
 TEXINPUTS := ../../text-en:../../images:$(TEXINPUTS)
 LUA_PATH := ./luadoc/?.lua:$LUA_PATH
 
+lua_gd_library_files=`find ../../../../../generic/pgf/graphdrawing/core/lualayer | grep "\\.lua$$"`
+
 all: $(doc).pdf
 
 # make dist will also enable automatic cross references in codeexamples.
@@ -30,19 +32,19 @@ pgfmanual.pdf: $(doc).tex $(doc).ind
 	@echo "Use 'make dist' to generate auto-xrefs."
 
 genluadoc:
-	$(luadoc) ../../../../../generic/pgf/libraries/graphdrawing/lua/pgflibrarygraphdrawing-box.lua
-	$(luadoc) ../../../../../generic/pgf/libraries/graphdrawing/lua/pgflibrarygraphdrawing-edge.lua
-	$(luadoc) ../../../../../generic/pgf/libraries/graphdrawing/lua/pgflibrarygraphdrawing-graph.lua 
-	$(luadoc) ../../../../../generic/pgf/libraries/graphdrawing/lua/pgflibrarygraphdrawing-interface.lua
-	$(luadoc) ../../../../../generic/pgf/libraries/graphdrawing/lua/pgflibrarygraphdrawing-iter.lua
-	$(luadoc) ../../../../../generic/pgf/libraries/graphdrawing/lua/pgflibrarygraphdrawing-node.lua
-	$(luadoc) ../../../../../generic/pgf/libraries/graphdrawing/lua/pgflibrarygraphdrawing-path.lua 
-	$(luadoc) ../../../../../generic/pgf/libraries/graphdrawing/lua/pgflibrarygraphdrawing-string.lua
-	$(luadoc) ../../../../../generic/pgf/libraries/graphdrawing/lua/pgflibrarygraphdrawing-sys.lua
-	$(luadoc) ../../../../../generic/pgf/libraries/graphdrawing/lua/pgflibrarygraphdrawing-table.lua
-	$(luadoc) ../../../../../generic/pgf/libraries/graphdrawing/lua/pgflibrarygraphdrawing-texboxregister.lua
-	$(luadoc) ../../../../../generic/pgf/libraries/graphdrawing/lua/pgflibrarygraphdrawing-traversal.lua
-	$(luadoc) ../../../../../generic/pgf/libraries/graphdrawing/lua/pgflibrarygraphdrawing-vector.lua
+	$(luadoc) ../../../../../generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-box.lua
+	$(luadoc) ../../../../../generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-edge.lua
+	$(luadoc) ../../../../../generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-graph.lua 
+	$(luadoc) ../../../../../generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-interface.lua
+	$(luadoc) ../../../../../generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-iter.lua
+	$(luadoc) ../../../../../generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-node.lua
+	$(luadoc) ../../../../../generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-path.lua 
+	$(luadoc) ../../../../../generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-string.lua
+	$(luadoc) ../../../../../generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-sys.lua
+	$(luadoc) ../../../../../generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-table.lua
+	$(luadoc) ../../../../../generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-texboxregister.lua
+	$(luadoc) ../../../../../generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-traversal.lua
+	$(luadoc) ../../../../../generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-vector.lua
 
 FORCE:
 

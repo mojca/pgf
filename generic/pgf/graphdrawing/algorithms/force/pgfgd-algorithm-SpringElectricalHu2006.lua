@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/force/pgfgd-algorithm-Hu2006SpringElectrical.lua,v 1.3 2012/04/03 21:17:55 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/force/pgfgd-algorithm-SpringElectricalHu2006.lua,v 1.1 2012/04/05 10:04:11 tantau Exp $
 
 
 
@@ -23,7 +23,7 @@
 
 
 graph_drawing_algorithm {
-  name = 'Hu2006SpringElectrical',
+  name = 'SpringElectricalHu2006',
   properties = {
     split_into_connected_components = true
   },
@@ -46,7 +46,7 @@ graph_drawing_algorithm {
 }
 
 
-function Hu2006SpringElectrical:constructor()
+function SpringElectricalHu2006:constructor()
 
   -- Adjust types
   self.downsize_ratio = math.max(0, math.min(1, self.downsize_ratio))
@@ -76,7 +76,7 @@ end
 
 
 
-function Hu2006SpringElectrical:run()
+function SpringElectricalHu2006:run()
   -- initialize the coarse graph data structure. note that the algorithm
   -- is the same regardless whether coarsening is used, except that the 
   -- number of coarsening steps without coarsening is 0
@@ -113,7 +113,7 @@ function Hu2006SpringElectrical:run()
     -- additionally improve the layout with the force-based algorithm
     -- if there are more than two nodes in the coarsest graph
     if coarse_graph:getSize() > 2 then
-      self:computeForceLayout(coarse_graph.graph, spring_length, Hu2006SpringElectrical.adaptive_step_update)
+      self:computeForceLayout(coarse_graph.graph, spring_length, SpringElectricalHu2006.adaptive_step_update)
     end
 
     -- undo coarsening step by step, applying the force-based sub-algorithm
@@ -140,7 +140,7 @@ function Hu2006SpringElectrical:run()
       end
 
       -- compute forces in the graph
-      self:computeForceLayout(coarse_graph.graph, spring_length, Hu2006SpringElectrical.conservative_step_update)
+      self:computeForceLayout(coarse_graph.graph, spring_length, SpringElectricalHu2006.conservative_step_update)
     end
   else
     -- compute a random initial layout for the coarsest graph
@@ -153,13 +153,13 @@ function Hu2006SpringElectrical:run()
     spring_length = spring_length / #coarse_graph.graph.edges
 
     -- improve the layout with the force-based algorithm
-    self:computeForceLayout(coarse_graph.graph, spring_length, Hu2006SpringElectrical.adaptive_step_update)
+    self:computeForceLayout(coarse_graph.graph, spring_length, SpringElectricalHu2006.adaptive_step_update)
   end
 end
 
 
 
-function Hu2006SpringElectrical:computeInitialLayout(graph, spring_length)
+function SpringElectricalHu2006:computeInitialLayout(graph, spring_length)
   -- TODO how can supernodes and fixed nodes go hand in hand? 
   -- maybe fix the supernode if at least one of its subnodes is 
   -- fixated?
@@ -184,7 +184,7 @@ function Hu2006SpringElectrical:computeInitialLayout(graph, spring_length)
       local distance = 3 * spring_length * self.graph_density * math.sqrt(self.graph_size) / 2
       local displacement = direction:normalized():timesScalar(distance)
 
-      Sys:log('Hu2006SpringElectrical: distance = ' .. distance)
+      Sys:log('SpringElectricalHu2006: distance = ' .. distance)
 
       graph.nodes[loose_index].pos = graph.nodes[fixed_index].pos:plus(displacement)
     else
@@ -209,7 +209,7 @@ end
 
 
 
-function Hu2006SpringElectrical:computeForceLayout(graph, spring_length, step_update_func)
+function SpringElectricalHu2006:computeForceLayout(graph, spring_length, step_update_func)
   -- global (=repulsive) force function
   function accurate_repulsive_force(distance, weight)
     -- note: the weight is taken into the equation here. unlike in the original
@@ -405,7 +405,7 @@ end
 
 --- Fixes nodes at their specified positions.
 --
-function Hu2006SpringElectrical:fixateNodes(graph)
+function SpringElectricalHu2006:fixateNodes(graph)
   local number_of_fixed_nodes = 0
 
   for node in table.value_iter(graph.nodes) do
@@ -433,7 +433,7 @@ end
 
 
 
-function Hu2006SpringElectrical:buildQuadtree(graph)
+function SpringElectricalHu2006:buildQuadtree(graph)
   -- compute the minimum x and y coordinates of all nodes
   local min_pos = table.combine_values(graph.nodes, function (min_pos, node)
     return Vector:new(2, function (n) 
@@ -479,13 +479,13 @@ end
 
 
 
-function Hu2006SpringElectrical.conservative_step_update(step, cooling_factor)
+function SpringElectricalHu2006.conservative_step_update(step, cooling_factor)
   return cooling_factor * step, nil
 end
 
 
 
-function Hu2006SpringElectrical.adaptive_step_update(step, cooling_factor, energy, old_energy, progress)
+function SpringElectricalHu2006.adaptive_step_update(step, cooling_factor, energy, old_energy, progress)
   if energy < old_energy then
     progress = progress + 1
     if progress >= 5 then
@@ -501,7 +501,7 @@ end
 
 
 
-function Hu2006SpringElectrical:dumpGraph(graph, title)
+function SpringElectricalHu2006:dumpGraph(graph, title)
   Sys:log(title .. ':')
   for node in table.value_iter(graph.nodes) do
     Sys:log('  node ' .. node.name)
