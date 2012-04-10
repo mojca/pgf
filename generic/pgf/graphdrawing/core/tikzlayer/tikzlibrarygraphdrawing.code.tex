@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/tikzlayer/tikzlibrarygraphdrawing.code.tex,v 1.9 2012/03/29 19:38:39 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/tikzlayer/tikzlibrarygraphdrawing.code.tex,v 1.11 2012/04/10 23:12:21 tantau Exp $
 
 \usepgflibrary{graphdrawing}
 
@@ -32,8 +32,10 @@
         /tikz/growth function=\relax,
         /tikz/edge from parent macro=\tikz@gd@edge@from@parent@macro,
       }   
-      \pgfgdsetedgecallback{\pgfgdtikzedgecallback}
+      \pgfgdsetedgecallback{\pgfgdtikzedgecallback}%
       \pgfgdbeginscope%
+        \let\tikzgdeventcallback\pgfgdevent%
+        \let\tikzgdeventgroupcallback\pgfgdeventgroup%
     },
     /tikz/execute at end scope={
       \pgfgdendscope
@@ -55,7 +57,7 @@
     % 
     % Redirect "at" key to "desired at"
     % 
-    /tikz/at/.style={/graph drawing/desired at={##1}}
+    /tikz/at/.style={/graph drawing/desired at={##1}},
   },
   % Link in...
   /graph drawing/at begin scope/.forward to=/tikz/graph drawing scope,

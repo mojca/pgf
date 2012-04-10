@@ -8,7 +8,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/graphs/tikzlibrarygraphs.code.tex,v 1.27 2012/03/29 21:20:21 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/graphs/tikzlibrarygraphs.code.tex,v 1.29 2012/04/10 23:12:20 tantau Exp $
 
 
 % 
@@ -703,6 +703,8 @@
   % Save action for next node
   \expandafter\def\expandafter\tikz@lib@graph@stored@actions\expandafter{%
     \expandafter\tikz@lib@graph@joiner\expandafter{\tikz@lib@graph@arrow@type}{#1}}%
+  % 
+  \tikzgdeventgroupcallback{descendants}%
   \tikz@lib@graph@parse@one%
 }
 
@@ -829,6 +831,7 @@
   \let\tikzgraphnodeas\tikzgraphnodeas@default%
   \pgfutil@ifnextchar\pgf@stop{%
     \ifx\tikz@lib@graph@name@only\pgfutil@empty%
+      \tikzgdeventcallback{node}{}%
     \else
       \expandafter\tikz@lib@graph@noskip%
     \fi%
@@ -893,7 +896,6 @@
           \iftikz@lib@graph@all%
             \tikzgraphsset{#1}\pgfkeysvalueof{/tikz/graphs/@operators}%
           \else%
-            % 
             \pgfkeys{/tikz/graphs/placement/place}%
             \let\tikzgraphnodetext\tikz@lib@graph@node@text%
             \let\tikzgraphnodepath\tikz@lib@graph@path%
@@ -1072,7 +1074,8 @@
 % Handle scope 
 %
 \def\tikz@lib@graph@scope#1{
-  \begingroup
+  \begingroup%
+    \tikzgdeventgroupcallback{array}%
     \let\tikz@lib@graph@node@list\pgfutil@empty%
     \tikz@lib@graph@start@hint@group%
       \tikz@lib@graph@parse@group{#1}%
@@ -1797,7 +1800,7 @@
 % keys. Typically, this key should execute node={shift=(...)} to setup
 % the necessary shift for a new node.
 % 
-% The key placment/compute position should not be called
+% The key placement/compute position should not be called
 % directly. Instead, the key placement/place should be used. This key
 % has two effects: First, it calls placement/compute position. Second,
 % it resets the length and normal counters. It will setup a completely

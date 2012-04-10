@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/model/pgflibrarygraphdrawing-graph.lua,v 1.1 2012/04/03 21:41:45 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/model/pgflibrarygraphdrawing-graph.lua,v 1.2 2012/04/10 23:12:21 tantau Exp $
 
 -- This file defines a graph class, which later represents user created
 -- graphs.
@@ -29,9 +29,8 @@ Graph.__index = Graph
 --                |nodes|: The nodes of the graph.\par
 --                |edges|: The edges of the graph.\par
 --                |clusters|: The node clusters of the graph.\par
---                |pos|: Initial position of the graph.\par
 --                |options|: A table of node options passed over from \tikzname.
---                |flags|: A table of flags for use by graph algorithms.
+--                |events|: A sequence of events signaled during the graph specification.
 --
 -- @return A newly-allocated graph.
 --
@@ -40,7 +39,8 @@ function Graph:new(values)
     nodes = {},
     edges = {},
     clusters = {},
-    options = {}
+    options = {},
+    events = {},
   }
   setmetatable(defaults, Graph)
   local result = table.custom_merge(values, defaults)
@@ -91,7 +91,7 @@ end
 -- @return A shallow copy of the graph.
 --
 function Graph:copy ()
-   return Graph:new({options = self.options})
+   return Graph:new({options = self.options, events = self.events})
 end
 
 

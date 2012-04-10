@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/model/pgflibrarygraphdrawing-node.lua,v 1.2 2012/04/05 10:04:13 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/model/pgflibrarygraphdrawing-node.lua,v 1.3 2012/04/10 23:12:21 tantau Exp $
 
 -- This file defines a node class, used in the graph representation.
 
@@ -16,8 +16,14 @@ pgf.module("pgf.graphdrawing")
 
 
 
+
+-- First class: A normal node 
+
 Node = Box:new{}
 Node.__index = Node
+
+-- This class is subclassed from Box, but this is more for 
+-- historical reasons and should be changed.
 
 
 
@@ -35,7 +41,8 @@ Node.__index = Node
 --
 function Node:new(values)
   local defaults = {
-    name = "node",
+    class = Node,
+    name = nil,
     tex = { 
       texNode = nil,
       maxX = 0,
@@ -48,6 +55,7 @@ function Node:new(values)
     options = {},
     growth_direction = nil,
     index = nil,
+    event_index = nil,
   }
   setmetatable(defaults, Node)
   local result = table.custom_merge(values, defaults)
@@ -248,5 +256,36 @@ function Node:__tostring()
   Node.__tostring = nil
   local result = "Node<" .. tostring(self) .. ">(" .. self.name .. ")"
   Node.__tostring = tmp
+  return result
+end
+
+
+
+
+
+
+
+
+--- Virtual node class
+--
+-- A virtual node is a node that is not part of the original graph,
+-- but that is used/needed for the graph drawing alogrithm.
+
+VirtualNode = Node:new{}
+VirtualNode.__index = VirtualNode
+
+
+--- Creates a new virtual node.
+--
+-- @param values  Values to override default node settings.
+--
+-- @return A newly allocated node.
+--
+function VirtualNode:new(values)
+  local defaults = Node:new {
+    class = VirtualNode,
+  }
+  setmetatable(defaults, VirtualNode)
+  local result = table.custom_merge(values, defaults)
   return result
 end

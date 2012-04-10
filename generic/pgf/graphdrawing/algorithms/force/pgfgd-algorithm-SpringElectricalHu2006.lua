@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/force/pgfgd-algorithm-SpringElectricalHu2006.lua,v 1.1 2012/04/05 10:04:11 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/force/pgfgd-algorithm-SpringElectricalHu2006.lua,v 1.2 2012/04/10 23:12:20 tantau Exp $
 
 
 
@@ -25,7 +25,7 @@
 graph_drawing_algorithm {
   name = 'SpringElectricalHu2006',
   properties = {
-    split_into_connected_components = true
+    works_only_on_connected_graphs = true
   },
   graph_parameters = {
     iterations = {'spring electrical layout/iterations', tonumber},
