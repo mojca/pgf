@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgfgd-subalgorithm-NodePositioningGansnerKNV1993.lua,v 1.2 2012/04/10 23:12:21 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgfgd-subalgorithm-NodePositioningGansnerKNV1993.lua,v 1.3 2012/04/12 14:41:32 tantau Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -50,9 +50,7 @@ function NodePositioningGansnerKNV1993:run()
   for rank in table.value_iter(ranks) do
     local nodes = self.ranking:getNodes(rank)
     for node in table.value_iter(nodes) do
-      node.pos:set{
-        x = x_ranking:getRank(node.aux_node),
-      }
+      node.pos.x = x_ranking:getRank(node.aux_node)
       node[self.main_algorithm] = node[self.main_algorithm] or {}
       node[self.main_algorithm].y = rank
     end

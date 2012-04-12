@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/preprocessing/pgflibrarygraphdrawing-growth-adjust.lua,v 1.2 2012/04/12 00:25:47 tantau Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/preprocessing/Attic/pgflibrarygraphdrawing-growth-adjust.lua,v 1.3 2012/04/12 14:41:33 tantau Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -92,7 +92,7 @@ function growth_adjust.compute_bounding_boxes(graph, algorithm)
   if r then
     local angle = r.to_angle -
       (r.from_angle or
-       math.atan2(r.to_node.pos:y() - r.from_node.pos:y(), r.to_node.pos:x() - r.from_node.pos:x()))
+       math.atan2(r.to_node.pos.y - r.from_node.pos.y, r.to_node.pos.x - r.from_node.pos.x))
 
     for _,n in ipairs(graph.nodes) do
       if n.tex.shape == "circle" and

@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/postprocessing/pgflibrarygraphdrawing-anchoring.lua,v 1.2 2012/04/12 00:25:47 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/postprocessing/Attic/pgflibrarygraphdrawing-anchoring.lua,v 1.3 2012/04/12 14:41:33 tantau Exp $
 
 --- This file contains a number of standard graph algorithms such as Dijkstra.
 
@@ -63,8 +63,8 @@ function anchoring.perform_post_layout_steps(graph)
    
   local anchor_node = graph.anchor_node or graph.nodes[1]
    
-  local anchor_x = anchor_node.pos:x()
-  local anchor_y = anchor_node.pos:y()
+  local anchor_x = anchor_node.pos.x
+  local anchor_y = anchor_node.pos.y
   
   local desired = anchor_node:getOption('/graph drawing/desired at') or graph:getOption('/graph drawing/anchor at') 
   
@@ -78,17 +78,13 @@ function anchoring.perform_post_layout_steps(graph)
    
    -- Step 3: Shift nodes
    for node in table.value_iter(graph.nodes) do
-     node.pos:set{
-       x = node.pos:x() + delta_x,
-       y = node.pos:y() + delta_y
-     }
+     node.pos.x = node.pos.x + delta_x
+     node.pos.y = node.pos.y + delta_y
    end
    for edge in table.value_iter(graph.edges) do
      for point in table.value_iter(edge.bend_points) do
-       point:set{
-	 x = point:x() + delta_x,
-	 y = point:y() + delta_y
-       }
+       point.x = point.x + delta_x
+       point.y = point.y + delta_y
      end
    end
 end

@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/trees/pgfgd-algorithm-TreeReingoldTilford1981.lua,v 1.1 2012/04/10 23:12:21 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/trees/pgfgd-algorithm-TreeReingoldTilford1981.lua,v 1.2 2012/04/12 14:41:32 tantau Exp $
 
 
 --- An implementation of the Reingold-Tilford algorithm
@@ -42,7 +42,7 @@ function TreeReingoldTilford1981:run()
 
   -- Update x positions
   for _,n in ipairs(self.graph.nodes) do
-    n.pos:set { x = n[self].x }
+    n.pos.x = n[self].x 
   end
 
 end

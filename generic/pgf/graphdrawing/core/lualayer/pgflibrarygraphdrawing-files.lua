@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/pgflibrarygraphdrawing-files.lua,v 1.10 2012/04/10 23:12:21 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/Attic/pgflibrarygraphdrawing-files.lua,v 1.11 2012/04/12 14:41:32 tantau Exp $
 
 -- This file defines a list of initial files to load.
 
@@ -20,8 +20,6 @@ local files = {
   "sys",
   "vector",
   "quadtree",
-  "path",
-  "box",
   "node",
   "edge",
   "cluster",

@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/texinterface/pgflibrarygraphdrawing-interface.lua,v 1.3 2012/04/10 23:12:21 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/texinterface/Attic/pgflibrarygraphdrawing-interface.lua,v 1.4 2012/04/12 14:41:33 tantau Exp $
 
 -- This file defines the Interface global object, which is used as a
 -- simplified frontend in the TeX part of the library.
@@ -251,7 +251,7 @@ function Interface:drawGraph()
   local start = os.clock()
   -- Ok, everything setup.
   
-  run_graph_drawing_pipeline(self.graph, algorithm_class)
+  pipeline.run_graph_drawing_pipeline(self.graph, algorithm_class)
   
   local stop = os.clock()
   Sys:log(string.format("Graph drawing engine: algorithm '" .. name .. "' took %.4f seconds", stop - start))
@@ -295,8 +295,8 @@ function Interface:drawNode(node)
                 node.tex.minY,
                 node.tex.maxX,
                 node.tex.maxY,
-                node.pos:x(),
-                node.pos:y(),
+                node.pos.x,
+                node.pos.y,
                 node.tex.texLateSetup)
 end
 

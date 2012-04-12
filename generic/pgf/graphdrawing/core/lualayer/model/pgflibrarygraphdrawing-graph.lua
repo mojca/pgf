@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/model/pgflibrarygraphdrawing-graph.lua,v 1.2 2012/04/10 23:12:21 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/model/Attic/pgflibrarygraphdrawing-graph.lua,v 1.3 2012/04/12 14:41:33 tantau Exp $
 
 -- This file defines a graph class, which later represents user created
 -- graphs.
@@ -17,7 +17,7 @@ pgf.module("pgf.graphdrawing")
 
 
 
-Graph = Box:new()
+Graph = {}
 Graph.__index = Graph
 
 

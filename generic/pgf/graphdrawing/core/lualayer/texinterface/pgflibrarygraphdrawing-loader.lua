@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/texinterface/pgflibrarygraphdrawing-loader.lua,v 1.1 2012/04/03 21:41:45 tantau Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/texinterface/Attic/pgflibrarygraphdrawing-loader.lua,v 1.2 2012/04/12 14:41:33 tantau Exp $
 
 -- This file is the main entry point from the TeX part of the
 -- library.  It defines a module system, which is used in all other Lua
@@ -323,10 +323,6 @@ function graph_drawing_algorithm(info)
 	else
 	  obj[k] = g:getOption('/graph drawing/' .. v)
 	end
-      end
-
-      if obj.constructor then
-	obj:constructor()
       end
 
       return obj

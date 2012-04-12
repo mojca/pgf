@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/algorithms/pgflibrarygraphdrawing-spacing.lua,v 1.1 2012/04/10 23:12:21 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/algorithms/Attic/pgflibrarygraphdrawing-spacing.lua,v 1.2 2012/04/12 14:41:32 tantau Exp $
 
 -- This file defines an edge class, used in the graph representation.
 
@@ -129,14 +129,14 @@ function spacing.arrange_layers_by_baselines (algorithm, graph)
     local height = 0
 
     for _,n in ipairs(layers[1]) do
-      n.pos:set { y = 0 }
+      n.pos.y = 0
     end
     
     for i=2,#layers do
       height = height + spacing.baseline_distance(algorithm, graph, layers[i-1], layers[i])
 
       for _,n in ipairs(layers[i]) do
-	n.pos:set { y = height }
+	n.pos.y = height 
       end
     end
   end

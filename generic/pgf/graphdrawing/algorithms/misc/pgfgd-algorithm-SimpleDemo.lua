@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/misc/pgfgd-algorithm-SimpleDemo.lua,v 1.2 2012/04/03 21:17:55 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/misc/pgfgd-algorithm-SimpleDemo.lua,v 1.3 2012/04/12 14:41:32 tantau Exp $
 
 -- This file contains an example of how a very simple algorithm can be
 -- implemented by a user.
@@ -30,8 +30,8 @@ function SimpleDemo:run()
       -- the interesting part...
       local node_radius = tonumber(node:getOption('/graph drawing/node radius')
                                    or radius)
-      node.pos:set{x = node_radius * math.cos(i * alpha)}
-      node.pos:set{y = node_radius * math.sin(i * alpha)}
+      node.pos.x = node_radius * math.cos(i * alpha)
+      node.pos.y = node_radius * math.sin(i * alpha)
       i = i + 1
    end
 end
