@@ -8,7 +8,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/basiclayer/pgflibrarygraphdrawing.code.tex,v 1.23 2012/04/12 00:25:47 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/basiclayer/pgflibrarygraphdrawing.code.tex,v 1.24 2012/04/12 15:16:07 tantau Exp $
 
 
 
@@ -41,7 +41,7 @@
 % Initialize the lua graph drawing environment
 %
 \directlua{
-  local file = 'pgflibrarygraphdrawing-loader.lua'
+  local file = 'pgfgd-core-loader.lua'
   local format = 'tex'
   % Use either resolvers or kpse to locate files.
   if resolvers then
@@ -1435,7 +1435,7 @@
     \def\pgfpositionnodelaterpostsetup{#9}
     \setbox\pgf@gd@box=\box\pgfutil@voidb@x
     \directlua{
-      texnode = pgf.graphdrawing.TeXBoxRegister:getBox(#8)
+      texnode = pgf.graphdrawing.Interface:getBox(#8)
       tex.box[\the\pgf@gd@box] = texnode
     }
     \setbox\pgfpositionnodelaterbox=\box\pgf@gd@box
