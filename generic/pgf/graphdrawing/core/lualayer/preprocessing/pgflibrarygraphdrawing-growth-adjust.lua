@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/preprocessing/pgflibrarygraphdrawing-growth-adjust.lua,v 1.1 2012/04/10 23:12:21 tantau Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/preprocessing/pgflibrarygraphdrawing-growth-adjust.lua,v 1.2 2012/04/12 00:25:47 tantau Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -28,8 +28,7 @@ function growth_adjust.prepare_post_layout_orientation(graph, algorithm)
 	return false
       elseif growth_direction then
 	graph[algorithm].rotate_around = {
-	  x = node.pos:x(),
-	  y = node.pos:y(),
+	  from_node = node,
 	  from_angle = tonumber(growth_direction)/360*2*math.pi,
 	  to_angle = tonumber(grow)/360*2*math.pi,
 	  swap =  flag
@@ -47,13 +46,9 @@ function growth_adjust.prepare_post_layout_orientation(graph, algorithm)
 	
 	for _, other in ipairs(t) do
 	  if other ~= node then
-	    local x = other.pos:x() - node.pos:x()
-	    local y = other.pos:y() - node.pos:y()
-	    local angle = math.atan2(y,x)
 	    graph[algorithm].rotate_around = {
-	      x = node.pos:x(),
-	      y = node.pos:y(),
-	      from_angle = angle,
+	      from_node = node,
+	      to_node = other,
 	      to_angle = tonumber(grow)/360*2*math.pi,
 	      swap = flag
 	    }
@@ -95,7 +90,9 @@ function growth_adjust.compute_bounding_boxes(graph, algorithm)
   local r = graph[algorithm].rotate_around
 
   if r then
-    local angle = (r.to_angle - r.from_angle)
+    local angle = r.to_angle -
+      (r.from_angle or
+       math.atan2(r.to_node.pos:y() - r.from_node.pos:y(), r.to_node.pos:x() - r.from_node.pos:x()))
 
     for _,n in ipairs(graph.nodes) do
       if n.tex.shape == "circle" and
