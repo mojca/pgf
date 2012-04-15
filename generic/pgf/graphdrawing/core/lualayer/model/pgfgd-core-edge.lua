@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/model/pgfgd-core-edge.lua,v 1.1 2012/04/12 15:16:07 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/model/pgfgd-core-edge.lua,v 1.2 2012/04/15 17:21:25 tantau Exp $
 
 -- This file defines an edge class, used in the graph representation.
 
@@ -59,8 +59,12 @@ function Edge:new(values)
     event_index = nil,
   }
   setmetatable(defaults, Edge)
-  local result = table.custom_merge(values, defaults)
-  return result
+  if values then
+    for k,v in pairs(values) do
+      defaults[k] = v
+    end
+  end
+  return defaults
 end
 
 
