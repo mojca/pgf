@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/control/pgfgd-core-orientation.lua,v 1.1 2012/04/12 15:16:07 tantau Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/control/pgfgd-core-orientation.lua,v 1.2 2012/04/15 17:21:25 tantau Exp $
 
 pgf.module("pgf.graphdrawing")
 
@@ -159,7 +159,7 @@ function orientation.perform_post_layout_steps(algorithm)
 
    -- Computed during preprocessing:
    local r = algorithm.graph[algorithm].rotate_around 
-   if r then
+   if r and r.from_node.growth_direction ~= "fixed" and algorithm.growth_direction ~= "fixed" then
      local x = r.from_node.pos.x
      local y = r.from_node.pos.y
      local from_angle = r.from_angle or math.atan2(r.to_node.pos.y - y, r.to_node.pos.x - x)

@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/control/pgfgd-core-loader.lua,v 1.1 2012/04/12 15:16:07 tantau Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/control/pgfgd-core-loader.lua,v 1.2 2012/04/15 22:28:07 tantau Exp $
 
 -- This file is the main entry point from the TeX part of the
 -- library.  It defines a module system, which is used in all other Lua
@@ -345,10 +345,10 @@ function graph_drawing_algorithm(info)
   _M[info.name].__index = class
 
   _M[info.name].new = 
-    function (self, g) 
+    function (self, g, algo) 
 
       -- Create new object
-      local obj = { graph = g }
+      local obj = { graph = g, parent_algorithm = algo }
       setmetatable(obj, class)
 
       -- Setup graph_options
@@ -363,6 +363,7 @@ function graph_drawing_algorithm(info)
       return obj
     end
 end
+
 
 function toboolean(string)
   return string == "true"
