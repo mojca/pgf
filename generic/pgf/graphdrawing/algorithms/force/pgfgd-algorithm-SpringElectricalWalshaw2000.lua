@@ -8,8 +8,10 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/force/pgfgd-algorithm-SpringElectricalWalshaw2000.lua,v 1.3 2012/04/12 14:41:32 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/force/pgfgd-algorithm-SpringElectricalWalshaw2000.lua,v 1.6 2012/04/17 22:40:45 tantau Exp $
 
+local lib = require "pgf.gd.lib"
+local QuadTree = require "pgf.gd.force.QuadTree"
 
 
 --- Implementation of a spring-electrical graph drawing algorithm.
@@ -133,8 +135,6 @@ function SpringElectricalWalshaw2000:run()
     -- undo coarsening step by step, applying the force-based sub-algorithm
     -- to every intermediate coarse graph as well as the original graph
     while coarse_graph:getLevel() > 0 do
-      --Sys:log('generating layout for coarse graph ' .. coarse_graph:getLevel()-1)
-
       -- interpolate the previous coarse graph
       coarse_graph:interpolate()
 
@@ -178,7 +178,7 @@ function SpringElectricalWalshaw2000:computeInitialLayout(graph, spring_length)
 
       -- position the loose node relative to the fixed node, with
       -- the displacement (random direction) matching the spring length
-      local direction = Vector:new{x = math.random(1, 2), y = math.random(1, 2)}
+      local direction = lib.Vector:new{x = math.random(1, 2), y = math.random(1, 2)}
       local distance = 3 * spring_length * self.graph_density * math.sqrt(self.graph_size) / 2
       local displacement = direction:normalized():timesScalar(distance)
 
@@ -207,8 +207,6 @@ end
 
 
 function SpringElectricalWalshaw2000:computeForceLayout(graph, spring_length)
-  --Sys:log('SpringElectricalWalshaw2000:   compute force based layout')
-
   -- global (=repulsive) force function
   local function accurate_repulsive_force(distance, weight) 
     return - self.spring_constant * weight * math.pow(spring_length, self.repulsive_force_order + 1) / math.pow(distance, self.repulsive_force_order)
@@ -249,7 +247,6 @@ function SpringElectricalWalshaw2000:computeForceLayout(graph, spring_length)
   local i = 0
     
   while not converged and i < self.iterations do
-    --Sys:log('SpringElectricalWalshaw2000:     iteration ' .. i .. ' (max: ' .. self.iterations .. ')')
   
     -- assume that we are converging
     converged = true
@@ -266,7 +263,7 @@ function SpringElectricalWalshaw2000:computeForceLayout(graph, spring_length)
     -- iterate over all nodes
     for v in iter.filter(table.value_iter(graph.nodes), nodeNotFixed) do
       -- vector for the displacement of v
-      local d = Vector:new(2)
+      local d = lib.Vector:new(2)
 
       -- repulsive force induced by other nodes
       local repulsive_forces = {}
@@ -439,14 +436,14 @@ end
 function SpringElectricalWalshaw2000:buildQuadtree(graph)
   -- compute the minimum x and y coordinates of all nodes
   local min_pos = table.combine_values(graph.nodes, function (min_pos, node)
-    return Vector:new(2, function (n) 
+    return lib.Vector:new(2, function (n) 
       return math.min(min_pos[n], node.pos[n])
     end)
   end, graph.nodes[1].pos)
 
   -- compute maximum x and y coordinates of all nodes
   local max_pos = table.combine_values(graph.nodes, function (max_pos, node)
-    return Vector:new(2, function (n) 
+    return lib.Vector:new(2, function (n) 
       return math.max(max_pos[n], node.pos[n])
     end)
   end, graph.nodes[1].pos)
@@ -454,7 +451,7 @@ function SpringElectricalWalshaw2000:buildQuadtree(graph)
   -- make sure the maximum position is at least a tiny bit
   -- larger than the minimum position
   if min_pos:equals(max_pos) then
-    max_pos = max_pos:plus(Vector:new(2, function (n)
+    max_pos = max_pos:plus(lib.Vector:new(2, function (n)
       return 0.1 + math.random() * 0.1
     end))
   end
@@ -467,12 +464,12 @@ function SpringElectricalWalshaw2000:buildQuadtree(graph)
 
   -- create the quadtree
   quadtree = QuadTree:new(min_pos.x, min_pos.y,
-                          max_pos.x - min_pos.x,
-                          max_pos.y - min_pos.y)
+			  max_pos.x - min_pos.x,
+			  max_pos.y - min_pos.y)
 
   -- insert nodes into the quadtree
   for node in table.value_iter(graph.nodes) do
-    local particle = Particle:new(node.pos, node.weight)
+    local particle = QuadTree.Particle:new(node.pos, node.weight)
     particle.node = node
     quadtree:insert(particle)
   end

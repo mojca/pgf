@@ -7,7 +7,9 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/trees/pgfgd-algorithm-TreeReingoldTilford1981.lua,v 1.2 2012/04/12 14:41:32 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/trees/pgfgd-algorithm-TreeReingoldTilford1981.lua,v 1.3 2012/04/17 22:40:47 tantau Exp $
+
+local lib = require "pgf.gd.lib"
 
 
 --- An implementation of the Reingold-Tilford algorithm
@@ -118,7 +120,7 @@ function TreeReingoldTilford1981:computeHorizontalPosition(node)
 	local n1 = right_borders[y]
 	if n1 then
 	  shift = math.max(shift, 
-			   spacing.ideal_sibling_distance(self, self.graph, n1, n2) + n1[self].x - n2[self].x)
+			   lib.NodeDistances:idealSiblingDistance(self, self.graph, n1, n2) + n1[self].x - n2[self].x)
 	end
 	if local_right_borders[y] then
 	  if y > child_depth and (left_borders[y][self].x - local_right_borders[y][self].x <= first_dist) then 
@@ -146,6 +148,6 @@ end
 
 function TreeReingoldTilford1981:computeVerticalPositions()
   
-  spacing.arrange_layers_by_baselines(self, self.graph)
+  lib.NodeDistances:arrangeLayersByBaselines(self, self.graph)
   
 end

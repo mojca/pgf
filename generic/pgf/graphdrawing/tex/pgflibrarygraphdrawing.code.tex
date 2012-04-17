@@ -8,7 +8,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/tex/pgflibrarygraphdrawing.code.tex,v 1.4 2012/04/17 10:56:42 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/tex/pgflibrarygraphdrawing.code.tex,v 1.5 2012/04/17 22:40:57 tantau Exp $
 
 
 
@@ -50,9 +50,9 @@
     dofile(assert(kpse.find_file('pgfgd-core-loader.lua', 'tex'),  'could not find pgfgd-core-loader.lua'))
   end
   % Now load controls
-  require 'pgf.gd.control'
-  require 'pgf.gd.lib'
-  require 'pgf.gd.model'
+  require 'pgf.gd.control.preload'
+  require 'pgf.gd.lib.preload'
+  require 'pgf.gd.model.preload'
 }
 
 

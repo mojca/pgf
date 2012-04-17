@@ -7,12 +7,14 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/utilities/pgfgd-core-depth-first-search.lua,v 1.1 2012/04/12 15:16:08 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/utilities/pgfgd-core-depth-first-search.lua,v 1.2 2012/04/17 22:40:50 tantau Exp $
 
 --- TODO Jannis: Add documentation.
 
 pgf.module("pgf.graphdrawing")
 
+
+local lib = require "pgf.gd.lib"
 
 
 DepthFirstSearch = {}
@@ -26,7 +28,7 @@ function DepthFirstSearch:new(init_func, visit_func, complete_func)
     visit_func = visit_func,
     complete_func = complete_func,
 
-    stack = Stack:new(),
+    stack = lib.Stack:new(),
     discovered = {},
     visited = {},
     completed = {},
@@ -64,7 +66,7 @@ function DepthFirstSearch:reset()
   self.discovered = {}
   self.visited = {}
   self.completed = {}
-  self.stack = Stack:new()
+  self.stack = lib.Stack:new()
 end
 
 

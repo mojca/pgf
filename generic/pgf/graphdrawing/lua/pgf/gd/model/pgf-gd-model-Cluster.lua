@@ -1,4 +1,5 @@
 -- Copyright 2011 by Jannis Pohlmann
+-- Copyright 2012 by Till Tantau
 --
 -- This file may be distributed an/or modified
 --
@@ -7,20 +8,22 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/model/pgfgd-core-cluster.lua,v 1.1 2012/04/12 15:16:07 tantau Exp $
-
---- This file defines a simple interface for clustering nodes. Every cluster
---- constists of a set of nodes and may have options that determine how 
---- algorithms treat the cluster. A layered drawing algorithm, for instance,
---- could use a cluster property to place a cluster at the minimum or maximum
---- rank in the final drawing.
-
-pgf.module('pgf.graphdrawing')
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/model/pgf-gd-model-Cluster.lua,v 1.2 2012/04/17 22:40:55 tantau Exp $
 
 
 
-Cluster = {}
+--- The Cluser class defines a model of a cluster inside a graph.
+--
+--
+
+local Cluster = {}
 Cluster.__index = Cluster
+
+
+-- Namespace
+
+local model   = require "pgf.gd.model"
+model.Cluster = Cluster
 
 
 
@@ -31,7 +34,6 @@ function Cluster:new(name)
     name = name,
     nodes = {},
     contains_node = {},
-    options = {},
   }
   setmetatable(cluster, Cluster)
   return cluster
@@ -48,7 +50,7 @@ end
 function Cluster:addNode(node)
   if not self:findNode(node) then
     self.contains_node[node] = true
-    table.insert(self.nodes, node)
+    self.nodes[#self.nodes + 1] = node
   end
 end
 
@@ -60,12 +62,7 @@ end
 
 
 
-function Cluster:setOption(name, value)
-  self.options[name] = value
-end
 
+-- Done
 
-
-function Cluster:getOption(name)
-  return self.options[name]
-end
+return Cluster

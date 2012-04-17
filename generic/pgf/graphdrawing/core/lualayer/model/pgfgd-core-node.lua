@@ -8,13 +8,13 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/model/pgfgd-core-node.lua,v 1.2 2012/04/15 17:21:25 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/model/pgfgd-core-node.lua,v 1.5 2012/04/17 22:40:49 tantau Exp $
 
 -- This file defines a node class, used in the graph representation.
 
 pgf.module("pgf.graphdrawing")
 
-
+local Vector = require "pgf.gd.lib.Vector"
 
 
 -- First class: A normal node 
@@ -92,7 +92,7 @@ end
 -- @return The value of the node option \meta{name} or |nil|.
 --
 function Node:getOption(name, graph)
-   return self.options[name] or (graph and graph.options[name]) or Interface.defaultGraphParameters[name]
+   return self.options[name] or (graph and graph.options[name]) or pgf.gd.control.TeXInterface.parameter_defaults[name]
 end
 
 
@@ -102,7 +102,7 @@ end
 -- @return Width of the node.
 --
 function Node:getTexWidth()
-	return math.abs(self.tex.maxX - self.tex.minX)
+  return math.abs(self.tex.maxX - self.tex.minX)
 end
 
 
@@ -144,7 +144,7 @@ end
 -- @return The number of adjacent edges of the node.
 --
 function Node:getDegree()
-	return table.count_pairs(self.edges)
+  return table.count_pairs(self.edges)
 end
 
 
