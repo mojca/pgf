@@ -1,4 +1,5 @@
 -- Copyright 2011 by Jannis Pohlmann
+-- Copyright 2012 by Till Tantau
 --
 -- This file may be distributed an/or modified
 --
@@ -7,18 +8,23 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/utilities/pgfgd-core-ranking.lua,v 1.1 2012/04/12 15:16:08 tantau Exp $
-
---- This file contains a helper class for managing node rankings as used
---- in layered drawing algorithms.
-
-pgf.module("pgf.graphdrawing")
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/layered/pgf-gd-layered-Ranking.lua,v 1.1 2012/04/18 15:28:18 tantau Exp $
 
 
 
-Ranking = {}
+--- The Ranking class is used by the Sugiyama algorithm to compute an ordering on the
+-- nodes of a layer
+
+local Ranking = {}
 Ranking.__index = Ranking
 
+-- Namespace
+local layered = require "pgf.gd.layered"
+layered.Ranking = Ranking
+
+
+
+-- TODO Jannis: document!
 
 
 function Ranking:new()
@@ -174,15 +180,12 @@ end
 
 
 function Ranking:normalizeRanks()
-  --Sys:log('normalize ranks:')
 
   -- get the current ranks
   local ranks = self:getRanks()
 
   local min_rank = ranks[1]
   local max_rank = ranks[#ranks]
-
-  --Sys:log('  min_rank = ' .. min_rank .. ', max_rank = ' .. max_rank)
 
   -- clear ranks
   self.rank_to_nodes = {}
@@ -191,8 +194,6 @@ function Ranking:normalizeRanks()
   for node in table.key_iter(self.position_in_rank) do
     local rank, pos = self:getNodeInfo(node)
     local new_rank = rank - (min_rank - 1)
-
-    --Sys:log('    rerank ' .. node.name .. ' from ' .. rank .. ' to ' .. new_rank)
     
     self.rank_to_nodes[new_rank] = self.rank_to_nodes[new_rank] or {}
     self.rank_to_nodes[new_rank][pos] = node
@@ -280,3 +281,9 @@ function Ranking:reorderTable(input, get_index_func, is_fixed_func)
     input[new_index] = input_copy[old_index]
   end
 end
+
+
+
+-- Done
+
+return Ranking

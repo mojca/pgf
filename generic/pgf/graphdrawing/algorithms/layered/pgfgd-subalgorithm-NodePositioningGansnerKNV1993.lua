@@ -7,10 +7,11 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgfgd-subalgorithm-NodePositioningGansnerKNV1993.lua,v 1.4 2012/04/17 22:40:47 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgfgd-subalgorithm-NodePositioningGansnerKNV1993.lua,v 1.5 2012/04/18 15:28:18 tantau Exp $
 
 
 local lib = require "pgf.gd.lib"
+local NetworkSimplex = require "pgf.gd.layered.NetworkSimplex"
 
 pgf.module("pgf.graphdrawing")
 
