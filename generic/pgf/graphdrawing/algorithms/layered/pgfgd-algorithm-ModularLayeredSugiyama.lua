@@ -7,9 +7,12 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgfgd-algorithm-ModularLayeredSugiyama.lua,v 1.4 2012/04/15 17:21:25 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgfgd-algorithm-ModularLayeredSugiyama.lua,v 1.7 2012/04/18 15:28:18 tantau Exp $
 
 
+local control = require "pgf.gd.control"
+local lib     = require "pgf.gd.lib"
+local Ranking = require "pgf.gd.layered.Ranking"
 
 
 --- An implementation of a modular version of the Sugiyama method
@@ -59,24 +62,24 @@ function ModularLayeredSugiyama:run()
   -- Create a subalgorithm object. Needed so that removed loops
   -- are not stored on top of removed loops from main call.
   local cluster_subalgorithm = { graph = self.graph } 
-  pipeline.prepare_graph_for_algorithm(cluster_subalgorithm)
+  self.graph:registerAlgorithm(cluster_subalgorithm)
 
   self:mergeClusters()
   
-  pipeline.remove_loops(cluster_subalgorithm)
-  pipeline.collapse_multiedges(cluster_subalgorithm, collapse)
+  lib.Simplifiers:removeLoops(cluster_subalgorithm)
+  lib.Simplifiers:collapseMultiedges(cluster_subalgorithm, collapse)
 
   self:removeCycles()
   self:rankNodes()
   self:restoreCycles()
 
-  pipeline.expand_multiedges(cluster_subalgorithm)
-  pipeline.restore_loops(cluster_subalgorithm)
+  lib.Simplifiers:expandMultiedges(cluster_subalgorithm)
+  lib.Simplifiers:restoreLoops(cluster_subalgorithm)
 
   self:expandClusters()
   
   -- Now do actual computation
-  pipeline.collapse_multiedges(cluster_subalgorithm, collapse)
+  lib.Simplifiers:collapseMultiedges(cluster_subalgorithm, collapse)
   self:removeCycles()
   self:insertDummyNodes()
   
@@ -86,7 +89,7 @@ function ModularLayeredSugiyama:run()
   
   -- Cleanup
   self:removeDummyNodes()
-  pipeline.expand_multiedges(cluster_subalgorithm)
+  lib.Simplifiers:expandMultiedges(cluster_subalgorithm)
   self:routeEdges()
   self:restoreCycles()
 
@@ -119,7 +122,7 @@ function ModularLayeredSugiyama:insertDummyNodes()
   -- keep track of dummy nodes introduced
   self.dummy_nodes = {}
 
-  for node in traversal.topological_sorting(self.graph) do
+  for node in lib.Iterators:topologicallySorted(self.graph) do
     local in_edges = node:getIncomingEdges()
 
     for edge in table.value_iter (in_edges) do
@@ -129,11 +132,11 @@ function ModularLayeredSugiyama:insertDummyNodes()
       if dist > 1 then
         local dummies = {}
 
-        for i in iter.times(dist-1) do
+        for i=1,dist-1 do
           local rank = self.ranking:getRank(neighbour) + i
 
           local dummy = VirtualNode:new{
-            pos = Vector:new(),
+            pos = lib.Vector:new(),
             name = 'dummy@' .. neighbour.name .. '@to@' .. node.name .. '@at@' .. rank,
           }
 
@@ -395,38 +398,6 @@ function ModularLayeredSugiyama:loadSubAlgorithm(step, name)
   pgf.load(filename, 'tex', false)
 
   return classname, pgf.graphdrawing[classname]
-end
-
-
-
-function ModularLayeredSugiyama:dumpRanking(prefix, title)
-  local ranks = self.ranking:getRanks()
-  for rank in table.value_iter(ranks) do
-    local nodes = self.ranking:getNodes(rank)
-    local str = prefix .. '  rank ' .. rank .. ':'
-    local str = table.combine_values(nodes, function (str, node)
-      return str .. ' ' .. node.name .. ' (' .. self.ranking:getRankPosition(node) .. ')'
-    end, str)
-  end
-end
-
-function ModularLayeredSugiyama:dumpGraph(title)
-  Sys:log(title .. ':')
-  for node in table.value_iter(self.graph.nodes) do
-    Sys:log('  node ' .. node.name)
-    for edge in table.value_iter(node.edges) do
-      Sys:log('    ' .. tostring(edge))
-    end
-  end
-  for edge in table.value_iter(self.graph.edges) do
-    Sys:log('  ' .. tostring(edge))
-  end
-  for cluster in table.value_iter(self.graph.clusters) do
-    local node_strings = table.map_values(cluster.nodes, function (node)
-      return node.name
-    end)
-    Sys:log('  cluster ' .. cluster:getName() .. ': ' .. table.concat(node_strings, ' '))
-  end
 end
 
 

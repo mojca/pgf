@@ -8,13 +8,16 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/model/pgfgd-core-graph.lua,v 1.2 2012/04/15 17:21:25 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/model/pgfgd-core-graph.lua,v 1.5 2012/04/18 15:28:18 tantau Exp $
 
 -- This file defines a graph class, which later represents user created
 -- graphs.
 
 pgf.module("pgf.graphdrawing")
 
+
+
+local lib = require "pgf.gd.lib"
 
 
 Graph = {}
@@ -53,6 +56,28 @@ end
 
 
 
+--- Prepares a graph for an algorithm.
+--
+-- This method causes self, all its nodes, and all its edges to get
+-- a new empty table for the key algorithm. This allows an algorithm to
+-- store stuff with nodes and edges without them interfering with information
+-- stored by other algorithms.
+--
+-- @param An algorithm object.
+
+function Graph:registerAlgorithm(algorithm)
+  self[algorithm] = self[algorithm] or {}
+
+  -- Add an algorithm field to all nodes, all edges, and the graph:
+  for _,n in pairs(self.nodes) do
+    n[algorithm] = n[algorithm] or {}
+  end
+  for _,e in pairs(self.edges) do
+    e[algorithm] = e[algorithm] or {}
+  end
+end
+
+
 --- Sets the graph option \meta{name} to \meta{value}.
 --
 -- @param name Name of the option to be changed.
@@ -71,20 +96,9 @@ end
 -- @return The value of the graph option \meta{name} or |nil|.
 --
 function Graph:getOption(name)
-   return self.options[name] or Interface.defaultGraphParameters[name]
+  return self.options[name] or pgf.gd.control.TeXInterface.parameter_defaults[name]
 end
 
-
-
---- Merges the given options into the options of the graph.
---
--- @see table.custom_merge
---
--- @param options The options to be merged.
---
-function Graph:mergeOptions(options)
- self.options = table.custom_merge(options, self.options)
-end
 
 
 
@@ -340,73 +354,6 @@ function Graph:addCluster(cluster)
 end
 
 
-
-
-
---- Computes the pseudo diameter of the graph.
---
--- The diameter of a graph is the maximum of the shortest paths between
--- any pair of nodes in the graph. A pseudo diameter is an approximation
--- of the diameter that is computed by picking a starting node |u| and
--- finding a node |v| that is farthest away from |u| and has the smallest
--- degree of all nodes that have the same distance to |u|. The algorithm
--- continues with |v| as the new starting node and iteratively tries
--- to find an end node that is generates a larger pseudo diameter.
--- It terminates as soon as no such end node can be found.
---
--- @return The pseudo diameter of the graph.
--- @return The start node of the corresponding approximation of a maximum
---         shortest path.
--- @return The end node of that path.
---
-function Graph:getPseudoDiameter()
-  -- find a node with minimum degree
-  local start_node = table.combine_values(self.nodes, function (min, node)
-    if node:getDegree() < min:getDegree() then
-      return node
-    else
-      return min
-    end
-  end, self.nodes[1])
-
-  assert(start_node)
-
-  local old_diameter = 0
-  local diameter = 0
-  local end_node = nil
-
-  while true do
-    local distance, levels = algorithms.dijkstra(self, start_node)
-
-    -- the number of levels is the same as the distance of the nodes
-    -- in the last level to the start node
-    old_diameter = diameter
-    diameter = #levels
-
-    -- abort if the diameter could not be improved
-    if diameter == old_diameter then
-      end_node = levels[#levels][1]
-      break
-    end
-
-    -- select the node with the smallest degree from the last level as
-    -- the start node for the next iteration
-    start_node = table.combine_values(levels[#levels], function (min, node)
-      if node:getDegree() < min:getDegree() then
-        return node
-      else
-        return min
-      end
-    end, levels[#levels][1])
-
-    assert(start_node)
-  end
-
-  assert(start_node)
-  assert(end_node)
-
-  return diameter, start_node, end_node
-end
 
 
 

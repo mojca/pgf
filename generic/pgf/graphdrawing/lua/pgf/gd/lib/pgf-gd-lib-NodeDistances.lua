@@ -7,13 +7,15 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/lib/pgf-gd-lib-NodeDistances.lua,v 1.1 2012/04/17 22:40:53 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/lib/pgf-gd-lib-NodeDistances.lua,v 1.2 2012/04/18 15:28:18 tantau Exp $
 
 
 
 --- The NodeDistances class is a singleton object.
--- Its methods allow implement methods for simplifing graphs, for instance 
--- for removing loops or multiedges or computing spanning trees.
+--
+-- Its methods are used to compute and/or set the ideal distances between
+-- nodes of a graph. The methods take parameters like sibling distance or
+-- layer sep into account.
 
 local NodeDistances = {}
 
