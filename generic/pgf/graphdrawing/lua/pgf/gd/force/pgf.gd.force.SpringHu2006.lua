@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/force/pgf.gd.force.SpringHu2006.lua,v 1.1 2012/04/19 15:22:28 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/force/pgf.gd.force.SpringHu2006.lua,v 1.2 2012/04/19 20:24:16 tantau Exp $
 
 
 --- Implementation of a spring spring graph drawing algorithm.
@@ -33,7 +33,7 @@ local SpringHu2006 = pgf.gd.new_algorithm_class {
     initial_step_length = 'spring layout/initial step dimension [number]',
     convergence_tolerance = 'spring layout/convergence tolerance [number]',
 
-    natural_spring_length = 'spring layout/natural spring dimension [number]',
+    natural_spring_length = 'node distance [number]',
    
     coarsen = 'spring layout/coarsen [boolean]',
     downsize_ratio = 'spring layout/coarsening/downsize ratio [number]',

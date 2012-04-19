@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/force/pgf.gd.force.SpringElectricalWalshaw2000.lua,v 1.1 2012/04/19 15:22:28 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/force/pgf.gd.force.SpringElectricalWalshaw2000.lua,v 1.2 2012/04/19 20:24:16 tantau Exp $
 
 
 --- Implementation of a spring-electrical graph drawing algorithm.
@@ -57,7 +57,7 @@ local SpringElectricalWalshaw2000 = pgf.gd.new_algorithm_class {
     initial_step_length = 'spring electrical layout/initial step dimension [number]',
     convergence_tolerance = 'spring electrical layout/convergence tolerance [number]',
 
-    natural_spring_length = 'spring electrical layout/natural spring dimension [number]',
+    natural_spring_length = 'node distance [number]',
     spring_constant = 'spring electrical layout/spring constant [number]',
 
     approximate_repulsive_forces = 'spring electrical layout/approximate electric forces [boolean]',
