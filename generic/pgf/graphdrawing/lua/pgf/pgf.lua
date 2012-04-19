@@ -7,47 +7,13 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/pgf.lua,v 1.3 2012/04/19 13:49:07 tantau Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/pgf.lua,v 1.4 2012/04/19 15:22:28 tantau Exp $
 
 
 -- Declare the pgf namespace:
 -- (Skip, till old module stuff has been replaced)
 
 pgf = {}
-
-
--- Declare a search function for pgf, which just substitutes dots by hyphens, because this
--- is more compatible with tex:
-
-local function searcher_function(modulename)
-
-  -- Find source
-  local actual_modulename = string.gsub(modulename, "%.", "-")
-
-  --- Use either resolvers or kpse to locate files.
-  local filename
-  if resolvers then
-    filename = resolvers.find_file(actual_modulename .. ".lua", "tex")
-  else
-    filename = kpse.find_file(actual_modulename .. ".lua", "tex")
-  end
-
-  if filename and filename ~= "" then
-    return function () return dofile(filename) end
-  else
-    return nil
-  end
-end
-
-
--- Install the loader so that it's called just before the normal Lua loader
-if package.loaders then
-  table.insert(package.loaders, 3, searcher_function)
-else
-  table.insert(package.searchers, 3, searcher_function)
-end
-
-
 
 
 
