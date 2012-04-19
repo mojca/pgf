@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/circular/Attic/pgf-gd-circular.lua,v 1.1 2012/04/19 13:49:07 tantau Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/circular/pgf.gd.circular.lua,v 1.1 2012/04/19 15:09:15 tantau Exp $
 
 
 
