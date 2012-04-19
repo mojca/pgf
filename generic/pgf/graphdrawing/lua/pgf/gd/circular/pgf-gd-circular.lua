@@ -7,11 +7,14 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/layered/Attic/pgf-gd-layered.lua,v 1.2 2012/04/19 13:49:07 tantau Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/circular/Attic/pgf-gd-circular.lua,v 1.1 2012/04/19 13:49:07 tantau Exp $
 
 
-require("pgf.gd").layered = {}
+
+-- Declare namespace
+require("pgf.gd").circular = {}
+
 
 -- Done
 
-return pgf.gd.layered
+return pgf.gd.circular

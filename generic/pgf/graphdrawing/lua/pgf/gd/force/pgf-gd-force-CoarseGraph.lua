@@ -1,24 +1,40 @@
 -- Copyright 2011 by Jannis Pohlmann
+-- Copyright 2012 by Till Tantau
 --
--- This file may be distributed and/or modified
+-- This file may be distributed an/or modified
 --
 -- 1. under the LaTeX Project Public License and/or
 -- 2. under the GNU Public License
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/utilities/pgfgd-core-coarsen-graph.lua,v 1.1 2012/04/12 15:16:08 tantau Exp $
-
-pgf.module("pgf.graphdrawing")
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/force/Attic/pgf-gd-force-CoarseGraph.lua,v 1.1 2012/04/19 13:49:07 tantau Exp $
 
 
+--- A class for handling "coarse" versions of a graph. Such versions contain
+-- less nodes and edges than the original graph while retaining the overall 
+-- structure.
 
-CoarseGraph = Graph:new{}
+local Graph = require "pgf.gd.model.Graph"   -- we subclass from here
+local CoarseGraph = Graph:new()
 CoarseGraph.__index = CoarseGraph
 
 
 
-CoarseGraph.COARSEN_INDEPENDENT_EDGES = 0
+-- Namespace:
+local force = require "pgf.gd.force"
+force.CoarseGraph = CoarseGraph
+
+
+-- Imports
+local Node = require "pgf.gd.model.Node"
+local Edge = require "pgf.gd.model.Edge"
+
+
+
+-- Class setup
+
+CoarseGraph.COARSEN_INDEPENDENT_EDGES = 0  -- TT: Remark: These uppercase constants are *ugly*. Why do people do this?!
 CoarseGraph.COARSEN_INDEPENDENT_NODES = 1
 CoarseGraph.COARSEN_HYBRID = 2
 
@@ -82,25 +98,10 @@ function CoarseGraph:coarsen()
   -- update the level
   self.level = self.level + 1
 
-  --Sys:log('coarsen to level ' .. self.level)
-
   local old_graph_size = #self.graph.nodes
 
   if self.scheme == CoarseGraph.COARSEN_INDEPENDENT_EDGES then
-    --Sys:log('  coarsening scheme: independent edges')
-
     local matching, unmatched_nodes = self:findMaximalMatching()
-
-    --Sys:log('  maximal matching:')
-    --for edge in table.value_iter(matching) do
-    --  Sys:log('    ' .. tostring(edge))
-    --end
-    --if #unmatched_nodes > 0 then
-    --  Sys:log('  unmatched nodes:')
-    --  for node in table.value_iter(unmatched_nodes) do
-    --    Sys:log('    ' .. node.name)
-    --  end
-    --end
 
     for edge in table.value_iter(matching) do
       -- get the two nodes of the edge that we are about to collapse
@@ -120,8 +121,6 @@ function CoarseGraph:coarsen()
       -- add the supernode to the graph
       self.graph:addNode(supernode)
 
-      --Sys:log('  contract edge ' .. tostring(edge) .. ' and create node ' .. supernode.name)
-
       -- collact all neighbours of the nodes to merge, create a node -> edge mapping
       local u_neighbours = table.map_pairs(u.edges, function (n, edge)
 	return edge:getNeighbour(u), edge
@@ -129,15 +128,6 @@ function CoarseGraph:coarsen()
       local v_neighbours = table.map_pairs(v.edges, function(n, edge)
         return edge:getNeighbour(v), edge
       end)
-
-      --Sys:log('    neighbours of ' .. u.name .. ':')
-      --for neighbour, edge in pairs(u_neighbours) do
-      --  Sys:log('      ' .. neighbour.name .. ' via ' .. tostring(edge))
-      --end
-      --Sys:log('    neighbours of ' .. v.name .. ':')
-      --for neighbour, edge in pairs(v_neighbours) do
-      --  Sys:log('      ' .. neighbour.name .. ' via ' .. tostring(edge))
-      --end
 
       -- remove the two nodes themselves from the neighbour lists
       u_neighbours = table.filter_keys(u_neighbours, function (node)
@@ -188,15 +178,11 @@ function CoarseGraph:coarsen()
           superedge:addNode(neighbour)
           superedge:addNode(supernode)
           
-          --Sys:log('    create edge ' .. tostring(superedge))
         else
           superedge:addNode(supernode)
           superedge:addNode(neighbour)
 
-          --Sys:log('    create edge ' .. tostring(superedge))
         end
-
-        --Sys:log('    delete edge ' .. tostring(edge))
 
         -- replace the old edge
         self.graph:addEdge(superedge)
@@ -222,27 +208,12 @@ function CoarseGraph:coarsen()
         superedge:addNode(supernode)
         superedge:addNode(neighbour)
 
-        --Sys:log('    create edge ' .. tostring(superedge))
-
         -- replace the old edges
         self.graph:addEdge(superedge)
         for edge in table.value_iter(edges) do
-          --Sys:log('    delete edge ' .. tostring(edge))
           self.graph:deleteEdge(edge)
         end
       end
-
-      --if u.name == '(0:2)' then
-      --  for node in table.value_iter(self.graph.nodes) do
-      --    Sys:log('node ' .. node.name)
-      --    for edge in table.value_iter(node.edges) do
-      --      Sys:log('  edge ' .. tostring(edge))
-      --    end
-      --  end
-      --  for edge in table.value_iter(self.graph.edges) do
-      --    Sys:log('edge ' .. tostring(edge))
-      --  end
-      --end
 
       -- delete the nodes u and v which were replaced by the supernode
       assert(#u.edges == 1, 'node ' .. u.name .. ' is part of a multiedge') -- if this fails, then there is a multiedge involving u
@@ -273,17 +244,14 @@ function CoarseGraph:revertSuperedge(superedge)
     local subedge = superedge.subedges[1]
 
     if not self.graph:findNode(subedge.nodes[1].name) then
-      --Sys:log('          create subnode ' .. subedge.nodes[1].name)
       self.graph:addNode(subedge.nodes[1])
     end
 
     if not self.graph:findNode(subedge.nodes[2].name) then
-      --Sys:log('          create subnode ' .. subedge.nodes[2].name)
       self.graph:addNode(subedge.nodes[2])
     end
 
     if not self.graph:findEdge(subedge) then
-      --Sys:log('          create subedge ' .. tostring(subedge))
       subedge.nodes[1]:addEdge(subedge)
       subedge.nodes[2]:addEdge(subedge)
       self.graph:addEdge(subedge)
@@ -295,17 +263,14 @@ function CoarseGraph:revertSuperedge(superedge)
   else
     for subedge in table.value_iter(superedge.subedges) do
       if not self.graph:findNode(subedge.nodes[1].name) then
-        --Sys:log('          create subnode ' .. subedge.nodes[1].name)
         self.graph:addNode(subedge.nodes[1])
       end
 
       if not self.graph:findNode(subedge.nodes[2].name) then
-        --Sys:log('          create subnode ' .. subedge.nodes[2].name)
         self.graph:addNode(subedge.nodes[2])
       end
 
       if not self.graph:findEdge(subedge) then
-        --Sys:log('          create subedge ' .. tostring(subedge))
         subedge.nodes[1]:addEdge(subedge)
         subedge.nodes[2]:addEdge(subedge)
         self.graph:addEdge(subedge)
@@ -331,14 +296,11 @@ function CoarseGraph:interpolate()
     assert(not supernode.level or supernode.level <= self.level)
 
     if supernode.level and supernode.level == self.level then
-      --Sys:log('      split up supernode ' .. supernode.name)
-    
       -- move the subnode to the position of the supernode and add it to the graph
       supernode.subnodes[1].pos.x = supernode.pos.x
       supernode.subnodes[1].pos.y = supernode.pos.y
 
       if not self.graph:findNode(supernode.subnodes[1].name) then
-        --Sys:log('        create subnode ' .. supernode.subnodes[1].name)
         self.graph:addNode(supernode.subnodes[1])
       end
 
@@ -347,12 +309,10 @@ function CoarseGraph:interpolate()
       supernode.subnodes[2].pos.y = supernode.pos.y
 
       if not self.graph:findNode(supernode.subnodes[2].name) then
-        --Sys:log('        create subnode ' .. supernode.subnodes[2].name)
         self.graph:addNode(supernode.subnodes[2])
       end
 
       if not self.graph:findEdge(supernode.subnode_edge) then
-        --Sys:log('        create subnode edge ' .. tostring(supernode.subnode_edge))
         supernode.subnodes[1]:addEdge(supernode.subnode_edge)
         supernode.subnodes[2]:addEdge(supernode.subnode_edge)
         self.graph:addEdge(supernode.subnode_edge)
@@ -361,7 +321,6 @@ function CoarseGraph:interpolate()
       local superedges = table.map_values(supernode.edges, function (e) return e end)
 
       for superedge in table.value_iter(superedges) do
-        --Sys:log('        revert edge ' .. tostring(superedge))
         self:revertSuperedge(superedge)
       end
 
@@ -448,3 +407,8 @@ function CoarseGraph:findMaximalMatching()
 
   return matching, unmatched_nodes
 end
+
+
+-- done
+
+return CoarseGraph

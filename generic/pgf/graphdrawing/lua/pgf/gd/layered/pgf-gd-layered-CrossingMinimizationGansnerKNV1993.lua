@@ -7,16 +7,23 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgfgd-subalgorithm-CrossingMinimizationGansnerKNV1993.lua,v 1.4 2012/04/18 15:28:18 tantau Exp $
-
-pgf.module("pgf.graphdrawing")
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/layered/Attic/pgf-gd-layered-CrossingMinimizationGansnerKNV1993.lua,v 1.1 2012/04/19 13:49:07 tantau Exp $
 
 
-local DepthFirstSearch = require "pgf.gd.lib.DepthFirstSearch"
-
+--- An sub of Modular for reducing crossings
 
 CrossingMinimizationGansnerKNV1993 = {}
 CrossingMinimizationGansnerKNV1993.__index = CrossingMinimizationGansnerKNV1993
+
+
+-- Namespace
+require("pgf.gd.layered").CrossingMinimizationGansnerKNV1993 = CrossingMinimizationGansnerKNV1993
+
+
+-- Imports
+
+local DepthFirstSearch = require "pgf.gd.lib.DepthFirstSearch"
+
 
 
 
@@ -345,3 +352,7 @@ function CrossingMinimizationGansnerKNV1993:switchNodePositions(left_node, right
 end
 
 
+
+-- done
+
+return CrossingMinimizationGansnerKNV1993

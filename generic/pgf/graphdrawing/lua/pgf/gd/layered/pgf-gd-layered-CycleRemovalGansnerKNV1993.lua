@@ -7,16 +7,22 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgfgd-subalgorithm-CycleRemovalGansnerKNV1993.lua,v 1.4 2012/04/18 15:28:18 tantau Exp $
-
-pgf.module("pgf.graphdrawing")
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/layered/Attic/pgf-gd-layered-CycleRemovalGansnerKNV1993.lua,v 1.1 2012/04/19 13:49:07 tantau Exp $
 
 
-local lib = require "pgf.gd.lib"
 
+--- An sub of Modular for removing cycles
 
 CycleRemovalGansnerKNV1993 = {}
 CycleRemovalGansnerKNV1993.__index = CycleRemovalGansnerKNV1993
+
+
+-- Namespace
+require("pgf.gd.layered").CycleRemovalGansnerKNV1993 = CycleRemovalGansnerKNV1993
+
+-- Imports
+local Simplifiers = require "pgf.gd.lib.Simplifiers"
+
 
 
 
@@ -51,10 +57,15 @@ function CycleRemovalGansnerKNV1993:run()
   --   for all nodes with outdegree of 0, insert temporary edge (v, S_max) with delta=0
   
   -- classify edges as tree/forward, cross and back edges using a DFS traversal
-  local tree_or_forward_edges, cross_edges, back_edges = lib.Simplifiers:classifyEdges(self.graph)
+  local tree_or_forward_edges, cross_edges, back_edges = Simplifiers:classifyEdges(self.graph)
 
   -- reverse the back edges in order to make the graph acyclic
   for edge in table.value_iter(back_edges) do
     edge.reversed = true
   end
 end
+
+
+-- done
+
+return CycleRemovalGansnerKNV1993

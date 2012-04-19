@@ -7,15 +7,25 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgfgd-subalgorithm-NodeRankingGansnerKNV1993.lua,v 1.4 2012/04/18 15:28:18 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/layered/Attic/pgf-gd-layered-NodeRankingGansnerKNV1993.lua,v 1.1 2012/04/19 13:49:07 tantau Exp $
 
-pgf.module("pgf.graphdrawing")
 
-local NetworkSimplex = require "pgf.gd.layered.NetworkSimplex"
-
+--- An sub of Modular for computing node rankings
 
 NodeRankingGansnerKNV1993 = {}
 NodeRankingGansnerKNV1993.__index = NodeRankingGansnerKNV1993
+
+
+-- Namespace
+require("pgf.gd.layered").NodeRankingGansnerKNV1993 = NodeRankingGansnerKNV1993
+
+
+-- Imports
+
+local Edge           = require "pgf.gd.model.Edge"
+local Node           = require "pgf.gd.model.Node"
+
+local NetworkSimplex = require "pgf.gd.layered.NetworkSimplex"
 
 
 
@@ -162,3 +172,6 @@ function NodeRankingGansnerKNV1993:expandClusters()
 end
 
 
+-- done
+
+return NodeRankingGansnerKNV1993

@@ -1,4 +1,5 @@
 -- Copyright 2011 by Jannis Pohlmann
+-- Copyright 2012 by Till Tantau
 --
 -- This file may be distributed and/or modified
 --
@@ -7,10 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/force/pgfgd-algorithm-SpringHu2006.lua,v 1.6 2012/04/18 15:28:18 tantau Exp $
-
-
-local lib = require "pgf.gd.lib"
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/force/Attic/pgf-gd-force-SpringHu2006.lua,v 1.1 2012/04/19 13:49:07 tantau Exp $
 
 
 --- Implementation of a spring spring graph drawing algorithm.
@@ -23,27 +21,40 @@ local lib = require "pgf.gd.lib"
 -- Modifications compared to the original algorithm are explained in 
 -- the manual.
 
-
-graph_drawing_algorithm {
-  name = 'SpringHu2006',
+local SpringHu2006 = pgf.gd.new_algorithm_class {
   properties = {
     works_only_on_connected_graphs = true,
     works_only_for_loop_free_graphs = true,
     works_only_for_simple_graphs = true,
   },
   graph_parameters = {
-    iterations = {'spring layout/iterations', tonumber},
-    cooling_factor = {'spring layout/cooling factor', tonumber},
-    initial_step_length = {'spring layout/initial step dimension', tonumber},
-    convergence_tolerance = {'spring layout/convergence tolerance', tonumber},
+    iterations = 'spring layout/iterations [number]',
+    cooling_factor = 'spring layout/cooling factor [number]',
+    initial_step_length = 'spring layout/initial step dimension [number]',
+    convergence_tolerance = 'spring layout/convergence tolerance [number]',
 
-    natural_spring_length = {'spring layout/natural spring dimension', tonumber},
+    natural_spring_length = 'spring layout/natural spring dimension [number]',
    
-    coarsen = {'spring layout/coarsen', toboolean},
-    downsize_ratio = {'spring layout/coarsening/downsize ratio', tonumber},
-    minimum_graph_size = {'spring layout/coarsening/minimum graph size', tonumber},
+    coarsen = 'spring layout/coarsen [boolean]',
+    downsize_ratio = 'spring layout/coarsening/downsize ratio [number]',
+    minimum_graph_size = 'spring layout/coarsening/minimum graph size [number]',
   }
 }
+
+
+-- Namespace:
+require("pgf.gd.force").SpringHu2006 = SpringHu2006
+
+
+-- Imports
+
+local PathLengths = require "pgf.gd.lib.PathLengths"
+local Vector      = require "pgf.gd.lib.Vector"
+
+local CoarseGraph = require "pgf.gd.force.CoarseGraph"
+
+
+
 
 
 function SpringHu2006:run()
@@ -53,7 +64,7 @@ function SpringHu2006:run()
   
   self.graph_size = #self.graph.nodes
   self.graph_density = (2 * #self.graph.edges) / (#self.graph.nodes * (#self.graph.nodes - 1))
-  
+
   -- validate input parameters
   assert(self.iterations >= 0, 'iterations (value: ' .. self.iterations .. ') need to be greater than 0')
   assert(self.cooling_factor >= 0 and self.cooling_factor <= 1, 'the cooling factor (value: ' .. self.cooling_factor .. ') needs to be between 0 and 1')
@@ -114,13 +125,13 @@ function SpringHu2006:run()
     -- to every intermediate coarse graph as well as the original graph
     while coarse_graph:getLevel() > 0 do
       -- compute the diameter of the parent coarse graph
-      local parent_diameter = lib.PathLengths:pseudoDiameter(coarse_graph.graph)
+      local parent_diameter = PathLengths:pseudoDiameter(coarse_graph.graph)
 
       -- interpolate the previous coarse graph from its parent
       coarse_graph:interpolate()
 
       -- compute the diameter of the current coarse graph
-      local current_diameter = lib.PathLengths:pseudoDiameter(coarse_graph.graph)
+      local current_diameter = PathLengths:pseudoDiameter(coarse_graph.graph)
 
       -- scale node positions by the quotient of the pseudo diameters
       for node in table.value_iter(coarse_graph.graph) do
@@ -176,7 +187,7 @@ function SpringHu2006:computeInitialLayout(graph, spring_length)
 
       -- position the loose node relative to the fixed node, with
       -- the displacement (random direction) matching the spring length
-      local direction = lib.Vector:new{x = math.random(1, spring_length), y = math.random(1, spring_length)}
+      local direction = Vector:new{x = math.random(1, spring_length), y = math.random(1, spring_length)}
       local distance = 1.8 * spring_length * self.graph_density * math.sqrt(self.graph_size) / 2
       local displacement = direction:normalized():timesScalar(distance)
 
@@ -224,7 +235,7 @@ function SpringHu2006:computeForceLayout(graph, spring_length, step_update_func)
   local progress = 0
 
   -- compute graph distance between all pairs of nodes
-  local distances = lib.PathLengths:floydWarshall(graph)
+  local distances = PathLengths:floydWarshall(graph)
 
   while not converged and iteration < self.iterations do
     -- remember old node positions
@@ -239,7 +250,7 @@ function SpringHu2006:computeForceLayout(graph, spring_length, step_update_func)
     for _,v in ipairs(graph.nodes) do
       if not v.fixed then
 	-- vector for the displacement of v
-	local d = lib.Vector:new(2)
+	local d = Vector:new(2)
 	
 	for u in table.value_iter(graph.nodes) do
 	  if v ~= u then
@@ -351,3 +362,8 @@ function SpringHu2006.adaptive_step_update(step, cooling_factor, energy, old_ene
   end
   return step, progress
 end
+
+
+-- done
+
+return SpringHu2006

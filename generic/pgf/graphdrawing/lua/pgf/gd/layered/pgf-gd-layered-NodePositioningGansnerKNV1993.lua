@@ -7,18 +7,32 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgfgd-subalgorithm-NodePositioningGansnerKNV1993.lua,v 1.5 2012/04/18 15:28:18 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/layered/Attic/pgf-gd-layered-NodePositioningGansnerKNV1993.lua,v 1.1 2012/04/19 13:49:07 tantau Exp $
 
 
-local lib = require "pgf.gd.lib"
-local NetworkSimplex = require "pgf.gd.layered.NetworkSimplex"
 
-pgf.module("pgf.graphdrawing")
-
-
+--- An sub of Modular for positioning nodes
 
 NodePositioningGansnerKNV1993 = {}
 NodePositioningGansnerKNV1993.__index = NodePositioningGansnerKNV1993
+
+
+-- Namespace
+require("pgf.gd.layered").NodePositioningGansnerKNV1993 = NodePositioningGansnerKNV1993
+
+
+-- Imports
+
+local NodeDistances = require "pgf.gd.lib.NodeDistances"
+
+local Graph = require "pgf.gd.model.Graph"
+local Edge  = require "pgf.gd.model.Edge"
+local Node  = require "pgf.gd.model.Node"
+
+local NetworkSimplex = require "pgf.gd.layered.NetworkSimplex"
+
+
+
 
 
 
@@ -27,20 +41,10 @@ function NodePositioningGansnerKNV1993:new(main_algorithm, graph, ranking)
     main_algorithm = main_algorithm,
     graph = graph,
     ranking = ranking,
-
-    -- read graph input parameters
-    level_distance = tonumber(graph:getOption('/graph drawing/level distance')),
-    sibling_distance = tonumber(graph:getOption('/graph drawing/sibling distance')),
   }
   setmetatable(algorithm, NodePositioningGansnerKNV1993)
-
-  -- validate input parameters
-  assert(algorithm.level_distance >= 0, 'the level distance needs to be greater than or equal to 0')
-  assert(algorithm.sibling_distance >= 0, 'the sibling distance needs to be greater than or equal to 0')
-
   return algorithm
 end
-
 
 
 function NodePositioningGansnerKNV1993:run()
@@ -60,7 +64,7 @@ function NodePositioningGansnerKNV1993:run()
     end
   end
   
-  lib.NodeDistances:arrangeLayersByBaselines(self.main_algorithm, self.graph)
+  NodeDistances:arrangeLayersByBaselines(self.main_algorithm, self.graph)
 end
 
 
@@ -86,7 +90,6 @@ function NodePositioningGansnerKNV1993:constructAuxiliaryGraph()
       name = '{' .. tostring(edge) .. '}',
     }
 
-    --table.insert(aux_graph.nodes, 1, node)
     aux_graph:addNode(node)
 
     node.orig_edge = edge
@@ -141,9 +144,9 @@ function NodePositioningGansnerKNV1993:getOmega(edge)
   local node1 = edge.nodes[1]
   local node2 = edge.nodes[2]
 
-  if (node1.class == VirtualNode) and (node2.class == VirtualNode) then
+  if (node1.kind == "dummy") and (node2.kind == "dummy") then
     return 8
-  elseif (node1.class == VirtualNode) or (node2.class == VirtualNode) then
+  elseif (node1.kind == "dummy") or (node2.kind == "dummy") then
     return 2
   else
     return 1
@@ -153,5 +156,10 @@ end
 
 
 function NodePositioningGansnerKNV1993:getDesiredHorizontalDistance(v, w)
-  return lib.NodeDistances:idealSiblingDistance(self.main_algorithm, self.graph, v,w)
+  return NodeDistances:idealSiblingDistance(self.main_algorithm, self.graph, v,w)
 end
+
+
+-- done
+
+return NodePositioningGansnerKNV1993

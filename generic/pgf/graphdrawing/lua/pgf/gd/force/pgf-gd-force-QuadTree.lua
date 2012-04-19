@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/force/pgf-gd-force-QuadTree.lua,v 1.1 2012/04/17 22:40:51 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/force/Attic/pgf-gd-force-QuadTree.lua,v 1.2 2012/04/19 13:49:07 tantau Exp $
 
 
 --- An implementation of a quad trees.
@@ -21,19 +21,14 @@ local QuadTree = {
   Particle = {},
   Cell = {} 
 }
-
-
+QuadTree.__index = QuadTree
 
 -- Namespace:
-local force = require "pgf.gd.force"
-force.QuadTree = QuadTree
+require("pgf.gd.force").QuadTree = QuadTree
 
 -- Imports:
 local Vector = require "pgf.gd.lib.Vector"
 
-
--- Class setup
-QuadTree.__index = QuadTree
 
 
 --- Creates a new quad tree.

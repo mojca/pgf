@@ -7,9 +7,8 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/trees/pgfgd-algorithm-TreeReingoldTilford1981.lua,v 1.3 2012/04/17 22:40:47 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/trees/Attic/pgf-gd-trees-ReingoldTilford1981.lua,v 1.1 2012/04/19 13:49:07 tantau Exp $
 
-local lib = require "pgf.gd.lib"
 
 
 --- An implementation of the Reingold-Tilford algorithm
@@ -19,28 +18,30 @@ local lib = require "pgf.gd.lib"
 -- A. Brüggemann-Klein, D. Wood, Drawing trees nicely with TeX,
 -- Electronic Publishing, 2(2), 101-115, 1989
 
-graph_drawing_algorithm { 
-  name = 'TreeReingoldTilford1981',
+local ReingoldTilford1981 = pgf.gd.new_algorithm_class {
   properties = {
     works_only_on_connected_graphs = true,
     needs_a_spanning_tree = true,
     growth_direction = 90,
   },
   graph_parameters = {
-    extended_version = {'tree layout/missing nodes get space', toboolean},
-    sigsep           = {'tree layout/significant sep', tonumber},
+    extended_version = 'tree layout/missing nodes get space [boolean]',
+    sigsep           = 'tree layout/significant sep [number]',
   }
 }
 
 
+-- Imports
+local NodeDistances = require "pgf.gd.lib.NodeDistances"
 
-function TreeReingoldTilford1981:run()
+
+function ReingoldTilford1981:run()
   
   local root = self.graph[self].spanning_tree_root
 
   self:precomputeDescendants(root, 1)
   self:computeHorizontalPosition(root)
-  self:computeVerticalPositions()
+  NodeDistances:arrangeLayersByBaselines(self, self.graph)
 
   -- Update x positions
   for _,n in ipairs(self.graph.nodes) do
@@ -50,7 +51,7 @@ function TreeReingoldTilford1981:run()
 end
 
 
-function TreeReingoldTilford1981:precomputeDescendants(node, depth)
+function ReingoldTilford1981:precomputeDescendants(node, depth)
   node[self].descendants = { node }
   node[self].y = depth
   for _,c in ipairs(node[self].children) do
@@ -63,7 +64,7 @@ end
 
 
 
-function TreeReingoldTilford1981:computeHorizontalPosition(node)
+function ReingoldTilford1981:computeHorizontalPosition(node)
   
   local children = node[self].children
 
@@ -88,7 +89,7 @@ function TreeReingoldTilford1981:computeHorizontalPosition(node)
       -- the i-th child
       for _,d in ipairs(children[i][self].descendants) do
 	local y = d[self].y
-	if self.extended_version or not (y > child_depth and d.class == VirtualNode) then
+	if self.extended_version or not (y > child_depth and d.kind == "dummy") then
 	  if not right_borders[y] or right_borders[y][self].x < d[self].x then
 	    right_borders[y] = d
 	  end
@@ -102,7 +103,7 @@ function TreeReingoldTilford1981:computeHorizontalPosition(node)
       -- Now left for i+1 st child
       for _,d in ipairs(children[i+1][self].descendants) do
 	local y = d[self].y
-	if self.extended_version or not (y > child_depth and d.class == VirtualNode) then
+	if self.extended_version or not (y > child_depth and d.kind == "dummy") then
 	  if not left_borders[y] or left_borders[y][self].x > d[self].x then
 	    left_borders[y] = d
 	  end
@@ -120,7 +121,7 @@ function TreeReingoldTilford1981:computeHorizontalPosition(node)
 	local n1 = right_borders[y]
 	if n1 then
 	  shift = math.max(shift, 
-			   lib.NodeDistances:idealSiblingDistance(self, self.graph, n1, n2) + n1[self].x - n2[self].x)
+			   NodeDistances:idealSiblingDistance(self, self.graph, n1, n2) + n1[self].x - n2[self].x)
 	end
 	if local_right_borders[y] then
 	  if y > child_depth and (left_borders[y][self].x - local_right_borders[y][self].x <= first_dist) then 
@@ -146,8 +147,4 @@ end
 
 
 
-function TreeReingoldTilford1981:computeVerticalPositions()
-  
-  lib.NodeDistances:arrangeLayersByBaselines(self, self.graph)
-  
-end
+return ReingoldTilford1981

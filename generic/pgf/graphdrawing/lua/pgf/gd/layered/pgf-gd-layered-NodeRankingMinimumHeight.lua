@@ -7,16 +7,23 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgfgd-subalgorithm-NodeRankingMinimumHeight.lua,v 1.3 2012/04/18 15:28:18 tantau Exp $
-
-pgf.module("pgf.graphdrawing")
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/layered/Attic/pgf-gd-layered-NodeRankingMinimumHeight.lua,v 1.1 2012/04/19 13:49:07 tantau Exp $
 
 
-local Ranking = require "pgf.gd.layered.Ranking"
 
+--- An sub of Modular for computing node rankings
 
 NodeRankingMinimumHeight = {}
 NodeRankingMinimumHeight.__index = NodeRankingMinimumHeight
+
+
+-- Namespace
+require("pgf.gd.layered").NodeRankingMinimumHeight = NodeRankingMinimumHeight
+
+
+-- Imports
+
+local Ranking = require "pgf.gd.layered.Ranking"
 
 
 
@@ -52,3 +59,8 @@ function NodeRankingMinimumHeight:run()
 
   return ranking
 end
+
+
+-- done
+
+return NodeRankingMinimumHeight

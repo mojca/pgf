@@ -7,14 +7,17 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgfgd-subalgorithm-CycleRemovalBergerS1990b.lua,v 1.2 2012/04/10 23:12:20 tantau Exp $
-
-pgf.module("pgf.graphdrawing")
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/layered/Attic/pgf-gd-layered-CycleRemovalBergerS1990b.lua,v 1.1 2012/04/19 13:49:07 tantau Exp $
 
 
+--- An sub of Modular for removing cycles
 
 CycleRemovalBergerS1990b = {}
 CycleRemovalBergerS1990b.__index = CycleRemovalBergerS1990b
+
+
+-- Namespace
+require("pgf.gd.layered").CycleRemovalBergerS1990b = CycleRemovalBergerS1990b
 
 
 
@@ -79,3 +82,8 @@ function CycleRemovalBergerS1990b:run()
   end
 end
 
+
+
+-- done
+
+return CycleRemovalBergerS1990b

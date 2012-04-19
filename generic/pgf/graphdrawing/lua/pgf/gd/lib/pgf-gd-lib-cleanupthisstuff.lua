@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/core/lualayer/utilities/pgfgd-core-table.lua,v 1.1 2012/04/12 15:16:08 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/lib/Attic/pgf-gd-lib-cleanupthisstuff.lua,v 1.1 2012/04/19 13:49:07 tantau Exp $
 
 --- This file contains a number of helper functions for tables, including
 --- functions to create key and value iterators, copy tables, map table
@@ -19,7 +19,13 @@
 --- * the order in which keys, pairs and values are iterated over is a
 ---   bit mixed up right now. need to make this consistent.
 
-pgf.module("pgf.graphdrawing")
+
+-- THIS FILE MUST BE REWORKED!!!!
+--
+-- All this stuff needs to be unraveled and moved into the "right" places.
+--
+-- Right now, the code fiddles around with the "table" object. A really bad
+-- idea. 
 
 
 

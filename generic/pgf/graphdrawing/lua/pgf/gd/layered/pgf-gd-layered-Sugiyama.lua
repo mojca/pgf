@@ -7,49 +7,48 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgfgd-algorithm-ModularLayeredSugiyama.lua,v 1.7 2012/04/18 15:28:18 tantau Exp $
-
-
-local control = require "pgf.gd.control"
-local lib     = require "pgf.gd.lib"
-local Ranking = require "pgf.gd.layered.Ranking"
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/layered/Attic/pgf-gd-layered-Sugiyama.lua,v 1.1 2012/04/19 13:49:07 tantau Exp $
 
 
 --- An implementation of a modular version of the Sugiyama method
 
-graph_drawing_algorithm {
-  name = 'ModularLayeredSugiyama',
+local Sugiyama = pgf.gd.new_algorithm_class {
   properties = {
     works_only_on_connected_graphs = true,
     works_only_for_loop_free_graphs = true,
     growth_direction = 90,
   },
   graph_parameters = {
-    level_distance = {'level distance', tonumber},
-    sibling_distance = {'sibling distance', tonumber},
-    random_seed = {'layered layout/random seed', tonumber},
-    cycle_removal_algorithm = 'layered layout/cycle removal',
-    node_ranking_algorithm = 'layered layout/node ranking',
-    crossing_minimization_algorithm = 'layered layout/crossing minimization',
-    node_positioning_algorithm = 'layered layout/node positioning',
-    edge_routing_algorithm = 'layered layout/edge routing',
+    cycle_removal_algorithm         = 'layered layout/cycle removal [algorithm]',
+    node_ranking_algorithm          = 'layered layout/node ranking [algorithm]',
+    crossing_minimization_algorithm = 'layered layout/crossing minimization [algorithm]',
+    node_positioning_algorithm      = 'layered layout/node positioning [algorithm]',
+    edge_routing_algorithm          = 'layered layout/edge routing [algorithm]',
   }
 }
 
+-- Namespace
+require("pgf.gd.layered").Sugiyama = Sugiyama
 
 
-function ModularLayeredSugiyama:run()
+-- Imports
+
+local lib     = require "pgf.gd.lib"
+
+local Ranking = require "pgf.gd.layered.Ranking"
+
+local Edge    = require "pgf.gd.model.Edge"
+local Node    = require "pgf.gd.model.Node"
+
+
+
+
+function Sugiyama:run()
   if #self.graph.nodes <= 1 then
      return
   end
-
-  -- apply the random seed specified by the user (only if it is non-zero)
-  if self.random_seed ~= 0 then
-    math.randomseed(self.random_seed)
-  end
   
   self:preprocess()
-
 
   -- Helper function for collapsing multiedges
   local function collapse (m,e)
@@ -69,8 +68,8 @@ function ModularLayeredSugiyama:run()
   lib.Simplifiers:removeLoops(cluster_subalgorithm)
   lib.Simplifiers:collapseMultiedges(cluster_subalgorithm, collapse)
 
-  self:removeCycles()
-  self:rankNodes()
+  self.cycle_removal_algorithm:new(self, self.graph):run()
+  self.ranking = self.node_ranking_algorithm:new(self, self.graph):run()
   self:restoreCycles()
 
   lib.Simplifiers:expandMultiedges(cluster_subalgorithm)
@@ -80,25 +79,23 @@ function ModularLayeredSugiyama:run()
   
   -- Now do actual computation
   lib.Simplifiers:collapseMultiedges(cluster_subalgorithm, collapse)
-  self:removeCycles()
+  self.cycle_removal_algorithm:new(self, self.graph):run()
   self:insertDummyNodes()
   
   -- Main algorithm
-  self:reduceEdgeCrossings()
-  self:positionNodes()
+  self.crossing_minimization_algorithm:new(self, self.graph, self.ranking):run()
+  self.node_positioning_algorithm:new(self, self.graph, self.ranking):run()
   
   -- Cleanup
   self:removeDummyNodes()
   lib.Simplifiers:expandMultiedges(cluster_subalgorithm)
-  self:routeEdges()
+  self.edge_routing_algorithm:new(self, self.graph):run()
   self:restoreCycles()
-
-  self:postprocess()
 end
 
 
 
-function ModularLayeredSugiyama:preprocess()
+function Sugiyama:preprocess()
   -- initialize edge parameters
   for edge in table.value_iter(self.graph.edges) do
     -- read edge parameters
@@ -112,7 +109,7 @@ end
 
 
 
-function ModularLayeredSugiyama:insertDummyNodes()
+function Sugiyama:insertDummyNodes()
   -- enumerate dummy nodes using a globally unique numeric ID
   local dummy_id = 1
 
@@ -135,9 +132,10 @@ function ModularLayeredSugiyama:insertDummyNodes()
         for i=1,dist-1 do
           local rank = self.ranking:getRank(neighbour) + i
 
-          local dummy = VirtualNode:new{
+          local dummy = Node:new{
             pos = lib.Vector:new(),
             name = 'dummy@' .. neighbour.name .. '@to@' .. node.name .. '@at@' .. rank,
+	    kind = "dummy",
           }
 
           dummy_id = dummy_id + 1
@@ -183,7 +181,7 @@ end
 
 
 
-function ModularLayeredSugiyama:removeDummyNodes()
+function Sugiyama:removeDummyNodes()
   -- delete dummy nodes
   for node in table.value_iter(self.dummy_nodes) do
     self.graph:deleteNode(node)
@@ -216,7 +214,7 @@ end
 
 
 
-function ModularLayeredSugiyama:mergeClusters()
+function Sugiyama:mergeClusters()
 
   self.cluster_nodes = {}
   self.cluster_node = {}
@@ -293,7 +291,7 @@ end
 
 
 
-function ModularLayeredSugiyama:expandClusters()
+function Sugiyama:expandClusters()
 
   for node in table.value_iter(self.original_nodes) do
     self.ranking:setRank(node, self.ranking:getRank(self.cluster_node[node]))
@@ -313,69 +311,7 @@ function ModularLayeredSugiyama:expandClusters()
 end
 
 
-
-
-function ModularLayeredSugiyama:removeCycles()
-  local name, class = self:loadSubAlgorithm('CycleRemoval', self.cycle_removal_algorithm)
-  
-  assert(class, 'the cycle removal algorithm "' .. self.cycle_removal_algorithm .. '" could not be found')
-
-  local algorithm = class:new(self, self.graph)
-  algorithm:run()
-end
-
-
-
-function ModularLayeredSugiyama:rankNodes()
-  local name, class = self:loadSubAlgorithm('NodeRanking', self.node_ranking_algorithm)
-  
-  assert(class, 'the node ranking algorithm "' .. self.node_ranking_algorithm .. '" could not be found')
-
-  local algorithm = class:new(self, self.graph)
-  self.ranking = algorithm:run()
-  
-  assert(self.ranking and self.ranking.__index == Ranking, 'the node ranking algorithm "' .. tostring(name) .. '" did not return a ranking')
-end
-
-
-
-function ModularLayeredSugiyama:reduceEdgeCrossings()
-  local name, class = self:loadSubAlgorithm('CrossingMinimization', self.crossing_minimization_algorithm)
-
-  assert(class, 'the crossing minimzation algorithm "' .. self.crossing_minimization_algorithm .. '" could not be found')
-
-  local algorithm = class:new(self, self.graph, self.ranking)
-  self.ranking = algorithm:run()
-  
-  assert(self.ranking and self.ranking.__index == Ranking, 'the crossing minimization algorithm "' .. tostring(name) .. '" did not return a ranking')
-end
-
-
-
-
-function ModularLayeredSugiyama:positionNodes()
-  local name, class = self:loadSubAlgorithm('NodePositioning', self.node_positioning_algorithm)
-
-  assert(class, 'the node positioning algorithm "' .. self.node_positioning_algorithm .. '" could not be found')
-
-  local algorithm = class:new(self, self.graph, self.ranking)
-  algorithm:run()
-end
-
-
-
-function ModularLayeredSugiyama:routeEdges()
-  local name, class = self:loadSubAlgorithm('EdgeRouting', self.edge_routing_algorithm)
-
-  assert(class, 'the edge routing algorithm "' .. self.edge_routing_algorithm .. '" could not be found')
-
-  local algorithm = class:new(self, self.graph)
-  algorithm:run()
-end
-
-
-
-function ModularLayeredSugiyama:restoreCycles()
+function Sugiyama:restoreCycles()
   for edge in table.value_iter(self.graph.edges) do
     edge.reversed = false
   end
@@ -383,21 +319,8 @@ end
 
 
 
-function ModularLayeredSugiyama:postprocess()
-end
 
 
+-- done
 
-function ModularLayeredSugiyama:loadSubAlgorithm(step, name)
-  -- make sure there are no spaces in the file name
-  name = name:gsub(' ', '')
-
-  local classname = step .. name
-  local filename = 'pgfgd-subalgorithm-' .. classname .. '.lua'
-
-  pgf.load(filename, 'tex', false)
-
-  return classname, pgf.graphdrawing[classname]
-end
-
-
+return Sugiyama

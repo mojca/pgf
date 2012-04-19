@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/circular/pgfgd-algorithm-CircularLayoutTantau2012.lua,v 1.3 2012/04/12 14:41:32 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/circular/Attic/pgf-gd-circular-Tantau2012.lua,v 1.1 2012/04/19 13:49:07 tantau Exp $
 
 
 --- A circular layout
@@ -22,17 +22,20 @@
 -- The order of the nodes will be the order they are encountered, the
 -- edges actually play no role.
 
-graph_drawing_algorithm { 
-  name = 'CircularLayoutTantau2012',
+local Tantau2012 = pgf.gd.new_algorithm_class {
   properties = {
     growth_direction = 180
   },
   graph_parameters = {
-    minimum_radius = {'circular layout/radius', tonumber}
+    minimum_radius = 'circular layout/radius [number]',
   }
 }
 
-function CircularLayoutTantau2012:run()
+-- Make public
+require("pgf.gd.circular").Tantau2012 = Tantau2012
+
+
+function Tantau2012:run()
   local n = #self.graph.nodes
 
   local sib_dists = self:computeSiblingDistances ()
@@ -69,7 +72,7 @@ function CircularLayoutTantau2012:run()
 end
 
 
-function CircularLayoutTantau2012:computeSiblingDistances()
+function Tantau2012:computeSiblingDistances()
   local sib_dists = {}
   local sum_length = 0
   local nodes = self.graph.nodes
@@ -93,7 +96,7 @@ function CircularLayoutTantau2012:computeSiblingDistances()
 end
 
 
-function CircularLayoutTantau2012:computeNodeRadii()
+function Tantau2012:computeNodeRadii()
   local radii = {}
   for i,n in pairs(self.graph.nodes) do
     if n.tex.shape == "circle" or n.tex.shape == "ellipse" then
@@ -107,7 +110,7 @@ function CircularLayoutTantau2012:computeNodeRadii()
 end
 
 
-function CircularLayoutTantau2012:adjustNodeRadii(sib_dists,radii)
+function Tantau2012:adjustNodeRadii(sib_dists,radii)
   local total = 0
   for i=1,#radii do
     total = total + 2*radii[i] 
@@ -125,3 +128,8 @@ function CircularLayoutTantau2012:adjustNodeRadii(sib_dists,radii)
   
   return diam, adjusted_radii
 end
+
+
+-- done
+
+return Tantau2012

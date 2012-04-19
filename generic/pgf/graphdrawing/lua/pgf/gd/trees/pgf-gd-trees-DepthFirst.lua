@@ -7,25 +7,22 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/trees/pgfgd-subalgorithm-SpanningTreeBreadthFirst.lua,v 1.1 2012/04/15 22:28:07 tantau Exp $
-
--- This file defines an edge class, used in the graph representation.
-
-pgf.module("pgf.graphdrawing")
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/trees/Attic/pgf-gd-trees-DepthFirst.lua,v 1.1 2012/04/19 13:49:07 tantau Exp $
 
 
 
-
-
---- A subalgorithm for computing spanning trees
+--- A (sub)algorithm for computing spanning trees
 --
 -- This algorithm will compute a spanning tree of a graph using the
--- breadth first method.
+-- depth first method.
 
-graph_drawing_algorithm {
-  name = 'SpanningTreeBreadthFirst',
-}
+local DepthFirst = pgf.gd.new_algorithm_class {}
 
+-- Store in namespace
+require("pgf.gd.trees").DepthFirst = DepthFirst
+
+-- Imports
+local Simplifiers = require "pgf.gd.lib.Simplifiers"
 
 
 --- Compute a spanning tree of a graph
@@ -36,10 +33,9 @@ graph_drawing_algorithm {
 --
 -- @param graph The graph for which the spanning tree should be computed 
 
-function SpanningTreeBreadthFirst:run ()
-
-  local algorithm = self.parent_algorithm
-  local graph = self.graph
-
-  compute_spanning_tree(algorithm, false)
+function DepthFirst:run ()
+  Simplifiers:computeSpanningTree(self.parent_algorithm, true)
 end
+
+
+return DepthFirst

@@ -7,15 +7,18 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/algorithms/layered/pgfgd-subalgorithm-EdgeRoutingGansnerKNV1993.lua,v 1.2 2012/04/10 23:12:20 tantau Exp $
-
-pgf.module("pgf.graphdrawing")
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/layered/Attic/pgf-gd-layered-EdgeRoutingGansnerKNV1993.lua,v 1.1 2012/04/19 13:49:07 tantau Exp $
 
 
+
+--- An sub of Modular for routing edges
 
 EdgeRoutingGansnerKNV1993 = {}
 EdgeRoutingGansnerKNV1993.__index = EdgeRoutingGansnerKNV1993
 
+
+-- Namespace
+require("pgf.gd.layered").EdgeRoutingGansnerKNV1993 = EdgeRoutingGansnerKNV1993
 
 
 function EdgeRoutingGansnerKNV1993:new(main_algorithm, graph)
@@ -31,3 +34,7 @@ end
 
 function EdgeRoutingGansnerKNV1993:run()
 end
+
+
+-- done
+return EdgeRoutingGansnerKNV1993
