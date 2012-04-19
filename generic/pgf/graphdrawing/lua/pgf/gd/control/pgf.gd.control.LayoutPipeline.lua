@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/control/pgf.gd.control.LayoutPipeline.lua,v 1.1 2012/04/19 15:22:28 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/control/pgf.gd.control.LayoutPipeline.lua,v 1.2 2012/04/19 23:28:48 tantau Exp $
 
 
 --- The LayoutPipeline class is a singleton object.
@@ -73,7 +73,12 @@ function LayoutPipeline:run(graph, algorithm_class)
 
     -- Compute a spanning tree, if necessary
     if algorithm_class.needs_a_spanning_tree then
-      lib.Simplifiers:runSpanningTreeAlgorithm(algorithm)
+      local spanning_algorithm_class = require(graph:getOption("/graph drawing/spanning tree algorithm"))
+      
+      local spanning_algorithm = spanning_algorithm_class:new(subgraph, algorithm)    
+      subgraph:registerAlgorithm(spanning_algorithm)
+      
+      spanning_algorithm:run()
     end
 
     if #subgraph.nodes > 1 or algorithm_class.run_also_for_single_node then
