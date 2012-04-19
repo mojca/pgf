@@ -7,46 +7,37 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/pgf.lua,v 1.2 2012/04/17 22:40:50 tantau Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/pgf.lua,v 1.4 2012/04/19 15:22:28 tantau Exp $
 
 
 -- Declare the pgf namespace:
 -- (Skip, till old module stuff has been replaced)
 
--- pgf = {}
+pgf = {}
 
 
 
--- Declare a search function for pgf, which just substitutes dots by hyphens, because this
--- is more compatible with tex:
+--- Writes some debug info on the TeX output, separating the parameters
+-- by spaces. 
+--
+-- @param ... List of parameters to write to the \TeX\ output.
 
-local function searcher_function(modulename)
-
-  -- Find source
-  local actual_modulename = string.gsub(modulename, "%.", "-")
-
-  --- Use either resolvers or kpse to locate files.
-  local filename
-  if resolvers then
-    filename = resolvers.find_file(actual_modulename .. ".lua", "tex")
-  else
-    filename = kpse.find_file(actual_modulename .. ".lua", "tex")
+function pgf.debug(...)
+  local stacktrace = debug.traceback("",2)
+  texio.write_nl("Debug called for: ")
+  -- this is to even print out nil arguments in between
+  local args = {...}
+  for i = 1, table.getn(args) do
+    if i ~= 1 then texio.write(" ") end
+    texio.write(tostring(args[i]))
   end
-
-  if filename and filename ~= "" then
-    return function () return dofile(filename) end
-  else
-    return nil
+  texio.write_nl('')
+  for w in string.gmatch(stacktrace, "/.-:.-:.-%c") do
+    texio.write('by ', string.match(w,".*/(.*)"))
   end
 end
 
 
--- Install the loader so that it's called just before the normal Lua loader
-if package.loaders then
-  table.insert(package.loaders, 3, searcher_function)
-else
-  table.insert(package.searchers, 3, searcher_function)
-end
 
 
 
