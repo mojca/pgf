@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more details.
 --
--- $Id: pgfluamath.parser.lua,v 1.13 2012/03/06 16:06:09 cjorssen Exp $	
+-- $Id: pgfluamath.parser.lua,v 1.14 2012/04/29 20:36:29 ludewich Exp $	
 
 local pgfluamathparser = pgfluamathparser or {}
 
