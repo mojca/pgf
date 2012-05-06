@@ -8,23 +8,24 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/examples/pgf.gd.examples.SimpleDemo.lua,v 1.1 2012/04/19 15:22:28 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/examples/pgf.gd.examples.SimpleDemo.lua,v 1.2 2012/05/06 21:45:45 tantau Exp $
 
 
 --- A trivial node placing algorithm for demonstration purposes.
--- All nodes are positioned on a fixed size circle.
+-- All nodes are positioned on a circle, independently of which edges are present...
 
 local SimpleDemo = pgf.gd.new_algorithm_class {
-  graph_parameters = { radius = "radius [number]" }
+  properties = { works_only_on_connected_graphs = true },
+  graph_parameters = { radius = "/graph drawing/radius" }
 }
 
 function SimpleDemo:run()
-  local alpha = (2 * math.pi) / #self.graph.nodes
+  local alpha = (2 * math.pi) / #self.digraph.vertices
 
-  for i,node in ipairs(self.graph.nodes) do
-    local node_radius = tonumber(node:getOption('/graph drawing/node radius') or self.radius)
-    node.pos.x = node_radius * math.cos(i * alpha)
-    node.pos.y = node_radius * math.sin(i * alpha)
+  for i,vertex in ipairs(self.digraph.vertices) do
+    local radius = vertex.options['/graph drawing/node radius'] or self.radius
+    vertex.pos.x = radius * math.cos(i * alpha)
+    vertex.pos.y = radius * math.sin(i * alpha)
   end
 end
 

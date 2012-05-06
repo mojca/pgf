@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/lib/pgf.gd.lib.PriorityQueue.lua,v 1.1 2012/04/19 15:22:29 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/lib/pgf.gd.lib.PriorityQueue.lua,v 1.2 2012/05/06 21:45:46 tantau Exp $
 
 
 
@@ -37,9 +37,9 @@ local FibonacciHeapNode = {}
 --
 -- @return The newly created queue
 
-function PriorityQueue:new()
+function PriorityQueue.new()
   local queue = {
-    heap = FibonacciHeap:new(),
+    heap = FibonacciHeap.new(),
     nodes = {},
     values = {},
   }
@@ -111,7 +111,7 @@ end
 FibonacciHeap.__index = FibonacciHeap
 
 
-function FibonacciHeap:new()
+function FibonacciHeap.new()
   local heap = {
     trees = trees or {},
     minimum = nil,
@@ -123,8 +123,8 @@ end
 
 
 function FibonacciHeap:insert(value)
-  local node = FibonacciHeapNode:new(value)
-  local heap = FibonacciHeap:new()
+  local node = FibonacciHeapNode.new(value)
+  local heap = FibonacciHeap.new()
   table.insert(heap.trees, node)
   self:merge(heap)
   return node
@@ -280,7 +280,7 @@ end
 
 FibonacciHeapNode.__index = FibonacciHeapNode
 
-function FibonacciHeapNode:new(value, root, parent)
+function FibonacciHeapNode.new(value, root, parent)
   local node = {
     value = value,
     children = {},
@@ -302,7 +302,7 @@ function FibonacciHeapNode:new(value, root, parent)
 end
 
 function FibonacciHeapNode:addChild(value)
-  local child = FibonacciHeapNode:new(value, self.root, self)
+  local child = FibonacciHeapNode.new(value, self.root, self)
   table.insert(self.children, child)
 end
 

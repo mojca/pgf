@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/layered/pgf.gd.layered.CycleRemovalGansnerKNV1993.lua,v 1.1 2012/04/19 15:22:29 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/layered/pgf.gd.layered.CycleRemovalGansnerKNV1993.lua,v 1.2 2012/05/06 21:45:45 tantau Exp $
 
 
 
@@ -26,7 +26,7 @@ local Simplifiers = require "pgf.gd.lib.Simplifiers"
 
 
 
-function CycleRemovalGansnerKNV1993:new(main_algorithm, graph)
+function CycleRemovalGansnerKNV1993.new(main_algorithm, graph)
   local algorithm = {
     main_algorithm = main_algorithm,
     graph = graph,

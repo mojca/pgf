@@ -8,9 +8,13 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/tex/pgflibrarygraphdrawing.misc.code.tex,v 1.2 2012/04/19 13:49:07 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/tex/pgflibrarygraphdrawing.misc.code.tex,v 1.3 2012/05/06 21:45:47 tantau Exp $
 
 
+\pgfgddeclareforwardedkeys{/graph drawing}{
+  radius/.graph parameter=number,
+  radius/.parameter initial=1cm,
+}
 
 %
 % An example algorithm
@@ -20,8 +24,6 @@
   {simple demo layout}
   {
     algorithm=pgf.gd.examples.SimpleDemo,
-    radius/.graph parameter=evaluate math expression,
-    radius/.parameter initial=1cm,
   }
 
 

@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/lib/pgf.gd.lib.Simplifiers.lua,v 1.2 2012/04/19 23:28:49 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/lib/pgf.gd.lib.Simplifiers.lua,v 1.3 2012/05/06 21:45:46 tantau Exp $
 
 
 
@@ -22,10 +22,14 @@ local lib     = require "pgf.gd.lib"
 lib.Simplifiers = Simplifiers
 
 
+
+
 -- Imports
 
 local Edge            = require "pgf.gd.model.Edge"
 local Node            = require "pgf.gd.model.Node"
+
+
 
 
 
@@ -131,7 +135,7 @@ end
 --
 -- @param algorithm An algorithm object
 
-function Simplifiers:removeLoops(algorithm)
+function Simplifiers:removeLoopsOldModel(algorithm)
   local graph = algorithm.graph
   local loops = {}
 
@@ -154,7 +158,7 @@ end
 --
 -- @param algorithm An algorithm object
 
-function Simplifiers:restoreLoops(algorithm)
+function Simplifiers:restoreLoopsOldModel(algorithm)
   local graph = algorithm.graph
 
   for _,edge in ipairs(graph[algorithm].loops) do
@@ -174,7 +178,7 @@ end
 --
 -- @param algorithm An algorithm object
 
-function Simplifiers:collapseMultiedges(algorithm, collapse_action)
+function Simplifiers:collapseMultiedgesOldModel(algorithm, collapse_action)
   local graph = algorithm.graph
   local collapsed_edges = {}
   local node_processed = {}
@@ -190,7 +194,7 @@ function Simplifiers:collapseMultiedges(algorithm, collapse_action)
 
       if not node_processed[neighbour] then
         if not multiedge[neighbour] then
-          multiedge[neighbour] = Edge:new{ direction = Edge.RIGHT }
+          multiedge[neighbour] = Edge.new{ direction = Edge.RIGHT }
           collapsed_edges[multiedge[neighbour]] = {}
         end
 
@@ -235,7 +239,7 @@ end
 --
 -- @param algorithm An algorithm object
 
-function Simplifiers:expandMultiedges(algorithm)
+function Simplifiers:expandMultiedgesOldModel(algorithm)
   local graph = algorithm.graph
   for multiedge, subedges in pairs(graph[algorithm].collapsed_edges) do
     assert(#subedges >= 2)
