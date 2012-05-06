@@ -8,8 +8,14 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/tex/pgflibrarygraphdrawing.circular.code.tex,v 1.2 2012/04/19 13:49:07 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/tex/pgflibrarygraphdrawing.circular.code.tex,v 1.3 2012/05/06 21:45:47 tantau Exp $
 
+
+
+\pgfgdset{
+  circular layout/radius/.graph parameter=number,
+  circular layout/radius/.parameter initial=0cm,
+}
 
 
 %
@@ -18,11 +24,7 @@
 \pgfgddeclarealgorithmkey
   {circular layout}
   {circular layout}
-  {
-    algorithm=pgf.gd.circular.Tantau2012,
-    circular layout/radius/.graph parameter=evaluate math expression,
-    circular layout/radius/.parameter initial=0cm,
-  }
+  {algorithm=pgf.gd.circular.Tantau2012}
 
 
 

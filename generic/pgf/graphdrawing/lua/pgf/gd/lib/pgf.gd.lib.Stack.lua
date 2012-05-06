@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/lib/pgf.gd.lib.Stack.lua,v 1.1 2012/04/19 15:22:29 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/lib/pgf.gd.lib.Stack.lua,v 1.2 2012/05/06 21:45:46 tantau Exp $
 
 
 --- A Stack is a very simple wrapper around an array
@@ -25,7 +25,7 @@ lib.Stack = Stack
 
 
 --- Create a new stack
-function lib.Stack:new()
+function Stack.new()
   local stack = {}
   setmetatable(stack, lib.Stack)
   return stack
@@ -33,25 +33,25 @@ end
 
 
 --- Push an element on top of the stack
-function lib.Stack:push(data)
+function Stack:push(data)
   self[#self+1] = data
 end
 
 
 --- Inspect (but not pop) the top element of a stack
-function lib.Stack:peek()
+function Stack:peek()
   return self[#self]
 end
 
 
 --- Pop an element from the top of the stack
-function lib.Stack:pop()
+function Stack:pop()
   return table.remove(self, #self)
 end
 
 
 --- Get the height of the stack
-function lib.Stack:getSize()
+function Stack:getSize()
   return #self
 end
 

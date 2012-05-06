@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/layered/pgf.gd.layered.Ranking.lua,v 1.1 2012/04/19 15:22:29 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/layered/pgf.gd.layered.Ranking.lua,v 1.2 2012/05/06 21:45:46 tantau Exp $
 
 
 
@@ -27,7 +27,7 @@ layered.Ranking = Ranking
 -- TODO Jannis: document!
 
 
-function Ranking:new()
+function Ranking.new()
   local ranking = {
     rank_to_nodes = {},
     node_to_rank = {},
@@ -40,7 +40,7 @@ end
 
 
 function Ranking:copy()
-  local copied_ranking = Ranking:new()
+  local copied_ranking = Ranking.new()
   
   -- copy rank to nodes mapping
   for rank, nodes in pairs(self.rank_to_nodes) do

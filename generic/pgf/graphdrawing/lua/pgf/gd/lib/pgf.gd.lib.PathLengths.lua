@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/lib/pgf.gd.lib.PathLengths.lua,v 1.1 2012/04/19 15:22:29 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/lib/pgf.gd.lib.PathLengths.lua,v 1.2 2012/05/06 21:45:46 tantau Exp $
 
 
 
@@ -49,7 +49,7 @@ function PathLengths:dijkstra(graph, source)
   local levels = {}
   local parent = {}
 
-  local queue = lib.PriorityQueue:new()
+  local queue = lib.PriorityQueue.new()
 
   -- reset the distance of all nodes and insert them into the priority queue
   for node in table.value_iter(graph.nodes) do

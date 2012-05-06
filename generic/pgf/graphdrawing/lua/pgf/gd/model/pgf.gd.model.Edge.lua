@@ -9,7 +9,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/model/pgf.gd.model.Edge.lua,v 1.1 2012/04/19 15:22:29 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/model/pgf.gd.model.Edge.lua,v 1.2 2012/05/06 21:45:46 tantau Exp $
 
 
 
@@ -54,7 +54,7 @@ Edge.NONE = "-!-"
 --
 -- @return A newly-allocated edge.
 --
-function Edge:new(values)
+function Edge.new(values)
   local defaults = {
     nodes = {},
     edge_nodes = '',
@@ -308,7 +308,7 @@ end
 -- @return Shallow copy of the edge.
 --
 function Edge:copy()
-  local result = table.custom_copy(self, Edge:new())
+  local result = table.custom_copy(self, Edge.new())
   result.nodes = {}
   return result
  end

@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/lib/pgf.gd.lib.DepthFirstSearch.lua,v 1.1 2012/04/19 15:22:29 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/lib/pgf.gd.lib.DepthFirstSearch.lua,v 1.2 2012/05/06 21:45:46 tantau Exp $
 
 
 
@@ -27,13 +27,13 @@ lib.DepthFirstSearch = DepthFirstSearch
 
 -- TT: TODO Jannis: Please document...
 
-function DepthFirstSearch:new(init_func, visit_func, complete_func)
+function DepthFirstSearch.new(init_func, visit_func, complete_func)
   local dfs = {
     init_func = init_func,
     visit_func = visit_func,
     complete_func = complete_func,
 
-    stack = lib.Stack:new(),
+    stack = lib.Stack.new(),
     discovered = {},
     visited = {},
     completed = {},
@@ -71,7 +71,7 @@ function DepthFirstSearch:reset()
   self.discovered = {}
   self.visited = {}
   self.completed = {}
-  self.stack = lib.Stack:new()
+  self.stack = lib.Stack.new()
 end
 
 

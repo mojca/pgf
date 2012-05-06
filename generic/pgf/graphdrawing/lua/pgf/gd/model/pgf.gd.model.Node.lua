@@ -9,7 +9,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/model/pgf.gd.model.Node.lua,v 1.1 2012/04/19 15:22:29 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/model/pgf.gd.model.Node.lua,v 1.2 2012/05/06 21:45:46 tantau Exp $
 
 
 
@@ -47,7 +47,7 @@ local Vector = require "pgf.gd.lib.Vector"
 --
 -- @return A newly allocated node.
 --
-function Node:new(values)
+function Node.new(values)
   local new = {
     class = Node,
     name = nil,
@@ -73,7 +73,7 @@ function Node:new(values)
     end
   end
   if not new.pos then 
-    new.pos = Vector:new(2) 
+    new.pos = Vector.new(2) 
   end
   return new
 end
@@ -240,7 +240,7 @@ end
 -- @return Copy of the node.
 --
 function Node:copy()
-  local result = table.custom_copy(self, Node:new())
+  local result = table.custom_copy(self, Node.new())
   result.edges = {}
   return result
 end

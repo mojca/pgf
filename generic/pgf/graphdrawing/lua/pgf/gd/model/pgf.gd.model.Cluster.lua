@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/model/pgf.gd.model.Cluster.lua,v 1.1 2012/04/19 15:22:29 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/model/pgf.gd.model.Cluster.lua,v 1.2 2012/05/06 21:45:46 tantau Exp $
 
 
 
@@ -29,7 +29,7 @@ model.Cluster = Cluster
 
 --- TODO Jannis: Add documentation for this class.
 --
-function Cluster:new(name)
+function Cluster.new(name)
   local cluster = {
     name = name,
     nodes = {},
