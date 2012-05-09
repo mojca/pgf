@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/model/pgf.gd.model.Arc.lua,v 1.3 2012/05/06 21:45:46 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/model/pgf.gd.model.Arc.lua,v 1.4 2012/05/09 22:57:00 tantau Exp $
 
 
 --- The Arc class
@@ -73,6 +73,11 @@ local Arc = {}
 -- Namespace
 
 require("pgf.gd.model").Arc = Arc
+
+
+-- Imports
+
+local Options = require "pgf.gd.control.Options"
 
 
 local Arc_collectors = {}
@@ -344,23 +349,21 @@ end
 -- the set of all points that must be rotated and shifted along with
 -- the endpoints of an edge.
 
-function Arc.pointCloudCollector(key)
-  Arc.collector(
-    key,
-    function (array, arc)
-      local cloud = {}
-      for _,e in ipairs(array) do
-	if e.head == arc.head then
-	  -- Only syntactically correct edges
-	  for _,p in ipairs(e.path) do
-	    cloud[#cloud + 1] = p
-	  end
+Arc.collector(
+  "point_cloud",
+  function (array, arc)
+    local cloud = {}
+    for _,e in ipairs(array) do
+      if e.head == arc.head then
+	-- Only syntactically correct edges
+	for _,p in ipairs(e.path) do
+	  cloud[#cloud + 1] = p
 	end
       end
-      return cloud
     end
-  )
-end
+    return cloud
+  end
+)
 
 
 ---
@@ -369,17 +372,58 @@ end
 -- This collector return the lowest event index of any edge involved
 -- in the arc (or nil, if there is no syntactic edge).
 
-function Arc.eventIndexCollector(key)
-  Arc.collector(
-    key,
-    function (array)
-      if array[1] then
-	return array[1].event_index
-      end
+Arc.collector(
+  "event_index",
+  function (array)
+    if array[1] then
+      return array[1].event_index
     end
-  )
-end
+  end
+)
 
+
+
+---
+-- The edge priority collector
+--
+-- This collector returns the top (that is, smallest) priority of any
+-- edge involved in the arc.
+--
+-- The priority of an edge is computed as follows:
+--
+-- 1) If the option "/graph drawing/edge priority" is set, this number
+-- will be used.
+--
+-- 2) If the edge has the same head as the arc, we lookup the key
+-- "/graph drawing/edge priority " .. edge.direction. If set, we use
+-- this value.
+--
+-- 3) If the edge has a different head from the arc (the arc is
+-- "reversed" with respect to the syntactic edge), we lookup the key
+-- "/graph drawing/edge priority reversed " .. edge.direction. If set,
+-- we use this value.
+--
+-- 4) Otherwise, we use priority 5.
+
+Arc.collector(
+  "edge_priority",
+  function (array, arc)
+    local min 
+    local g = arc.syntactic_digraph
+    for _,e in ipairs(array) do
+      local p = e.options["/graph drawing/edge priority"]
+      if not p then
+	if e.head == arc.head then
+	  p = Options.lookup("/graph drawing/edge priority " .. e.direction, e, g)
+	else
+	  p = Options.lookup("/graph drawing/edge priority reversed " .. e.direction, e, g)
+	end
+      end
+      min = math.min(p or 5, min or math.huge)
+    end
+    return min or 5
+  end
+)
 
 
 ---

@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
---- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/lib/pgf.gd.lib.preload.lua,v 1.1 2012/04/19 15:22:29 tantau Exp $
+--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/lib/pgf.gd.lib.preload.lua,v 1.2 2012/05/09 22:57:00 tantau Exp $
 
 
 require "pgf.gd.lib.Anchoring"
@@ -16,7 +16,6 @@ require "pgf.gd.lib.DepthFirstSearch"
 require "pgf.gd.lib.Events"
 require "pgf.gd.lib.Iterators"
 require "pgf.gd.lib.Orientation"
-require "pgf.gd.lib.NodeDistances"
 require "pgf.gd.lib.PathLengths"
 require "pgf.gd.lib.PriorityQueue"
 require "pgf.gd.lib.Stack"

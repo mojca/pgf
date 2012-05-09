@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/trees/pgf.gd.trees.DepthFirst.lua,v 1.2 2012/04/19 23:28:49 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/trees/pgf.gd.trees.DepthFirst.lua,v 1.3 2012/05/09 22:57:00 tantau Exp $
 
 
 
@@ -27,14 +27,10 @@ local SpanningTreeComputation = require "pgf.gd.trees.SpanningTreeComputation"
 
 --- Compute a spanning tree of a graph
 --
--- The computed spanning tree will be available through the fields
--- algorithm.children of each node and algorithm.spanning_tree_root of
--- the graph.
---
--- @param graph The graph for which the spanning tree should be computed 
+-- Returns a spanning tree of self.events using dfs.
 
 function DepthFirst:run ()
-  SpanningTreeComputation:computeSpanningTree(self.parent_algorithm, true)
+  return SpanningTreeComputation.computeSpanningTree(self.ugraph, true, self.events)
 end
 
 
