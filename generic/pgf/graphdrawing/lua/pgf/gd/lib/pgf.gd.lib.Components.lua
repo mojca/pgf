@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/lib/pgf.gd.lib.Components.lua,v 1.2 2012/05/06 21:45:46 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/lib/pgf.gd.lib.Components.lua,v 1.3 2012/05/09 22:57:00 tantau Exp $
 
 
 
@@ -30,11 +30,6 @@ local Vertex     = require "pgf.gd.model.Vertex"
 local Arc        = require "pgf.gd.model.Arc"
 
 local Transform  = require "pgf.gd.lib.Transform"
-
-
--- Collectors
-local point_cloud = {}
-Arc.pointCloudCollector(point_cloud)
 
 
 --- Decompose a graph into its components
@@ -229,7 +224,7 @@ function Components:pack(syntactic_digraph, components)
     end
 
     for _,a in ipairs(c.arcs) do
-      for _,p in ipairs(a[point_cloud]) do
+      for _,p in ipairs(a.point_cloud) do
 	vertices [#vertices + 1] = Vertex.new { pos = p, kind = "dummy" }
       end
     end
