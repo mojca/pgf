@@ -7,7 +7,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/tikz.code.tex,v 1.97 2012/05/02 21:02:56 cjorssen Exp $
+\ProvidesPackageRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/tikz.code.tex,v 1.98 2012/05/12 12:42:04 tantau Exp $
 
 
 % Always-present libraries (|\usepgflibrary| defined in
@@ -1107,8 +1107,8 @@
   edge node/.code={
     \expandafter\def\expandafter\tikz@tonodes\expandafter{\tikz@tonodes #1}
   },
-  edge label/.style={edge node={node[auto]{#1}}},
-  edge label'/.style={edge node={node[auto,swap]{#1}}}
+  edge label/.style={/tikz/edge node={node[auto]{#1}}},
+  edge label'/.style={/tikz/edge node={node[auto,swap]{#1}}}
 }
 
 

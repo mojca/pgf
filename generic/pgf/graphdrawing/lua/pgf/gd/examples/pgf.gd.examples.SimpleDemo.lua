@@ -8,7 +8,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/examples/pgf.gd.examples.SimpleDemo.lua,v 1.3 2012/05/09 22:57:00 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/examples/pgf.gd.examples.SimpleDemo.lua,v 1.4 2012/05/12 12:42:05 tantau Exp $
 
 
 --- A trivial node placing algorithm for demonstration purposes.
@@ -27,14 +27,6 @@ function SimpleDemo:run()
     vertex.pos.x = radius * math.cos(i * alpha)
     vertex.pos.y = radius * math.sin(i * alpha)
   end
-
-  self.digraph.syntactic_digraph:add {
-    pgf.gd.model.Vertex.new {
-      pos = pgf.gd.model.Coordinate.new (100,0),
-      generated_text = "hallo welt",
-      generated_options = { draw = "black" },
-    } 
-  }
 end
 
 return SimpleDemo

@@ -7,7 +7,7 @@
 --
 -- See the file doc/generic/pgf/licenses/LICENSE for more information
 
--- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/trees/pgf.gd.trees.ReingoldTilford1981.lua,v 1.3 2012/05/09 22:57:00 tantau Exp $
+-- @release $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/graphdrawing/lua/pgf/gd/trees/pgf.gd.trees.ReingoldTilford1981.lua,v 1.4 2012/05/12 12:42:05 tantau Exp $
 
 
 
@@ -36,7 +36,6 @@ function ReingoldTilford1981:run()
   local root = self.spanning_tree.storage.root
   
   self.extended_version = self.digraph.options['/graph drawing/tree layout/missing nodes get space']
-
   
   self:precomputeDescendants(root, 1)
   self:computeHorizontalPosition(root)
