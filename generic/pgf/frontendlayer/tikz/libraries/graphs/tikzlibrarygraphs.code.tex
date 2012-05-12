@@ -8,7 +8,7 @@
 %
 % See the file doc/generic/pgf/licenses/LICENSE for more details.
 
-\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/graphs/tikzlibrarygraphs.code.tex,v 1.29 2012/04/10 23:12:20 tantau Exp $
+\ProvidesFileRCS[v\pgfversion] $Header: /home/mojca/cron/mojca/github/cvs/pgf/pgf/generic/pgf/frontendlayer/tikz/libraries/graphs/tikzlibrarygraphs.code.tex,v 1.30 2012/05/12 12:42:04 tantau Exp $
 
 
 % 
@@ -1030,6 +1030,9 @@
     \def\tikz@lib@graph@name@only{#1}%
   \fi%  
   \edef\tikz@lib@graph@name{\tikz@lib@graph@path\tikz@lib@graph@name@only}%
+  \iftikz@lib@graph@fresh@node%
+    \tikz@lg@if@local@node{\tikz@lib@graph@name}{\tikz@lg@find@fresh@name}{}%
+  \fi%
   \pgfutil@ifnextchar"\tikz@lg@underscore@quote{\pgfutil@ifnextchar\tikz@active@quotes@token\tikz@lg@underscore@quote@active\tikz@lg@underscore@cont}
 }
 \def\tikz@lg@underscore@quote"#1"\pgf@stop{%
